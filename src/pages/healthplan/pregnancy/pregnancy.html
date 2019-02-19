@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>My Pregnancy Plan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="back-color">
+    <ion-row>
+        <ion-col col-12>
+            <ion-card style="box-shadow: 6px 5px 13px #d6d6d6;">
+                <ion-card-content>
+                    <img class="img-size" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/pregnancy.svg" />
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+        <ion-col col-12 text-center class="animate">
+            <p class="wlcome-user-text">Congratulations {{healthPlanDetails.ConsumerName}}!</p>
+            <p class="margin-top-5 preg-text-style">Dr. {{healthPlanDetails.ProviderName}} has created a
+                <span class="preg-text">pregnancy</span> plan</p>
+            <p class="margin-top-5 preg-text-style">specially for you</p>
+        </ion-col>
+        <ion-col col-12 text-center style="margin-top: 35%;">
+            <button class="btn btn-style animate" ion-button (click)="redirectTo()">Let's Go</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

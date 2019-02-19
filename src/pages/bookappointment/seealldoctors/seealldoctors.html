@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title (click)="closeCurrentSection()">{{searchStatus?searchedKeyword:searchedSymptoms}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-12 *ngIf="doctorList.length > 0">
+      <ion-card class="card-box-shadow" *ngFor="let doctor of doctorList">
+        <ion-row>
+          <ion-col col-9>
+            <ion-item class="padding-0" (click)="redirectTo('DoctorProfile',doctor._source)">
+              <ion-avatar item-start class="avtar-margin">
+                <img class="img-size padding-0" [src]="(doctor._source.ProviderImage != null && doctor._source.ProviderImage != '') ? doctor._source.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+                />
+              </ion-avatar>
+              <div class="card">
+                <h4 class="profile-user-name para-overflow-hidden">{{doctor._source.ProviderName}}
+                </h4>
+                <p class="margin-top-6 para-overflow-hidden">
+                  <span class="doc-specilization-border">{{doctor._source.SpecialisationDesc}}</span>
+                </p>
+                <p class="margin-top-6 para-overflow-hidden" *ngIf="doctor._source.HospitalName!='' && doctor._source.HospitalName!=null">
+                  <span class="display-inline margin-left--2">
+                    <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+                  </span>
+                  <span class="font-weight-doc-loc">{{doctor._source.HospitalName}}</span>
+                </p>
+                <p class="margin-top-6 para-overflow-hidden" *ngIf="doctor._source.CityAreaName!='' && doctor._source.CityAreaName!=null">
+                  <span class="display-inline margin-left--2">
+                    <img src="assets/img/doctorProfile/location_icon.svg" class="doc-detail-location-icon">
+                  </span>
+                  <span class="font-weight-doc-loc">{{doctor._source.CityAreaName}}</span>
+                </p>
+              </div>
+            </ion-item>
+          </ion-col>
+          <ion-col col-3 class="margin-auto">
+            <div (click)="showMap(doctor._source.Latlong)" *ngIf="doctor.fields != undefined && doctor.fields != null">
+              <p class="para-margin-0">
+                <!-- <span class="distance-text">Distance</span> -->
+                <span class="location-img-sec">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="location-img">
+                </span>
+              </p>
+              <p class="km-text">{{doctor.fields.distance[0]}} km</p>
+            </div>
+            <p>
+              <button ion-button small class="button-primary solid-btn-style " (click)="bookAppointment(doctor._source)">Book</button>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="doctorList.length == 0 && !isAvailable">
+      <img src="assets/img/bookAppointment/specialities_icon.svg" class="not-found" />
+      <p class="not-found-text">No doctor(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

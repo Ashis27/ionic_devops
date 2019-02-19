@@ -1,0 +1,145 @@
+page-otpverification{
+    .otp-text{
+        font-size: 17px;
+}
+.verify-otp-input input{
+    text-align: center;
+    font-size: 25px;
+    padding: 0px !important;
+    margin: 0px 0px 0px 0px !important;
+    font-weight: 500;
+    color: #4e4e4e;
+ }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--para-text-color);
+    opacity: 1; /* Firefox */
+     text-align: center;
+     font-size: 17px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--para-text-color);
+     text-align: center;
+     font-size: 17px;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--para-text-color);
+     text-align: center;
+     font-size: 17px;
+}
+    .back-image{
+    //   background-repeat: no-repeat !important;
+    // width: 100% !important;
+    // background-position: center !important;
+    // background-size: 100% !important;
+    // background: url('../assets/img/login/login_bg.svg');
+    background-repeat: no-repeat !important;
+    width: 100% !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background: url(../assets/img/login/login_bg.svg);
+    height: 100%;
+}
+// .logo {
+//     padding: 20px 0;
+//     min-height: 150px;
+//     text-align: center;
+//     img {
+//       max-width: 150px;
+//     }
+//   }
+  .list {
+    margin-bottom: 0;
+  }
+  .login-form-top{
+   margin-top: 10px;
+}
+.login-input{
+     border: 1px solid var(--primary-color);
+    border-radius: 25px 25px 25px 25px;
+        margin-bottom: 5%;
+}
+.login-input-label{
+
+}
+.login-form{
+  margin: 0px 15px 0px 15px;
+}
+.login-form-btn{
+    width: 100%;
+    background-color: var(--button-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.login-facebook-btn{
+   width: 100%;
+    background: var(--facebook-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.login-google-btn{
+   width: 100%;
+    background: var(--google-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.social-btn-sec{
+    margin: 0px 6px 10px 6px;
+}
+.facebook-icon{
+    font-size: 1.8em;
+}
+.googleplus-icon{
+    font-size: 1.8em;
+}
+.social-btn-size{
+     font-size: 1em !important;
+    margin-left: 10px;
+        margin-top: 5px;
+    text-transform: capitalize;
+}
+.optional-text{
+    color:var(--para-text-color) !important; 
+font-weight: 400;
+ margin: 3px 0px -5px 0px !important;
+
+}
+.mobile-icon-size{
+      font-size: 1.5em;
+}
+.login-input-label{
+  margin: 0px !important;
+}
+.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+  border-bottom-color: #ffffff !important;
+    -webkit-box-shadow: inset 0 -1px 0 0 #ffffff !important;
+    box-shadow: inset 0 -1px 0 0 #ffffff !important;
+}
+.item-input.item-input-has-focus .item-inner,
+.item-input.input-has-focus .item-inner {
+  border-bottom-color: #ffffff !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #ffffff !important;
+  box-shadow: inset 0 -1px 0 0 #ffffff !important;
+}
+.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: #ffffff !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #ffffff !important;
+  box-shadow: inset 0 -1px 0 0 #ffffff !important;
+}
+.ask-login-signup-text{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--black-light-color);
+ }
+ .reg-by-doc{
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px !important;
+    color: #484848 !important;
+    font-weight: 500;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 10px;
+ }
+}

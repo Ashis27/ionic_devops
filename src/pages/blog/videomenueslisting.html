@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+ 
+    <button ion-button menuToggle > 
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Health Corner</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="searchBlogByKeyword()">
+        <ion-icon name="search" class="search-input"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar style="padding-top:0px !important" no-border-top *ngIf="filterStatus">
+    <ion-searchbar (ionInput)="searchBlogText($event)" autocorrect="off" [(ngModel)]="searchKeyword" placeholder="Search Here"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="VideoMenuList.length > 0" [ngClass]="filterStatus?'video-sec-margin-top-15':'video-sec-margin-top-0'">
+    <ion-row *ngFor="let vid of VideoMenuList;let i = index">
+      <ion-col col-12>
+        <ion-card (click)="play(vid,i)">
+          <ion-card-content>
+            <ion-row>
+              <ion-col col-5 class="cols">
+                <img *ngIf="vid.VideoURL != null && vid.VideoURL != undefined" src={{getThumbnail(vid.VideoURL)}} style="width:100%;" class="frames">
+              </ion-col>
+              <ion-col col-7 class="cols">
+                <p class="title para-overflow-hidden">{{vid.VideoTitle}}</p>
+                <p class="sub-desc">{{vid.VideoShortDescription}}</p>
+                <p class="time">
+                  <span class="time-ago-text" *ngIf="vid.days>0">{{vid.days}} day(s)
+                  </span>
+                  <span class="time-ago-text" *ngIf="vid.days==0 && vid.hrs > 0">{{vid.hrs}} hr(s)
+                  </span>
+                  <span class="time-ago-text" *ngIf="vid.days==0 && vid.hrs == 0 && vid.mins>0 ">{{vid.mins}} minute(s)
+                  </span>
+                  <span class="time-ago-text" *ngIf="vid.days==0 && vid.hrs == 0 && vid.mins==0&& vid.secs>0 ">{{vid.secs}} seconds</span> <span class="time-ago-text"> ago</span>
+                  <span class="leftspan">{{vid.Createddate}}</span>
+                </p>
+                <p>
+                  <span class="rightspan" style="margin-left:5px"> {{vid.AssociatedActivity}}</span>
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="VideoMenuList.length == 0 && !isAvailable" style="margin-top: 20%">
+    <div text-center>
+      <img class="not-found" src="assets/img/videoBlog.svg">
+      <p class="not-found-text">No Result Found!</p>
+    </div>
+  </div>
+
+</ion-content>

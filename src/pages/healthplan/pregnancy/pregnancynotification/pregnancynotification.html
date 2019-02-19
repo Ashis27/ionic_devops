@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>My Pregnancy Plan</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="back-color">
+    <ion-row>
+        <ion-col col-12>
+            <p class="page-header">
+                Notification settings
+                <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/bell.svg" />
+            </p>
+            <p style="border: 1px solid var(--health-plan-pregnancy-color);height: 1px;margin: -10px 10px 10px;width: 17%;"></p>
+        </ion-col>
+    </ion-row>
+
+    <ion-card style="box-shadow: 6px 5px 13px #d6d6d6;">
+        <ion-card-content>
+            <ion-row class="form-margin">
+                <ion-col col-3 class="noti-img">
+                    <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/pills.svg" />
+                    <p text-center>Medication</p>
+                </ion-col>
+                <ion-col col-9>
+                    <p class="noti-header">All Medication reminder before 30 minutes</p>
+                    <ion-row col-12>
+                        <ion-col col-8 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="notification"></ion-checkbox>
+                            <p>
+                                App Notification
+                            </p>
+                        </ion-col>
+                        <!-- <ion-col col-4 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="alarm"></ion-checkbox>
+                            <p>
+                                Alaram
+                            </p>
+                        </ion-col> -->
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="box-shadow: 6px 5px 13px #d6d6d6;">
+        <ion-card-content>
+            <ion-row class="form-margin">
+                <ion-col col-3 class="noti-img">
+                    <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/lotus-position.svg" />
+                    <p text-center>Exercise</p>
+                </ion-col>
+                <ion-col col-9>
+                    <p class="noti-header">Morning Yoga before 15 minutes</p>
+                    <ion-row col-12>
+                        <ion-col col-8 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="notification"></ion-checkbox>
+                            <p>
+                                App Notification
+                            </p>
+                        </ion-col>
+                        <!-- <ion-col col-4 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="alarm"></ion-checkbox>
+                            <p>
+                                Alaram
+                            </p>
+                        </ion-col> -->
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="box-shadow: 6px 5px 13px #d6d6d6;">
+        <ion-card-content>
+            <ion-row class="form-margin">
+                <ion-col col-3 class="noti-img">
+                    <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/calendar.svg" />
+                    <p text-center>Appointment</p>
+                </ion-col>
+                <ion-col col-9>
+                    <p class="noti-header">All Appointments will be reminded as per System Default</p>
+                    <ion-row col-12>
+                        <ion-col col-8 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="notification"></ion-checkbox>
+                            <p>
+                                App Notification
+                            </p>
+                        </ion-col>
+                        <!-- <ion-col col-4 class="noti-checkbox">
+                            <ion-checkbox class="form-chkbox checkbox-ios" value="alarm"></ion-checkbox>
+                            <p>
+                                Alaram
+                            </p>
+                        </ion-col> -->
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-row>
+        <ion-col col-12 text-center>
+            <button class="btn btn-style" ion-button (click)="redirectTo('PregnancyDashboard')">Done</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

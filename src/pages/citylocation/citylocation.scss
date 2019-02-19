@@ -1,0 +1,70 @@
+page-citylocation{
+
+  .header-background{
+        background-color: var(--primary-color) !important;
+        // margin: -17px 0px 0px 0px;
+        color:var(--white-color);
+        margin-bottom: 10px;
+  }
+  .close-sec{
+    text-align: right;
+    color: var(--white-color);
+    margin-top: -12px;
+    font-size: 40px;
+  }
+  ion-searchbar{
+        background: var(--secondary-color) !important;
+        border-radius: 10px;
+        //margin-top: 10px;
+  }
+.item-ios{
+  padding-top:10px;
+}
+.save-location{
+  color: #39bebc;
+  text-align: center;
+  border: 1px solid #39bebc;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 0px;
+  width: 35%;
+  float: right;
+  background: white;
+}
+.menu-search-img{
+  width: 30px;
+}
+.content-ios{
+  margin-top: 0px !important;
+}
+  .show-added-info-list{
+     // border: 1px solid #39bebc;
+     padding: 5px 0px 5px 0px !important;
+     color: #5dc1bf !important;
+     font-weight: 400 !important;
+     border-radius: 5px;
+    }
+ .right-arrow{
+      color: #c1c1c1;
+ }
+  .locate-icon{
+    font-size: 30px;
+    margin-top: 5px;
+    color: #a2a2a2;
+}
+
+   .form-image{
+           max-width: 26px !important;
+      margin-top: 3px;
+   }
+  
+   .locality-input{
+      margin-top: 1px !important;
+   }
+   .location-header{
+      background-color: #d2d2d2;
+      color: #353535;
+      padding: 8px 18px;
+      font-weight: bold;
+      }
+}

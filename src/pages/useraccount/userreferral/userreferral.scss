@@ -1,0 +1,27 @@
+page-userreferral{
+  .referral-img{
+      width:30% !important;
+  }
+  .referral-code-text{
+      font-size: 18px;
+  }
+  .refrral-header-sec{
+      margin-top: 25%;
+  }
+  .referral-and-earn{
+      font-size: 25px;
+      margin-bottom: 20% !important;
+  }
+  .referral-code{
+    border: 1px dashed var(--dark-alpha-Dot5);
+    padding: 0;
+    margin-top: 5%;
+  }
+  .bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+  }
+  ion-navbar{
+    background-color: var(--primary-color) !important;
+}
+}

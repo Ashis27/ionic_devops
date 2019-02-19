@@ -1,0 +1,131 @@
+page-ovulation {
+    .background_image{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        height: 100%;
+        // background-position: center !important;
+        background-size: 100% 100%;
+        opacity: 0.5;
+        filter: alpha(opacity=40);
+        background-image: url('../assets/imgs/calculator/ovulation.jpg') ;
+        z-index:-1;
+    }
+    .scroll-content{
+       padding:0px !important;
+       z-index:1;
+    }
+    
+    // .list{
+    //     margin:5px 5px 16px;
+    // }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+    
+    .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        border-bottom-color: rgba(34, 34, 34, 0.12941176470588237) !important;
+    }
+
+
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .item-input{
+        border: none !important
+    }
+    text-input {
+        margin: 0px 0px !important;
+    }
+    .item{
+        padding: 0px !important
+    }
+    ion-label{
+        font-weight: 500;
+        margin-left: 10px !important;
+        margin-top: 9px !important;
+        color:#222 !important ;
+    }
+    .label {
+        margin: 0px 8px 0px 0 !important;
+    }
+    .datetime-text {
+        color: #222 !important;
+    }
+    // .col{
+    //     padding: 0px !important;
+    // }
+    ion-item{
+        margin-top: -3px !important;
+    }
+    .mar_col{
+        margin-top: -10px;
+    }
+    .margin-left{
+        margin-left:1%;   
+     }
+    .button{
+        // margin-left: 1% !important;
+        width: 100% !important;
+        background-color:#f15c23 !important;
+        color:white;
+    }
+    .toolbar-background{    
+        background: #39bebc !important;
+    }
+    .toolbar-title{
+       color: #fff8f8 !important;
+    }
+    
+    // p{
+    //     text-align: center;
+    //     color: #34bdbc;
+    // }
+
+    .header_label{
+        font-weight:300;
+    }
+    .text-input{
+        margin: 13px 0px !important;
+     }
+
+     
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+       // font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+         margin:30px 0px 10px 0px;
+     }
+    .result{
+        font-size: 16px;
+        margin: 5px;
+    }
+     .Cal_Des{
+
+     }
+}

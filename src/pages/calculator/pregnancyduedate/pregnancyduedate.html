@@ -1,0 +1,87 @@
+<!--
+  Generated template for the PregnancyduedatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Pregnancy Due Date</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="">
+      <!-- <div class="bg_image"></div> -->
+      <div class="progress_wrapper">
+          <div>
+            <round-progress
+            [current]="current"
+            [max]="max"
+            [color]="status"
+            [background]="'#eaeaea'"
+            [radius]="150"
+            [stroke]="25"
+            [semicircle]="false"
+            [rounded]="true"
+            [clockwise]="true"
+            [responsive]="false"
+            [duration]="800"
+            [animation]="'easeInOutQuart'"
+            [animationDelay]="0"></round-progress></div>
+            <div class="progress_text" [style.color]="status" *ngIf="AllFiledsFil">
+                <img [src]="smiley_src">
+                <p class="result"> {{result}}</p>
+            </div>
+          </div>
+          <!-- <ion-row class="margin-left">
+              <ion-col col-12>
+                  <p *ngIf="AllFiledsFil" [style.color]="status"> Your Pregnancy due date may be on </p>
+                  <p class="status"> {{result}}</p>
+              </ion-col>
+           </ion-row> -->
+    <ion-row class="margin-left">
+      <ion-col col-12>
+        <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;;">
+            <span item-right><ion-icon name="ios-calendar-outline" color="dark"></ion-icon></span>
+          <ion-label>First Day of Last Period</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="peroid" ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="padding-0">
+        <button ion-button block class="btn" (click)="calculate()">Calculate</button>
+      </ion-col>
+    </ion-row>
+    
+  
+    <ion-col col-12  class="Cal_Des" >
+        <ion-row class="margin-left">
+          <!-- <ion-col col-10 color="primary" >
+            <p class="Cal_header">Description</p>
+          </ion-col> -->
+          <ion-col col-12 >
+              <p class="cal_des">Pregnancy calculator will tell you when you can expect to meet your baby! .
+             <!-- <p class="cal_des"><strong>Note</strong></p>
+                <p class="cal_des">Pregnancy calculator will tell you when you can expect to meet your baby! .
+              </p> -->
+          </ion-col>
+        </ion-row>
+    </ion-col>
+  
+    <ion-col col-12 >
+      <ion-row class="disclaimer_wrapper margin-left">
+        <ion-col col-10  color="primary" >
+          <p class="disclaimer_header">Disclaimer</p>
+        </ion-col>
+        <ion-col col-12 >
+          <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  
+  </ion-content>
+  

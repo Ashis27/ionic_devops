@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="profile-back-sec package-navbar-back">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 white-space margin-auto para-overflow-hidden">
+        <span class="">{{selectedPackage.LabPackageName}}</span>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card class="time-slot-card-background">
+    <ion-item class="padding-left-5">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="profile-w-h" [src]="(selectedPackage.ImageUrl != null && selectedPackage.ImageUrl != '') ? selectedPackage.ImageUrl :'assets/img/dc_icon/package2.svg'"
+        />
+        <!-- <img src="assets/img/bookAppointment/doctor_icon.svg" class="profile-w-h"> -->
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{selectedPackage.LabPackageName}}
+        </h4>
+        <p class="margin-top-5">
+          <span class="content-row-seprator" *ngIf="selectedPackage.Gender == 1">
+            <img class="dioLocation" src="assets/img/male.svg" /> Male
+          </span>
+          <span class="content-row-seprator" *ngIf="selectedPackage.Gender == 2">
+            <img class="dioLocation" src="assets/img/female.svg" /> Female
+          </span>
+          <span class="content-row-seprator" *ngIf="selectedPackage.Gender == 3">
+            <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+          </span>
+        </p>
+        <!-- <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+          </span>
+          {{selectedPackage.CenterName}}, {{selectedPackage.CityAreaName}}
+        </p> -->
+        <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.CityAreaName}}, {{selectedDiagnosticCenter.City}}
+        </p>
+        <p class="para-overflow-hidden DF_text margin-5" *ngIf="selectedPackage.TestCount > 0">
+          <span class="dc-inner-sub-text-size">{{selectedPackage.TestCount}}</span>
+          <span class="inner-sub-text-size"> Test(s) Available</span>
+        </p>
+        <p class="age-group-section">
+          <span class="content-row-seprator">
+            Age:
+            <span class="age_grp_color" *ngIf="selectedPackage.AgeGroup == 4">Only for child</span>
+            <span class="age_grp_color" *ngIf="selectedPackage.AgeGroup == 3">Above 60 Years</span>
+            <span class="age_grp_color" *ngIf="selectedPackage.AgeGroup == 2">Between 25 and 60 Years</span>
+            <span class="age_grp_color" *ngIf="selectedPackage.AgeGroup == 1">Below 25 Years</span>
+          </span>
+        </p>
+        <!-- <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.City}}
+        </p> -->
+        <!-- <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+          </span>
+          {{selectedPackage.CityAreaName}}
+        </p> -->
+        <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="selectedPackage.GenericDiscount > 0">
+          <span class="dc-inner-sub-text-size">{{selectedPackage.GenericDiscount}}</span>
+          <span class="inner-sub-text-size">% Off</span>
+        </p> -->
+        <p class="price-text margin-top-5">
+          <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin-right: 10px !important;">₹ {{selectedPackage.PriceAfterDiscount}}</span>
+          <span *ngIf="selectedPackage.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{selectedPackage.Price}}</span>
+          <span class="para-overflow-hidden DF_text margin-5" *ngIf="selectedPackage.GenericDiscount > 0">
+            <span class="dc-inner-sub-text-size">({{selectedPackage.GenericDiscount}}%</span>
+            <span class="inner-sub-text-size"> Off)</span>
+          </span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row *ngIf="labProfileList.length > 0">
+    <p class="para-margin-0-1 price-sub-content search-header">
+      <img src="assets/img/dc_icon/labTest.svg" class="testwhite" />Individual Profile(s)</p>
+    <ion-col col-12 class="border-bottom-color" *ngFor="let item of labProfileList">
+      <div class="" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12 class="padding-top-0">
+            <p class="para-list-header font-weight-400 para-overflow-hidden margin-top-3 item-list-header">
+              <span>
+                <ion-icon name="ios-checkmark-circle-outline" class="test-list"></ion-icon>
+              </span>
+              <span class="font-weight-500" style="font-size: 15px;">{{item.LabProfileName}}</span>
+            </p>
+            <p class="margin-bottom-5">
+              <span>{{item.LabProfileDescription}}</span>
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="labTestList.length > 0">
+    <p class="para-margin-0-1 price-sub-content search-header">
+      <img src="assets/img/dc_icon/labTest.svg" class="testwhite" />Individual Test(s)</p>
+    <ion-col col-12 class="border-bottom-color" *ngFor="let item of labTestList">
+      <div class="" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12 class="padding-top-0">
+            <p class="para-list-header font-weight-400 para-overflow-hidden margin-top-3 item-list-header">
+              <span>
+                <ion-icon name="ios-checkmark-circle-outline" class="test-list"></ion-icon>
+              </span>
+              <span class="font-weight-500" style="font-size: 15px;">{{item.LabTestName}}</span>
+            </p>
+            <p class="margin-bottom-5">
+              <span>{{item.LabTestDescription}}</span>
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-fab bottom left (click)="getLocationOnMap()">
+    <button ion-fab mini>
+      <ion-icon name="ios-pin-outline"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6 class="btn-devider-border" (click)="addToCart(selectedPackage,'Package')">
+        <ion-title class="footer-titel-class" text-center>
+          <span class="margin-left-right-5 add-to-cart">Add To Cart</span>
+        </ion-title>
+      </ion-col>
+      <ion-col col-6 (click)="bookHealthPackage(selectedPackage)">
+        <ion-title class="footer-titel-class" text-center>
+          <span class="margin-left-right-5">Book Package</span>
+        </ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

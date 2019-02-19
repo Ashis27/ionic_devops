@@ -1,0 +1,355 @@
+page-seealldoctors{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .profile-w-h{
+        width: 70px !important;
+        height: 70px!important;
+        border: 2px solid white;
+    }
+    
+    .profile-user-name{
+        // font-size: 17px !important;
+        // color: rgb(0, 0, 0) !important;
+        font-size: 15px !important;
+        color: #616161 !important;
+        font-weight: bold;
+    }
+    
+    .profile-contect-detail{
+        color: white;
+        font-size: 12px;
+    }
+    .white-space-normal{
+        white-space: normal !important;
+    }
+    
+    .avtar-margin{
+        margin: 0px 8px 8px 0 !important;
+    }
+    
+    .profile-body-content{
+        color: #757272 !important;
+        line-height: 1.2 !important;
+    }
+    
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .header-margin-time-slot{
+       margin-top:-16px;
+    }
+    .time-slot-card-background{
+        margin: 0px !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+    .header-margin-align{
+            margin-top:-16px
+       }
+       
+       .header-title-margin{
+        margin: 4px 4px 2px 14px;
+        font-weight: bold;
+            }
+            .quick-date-ul{
+                     padding: 0px 0px 0px 5px;;
+                    margin: 11px 0px;
+                    border-right: 2px solid var(--border-color);
+                    height: 51px;
+                }
+                .quick-date-li {
+       
+                      display: inline;
+                        text-align: center;
+                        width: 42px;
+                        float: left;
+                        color: #3e3e3e;
+                        font-size: 13px;
+                    }
+                    .quick-date-li-date{
+                             font-size: 20px;
+                     }
+    
+                     .quick-date-li:hover:after{
+                            content: '';
+                            background-color: var(--button-color);
+                            border-radius: 100px;
+                            padding: 1px 5px 0px 5px;
+                            font-size: 7px;
+                         }
+                         .quick-date-li:hover {
+       
+                                display: inline;
+                                text-align: center;
+                                float:left;
+                                color: var(--button-color);
+                                font-size: 13px;
+                               
+                             }
+    
+                             .calander-icon-margin{
+                                margin-top: 12px;
+                             }
+                             .review-color{
+                                 color:var(--primary-color);
+                                 margin-left: 10px;
+                             }
+                             .star-color{
+                                color:var( --warning-color);
+                             }
+                             .img-size{
+                                // background: url(../assets/img/bookAppointment/specialities_icon.svg);
+                                max-width: 50px;
+                                background: #e4e4e4;
+                                height: 50px !important;
+                                width: 50px !important;
+                                border-radius: 50%;
+                                border: 1px solid #e4e4e4;
+                                padding: 5px !important;
+                                margin-top: 0px !important;
+                            }
+                            .med-icon{
+                                padding-top: 12px;
+                            }
+                             .morning-slot-border{
+                                border-top: 1px solid var(--border-color);
+                               
+                                padding: 18px 0px 10px 0px;
+                                margin-top: 20px;
+                             }
+                             .morning-icon-width{
+                                width: 26px !important;
+                             }
+                             .text-center-cls{
+                                 text-align:center;
+                             }
+    
+                             .morning-text-class{
+                                vertical-align: super;
+                                margin-left: 3px;
+                                text-transform: uppercase;
+                                font-size: 16px;
+                                color:var(--primary-color);
+                             }
+                             .morning-time-text{
+                                 font-size: 12px;
+                                 color:var(--secondary-color);
+                                 vertical-align: super;
+                                 margin-left: 4px;
+                             }
+                             .ul-time-selecter{
+                                padding: 6px;
+                             }
+    
+                             .li-time-selector{
+                                display: inline;
+                                text-align: center;
+                                width: 64px;
+                                float: left;
+                                color: var(--border-color);
+                                font-size: 12px;
+                                border: 1px solid var(--border-color);
+                                padding: 6px 1px 6px 1px;
+                                margin: 10px 5px;
+                                border-radius: 100px;
+                             }
+                             .li-time-selector-avlbl{
+                                display: inline;
+                                text-align: center;
+                                width: 64px;
+                                float: left;
+                                color:var(--button-color);
+                                font-size: 12px;
+                                border: 1px solid var(--button-color);
+                                padding: 6px 1px 6px 1px;
+                                margin: 10px 5px;
+                                border-radius: 100px;
+                             }
+    
+                             .li-time-selector:hover{
+                                display: inline;
+                                text-align: center;
+                                width: 64px;
+                                float: left;
+                                color: var(--white-color);
+                                font-size: 12px;
+                                border: 1px solid var(--button-color);
+                                background-color:var(--button-color);
+                                padding: 6px 1px 6px 1px;
+                                margin: 10px 5px;
+                                border-radius: 100px;
+                             }
+                             .li-time-selector-avlbl:hover{
+                                display: inline;
+                                text-align: center;
+                                width: 64px;
+                                float: left;
+                                color: var(--white-color);
+                                font-size: 12px;
+                                border: 1px solid var(--button-color);
+                                background-color:var(--button-color);
+                                padding: 6px 1px 6px 1px;
+                                margin: 10px 5px;
+                                border-radius: 100px;
+                             }
+    
+    
+                             .button-outline {
+                                border-color: var(--primary-color) !important;
+                                color: var(--primary-color) !important;
+                            }
+                            .button-primary{
+                   
+                                background-color: var(--primary-color) !important;
+                                margin: 10px 0px 0px 0px;
+                                padding: 12px 10px 10px 10px;
+                                height: 30px;
+                                width: 100%;
+                            }
+                            .km-text{
+                            // font-weight: 500;
+                            // color: var(--button-color);
+                            // /* width: 100%; */
+                            // text-align: center;
+                            font-weight: 500;
+                            color: var(--button-color);
+                            width: 100%;    
+                        text-align: center;
+                        }
+                        .location-img-sec{
+                           // float: left;
+                        }
+                        .location-img{
+                           // width: 20px;
+                           // margin-top: -3px;
+                           width: 25px;
+                           margin-left: 35%;
+                        }
+                        .solid-btn-style {
+                            // background-color: var(--primary-color) !important;
+                             padding: 10px 10px 10px 10px;
+                             height: 29px !important;
+                             width: 100%;
+                         }
+                        .distance-text{
+                            color: var(--primary-color);
+                            margin-left: 7px;
+                        }
+                            .doc-detail-location-icon{
+                                width: 14px;
+                                margin-left: 0px;
+                            }
+    
+                            .display-inline{
+                                display: inline;
+                                 float: left;
+                            }
+                            .font-weight-doc-loc{
+                                font-weight: 500;
+                            }
+                            .doc-specilization-border{
+                               // border-right: 1px solid var(--border-color);
+                                padding: 0px 5px 0px 0px;
+                            }
+    
+                            .ruppy-icon-size{
+                                width: 22px;
+                                vertical-align: sub;
+                                display:inline;
+                            }
+                            .ruppy-amt-size{
+                                font-size: 23px;
+                                font-weight: bold;
+                             
+                            }
+    
+                            .availability-dtl-alignment{
+                                vertical-align: text-bottom;
+                            }
+                            .total-amount-margin{
+                               //margin-left: 24px !important;
+                                //margin-top: -8px !important;
+                            }
+    
+                            .doc-detail-btn-section{
+                                border-top: 1px solid var(--border-color);
+                                 padding: 5px 15px 4px 0px;
+                            }
+                            .doc-detail-w-h{
+                                width: 70px !important;
+                                height: 10px!important;
+                                border: 2px solid white;
+                            }
+                            .text-center-class{
+                                text-align:center;
+                            }
+                            .filter-icon-width{
+                                width: 30px;
+                                margin-top: 10px;
+                            }
+    
+                            .filter-icon-border{
+                                border: 2px solid var(--primary-color);
+                                padding: 10px;
+                                color: var(--border-color);
+                                 border-radius: 30px;
+                            }
+                            .filter-div-style{
+                                margin-bottom: 10px;
+        box-shadow: 0px 2px 1px var(--border-color);
+        padding: 10px 0px 10px 0px;
+                            }
+                            .rating-sec{
+                                float: left;
+                            }
+                            .rating-sec > ul {
+                                padding: 0px;
+                             margin: 0px;
+                                &.rating li {
+                                  padding: 0px !important;
+                                  background: none;
+                                  color: #ffb400;
+                              
+                                  ion-icon {
+                                    font-size: 15px;
+                                  }
+                                }
+                              }
+                             .price-sec{
+    
+                             }
+                          
+                            .item-ios{
+                                padding-top:10px;
+                              }
+                              .doc-price{
+                              //  float: left;
+                                margin-top: -2px;
+                              }
+                              .ruppy-amt-not-available{
+                                font-size: 13px !important;
+                                font-weight: bold;
+                                color: var(--button-color);
+                                text-align: left;
+                            }
+                            .rupee-image{
+                                width: 12px !important;
+                                vertical-align: sub;
+                                display: inline;
+                                margin-bottom: -13px;
+                            }
+                            .content-ios{
+                                margin-top: 0px !important;
+                            }
+                       
+}

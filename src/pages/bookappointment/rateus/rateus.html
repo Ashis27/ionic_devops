@@ -1,0 +1,47 @@
+<!-- <ion-header>
+    <ion-navbar>
+        <ion-title style="color:white">Feedback</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="closeModal()" style="color:white"> 
+       CLOSE
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header> -->
+
+<ion-content padding class="main-view">
+    <div class="modal_content">
+        <ion-row>
+            <ion-col col-12 class="rate-us-msg">
+                <ion-item class="default-add margin-top-bottom-10">
+                    Appointment Feedback
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rate-us-sec">
+            <ion-col col-12 class="rate-us-image">
+                <ion-item class="default-add">
+                    <!--<img *ngIf="rating == 1 && rateUsDetails.image ==''" class="rate-us-icon" src="assets/hospitalImages/rating.jpg">-->
+                    <img class="rate-us-icon" [src]="feedback_img" />
+                    <p style="color: #656565;" *ngIf="rating >= 1 && feedback_img !=''">{{feedback_msg}}</p>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rate-us-sec">
+            <ion-col col-12 class="rate-us-image" *ngFor="let question of feedbackQuestions;let i = index;">
+                <ion-item *ngIf="question.Type == 1" class="default-add">
+                    <ion-range [(ngModel)]="rating" min="1" max="10" step="1" pin="true" debounce="5" snaps="true" color="secondary" (ionChange)="setRating(i)"></ion-range>
+                </ion-item>
+                <ion-item *ngIf="question.Type == 2">
+                    <ion-textarea placeholder="Leave a Message(Optional)" [(ngModel)]="feedbackAns[i].Value"></ion-textarea>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rate-us-sec">
+            <ion-col col-12 class="submitRate">
+                <button name="square" col-4 (click)="submitFeedback()" class="btn-back-style float-right location-search-header">Submit</button>
+                <button name="square" col-4 (click)="closeModal()" class="close-btn-back-style float-right margin-left-right-5 location-search-header">Not Now</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

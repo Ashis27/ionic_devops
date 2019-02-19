@@ -1,0 +1,133 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>My Pregnancy Plan</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="editProfile()">
+                <ion-icon name="ios-create"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content class="back-color">
+    <ion-row style="background: url('https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/user.jpg ') !important; margin-bottom:65px;">
+        <div col-12 class="dashboard-header">
+            <ion-row>
+                <ion-col col-3>
+                    <img class="statusImg" [src]="pregnancyStatusUrl" alt="">
+                </ion-col>
+                <ion-col col-9>
+                    <p text-center class="color-white">
+                        You are
+                        <span class="weeks-number">{{timeOfPregnancy}}</span> week(s) pregnant
+                    </p>
+                    <p text-center class="color-white">
+                        {{pregnancyStatustext}}
+                    </p>
+                </ion-col>
+            </ion-row>
+
+            <ion-item class="no-color">
+                <ion-range class="pregnancy-status pulse" disabled [(ngModel)]="pregnancyStatus">
+                </ion-range>
+            </ion-item>
+            <p text-center class="color-white" style="margin:0">
+                <span class="weeks-number">{{remainingTimeofPregnacy}}</span> week(s) more to go
+            </p>
+        </div>
+        <div>
+            <img class="img-banner" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/banner.jpg" />
+        </div>
+    </ion-row>
+
+    <div id="cardContainer">
+        <ion-card *ngFor="let linedata of lineItemData" class="actioncard">
+            <ion-card-content class="booking-slot ">
+                <ion-row>
+                    <ion-col col-3 style="border-right: 2px solid var(--health-plan-pregnancy-color);width: 40px;" class="card-img margin-auto">
+                        <img class="img-size" [src]="linedata.url" />
+                    </ion-col>
+                    <ion-col col-9>
+                        <p class="card-title">{{linedata.LineItemName}}</p>
+                        <p class="card-body"> {{linedata.LineItemDescription}} </p>
+                        <p>
+                            <span class="due-date">{{linedata.ScheduledDate}}</span>
+                        </p>
+                    </ion-col>
+                </ion-row>
+                <p class="dash-action" (click)="redirectToBook(linedata)">Book Appointment</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+
+    <ion-row class="menu-position">
+        <ion-col col-12 id="dashboard-menu" style="display:none;">
+            <ion-row style="margin: 2em 0 6em 0;">
+                <ion-col col-4 (click)="redirectTo('HealthPlanAppointmentHistory')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/calendar.svg" />
+                        <p>
+                            Doctor Appointment(s)
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('HealthPlanDiagnosticAppointmentHistory')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/diabetic.svg" />
+                        <p>
+                            Diagnostic Test(s)
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('HealthJournalList')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/info.svg" />
+                        <p>
+                            Health Journal
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('YageAndExcercise')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/lotus-position.svg" />
+                        <p>
+                            Excercise
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('MedicineList')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/pills.svg" />
+                        <p>
+                            Reminder &#38; Medication
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('diet')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/diet.svg" />
+                        <p>
+                            Diet Plan
+                        </p>
+                    </div>
+                </ion-col>
+                <ion-col col-4 (click)="redirectTo('ActionBox')">
+                    <div class="menu-sections">
+                        <img class="" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/package.svg" />
+                        <p>
+                            Action Box
+                        </p>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-fab bottom center (click)="showmenu()">
+        <button ion-fab>
+            <ion-icon [name]="footerIcon"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

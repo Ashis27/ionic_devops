@@ -1,0 +1,83 @@
+page-add-reminder {
+    .listHeader{
+        border-bottom: 0.5px solid #bbb7b7;
+        height: 40px;
+        line-height: 3;
+        margin: 0px 12px;
+        padding-left: 2px;
+        color: #39bebc;
+        font-size: 16px;
+        background-color: #f7eded;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .label-ios > .location-search-header{
+        padding: 10px 0px 0px 0px !important;
+        }
+    .medicine_items{
+     padding-left: 6px;
+     border-radius:5px;
+     margin-bottom:5px;
+     border-left:4px solid #39bebc;
+     min-height:5rem;
+    }
+    .medicine-image{
+        width: 10% !important;
+    }
+    ion-icon{
+     color:#39bebc !important;
+    }
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    
+    .medicine-list-header{
+        font-size: 16px !important;
+    }
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .input-for-email-mobile{
+        margin-left: 0px !important;
+    }
+    .contact-number-field{
+        margin-top: 0px !important;
+    }
+    .item-ios{
+        padding-top:10px;
+      }
+      .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+       .not-found {
+       // width: 44% !important;
+
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .back-button-icon {
+        color: #ffffff !important;
+    }
+    .nav-add-arrow-icon{
+        font-size:30px !important;
+        color:#39bebc !important;
+    }
+}

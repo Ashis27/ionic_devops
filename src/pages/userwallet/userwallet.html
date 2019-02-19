@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Wallet</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="back-image">
+  <ion-row *ngIf="(walletTransaction !=null && walletTransaction.ConsumerWalletTransaction.length > 0) && !isWalletEmpty">
+    <ion-col col-12>
+      <ion-row class="wallet-back">
+        <ion-col col-12 text-center class="wallet-header-back">
+          <!-- <p>
+            <img src="assets/img/wallet/wallet_1.svg" class="wallet-img" />
+          </p> -->
+          <p>
+            <span>
+              <!-- <img src="assets/img/doctorProfile/rupee_icon.svg" class="rupee-img"> -->
+            </span>
+            <span class="wallet-balance">
+              {{walletTransaction.HPCashBalance}}
+            </span>
+          </p>
+          <p class="wallet-balance-text-size">Wallet Balance</p>
+         
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="border-bottom-color trans-details-back" *ngFor="let trans of walletTransaction.ConsumerWalletTransaction">
+          <ion-row>
+            <ion-col col-2 text-left class="margin-auto">
+              <img src="assets/img/wallet/trans_receive.svg" *ngIf="trans.TransactionTypeDesc == 'Credit'" class="trans-img">
+              <img src="assets/img/wallet/trans_spend.svg" *ngIf="trans.TransactionTypeDesc == 'Debit'" class="trans-img">
+              <img src="assets/img/wallet/trans_spend.svg" *ngIf="trans.TransactionTypeDesc == 'Reversal'" class="trans-img">  </ion-col>
+            <ion-col col-7 text-left class="margin-auto">
+              <p class="trans-desc">{{trans.Remarks}}</p>
+              <p class="trans-date">{{trans.TransactionDate}}</p>
+            </ion-col>
+            <ion-col col-3 text-right class="margin-auto">
+              <span>
+                <!-- <img src="assets/img/doctorProfile/rupee_icon.svg" class="trans-rupee-img"> -->
+              </span>
+              <span class="wallet-trans-price-text">
+                <span *ngIf="trans.TransactionTypeDesc == 'Credit'" class="receive-trans">+{{trans.HealthProCashAmount}}</span>
+                <span *ngIf="trans.TransactionTypeDesc == 'Debit'" class="spend-trans">-{{trans.HealthProCashAmount}}</span>
+                <span *ngIf="trans.TransactionTypeDesc == 'Reversal'" class="reversal-trans">-{{trans.HealthProCashAmount}}</span>
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="(walletTransaction==null || walletTransaction.ConsumerWalletTransaction.length == 0) && isWalletEmpty">
+    <ion-col col-12 text-center>
+      <img src="assets/img/wallet.svg" class="not-found" />
+      <p class="not-found-text">Empty Wallet!</p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+      <ion-item class="footer-sec footer-row-section default-add">
+        <ion-row class="footer-row-section">
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HOME</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">EMERGENCY</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HISTORY</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer> -->

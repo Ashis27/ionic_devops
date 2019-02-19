@@ -1,0 +1,114 @@
+<ion-content class="back-image">
+	<div class="logo">
+		<img src="assets/img/logo.png" alt="health-pro logo">
+	</div>
+	<ion-list class="login-form-top">
+		<ion-row>
+			<ion-col class="para-section-style">
+				<p class="para-text-color" text-center>
+					Your <span class="default-color font-weight-400">Health</span> Our
+					<span class="default-color font-weight-400">Kare</span>
+				</p>
+			</ion-col>
+		</ion-row>
+		<form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" class="login-form">
+			<!--<ion-icon name="ios-phone-portrait" class="mobile-icon-size" *ngIf="isNumberTyped"></ion-icon>
+					<ion-icon name="mail" class="mobile-icon-size" *ngIf="!isNumberTyped"></ion-icon>-->
+			<ion-row class="login-input number-email-field padding-right-0">
+				<ion-col col-2>
+					<img class="form-image login-email-size" *ngIf="!isNumberTyped" src="assets/img/register/mail_icon.svg" />
+					<!--<ion-icon name="mail" class="mobile-icon-size mail-icon" *ngIf="!isNumberTyped"></ion-icon>-->
+					<ion-select interface="popover" [(ngModel)]="countryCode" class="country-code" name="country_code" *ngIf="isNumberTyped"
+					 (ionChange)="selectedCountryCode(countryCode)">
+						<!--<ion-option>--Choose City--</ion-option>-->
+						<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-10 class="input-email-mobile-sec padding-right-0">
+					<ion-item class="contact-number-field default-add padding-right-0">
+						<ion-input [(ngModel)]="userEmailOrMobile" id="numberInput" name="mobile_number" type="email" placeholder="Mobile Number or Email Id"
+						 #contact="ngModel" spellcheck="false" autocapitalize="off" [attr.maxlength]="maxLen" (keyup)="onlyNumber($event)" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<!-- <ion-row class="login-input number-email-field">
+				<ion-col col-2>
+					<img class="form-image pass-section" src="assets/img/register/lock.svg" />
+				</ion-col>
+				<ion-col col-10 class="input-email-mobile-sec">
+					<ion-item class="contact-number-field default-add">
+						<ion-input [(ngModel)]="login.Password" name="password" type="password" placeholder="Password" #password="ngModel" spellcheck="false"
+						 autocapitalize="off" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+				<ion-col col-2>
+					<img class="form-image pass-section" src="assets/img/register/lock.svg" />
+				</ion-col>
+				<ion-col col-8 class="padding-0">
+					<ion-item class="contact-number-field default-add login-password">
+						<ion-input [(ngModel)]="login.Password" name="password" [type]="isActive?'text':'password'" placeholder="Password" #password="ngModel"
+						 spellcheck="false" autocapitalize="off" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+				<ion-col col-2 class="text-aligh-right">
+					<ion-icon [name]="isActive?'eye':'eye-off'" class="eye-icon-style" item-right (click)="isActive=!isActive;" isActive=true>
+					</ion-icon>
+				</ion-col>
+			</ion-row> -->
+			<!--<ion-item class="login-input">
+				<ion-label class="login-input-label">
+					<img class="form-image" src="assets/img/register/lock.svg" />
+					
+				</ion-label>
+				<ion-input [(ngModel)]="userPassword" name="password" type="password" placeholder="Password" #password="ngModel" spellcheck="false"
+				 autocapitalize="off" required>
+				</ion-input>
+			</ion-item>-->
+			<div class="forgot-password-text">
+				<p class="" (click)="resetPassword()">Forgot Password?</p>
+			</div>
+			<div text-center>
+				<button class="login-form-btn" ion-button type="submit">Continue</button>
+			</div>
+		</form>
+		<ion-row>
+			<ion-col col-12 class="" text-center>
+				<p class="optional-text">
+					OR
+				</p>
+			</ion-col>
+			<ion-col>
+				<ion-row class="social-btn-sec">
+					<ion-col col-12 class="">
+						<button class="login-facebook-btn" ion-button type="button" (click)="onConnectWithSocial('facebook')">
+							<ion-icon name="logo-facebook" class="facebook-icon"></ion-icon>
+							<span class="social-btn-size">Facebook Connect</span>
+						</button>
+					</ion-col>
+					<!-- <ion-col col-6 class="">
+						<button class="login-google-btn" ion-button type="button" (click)="onConnectWithSocial('google')">
+							<ion-icon name="logo-googleplus" class="googleplus-icon"></ion-icon>
+							<span class="social-btn-size">Connect With</span>
+						</button>
+					</ion-col> -->
+				</ion-row>
+			</ion-col>
+			<ion-col col-12 class="" text-center>
+				<p class="optional-text">
+					Don't have an account?
+					<span class="ask-login-signup-text" (click)="onSignup()"> Sign Up</span>
+				</p>
+			</ion-col>
+			<!-- <ion-col col-12 class="skip-section" text-center>
+				<p class="optional-text">
+					<span class="ask-login-signup-text" (click)="onSkipToDashboard()"> Skip To Dashboard</span>
+				</p>
+			</ion-col> -->
+		</ion-row>
+
+	</ion-list>
+
+</ion-content>

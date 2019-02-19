@@ -1,0 +1,163 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="location-search-header">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 margin-auto">
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword !='' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword =='' || searchedKeyword == undefined || searchedKeyword == null">Health Packages</p>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row>
+    <!-- <div class="title-header-text">
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword !='' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword =='' || searchedKeyword == undefined || searchedKeyword == null">Health Packages</p>
+    </div>
+    <ion-buttons end class="nav-button-width margin-right-10" (click)="goToCart()">
+      <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+      <img class="cart-icon" src="assets/img/cartWhite.svg" />
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-row class="ios-margin-top"> 
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="location-search-header" (click)="closeCurrentSection()">
+          <ion-col col-1 class="close-sec margin-auto">
+            
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-9 class="header-title margin-top-bottom-5 margin-auto">
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword !='' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword =='' || searchedKeyword == undefined || searchedKeyword == null">Health Packages</p>
+          </ion-col>
+          <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+            <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+            <img class="cart-icon" src="assets/img/cartWhite.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
+  <ion-row>
+    <ion-col col-12 *ngIf="packageList.length > 0">
+      <ion-card class="card-box-shadow" *ngFor="let package of packageList">
+        <ion-item class="padding-0" (click)="selectedPackage(package)">
+          <ion-avatar item-start class="avtar-margin">
+            <img class="img-size padding-0" [src]="(package.ImageUrl != null && package.ImageUrl != '') ? package.ImageUrl :'assets/img/package2.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <ion-row>
+              <ion-col col-11>
+                <h4 class="profile-user-name para-overflow-hidden">{{package.PackageName}}
+                </h4>
+              </ion-col>
+              <ion-col col-1>
+                <span style="float:right;width: 25px;">
+                  <img src="assets/img/doctorProfile/medical_icon.svg">
+                </span>
+              </ion-col>
+            </ion-row>
+            <p class="margin-top-2 medicine-sub-content para-margin-0 para-overflow-hidden">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{package.CenterName}}, {{package.CityAreaName}}</p>
+            <p class="margin-6">
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 1">
+                <img class="dioLocation" src="assets/img/male.svg" /> Male
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 2">
+                <img class="dioLocation" src="assets/img/female.svg" /> Female
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 3">
+                <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+              </span>
+            </p>
+            <p class="margin-6">
+              <span class="">
+                <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+              <span class="original-price" *ngIf="package.GenericDiscount > 0">{{package.OriginalPrice}}</span>
+              <span *ngIf="package.GenericDiscount > 0"> / </span>
+              <span class="discount-price">{{package.PriceAfterDiscount}}</span>
+            </p>
+          </div>
+        </ion-item>
+        <ion-row class="text-center-appobtn border-top-color padding-5">
+          <ion-col col-4 class="">
+          </ion-col>
+          <ion-col col-4 class="" (click)="addToCart(package)">
+            <button ion-button small outline class="transparent-btn-style">Add To Cart</button>
+          </ion-col>
+          <ion-col col-4 class="">
+            <button ion-button small class="button-primary solid-btn-style " (click)="BookPackage(package)">Book Package</button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="packageList.length == 0 && !isAvailable">
+      <img src="assets/img/package2.svg" class="not-found" />
+      <p class="not-found-text">No Diagnostic center(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <!-- <div id="openFilter" class="modal">
+    <div class="modal-content">
+      <ion-grid class="user-profile-back">
+        <ion-row text-right class="header-back">
+          <ion-col col-9 class="document-name">
+            <p>Filter</p>
+          </ion-col>
+          <ion-col col-3>
+            <ion-icon name="ios-close-circle-outline" class="close-icon" (click)="closeModal()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <h3>Age Group</h3>
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 *ngFor="let ageGroup of ageGroups" class="age-grp">
+            <ion-item>
+              <ion-checkbox value="ageGroup.StandardCodesValuesID" (click)="filterByAgeGroup(ageGroup.StandardCodesValuesID)"></ion-checkbox>
+              <ion-label>{{ageGroup.Value}} </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-list class="border-bottom">
+            <ion-item class="login-input-select list-item-border login-input gender-item number-email-field default-add">
+              <ion-label class="reg-label-sec login-rem-sec-label">
+                Select Gender
+              </ion-label>
+              <ion-select interface="popover" [(ngModel)]="genderTabValue" name="gender" (click)="filterByGenderGroup(genderTabValue)"
+                style="padding: 10px 0px 0px 0px !important; border-right: 0px;">
+                <ion-option *ngFor="let gender of genderTabs" value="{{gender.Value}}">{{gender.Value == 'NA' ? 'All' : gender.Value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-col col-12>
+            <ion-item>
+              <h3>Price</h3>
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 class="price-grp">
+            <ion-item>
+              <ion-range dualKnobs="true" [(ngModel)]="selectedPrice" min="minPrice" max="maxPrice" step="100" (ionChange)="setChangePrice(selectedPrice)"
+                snaps="true"></ion-range>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button name="square" type="button" class="btn-back-style float-right popup-btn" (click)="applyFilter()">Apply</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div> -->
+</ion-content>

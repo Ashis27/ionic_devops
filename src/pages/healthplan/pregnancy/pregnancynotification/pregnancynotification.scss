@@ -1,0 +1,47 @@
+page-pregnancynotification {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .back-color {
+        background-color: #f9f9f9 !important;
+    }
+    .btn-style {
+        width: 75%;
+        background: var(--health-plan-pregnancy-color);
+        box-shadow: 3px 4px 8px var(--health-plan-pregnancy-shadow-color);
+    }
+    .page-header {
+        font-size: 1.5rem;
+        padding-left: 9px;
+    }
+    .page-header>img {
+        height: 3rem;
+        margin: -8px 0 -10px 8px;
+    }
+    .noti-img {
+        padding: 0;
+    }
+    .noti-img>img {
+        padding: 10% 18%;
+        border-right: 2px solid var(--health-plan-pregnancy-color);
+    }
+    .noti-img>p {
+        font-size: 1.2rem;
+    }
+    .noti-checkbox {
+        display: inherit;
+    }
+    .noti-checkbox>ion-checkbox {
+        margin: 0!important;
+    }
+    .noti-checkbox>p {
+        padding: 2px;
+    }
+    .noti-header {
+        min-height: 3.8rem;
+    }
+}

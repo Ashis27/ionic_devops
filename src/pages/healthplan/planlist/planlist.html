@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{pageTitle}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="planlist-back" [ngStyle]="{'background-image': 'url(' + bacgroundImg + ')'}">
+    <ion-row class="sub-menu-header-sec" *ngIf="planList.length > 0">
+        <ion-col col-12 class="padding-0" id="cardContainer">
+            <ion-row class="sub-menu-header-sec" *ngFor="let item of planList" class="actioncard">
+                <ion-col col-12 class="sub-menu-header padding-0">
+                    <ion-item class="item-bottom padding-left-5 plan-list" (click)="selectedItem(item)">
+                        <ion-row class="">
+                            <ion-col col-2 class="margin-auto">
+                                <img class="dashboard-sub-menu-img card-img" [src]="(item.ImageUrl != null && item.ImageUrl != '') ? item.ImageUrl :'https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/list.svg'" />
+                            </ion-col>
+                            <ion-col col-8 class="margin-auto">
+                                <p class="para-list-header para-overflow-hidden">{{item.Header}}</p>
+                            </ion-col>
+                            <ion-col col-2 class="text-aligh-right margin-auto">
+                                <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="planList.length == 0 && !isAvailable">
+        <ion-col col-12 text-center>
+            <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/list.svg" class="not-found" />
+            <p class="not-found-text">No result found!</p>
+        </ion-col>
+    </ion-row>
+</ion-content>

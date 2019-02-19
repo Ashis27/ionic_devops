@@ -1,0 +1,35 @@
+page-medicalhistory{
+  .show-added-info-list{
+    border: 1px solid #39bebc;
+    text-align: center;
+    padding: 7px 0px 5px 0px !important;
+    color: #39bebc !important;
+    font-weight: 500 !important;
+    border-radius: 5px;
+  }
+
+ion-navbar{
+  background-color: var(--primary-color) !important;
+}
+.bar-button-default {
+  margin: 0px !important;
+  color: var(--white-color) !important;
+}
+.medical-history-text{
+  font-size: 17px;
+}
+.footer .toolbar .toolbar-background {
+  background-color: var(--primary-color) !important;
+}
+.footer-titel-class > .toolbar-title {
+  padding: 0 0px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  text-align:center;
+}
+.book-appo-footer-btn{
+  width: 26px;
+  margin-bottom: -5px;
+}
+}

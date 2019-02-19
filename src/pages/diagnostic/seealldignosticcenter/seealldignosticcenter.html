@@ -1,0 +1,120 @@
+
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="title-header-text" (click)="closeCurrentSection()">
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword != '' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword == ''|| searchedKeyword == undefined || searchedKeyword == null">Diagnostic Centers</p>
+    </div>
+    <ion-buttons end class="nav-button-width">
+      <!-- <button ion-button icon-only> -->
+      <div (click)="getLocation()">
+        <p class="active-city-text para-overflow-hidden">Location
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </p>
+        <p class="active-location-text para-overflow-hidden">
+          <span *ngIf="selectedCityAndLocation.activeLocation !=''">{{selectedCityAndLocation.activeLocation}},</span> {{selectedCityAndLocation.activeCity}}
+        </p>
+      </div>
+      <!-- </button> -->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-row class="ios-margin-top">
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="location-search-header">
+          <ion-col col-1 class="close-sec margin-auto" (click)="closeCurrentSection()">
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-8 class="header-title margin-top-bottom-5 margin-auto" (click)="closeCurrentSection()">
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword != '' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword == ''|| searchedKeyword == undefined || searchedKeyword == null">Diagnostic Centers</p>
+          </ion-col>
+          <ion-col col-3 class="header-title padding-0 margin-auto" (click)="getLocation()">
+            <p class="active-city-text para-overflow-hidden">Location
+              <ion-icon name="ios-arrow-down"></ion-icon>
+            </p>
+            <p class="active-location-text para-overflow-hidden">
+              <span *ngIf="selectedCityAndLocation.activeLocation !=''">{{selectedCityAndLocation.activeLocation}},</span> {{selectedCityAndLocation.activeCity}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
+  <ion-row>
+    <ion-col col-12 *ngIf="diagnosticCenterList.length > 0">
+      <ion-card class="card-box-shadow" *ngFor="let center of diagnosticCenterList">
+        <ion-item class="padding-top-bottom-5" (click)="redirectTo('PackageList',center)">
+          <ion-avatar item-start class="avtar-margin">
+            <img class="img-size padding-0" [src]="(center.ProviderImage != null && center.ProviderImage != '') ? center.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <h4 class="profile-user-name">{{center.CenterName}}
+              <span style="float:right;width: 25px;">
+                <img src="assets/img/doctorProfile/medical_icon.svg">
+              </span>
+            </h4>
+            <!-- <p class="margin-top-6 para-overflow-hidden">
+              <span class="doc-specilization-border">{{center.SpecialisationDesc}}</span>
+            </p> -->
+            <p class="margin-top-6 para-overflow-hidden">
+              <span class="display-inline">
+                <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+              </span>
+              <span class="font-weight-doc-loc">{{center.City}}, {{center.CityAreaName}}</span>
+            </p>
+            <!-- <p class="margin-top-15" *ngIf="doctor.ProviderAverageRating != null && doctor.ProviderAverageRating!='' ">
+              <rating class="rating-sec" [(ngModel)]="doctor.ProviderAverageRating" readOnly="true" max="5" emptyStarIconName="star-outline"
+                halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+              <span class="review-color" (click)="getReview()">{{doctor.ProviderTotalRatingCount}} Review(s)</span>
+              <span class="doc-price">
+                <span>
+                  <img src="assets/img/doctorProfile/rupee_icon.svg" class="rupee-image">
+                </span>
+                <span class="ruppy-amt-not-available">{{doctor.ProviderFees !='NA'?doctor.ProviderFees:'Not Available'}}</span>
+              </span>
+            </p> -->
+          </div>
+        </ion-item>
+        <!-- <ion-item class="height-0 padding-0">
+          <ion-avatar item-start class="avtar-margin">
+            <div class="doc-detail-w-h"></div>
+          </ion-avatar>
+          <div class="card">
+            <p class="total-amount-margin para-overflow-hidden">
+              <span>
+                <img src="assets/img/doctorProfile/rupee_icon.svg" class="ruppy-icon-size">
+              </span>
+              <span class="ruppy-amt-size">{{doctor.ProviderFees !='NA'?doctor.ProviderFees:'Not Available'}}</span>
+              <span class="availability-dtl-alignment"> Availability: {{doctor.ScheduleDay}}</span>
+            </p>
+          </div>
+        </ion-item> -->
+        <!-- <ion-row class="text-center-appobtn border-top-color padding-5">
+          <ion-col col-4 class="">
+          </ion-col>
+          <ion-col col-4 class="" (click)="_call(center.Contact)">
+            <button ion-button small outline class="transparent-btn-style">Call Now</button>
+          </ion-col>
+          <ion-col col-4 class="">
+            <button ion-button small class="button-primary solid-btn-style " (click)="vieProfile(center)">View Package</button>
+          </ion-col>
+        </ion-row> -->
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="diagnosticCenterList.length == 0 && !isAvailable">
+      <img src="assets/img/bookAppointment/hospital_icon.svg" class="not-found" />
+      <p class="not-found-text">No Diagnostic center(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

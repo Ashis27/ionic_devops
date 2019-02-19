@@ -1,0 +1,76 @@
+page-add-vaccination {
+    // .content_bg{
+    //     background-color: green;    
+    // }
+    // .vaccine-input{
+    //     border: 1px solid #fff;
+    //     border-radius: 25px 25px 25px 25px;
+    //     background-color: transparent !important;
+    //     margin-bottom:2%;
+    // }
+    .header-background{
+        background-color: var(--primary-color) !important;
+        // margin: -17px 0px 0px 0px;
+        color:var(--white-color);
+        margin-bottom: 10px;
+  }
+    .vaccine-input{
+        border-bottom: 1px solid #e4e4e4;
+    }
+    .vaccine-input-label{
+        margin: 0px !important;
+        font-size:13px;
+    }
+    .mother_baby{
+        width:100%;
+    }
+    .mother_baby img{
+        width:15%;
+    }
+    .optional-image-bottom {
+        margin: 0px 10px -10px 0px !important;
+    }
+    .form-image {
+        max-width: 26px !important;
+        margin: 0px 10px -6px 0px !important;
+    }
+    .country_code{
+        padding:10px 0px 0px 8px !important;
+    }
+    .country_code_input{
+        margin-left:-13px !important;
+    }
+    .gender_div{
+        width:60%;
+        margin:0 auto;
+    }
+    .gender_wrapper{
+       width: 60%;
+       margin: 8% 0% 8% 21%;
+    }
+    .gendercls{
+        width: 40px;
+        height:40px;
+        margin-top:5px;
+        background: transparent;
+    }
+    .activate{
+        box-shadow: 1px 1px 1px 1px #e0f4f4;
+        border-radius: 5px;
+    }
+    .vaccine-submit-btton{
+        height: 45px;
+        text-transform: none;
+        border-radius:25px;
+        background-color: var(--button-color) !important;
+    }
+    .item-inner{
+        border-bottom:none !important;
+    }
+
+    .fab{
+        background-color: var(--button-color) !important;
+    }
+    
+
+}

@@ -1,0 +1,84 @@
+page-healthtrack{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .back-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background: url(../assets/img/login/login_bg.svg);
+        height: 100%;
+}
+  
+    .trans-details-back{
+        background: rgba(255, 255, 255, 0.7215686274509804);
+    }
+    .wallet-img{
+        width: 40px;
+    }
+    .rupee-img{
+        width: 15px;
+    }
+    .trans-rupee-img{
+        width: 14px;
+        vertical-align: bottom;
+    }
+    .trans-date{
+        color: #a0a0a0;
+        font-size: 13px;
+    }
+    .wallet-trans-price-text{
+        font-size: 16px;
+    }
+    .wallet-header-back{
+       // background: rgba(57, 190, 188, 0.10980392156862745);
+        //padding-top: 20px;
+        padding: 5px 0px 20px 10px;
+    }
+    .receive-trans{
+        color:green;
+    }
+    .trans-desc{
+        margin-bottom: -6px;
+        color: #1c2633;
+        font-weight: 500;    
+    }
+    .reversal-trans{
+        color:var(--google-color);
+    }
+    .spend-trans{
+        color:var(--button-color);
+    }
+    .wallet-back{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: cover !important;
+        //background: url(../assets/img/wallet/wallet.png);
+        //height: 30%;
+        border-bottom: 4px solid #39bebc;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    
+         margin-bottom: 5px;
+        box-shadow: 0px 4px 6px #d0d0d0;
+    
+    }
+    .wallet-balance-text-size{
+        color: #a0a0a0;//var(--dark-color) !important;
+        font-size: 13px !important;
+        margin: -5px 0px 0px 0px !important;
+       // font-weight: 200;
+
+    }
+    .wallet-balance{
+        font-size: 30px;
+        color: #2a3f5a;
+        font-weight: 500;
+    }
+}

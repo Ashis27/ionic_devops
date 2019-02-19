@@ -1,0 +1,330 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Dashboard</ion-title>
+    <ion-buttons end class="nav-button-width">
+      <div (click)="redirectTo('UserSetting')">
+        <img class="dashboard-sub-menu-img setting-image" src="assets/img/user-account/settings.svg" />
+      </div>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="profile-background-color">
+  <!-- <ion-row class="profile-back-sec">
+    <ion-col col-1 (click)="closeCurrentPage()" class="close-sec">
+      <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+    </ion-col>
+    <ion-col col-9 class="padding-0 back-sec">
+      <p class="para-margin-0 header-title">
+        Profile
+      </p>
+    </ion-col>
+    <ion-col col-1 class="text-aligh-right setting-icon padding-0" (click)="redirectTo('UserSetting')">
+      <img class="dashboard-sub-menu-img setting-image" src="assets/img/user-account/settings.svg" />
+    </ion-col>
+  </ion-row> -->
+  <ion-row class="user-account-sec">
+    <ion-col class="padding-0">
+      <ion-row>
+        <ion-col class="padding-0">
+          <ion-item class="profile-background-color default-add">
+            <ion-avatar item-start class="">
+              <img class="img-size" (click)="uploadProfilePicture()" [src]="(uploaded_image.File != null && uploaded_image.File != '') ? uploaded_image.File :'assets/img/profile.jpg'"
+              />
+            </ion-avatar>
+            <div class="card">
+              <h4 class="profile-user-name">{{loggedInUser.userName}}</h4>
+            </div>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="profile-user-name-div">
+        <ion-col col-6 class="profile-contact-detail" *ngIf="userProfile.Contact !=null && userProfile.Contact !=''">
+          <ion-row>
+            <ion-col col-2 class="padding-0">
+              <img class="dashboard-sub-menu-img profile-icon" src="assets/img/user-account/calltwo_icon.svg" />
+            </ion-col>
+            <ion-col col-10>
+              <p class="margin-top-2" *ngIf="userProfile.CountryCode !='' && userProfile.CountryCode!=null">
+                <span>+{{userProfile.CountryCode}} </span>
+                <span>{{userProfile.Contact}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-6 class="profile-contact-detail" *ngIf="loggedInUser.email !='' && loggedInUser.email!=null">
+          <ion-row>
+            <ion-col col-2 class="padding-0">
+              <img class="dashboard-sub-menu-img profile-icon" src="assets/img/user-account/messagetwo_icon.svg" />
+            </ion-col>
+            <ion-col col-10>
+              <p class="margin-top-2 para-overflow-hidden">{{loggedInUser.email}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row class="personal-sec">
+        <ion-col col-4 class="profile-text-center" (click)="redirectTo('UserProfile')">
+          <span class="profile-body-icon">
+            <img class="dashboard-sub-menu-img" src="assets/img/user-account/personalinformation_icon.svg" />
+          </span>
+          <p class="profile-body-content">Personal
+            <br/>Information</p>
+        </ion-col>
+        <ion-col col-4 class="profile-text-center border-left-color" (click)="redirectTo('MedicalHistory')">
+          <span class="profile-body-icon">
+            <img class="dashboard-sub-menu-img" src="assets/img/user-account/medialinformation_icon.svg" />
+          </span>
+          <p class="profile-body-content">Medical
+            <br/>Information</p>
+        </ion-col>
+        <ion-col col-4 class="profile-text-center border-left-color" (click)="redirectTo('UserAddress')">
+          <span class="profile-body-icon">
+            <img class="dashboard-sub-menu-img" src="assets/img/user-account/personaladdress_icon.svg" />
+          </span>
+          <p class="profile-body-content">Personal
+            <br/>Address</p>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="redirectTo('MyFamily')">
+        <ion-col class="padding-0">
+          <ion-item class="profile-item-background default-add">
+            <ion-thumbnail item-start class="">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/addfamily_icon.svg" />
+            </ion-thumbnail>
+            <p class="para-list-large-header">Add family member</p>
+            <p class="inner-sub-text-size">Add new member to your family</p>
+            <button ion-button clear item-end>
+              <span class="profile-forword-arrow">
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+              </span>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="redirectTo('ReferralCode')">
+        <ion-col class="padding-0">
+          <ion-item class="profile-item-background default-add">
+            <ion-thumbnail item-start class="">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/referfriend_icon.svg" />
+            </ion-thumbnail>
+            <p class="para-list-large-header">Refer your friends & family</p>
+            <p class="inner-sub-text-size">Refer your friends & family</p>
+            <button ion-button clear item-end>
+              <span class="profile-forword-arrow">
+
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+              </span>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="redirectTo('doctor')">
+        <ion-col class="padding-0">
+          <ion-item class="profile-item-background default-add">
+            <ion-thumbnail item-start class="">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/mydoctor_icon.svg" />
+            </ion-thumbnail>
+            <p class="para-list-large-header">Are you a doctor?</p>
+            <p class="inner-sub-text-size">Download and connect with patient</p>
+            <button ion-button clear item-end>
+              <span class="profile-forword-arrow">
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+              </span>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row (click)="redirectTo('Referral')">
+          <ion-col class="padding-0">
+            <ion-item class="profile-item-background default-add">
+              <ion-thumbnail item-start class="">
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/refer.svg" />
+              </ion-thumbnail>
+              <p class="para-list-large-header">Doctor Referrals</p>
+              <p class="inner-sub-text-size">Manage referred documents</p>
+              <button ion-button clear item-end>
+                <span class="profile-forword-arrow">
+                  <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+                </span>
+              </button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      <ion-row (click)="redirectTo('Reporting')">
+        <ion-col class="padding-0">
+          <ion-item class="profile-item-background default-add">
+            <ion-thumbnail item-start class="">
+              <img class="dashboard-sub-menu-img" src="assets/img/support (1).svg" />
+            </ion-thumbnail>
+            <p class="para-list-large-header">Help desk</p>
+            <p class="inner-sub-text-size">We are happy to assist you</p>
+            <button ion-button clear item-end>
+              <span class="profile-forword-arrow">
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+              </span>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="redirectTo('Feedback')">
+        <ion-col class="padding-0">
+          <ion-item class="profile-item-background default-add">
+            <ion-thumbnail item-start class="">
+              <img class="dashboard-sub-menu-img" src="assets/img/feedback (1).svg" />
+            </ion-thumbnail>
+            <p class="para-list-large-header">Feedback</p>
+            <p class="inner-sub-text-size">Write us your feedback</p>
+            <button ion-button clear item-end>
+              <span class="profile-forword-arrow">
+                <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+              </span>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <div id="openImage" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <ion-grid class="user-profile-back padding-0">
+        <ion-row text-right class="header-back modal-position-fixed">
+          <ion-col col-9 class="document-name margin-auto">
+            <p class="color-white"  style="font-size: 15px;">Image</p>
+          </ion-col>
+          <ion-col col-3 class="color-white margin-auto">
+            <ion-icon name="ios-close-circle-outline" class="close-icon" (click)="closeModal()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <img class="view-img-size" [src]="(uploaded_image.File != null && uploaded_image.File != '') ? uploaded_image.File :'assets/img/profile.jpg'"
+          />
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+      <ion-item class="footer-sec footer-row-section default-add">
+        <ion-row class="footer-row-section">
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HOME</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">EMERGENCY</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HISTORY</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer> -->
+<!-- <ion-content>
+  <ion-row class="profile-header-sec">
+    <ion-col col-12 class="app-header">
+      <ion-row class="profile-image-header">
+        <ion-col col-12>
+          <img class="img-size" (click)="uploadProfilePicture()" [src]="(uploaded_image.File != null && uploaded_image.File != '') ? uploaded_image.File :'assets/img/profile.jpg'"
+          />
+        </ion-col>
+        <ion-col col-12 (click)="redirectTo('UserProfile')">
+          <p class="para-margin-bottom-5 user-name">{{loggedInUser.userName}}</p>
+          <p class="para-margin-bottom-5 user-contact" *ngIf="countryCode !=''">+{{countryCode}}-{{userProfile.Contact}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row class="sub-menu-header-sec">
+    <ion-col col-12 class="sub-menu-header">
+      <ion-item class="item-bottom" (click)="redirectTo('UserProfile')">
+        <ion-row class="menu-inner-margin">
+          <ion-col col-2>
+            <img class="list-menu-img" src="assets/img/user-account/addmedicalrecord_icon.svg" />
+          </ion-col>
+          <ion-col col-8 class="inner-text-padding">
+            <p class="para-list-large-header">Personal Information</p>
+            <p class="inner-sub-text-size">About an Identifiable Indivisual</p>
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right">
+            <img class="right-arrow-img" src="assets/img/user-account/rightarrow_icon.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="item-bottom" (click)="redirectTo('MedicalHistory')">
+        <ion-row class="menu-inner-margin">
+          <ion-col col-2>
+            <img class="list-menu-img" src="assets/img/user-account/medicalremainder_icon.svg" />
+          </ion-col>
+          <ion-col col-8 class="inner-text-padding">
+            <p class="para-list-large-header">Medical Information</p>
+            <p class="inner-sub-text-size">Indivisual Medical Information</p>
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right">
+            <img class="right-arrow-img" src="assets/img/user-account/rightarrow_icon.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="item-bottom" (click)="redirectTo('UserAddress')">
+        <ion-row class="menu-inner-margin">
+          <ion-col col-2>
+            <img class="list-menu-img" src="assets/img/user-account/addmedicalrecord_icon.svg" />
+          </ion-col>
+          <ion-col col-8 class="inner-text-padding">
+            <p class="para-list-large-header">Address</p>
+            <p class="inner-sub-text-size">An Address is an Collection of Information</p>
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right">
+            <img class="right-arrow-img" src="assets/img/user-account/rightarrow_icon.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="item-bottom" (click)="redirectTo('MyFamily')">
+        <ion-row class="menu-inner-margin">
+          <ion-col col-2>
+            <img class="list-menu-img" src="assets/img/user-account/phr_icon.svg" />
+          </ion-col>
+          <ion-col col-8 class="inner-text-padding">
+            <p class="para-list-large-header">Add Family Memeber</p>
+            <p class="inner-sub-text-size">Add Someone to your Family</p>
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right">
+            <img class="right-arrow-img" src="assets/img/user-account/rightarrow_icon.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="item-bottom" (click)="redirectTo('doctor')">
+        <ion-row class="menu-inner-margin">
+          <ion-col col-2>
+            <img class="list-menu-img" src="assets/img/user-account/phr_icon.svg" />
+          </ion-col>
+          <ion-col col-8 class="inner-text-padding">
+            <p class="para-list-large-header">Are you a doctor?</p>
+            <p class="inner-sub-text-size">Download and connect with patient</p>
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right">
+            <img class="right-arrow-img" src="assets/img/user-account/rightarrow_icon.svg" />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      
+    </ion-col>
+  </ion-row>
+</ion-content>
+ -->

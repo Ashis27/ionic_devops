@@ -1,0 +1,77 @@
+page-reporting{
+  .referral-img{
+      width:24% !important;
+  }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+  .referral-code-text{
+      font-size: 18px;
+  }
+  .refrral-header-sec{
+      margin-top:5%;
+      margin-bottom: 10%;
+  }
+  .referral-and-earn{
+      font-size: 25px;
+      margin-bottom: 20% !important;
+  }
+  .referral-code{
+    border: 1px dashed var(--dark-alpha-Dot5);
+    padding: 0;
+    margin-top: 5%;
+  }
+ .dropdown-icon-margin{
+    margin: 0px 10px -5px 0px !important;
+ }
+  ion-navbar{
+    background: var(--primary-color) !important;
+}
+.img-height{
+    height:100px !important;
+}
+.hos-logo{
+    text-align: center;
+        // background-color: rgba(113, 155, 183, 0.91);
+}
+.profile-back{
+       background-color: white;
+
+}
+.icon-btn-color{
+    background: #7da4bd !important;
+  
+}
+ion-select > .select-icon {
+    width: 15px !important;
+}
+
+ion-item{
+    background-color: rgba(248, 251, 253, 0.13) !important
+}
+
+
+.feedback-msg{
+    width:100%;
+   height: 100%;
+    border-radius: 5px;
+    border: none !important;
+}
+
+.contact-number-field {
+   
+    margin-left: 0px !important;
+}
+
+.repo-msg-fild{
+    padding: 0px !important;
+    margin: 9px 0px 0px 10px !important;
+}
+.btn-margin {
+    margin: 10px 5px 0px 0px !important;
+}
+}

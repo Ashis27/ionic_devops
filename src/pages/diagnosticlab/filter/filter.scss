@@ -1,0 +1,82 @@
+page-filter {
+    .filter-icon{
+        margin-right: 10px !important;
+        width: 18px !important;
+        vertical-align: bottom;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+       .sort_by_btn{
+        font-size: 11px;
+        background: transparent;
+        color:var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+        width: 100%;
+       }
+       .sort_by_btn_active{
+        font-size: 11px;
+        background: var(--primary-color) !important;
+        color:white !important;
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+        width: 100%;
+       }
+       .header-background{
+        background-color: var(--primary-color) !important;
+        color:var(--white-color);
+        height: 50px !important;
+       }
+      .radio-btn-sec{
+       //  width:100% !important;
+       }
+       .close-button{
+        font-size: 25px;
+        margin: auto;
+       }
+       .range-knob{
+          background:var(--button-color) !important;
+      }
+      .range-pin::before{
+        background:var(--button-color) !important;
+      }
+      .range-pin{
+        background:var(--button-color) !important;
+      }
+      .price-range-back{
+        background: #b1b1b1;
+        color: white;
+        padding: 4px 7px 4px 7px;
+        border-radius: 5px;
+      }
+      .price-range-sec{
+        color: #4c4c4c;
+        font-size: 16px;
+        margin: 0px 0px 10px 0px;
+        font-weight: 500;
+        
+     padding-bottom: 15px !important;
+      }
+      .range.range-has-pin{
+        padding-top: 20px !important;
+      }
+      .age-radio-btn-sec{
+        width:100% !important;
+      }
+      .filter-apply-button{
+        width: 100%;
+        background-color: var(--primary-color) !important;
+      }
+
+} 

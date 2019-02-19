@@ -1,0 +1,750 @@
+page-videomenueslisting {
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .serach-input{
+        color: white;
+        font-size: 25px;
+    }
+    .video-sec-margin-top-15{
+        margin-top: 15%;
+    }
+    .video-sec-margin-top-0{
+        margin-top: 0%;
+    }
+    .toolbar-ios.statusbar-padding {
+        padding-top: 20px !important;
+      }
+//     ion-card{
+//         width:97.8% !important;
+//          margin-left: 1% !important;
+//          padding: 0px !important;
+        
+//      }
+//     .ion_card_content {
+//         padding-bottom: 5px;
+//     }
+//     .names{
+//         font-size: 16px;
+//     }
+//     .card_content{
+//        // margin-left: 10px;
+//     }
+//     .headerImg{
+//        height:30%;
+//        // margin: -10px;
+//        // b
+//       width: 110%;
+      
+//     }
+//     .scroll-content {
+//         padding: 6px !important;
+//         background-image: none !important;
+//         background:rgba(243, 228, 228, 0.5) !important;
+//     }
+//     .header_text{
+//         background-color: white;
+//         margin-top: -30px;
+//         padding-top: 10px;
+//         margin-left: -5px;
+//         width: 110%;
+//         padding-bottom:1px;
+//     }
+//     .left{
+//         float: left;
+//     }
+//     .right{
+//         float: left;
+//     }
+//     .restImg{
+// //width:30%;
+// // height: 20%;
+//     margin: -23px;
+//     margin-left: -26px;
+//     height: 85px;
+//     }
+//     ion-card{
+//         width:101% !important;
+//         margin-left: -0.5% !important;
+//     }
+//     .icontitle{
+//         float: left;
+//     }
+//     .iconhead{
+//         float: left;
+//         font-size: 25px;
+//         color: white;
+//         transform: translate(70px,0px);
+//     }
+//     .iframes{
+//         margin: -20px;
+//         width:110%;
+       
+       
+//     }
+//     .titleText{
+//         font-weight: bold;
+//         font-size: 16px;
+//         margin-left: -1px !important;
+//         margin-top: 12px;
+
+//     }
+//     ion-grid{
+//         .title{
+//             margin: -12px;
+//             margin-left: -25px;
+//         }
+//         .rest{
+//             margin-top: 10px;
+//             // text-align: end;
+//             // transform: translate(-70px,10px);
+//         }
+//         .rightspan{
+//             color:#bc2219;
+//         }
+//     }
+//     .leftspan{
+//         color:rgb(150, 146, 146);
+//     }
+//     .header_text{
+//         background-color: white;
+//         margin-top: -30px;
+//         padding-top: 10px;
+//         //
+//         width: 110%;
+//         padding-bottom:1px;
+//         h1,p{
+//             margin-left: 7px;
+//         }
+//         .rightspan{
+//             color:#bc2219;
+//         }
+//     }
+//     h4{
+       
+//         width: 90%;
+//         margin-left: 5px;
+//     }
+//     .grid{
+//         padding: 0px !important;
+//     }
+//     .card-content-md {
+//         padding:0px;
+       
+//     }
+//    .custom_col1{
+//         padding: 0px !important;
+//     }
+//     .custom_col2{
+//         padding:0px 0px 0px 5px !important;
+//     }
+//     .rest{
+//         bottom: 4px;
+//         position: absolute;
+//     }
+//     .shareimg{
+//         height: 24px;
+//         right: 20px;
+//         position: absolute;
+//     }
+    
+    
+    
+    
+//     .modal {
+//         display: none; /* Hidden by default */
+//         position: fixed; /* Stay in place */
+//         z-index: 1; /* Sit on top */
+//         left: 0;
+//         top: 0;
+//         width: 100%; /* Full width */
+//         height: 100%; /* Full height */
+//         overflow: auto; /* Enable scroll if needed */
+//         background-color: rgb(0,0,0); /* Fallback color */
+//         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+//         -webkit-animation-name: fadeIn; /* Fade in the background */
+//         -webkit-animation-duration: 0.4s;
+//         animation-name: fadeIn;
+//         animation-duration: 0.4s
+//     }
+    
+//     /* Modal Content */
+//     .modal-content {
+//         // width: 40% !important;
+//         // margin-top: 44% !important;
+//         // margin-left: 18% ;
+        
+      
+//         // background-color: #fefefe;
+    
+//         // -webkit-animation-name: slideIn;
+//         // -webkit-animation-duration: 0.4s;
+//         // animation-name: slideIn;
+//         // animation-duration: 0.4s
+//         height: 303px;
+//         width: 64% !important;
+//         margin-top: 49% !important;
+//         margin-left: 17%;
+//         background-color: #fefefe;
+//         -webkit-animation-name: slideIn;
+//         -webkit-animation-duration: 0.4s;
+//         animation-name: slideIn;
+//         animation-duration: 0.4s;
+//         border-radius: 16px;
+//     }
+    
+//     /* The Close Button */
+//     .close {
+//         color: white;
+//         float: right;
+//         font-size: 28px;
+//         font-weight: bold;
+//     }
+    
+//     .close:hover,
+//     .close:focus {
+//         color: #000;
+//         text-decoration: none;
+//         cursor: pointer;
+//     }
+    
+//     .modal-header {
+//         padding: 2px 16px;
+//         background-color: #5cb85c;
+//         color: white;
+//     }
+    
+//     .modal-body {padding: 2px 16px;}
+    
+//     .modal-footer {
+//         padding: 2px 16px;
+//         background-color: #5cb85c;
+//         color: white;
+//     }
+    
+//     /* Add Animation */
+//     @-webkit-keyframes slideIn {
+//         from {bottom: -300px; opacity: 0} 
+//         to {bottom: 0; opacity: 1}
+//     }
+    
+//     @keyframes slideIn {
+//         from {bottom: -300px; opacity: 0}
+//         to {bottom: 0; opacity: 1}
+//     }
+    
+//     @-webkit-keyframes fadeIn {
+//         from {opacity: 0} 
+//         to {opacity: 1}
+//     }
+    
+//     @keyframes fadeIn {
+//         from {opacity: 0} 
+//         to {opacity: 1}
+//     }
+//     .images{
+//         font-size:  25px;
+//         margin-left: 10px;
+//     }
+//     .name{
+//         font-size: 15px;
+//         margin-left: 32px;
+//     }
+    
+//     .backbtn{
+//         color: #585050;
+//         font-size: 38px;
+//         transform: rotate(43deg);
+//         margin-left: 19px;
+//         margin-top: -8px;
+//         font-weight: bold;
+//     }
+//     .insta{
+//         height: 21px;
+//         margin-left: 11px;
+//     }
+//     h3{
+//         margin: 4px !important;
+//             margin-left: 3%;
+//             width: 90%;
+//             margin-top: 20px !important;
+//         }
+
+//         .borderRight{
+//             border-right: 2px solid #af2222;
+//         }
+
+// ion-card{
+//     width:97.8% !important;
+//      margin-left: 1% !important;
+//      padding: 0px !important;
+    
+//  }
+// .ion_card_content {
+//     padding-bottom: 5px;
+// }
+// .names{
+//     font-size: 16px;
+// }
+// .card_content{
+//    // margin-left: 10px;
+// }
+// .headerImg{
+//    height:30%;
+//    // margin: -10px;
+//    // b
+//   width: 110%;
+  
+// }
+// .scroll-content {
+//     padding: 6px !important;
+//     background-image: none !important;
+//     background:rgba(243, 228, 228, 0.5) !important;
+// }
+// .header_text{
+//     background-color: white;
+//     margin-top: -30px;
+//     padding-top: 10px;
+//     margin-left: -5px;
+//     width: 110%;
+//     padding-bottom:1px;
+// }
+// .left{
+//     float: left;
+// }
+// .right{
+//     float: left;
+// }
+// .restImg{
+// //width:30%;
+// // height: 20%;
+// margin: -23px;
+// margin-left: -26px;
+// height: 85px;
+// }
+// ion-card{
+//     width:101% !important;
+//     margin-left: -0.5% !important;
+// }
+// .icontitle{
+//     float: left;
+// }
+// .iconhead{
+//     float: left;
+//     font-size: 25px;
+//     color: white;
+//     transform: translate(70px,0px);
+// }
+// .iframes{
+//     margin: -20px;
+//     width:110%;
+   
+   
+// }
+// .titleText{
+//     font-weight: bold;
+//     font-size: 16px;
+//     margin-left: -1px !important;
+//     margin-top: 12px;
+
+// }
+// ion-grid{
+//     .title{
+//         margin: -12px;
+//         margin-left: -25px;
+//     }
+//     .rest{
+//         margin-top: 10px;
+//         // text-align: end;
+//         // transform: translate(-70px,10px);
+//     }
+//     .rightspan{
+//         color:#bc2219;
+//     }
+// }
+// .leftspan{
+//     color:rgb(150, 146, 146);
+// }
+// .header_text{
+//     background-color: white;
+//     margin-top: -30px;
+//     padding-top: 10px;
+//     //
+//     width: 110%;
+//     padding-bottom:1px;
+//     h1,p{
+//         margin-left: 7px;
+//     }
+//     .rightspan{
+//         color:#bc2219;
+//     }
+// }
+// h4{
+   
+//     width: 90%;
+//     margin-left: 5px;
+// }
+// .grid{
+//     padding: 0px !important;
+// }
+// .card-content-md {
+//     padding:0px;
+   
+// }
+// .custom_col1{
+//     padding: 0px !important;
+// }
+// .custom_col2{
+//     padding:0px 0px 0px 5px !important;
+// }
+// .rest{
+//     bottom: 4px;
+//     position: absolute;
+// }
+// .shareimg{
+//     height: 24px;
+//     right: 20px;
+//     position: absolute;
+// }
+
+
+
+
+// .modal {
+//     display: none; /* Hidden by default */
+//     position: fixed; /* Stay in place */
+//     z-index: 1; /* Sit on top */
+//     left: 0;
+//     top: 0;
+//     width: 100%; /* Full width */
+//     height: 100%; /* Full height */
+//     overflow: auto; /* Enable scroll if needed */
+//     background-color: rgb(0,0,0); /* Fallback color */
+//     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+//     -webkit-animation-name: fadeIn; /* Fade in the background */
+//     -webkit-animation-duration: 0.4s;
+//     animation-name: fadeIn;
+//     animation-duration: 0.4s
+// }
+
+// /* Modal Content */
+// .modal-content {
+//     width: 40% !important;
+//     margin-top: 44% !important;
+//     margin-left: 18% ;
+    
+  
+//     background-color: #fefefe;
+
+//     -webkit-animation-name: slideIn;
+//     -webkit-animation-duration: 0.4s;
+//     animation-name: slideIn;
+//     animation-duration: 0.4s
+//     height: 303px;
+//     width: 64% !important;
+//     margin-top: 49% !important;
+//     margin-left: 17%;
+//     background-color: #fefefe;
+//     -webkit-animation-name: slideIn;
+//     -webkit-animation-duration: 0.4s;
+//     animation-name: slideIn;
+//     animation-duration: 0.4s;
+//     border-radius: 16px;
+// }
+
+// /* The Close Button */
+// .close {
+//     color: white;
+//     float: right;
+//     font-size: 28px;
+//     font-weight: bold;
+// }
+
+// .close:hover,
+// .close:focus {
+//     color: #000;
+//     text-decoration: none;
+//     cursor: pointer;
+// }
+
+// .modal-header {
+//     padding: 2px 16px;
+//     background-color: #5cb85c;
+//     color: white;
+// }
+
+// .modal-body {padding: 2px 16px;}
+
+// .modal-footer {
+//     padding: 2px 16px;
+//     background-color: #5cb85c;
+//     color: white;
+// }
+
+// /* Add Animation */
+// @-webkit-keyframes slideIn {
+//     from {bottom: -300px; opacity: 0} 
+//     to {bottom: 0; opacity: 1}
+// }
+
+// @keyframes slideIn {
+//     from {bottom: -300px; opacity: 0}
+//     to {bottom: 0; opacity: 1}
+// }
+
+// @-webkit-keyframes fadeIn {
+//     from {opacity: 0} 
+//     to {opacity: 1}
+// }
+
+// @keyframes fadeIn {
+//     from {opacity: 0} 
+//     to {opacity: 1}
+// }
+// .images{
+//     font-size:  25px;
+//     margin-left: 10px;
+// }
+// .name{
+//     font-size: 15px;
+//     margin-left: 32px;
+// }
+
+// .backbtn{
+//     color: #585050;
+//     font-size: 38px;
+//     transform: rotate(43deg);
+//     margin-left: 19px;
+//     margin-top: -8px;
+//     font-weight: bold;
+// }
+// .insta{
+//     height: 21px;
+//     margin-left: 11px;
+// }
+// h3{
+//     margin: 4px !important;
+//         margin-left: 3%;
+//         width: 90%;
+//         margin-top: 20px !important;
+//     }
+
+//     .borderRight{
+//         border-right: 2px solid #af2222;
+//     }
+.item-inner {
+      
+    border-bottom:none !important;
+}
+.item {
+   
+    border-radius: 4px !important;
+}
+.grid {
+     padding: 0px !important;
+}
+        .rightspan{
+            color:#bc2219;
+        }
+.select {
+    padding: 11px 10px 11px 0px !important;
+}
+.list_span,.favourites_span{
+    font-size: 15px;
+     color: #a29b9b;
+}
+.span_col {
+    text-align: center !important;
+}
+.selectedTab {
+    border-bottom: 2px solid #0cccd3;
+}
+.card-content-md {
+     padding: 0px 0px 0px !important;
+     line-height: 0.5;
+}
+    .leftspan{
+        color:rgb(150, 146, 146);
+    }
+.frames{
+  //  height: 89px !important;
+}
+.sub-desc{
+    font-weight: 100;
+    color: #949494;
+  //  height: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 5px;
+    height: 42px;
+}
+.cols{
+    padding: 0px !important;
+}
+.title{
+    font-size: 16px;
+    font-weight: 500;
+ color: #544e4e;
+ margin-left: 5px;
+ span{
+
+ }
+}
+.desc{
+    color: #544e4e;
+    margin-left: 5px;
+}
+.more{
+    font-size: 12px;
+ color: #bd504a;
+
+}
+.bottom_bar{
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}
+.ico{
+    right: 19px;
+    position: absolute;
+    margin-top: -6px;
+    font-size: 23px;
+    color: #756b6b;
+}
+.bottom_span{
+    margin-left: 5px;
+    color: #756b6b;
+}
+.time{
+    color: #bd504a;
+}
+ion-card{
+    margin:0px !important;
+    width: calc(100% - 0px) !important;
+}
+.card-content-ios {
+    padding: 0px 0px 0px;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+.scroll-content {
+     padding:0px !important; 
+    margin-top: 63px !important;
+
+}
+.toolbar{
+    padding-top: 0px !important;
+}
+ion-searchbar{
+    background-color: white !important;
+    border-radius: 3px !important;
+}
+.searchbar-input{
+    background-color: white !important;
+}
+
+.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s
+        }
+        
+        /* Modal Content */
+        .modal-content {
+            // width: 40% !important;
+            // margin-top: 44% !important;
+            // margin-left: 18% ;
+            
+          
+            // background-color: #fefefe;
+        
+            // -webkit-animation-name: slideIn;
+            // -webkit-animation-duration: 0.4s;
+            // animation-name: slideIn;
+            // animation-duration: 0.4s
+         // height:250px;
+            width: 90% !important;
+            margin-top: 60% !important;
+            margin-left: 4%;
+            background-color: #9c9898;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s;
+          
+        }
+        
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .modal-body {padding: 2px 16px;}
+        
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+            from {bottom: -300px; opacity: 0} 
+            to {bottom: 0; opacity: 1}
+        }
+        
+        @keyframes slideIn {
+            from {bottom: -300px; opacity: 0}
+            to {bottom: 0; opacity: 1}
+        }
+        
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0} 
+            to {opacity: 1}
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0} 
+            to {opacity: 1}
+        }
+        .frame{
+            height: 200px;
+            width: 100%;
+        }
+        ion-slides {
+            margin-top: -40% !important;
+        }
+        .time-ago-text{
+            color: #616161;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+}

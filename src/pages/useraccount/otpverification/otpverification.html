@@ -1,0 +1,100 @@
+<!--<ion-header no-border >
+	<ion-navbar>
+		<ion-buttons>
+			<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>-->
+<ion-content class="back-image">
+	<ion-row class="location-search-header left-arrow-style">
+		<ion-col col-1 (click)="closeCurrentPage()" class="close-sec">
+			<img src="assets/img/left-arrow.png" class="back-arrow" />
+		</ion-col>
+	</ion-row>
+	<div class="logo margin-top-0">
+		<img src="assets/img/logo.png" alt="health-pro logo">
+	</div>
+	<ion-list class="login-form-top">
+		<ion-row>
+			<ion-col class="para-section-style">
+				<p class="para-text-color reg-by-doc" *ngIf="isRegisteredByDoc">
+					It seems, you have already been registered by one of our healthcare provider. Please reset you password.
+				</p>
+				<p class="para-text-color">
+					Enter
+					<span class="optional-text">Code</span>
+				</p>
+				<p class="otp-text">
+					<span *ngIf="isContactSelected">We have sent you an SMS on +{{countryCode}}-{{contactNumber}} with a 6 digit code(OTP)</span>
+					<span *ngIf="!isContactSelected">We have sent a 6 digit code(OTP) to the email {{emailId}}</span>
+				</p>
+			</ion-col>
+		</ion-row>
+		<form #otpcodeverification="ngForm" (ngSubmit)="onVerifyOTP(otpcodeverification)" class="login-form">
+			<ion-item class="login-input verify-otp-input">
+				<ion-input [(ngModel)]="otpCode" name="otp" type="tel" maxlength="6" (keypress)="onlyNumber($event)" placeholder="OTP" #otpverification="ngModel"
+				 spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<div text-center>
+				<button class="login-form-btn" ion-button type="submit">Next</button>
+			</div>
+			<ion-col col-12 class="skip-section" text-center>
+				<p class="optional-text">
+					<span class="">I haven't received OTP
+						<span class="ask-login-signup-text" (click)="resendOTP()">Resend?</span>
+					</span>
+				</p>
+			</ion-col>
+		</form>
+		<ion-row>
+			<ion-col col-12 class="skip-section" text-center>
+				<p class="optional-text">
+					Don't have an account?
+					<span class="ask-login-signup-text" (click)="onSignup()"> Sign Up</span>
+				</p>
+			</ion-col>
+		</ion-row>
+	</ion-list>
+</ion-content>
+<!--<ion-row>
+	<ion-col col-3>
+	</ion-col>
+	<ion-col col-6 class="animated">
+		<ion-row>
+			<ion-col col-2></ion-col>
+			<ion-col col-2>
+				<ion-item class="">
+					<ion-input [(ngModel)]="" name="otp_code" type="tel" #otpcode="ngModel" maxLength="1" spellcheck="false" autocapitalize="off">
+					</ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-2>
+				<ion-item class="">
+					<ion-input [(ngModel)]="otpcode.substring(1, 2)" name="otp_code1" type="tel" #otpcode1="ngModel" maxLength="1" spellcheck="false"
+					 autocapitalize="off">
+					</ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-2>
+				<ion-item class="">
+					<ion-input [(ngModel)]="otpcode.substring(2, 3)" name="otp_code2" type="tel" #otpcode2="ngModel" maxLength="1" spellcheck="false"
+					 autocapitalize="off">
+					</ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-2>
+				<ion-item class="">
+					<ion-input [(ngModel)]="otpcode.substring(3, 4)" name="otp_code3" type="tel" #otpcode3="ngModel" maxLength="1" spellcheck="false"
+					 autocapitalize="off">
+					</ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-2></ion-col>
+		</ion-row>
+	</ion-col>
+	<ion-col col-3>
+	</ion-col>
+</ion-row>-->

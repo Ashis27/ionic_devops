@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="profile-back-sec package-navbar-back">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 white-space margin-auto para-overflow-hidden">
+        <span class="">{{selectedLabProfile.LabProfileName}}</span>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card class="time-slot-card-background">
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="profile-w-h" [src]="(selectedLabProfile.ImageUrl != null && selectedLabProfile.ImageUrl != '') ? selectedLabProfile.ImageUrl :'assets/img/dc_icon/labTest.svg'"
+        />
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{selectedLabProfile.LabProfileName}}
+        </h4>
+        <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.CenterName}}
+        </p>
+        <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.CityAreaName}}, {{selectedDiagnosticCenter.City}}
+        </p>
+        <p class="para-overflow-hidden DF_text margin-top-5" *ngIf="selectedLabProfile.TestCount > 0">
+          <span class="dc-inner-sub-text-size">{{selectedLabProfile.TestCount}}</span>
+          <span class="inner-sub-text-size"> Test(s) Available</span>
+        </p>
+        <p class="age-group-section margin-top-5" style="margin-left:0px !important;">
+          <span class="content-row-seprator">
+            Age:
+            <span class="age_grp_color" *ngIf="selectedLabProfile.AgeGroup == 4">Only for child</span>
+            <span class="age_grp_color" *ngIf="selectedLabProfile.AgeGroup == 3">Above 60 Years</span>
+            <span class="age_grp_color" *ngIf="selectedLabProfile.AgeGroup == 2">Between 25 and 60 Years</span>
+            <span class="age_grp_color" *ngIf="selectedLabProfile.AgeGroup == 1">Below 25 Years</span>
+          </span>
+        </p>
+        <p class="price-text margin-top-5">
+          <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin-right: 10px !important;">₹ {{selectedLabProfile.PriceAfterDiscount}}</span>
+          <span *ngIf="selectedLabProfile.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{selectedLabProfile.Price}}</span>
+          <span class="para-overflow-hidden DF_text margin-5" *ngIf="selectedLabProfile.GenericDiscount > 0">
+            <span class="dc-inner-sub-text-size">({{selectedLabProfile.GenericDiscount}}%</span>
+            <span class="inner-sub-text-size"> Off)</span>
+          </span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row *ngIf="selectedLabProfile !=null">
+    <ion-col col-12 *ngIf="selectedLabProfile.LabProfileDescription!='' && selectedLabProfile.LabProfileDescription!=null">
+      <p class="para-margin-0-1 price-sub-content search-header">
+        <ion-icon name="ios-list-outline"></ion-icon> Lab Profile Description</p>
+      <div class="padding-top-0" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12>
+            <p class="para-list-header font-weight-400 margin-top-3 item-list-header" [innerHTML]="selectedLabProfile.LabTestDescription">{{selectedLabProfile.LabProfileDescription}}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+    <ion-col col-12 *ngIf="labTestList.length > 0">
+      <ion-row>
+        <p class="para-margin-0-1 price-sub-content search-header">
+          <img src="assets/img/dc_icon/labTest.svg" class="testwhite" />Individual Test(s)</p>
+        <ion-col col-12 class="border-bottom-color" *ngFor="let item of selectedLabProfile.LabTests">
+          <div class="" no-padding>
+            <ion-row class="medicine-list-border">
+              <ion-col col-12 class="padding-top-0">
+                <p class="para-list-header font-weight-400 para-overflow-hidden margin-top-3 item-list-header">
+                  <span>
+                    <ion-icon name="ios-checkmark-circle-outline" class="test-list"></ion-icon>
+                  </span>
+                  <span class="font-weight-500" style="font-size: 15px;">{{item.LabTestName}}</span>
+                </p>
+                <p class="margin-bottom-5">
+                  <span>{{item.LabTestDescription}}</span>
+                </p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-fab bottom left (click)="getLocationOnMap()">
+    <button ion-fab mini>
+      <ion-icon name="ios-pin-outline"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6 class="btn-devider-border" (click)="addToCart(selectedLabProfile,'LabProfile')">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5 add-to-cart">Add To Cart</span>
+        </ion-title>
+      </ion-col>
+      <ion-col col-6 (click)="bookLabProfile(selectedLabProfile)">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5">Book Profile</span>
+        </ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

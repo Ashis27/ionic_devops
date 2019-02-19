@@ -1,0 +1,92 @@
+<!--
+  Generated template for the HeartbeatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Heart Beat</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="">
+      <!-- <div class="bg_image"></div> -->
+      <div class="progress_wrapper">
+          <div>
+            <round-progress
+            [current]="current"
+            [max]="max"
+            [color]="status"
+            [background]="'#eaeaea'"
+            [radius]="150"
+            [stroke]="25"
+            [semicircle]="false"
+            [rounded]="true"
+            [clockwise]="true"
+            [responsive]="false"
+            [duration]="800"
+            [animation]="'easeInOutQuart'"
+            [animationDelay]="0"></round-progress></div>
+            <div class="progress_text" [style.color]="status" *ngIf="AllFiledsFil">
+                <img [src]="smiley_src">
+                <p class="result"> {{result}}</p>
+            </div>
+          </div>
+      <ion-row class="margin-left">
+        <ion-col col-12>
+          <ion-item>
+            <span item-right><ion-icon name="ios-calendar-outline"></ion-icon></span>
+            <ion-label>Select Your DOB </ion-label>
+            <ion-datetime displayFormat="DD/MMM/YYYY" max="{{maxDate}}" [(ngModel)]="dob" ></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="padding-0">
+          <button ion-button block class="btn" (click)="calculate()">Calculate</button>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row class="margin-top-10">
+        <ion-col col-12  *ngIf="AllFiledsFil">
+            <p class="status margin-top-3"> Your No. of Heart Beats so far </p>
+            <p class="status margin-top-3"> {{result}}  (Approx.)</p>
+        </ion-col>
+     </ion-row>
+       
+      
+    
+      <ion-col col-12 no-padding class="Cal_Des" no-padding>
+          <ion-row class="margin-left margin-top-10">
+            <!-- <ion-col col-10 color="primary" no-padding>
+              <p class="Cal_header">Description</p>
+            </ion-col> -->
+            <ion-col col-12 no-padding>
+               <!-- <p class="cal_des"><strong>Note</strong></p> -->
+                  <p class="cal_des">Our heart beats 100,000 times in a day. Through the Heartbeat Calculator you can easily track how much your heart has pumped since the time you were born.
+                </p>
+                <!-- <ion-row>
+                  <p class="appointment_book" (click)="bookAppointment()"><strong>Please Book Your Apponitment Here </strong></p>
+                </ion-row> -->
+            </ion-col>
+          </ion-row>
+      </ion-col>
+    
+      <ion-col col-12 no-padding>
+        <ion-row class="disclaimer_wrapper margin-left">
+          <ion-col col-10  color="primary" no-padding>
+            <p class="disclaimer_header">Disclaimer</p>
+          </ion-col>
+          <ion-col col-12 no-padding>
+            <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals. 
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    
+    </ion-content>
+  

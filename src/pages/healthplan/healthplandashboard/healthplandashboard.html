@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Health Plan Dashboard</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="setNotification()">
+                <ion-icon name="ios-notifications-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="back-image">
+    <ion-row class="">
+        <ion-col col-12 *ngIf="subscribedHealthPlan.length > 0" class="padding-0">
+            <p class="plan-header-bck">Subscribed Plan</p>
+            <ion-row class="sub-menu-header-sec" *ngFor="let activePlan of subscribedHealthPlan">
+                <ion-col col-12 class="sub-menu-header padding-0">
+                    <ion-item class="item-bottom padding-left-5" (click)="isPregnencyPageVisited(activePlan)">
+                        <ion-row class="">
+                            <ion-col col-2 class="margin-auto">
+                                <img class="dashboard-sub-menu-img card-img" [src]="(activePlan.IconImageUrl != null && activePlan.IconImageUrl != '') ? activePlan.IconImageUrl :'https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/health.svg'"
+                                />
+                            </ion-col>
+                            <ion-col col-8 class="margin-auto">
+                                <p class="para-list-header">{{activePlan.HealthPlanName}}</p>
+                                <p class="inner-sub-text-size para-overflow-hidden">{{activePlan.Description}}</p>
+                            </ion-col>
+                            <ion-col col-2 class="text-aligh-right margin-auto">
+                                <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+
+        <!-- <ion-col col-12 *ngIf="activeHealthPlan.length > 0" class="padding-0">
+            <p class="plan-header-bck">Available Health Plan</p>
+            <ion-row class="sub-menu-header-sec" *ngFor="let plan of activeHealthPlan">
+                <ion-col col-12 class="sub-menu-header padding-0">
+                    <ion-item class="item-bottom padding-left-5">
+                        <ion-row class="">
+                            <ion-col col-2 class="margin-auto">
+                                <img class="dashboard-sub-menu-img card-img" [src]="(plan.IconImageUrl != null && plan.IconImageUrl != '') ? plan.IconImageUrl :'https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/health.svg'" />
+                            </ion-col>
+                            <ion-col col-8 class="margin-auto">
+                                <p class="para-list-header">{{plan.HealthPlanName}}</p>
+                                <p class="inner-sub-text-size para-overflow-hidden">{{plan.Description}}</p>
+                            </ion-col>
+                            <ion-col col-2 class="text-aligh-right margin-auto padding-0" (click)="activateKareplan(plan)">
+                                <button class="activate-btn">Activate</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col> -->
+    </ion-row>
+    <ion-row *ngIf="subscribedHealthPlan.length == 0 && !isAvailable">
+        <ion-col col-12 text-center>
+            <img src="assets/img/healthPlan/health.svg" class="not-found" />
+            <p class="not-found-text">No subscribed plan available!</p>
+        </ion-col>
+    </ion-row>
+</ion-content>

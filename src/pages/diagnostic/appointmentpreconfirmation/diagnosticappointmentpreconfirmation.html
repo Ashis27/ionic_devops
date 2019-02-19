@@ -1,0 +1,222 @@
+<ion-content>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>Book Package For</ion-title>
+  </ion-navbar>
+  <ion-card class="time-slot-card-background border-bottom-color">
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="img-size" [src]="(providerInfo.ProviderImage != null && providerInfo.ProviderImage != '') ? providerInfo.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+        />
+        <!-- <img [src]="providerInfo.ProviderImage" class="profile-w-h"> -->
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{providerInfo.DiagnosticCenterName.CenterName}}
+          <span style="float:right;width: 25px;">
+            <img src="assets/img/medical_icon.svg">
+          </span>
+        </h4>
+        <p class="margin-top-6 para-overflow-hidden">
+          <span class="display-inline">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+          </span>
+          <span class="font-weight-doc-loc">{{providerInfo.DiagnosticCenterName.City}}, {{providerInfo.DiagnosticCenterName.CityAreaName}}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row>
+    <!-- Selected Date And Time -->
+    <ion-col col-12 class="appo-dtl-date-header appo-dtl-padding selected-datetime-header">
+      <p class="header-title-margin">
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="padding-left-right-8 border-bottom-color padding-bottom-5">
+    <ion-col col-12 class="padding-left-right-5">
+      <ion-row>
+        <ion-col col-8 class="padding-left-right-5" *ngIf="timeSlotInfo !=null">
+          <!-- <p class="appo-dtl-date-header para-margin-0 profile-user-name"> -->
+            <p class="margin-top-6">
+            <span class="appo-dtl-date-header para-margin-0 profile-user-name">{{timeSlotInfo.date}}</span>
+            <span class="font-size-16 selected-time">{{timeSlotInfo.timeSlot}}
+            </span>
+          </p>
+          <!-- <p class="margin-top-4">
+            <span class="font-size-16 selected-time">{{timeSlotInfo.timeSlot}}
+            </span>
+          </p> -->
+        </ion-col>
+        <ion-col col-4 class="padding-left-right-5" (click)="changeDate()">
+          <p class="time-change-link">Change</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <!-- <ion-col col-4 class="padding-left-15 margin-top-13">
+      <p class="para-margin-0">
+        <img src="assets/img/fees_icon.svg" class="wallete-w">
+        <span class="wallete-w-text">Fees</span>
+      </p>
+      <p class="para-margin-0" *ngIf="totalPrice > 0">
+        <img src="assets/img/rupee_icon.svg" class="rupee-icon-width">
+        <span class="doc-fee-text">{{showTotalPrice}}</span>
+      </p>
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12>
+      <!-- <div>
+        <ion-segment [(ngModel)]="addMembers">
+          <ion-segment-button value="ForMeAndFamily" class="text-center-cls border-right segBordder">
+            <p class="para-margin-0">
+              <img src="assets/img/family.svg" class="morning-icon-width family-icon">
+            </p>
+            <p class="margin-top--10 tab-heading-color">For Me & Family</p>
+          </ion-segment-button>
+          <ion-segment-button value="ForOthers" class="text-center-cls segBordder">
+            <p class="para-margin-0">
+              <img src="assets/img/friends.svg" class="morning-icon-width">
+            </p>
+            <p class="margin-top--10 tab-heading-color">For Others</p>
+          </ion-segment-button>
+        </ion-segment>
+      </div> -->
+      <!-- <div [ngSwitch]="addMembers">
+        <ion-list *ngSwitchCase="'ForMeAndFamily'">
+          <ion-row class="border-bottom-color" *ngIf="userDetails !=null">
+            <ion-col col-12 class="appo-dtl-padding">
+              <p class="body-content-header">NAME</p>
+              <p (click)="selectedMember('self',userDetails.ConsumerID,userDetails.FirstName)">
+                <ion-radio checked={{isChecked}} value="{{userDetails.ConsumerID}}" id="self" name="appoBooking"></ion-radio>
+                <span class="check-box-content"> {{userDetails.FirstName}}</span>
+              </p>
+            </ion-col>
+          </ion-row> -->
+      <ion-row class="margin-top-bottom-10">
+        <ion-col col-12 class="appo-dtl-padding" (click)="addNewMember()">
+          <p class="body-content-header margin-bottom-0">ADD NEW FAMILY MEMBER
+            <span class="float-right">
+              <img src="assets/img/plus.svg" class="add-member-icon">
+              <!-- <img src="assets/img/minus.svg" *ngIf="showNewMemberField" class="add-member-icon" (click)="showNewMemberField = !showNewMemberField"> -->
+            </span>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="border-bottom-color" *ngIf="documentsFor.length>0">
+        <ion-col col-12 class="appo-dtl-padding">
+          <p class="body-content-header padding-bottom-10">Select Member</p>
+          <ion-row class="margin-top--12">
+            <ion-list radio-group [(ngModel)]="selectedUser" class="width-100" name="family">
+              <ion-item class="radio-btn-sec default-add list-item-border" *ngFor="let memeber of documentsFor">
+                <ion-label class="radio-btn-name">{{memeber.DisplayText}}</ion-label>
+                <ion-radio class="family-radio" item-left value="{{memeber.Value}}" (ionSelect)="selectedMember('family',memeber.Value,memeber.DisplayText)"></ion-radio>
+              </ion-item>
+            </ion-list>
+            <!-- <ion-col col-6 class="padding-left-right-5" *ngFor="let memeber of documentsFor" (click)="selectedMember(memeber)">
+                  <p>
+                    <ion-radio [(ngModel)]="selectedUser" value="{{memeber.Value}}" id="{{memeber.Value}}" name="appoBooking"></ion-radio>
+                    <span class="check-box-content"> {{memeber.DisplayText}}</span>
+                  </p>
+                </ion-col> -->
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 class="appo-dtl-padding confirm-btn">
+      <button ion-button class="login-form-btn" (click)="confirmBooking()">Pay Now</button>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row *ngIf="appoCharges == null">
+            <ion-col col-12 class="appo-dtl-padding confirm-btn">
+              <button ion-button class="login-form-btn" (click)="confirmBooking()">Confirm</button>
+            </ion-col>
+          </ion-row> -->
+  <!-- </ion-list> -->
+  <!-- <ion-list *ngSwitchCase="'ForOthers'">
+          <form #signupForm="ngForm" novalidate (ngSubmit)="validateEmailAndMobile(signupForm)" class="login-form">
+            <ion-row>
+              <ion-col col-12 class="appo-dtl-padding">
+                <p class="body-content-header margin-bottom-0">Name
+                </p>
+                <p class="margin-top-0">
+                  <ion-list>
+                    <ion-item class="list-item-border">
+                      <ion-input type="text" placeholder="Enter Name" [(ngModel)]="signup.FirstName" name="name" #name="ngModel" spellcheck="false"
+                        autocapitalize="off" required></ion-input>
+                    </ion-item>
+                  </ion-list>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 class="appo-dtl-padding">
+                <p class="body-content-header margin-bottom-0">Email
+                </p>
+                <p class="margin-top-0">
+                  <ion-list>
+                    <ion-item class="list-item-border">
+                      <ion-input type="email" placeholder="Enter Email" [(ngModel)]="signup.UserLogin" name="email_id" #email="ngModel" spellcheck="false"
+                        autocapitalize="off" required></ion-input>
+                    </ion-item>
+                  </ion-list>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 class="appo-dtl-padding">
+                <p class="body-content-header margin-bottom-0">Mobile Number
+                </p>
+                <p class="margin-top-0">
+                  <ion-list class="border-bottom">
+                    <ion-row class="login-input number-email-field">
+                      <ion-col col-2 class="padding-0">
+                        <ion-select interface="popover" [(ngModel)]="signup.CountryCode" class="country-code default-add" name="country_code default-add"
+                          style="padding: 18px 10px 0px 0px !important;border-right: 0px;">
+                          <ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+                        </ion-select>
+                      </ion-col>
+                      <ion-col col-10 class="input-for-email-mobile">
+                        <ion-item class="contact-number-field contact-padding default-add default-add">
+                          <ion-input [(ngModel)]="signup.Contact" id="numberInput" name="mobile_number" type="tel" placeholder="Mobile Number" #usercontact="ngModel"
+                            spellcheck="false" autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="genderList.length > 0">
+              <ion-col col-12 class="appo-dtl-padding">
+                <p class="body-content-header margin-bottom-0">Gender
+                </p>
+                <p class="margin-top-0">
+                  <ion-list class="border-bottom">
+                    <ion-item class="login-input-select list-item-border login-input gender-item number-email-field default-add">
+                      <ion-label class="reg-label-sec login-rem-sec-label">
+                        Select Gender
+                      </ion-label>
+                      <ion-select interface="popover" [(ngModel)]="signup.Sex" name="gender" style="padding: 10px 0px 0px 0px !important; border-right: 0px;">
+                        <ion-option *ngFor="let gender of genderList" value="{{gender.Value}}">{{gender.DisplayText}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-list>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 class="appo-dtl-padding confirm-btn">
+                  <button ion-button type="submit" class="login-form-btn">Pay Now</button>
+                </ion-col>
+            </ion-row>
+          </form>
+        </ion-list> -->
+  <!-- </div> -->
+  <!-- </ion-col>
+  </ion-row> -->
+</ion-content>

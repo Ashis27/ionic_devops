@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Support</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<ion-content>
+  <ion-row class="refrral-header-sec">
+    <ion-col col-12 text-center>
+      <img src="assets/img/ticketMsg.png" class="referral-img" alt="referral image">
+    </ion-col>
+    <!-- <ion-col col-12>
+      <p text-center class="default-address list-font-size">
+        Our support team is happy to assist you.
+        <br/>
+      </p>
+    </ion-col> -->
+  </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <ion-list>
+        <form class="profile-form" #feedbackForm="ngForm" novalidate (ngSubmit)="submitTicket(feedbackForm)">
+          <ion-item class="login-input contact-number-field padding-10 default-add para-margin-bottom-5">
+            <ion-label class="login-input-label para-margin-0 edit-name-icon">
+              <img class="form-image dropdown-icon-margin" src="assets/img/register/name_icon.svg" />
+            </ion-label>
+            <ion-input [(ngModel)]="loggedInUser.userName" name="name" disabled #name="ngModel" type="text" placeholder="Name" spellcheck="false"
+              autocapitalize="off">
+            </ion-input>
+          </ion-item>
+          <ion-item class="login-input contact-number-field padding-10 default-add para-margin-bottom-5">
+            <ion-label class="login-input-label para-margin-0 edit-name-icon">
+              <img class="form-image dropdown-icon-margin" src="assets/img/login/mobile_icon.svg" />
+            </ion-label>
+            <ion-input id="numberInput" [(ngModel)]="loggedInUser.contact" disabled #contact="ngModel" name="mobile_number1" type="tel"
+              placeholder="Mobile Number" spellcheck="false" autocapitalize="off">
+            </ion-input>
+          </ion-item>
+          <ion-item class="login-input contact-number-field padding-10 default-add para-margin-bottom-5">
+            <ion-label class="login-input-label para-margin-0 edit-name-icon">
+              <img class="form-image dropdown-icon-margin" src="assets/img/register/mail_icon.svg" />
+            </ion-label>
+            <ion-input name="email" type="text" [(ngModel)]="loggedInUser.email" disabled #email="ngModel" placeholder="Email" spellcheck="false"
+              autocapitalize="off">
+            </ion-input>
+          </ion-item>
+          <ion-item class="login-input-select login-input gender-item number-email-field default-add para-margin-bottom-5" *ngIf="ticketTypeDetails.length > 0">
+            <ion-label class="reg-label-sec login-rem-sec-label">
+              <img class="form-image dropdown-icon-margin" src="assets/img/category.svg" />
+              <span>Categories</span>
+            </ion-label>
+            <ion-select name="category" style="width:90%;padding: 0px 0px 0px 0px !important; border-right: 0px;" [(ngModel)]="ticketDetail.ticketType"
+              required>
+              <ion-option *ngFor="let type of ticketTypeDetails" value="{{type.Value}}">{{type.DisplayText}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="login-input-select  repo-msg-fild para-margin-bottom-5">
+            <textarea class="feedback-msg" name="message" [(ngModel)]="ticketDetail.ticketDescription" placeholder="Leave a message"
+              spellcheck="false" autocapitalize="off"></textarea>
+          </ion-item>
+          <div text-center class="btn-margin">
+            <button class="btn-back-style" ion-button type="susbmit">Submit</button>
+          </div>
+        </form>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

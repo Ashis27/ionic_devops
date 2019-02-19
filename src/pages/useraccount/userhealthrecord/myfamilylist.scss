@@ -1,0 +1,65 @@
+page-myfamilylist{
+
+.family-healthrecord{
+    color: #ffffff !important;
+    padding: 16px 9px 15px 8px;
+    /* border: 0px solid #ad1818; */
+    font-size: 40px;
+    border-radius: 50%;
+    }
+        .dashboard_col_item_name{
+       color: #5f6e7d !important;
+    font-weight: bold;
+    margin-top: 7px;
+    font-size: 16px;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    /* padding: 0px 0px 0px 10px; */
+    }
+    .dashboard_col_item_block{
+         /* padding: 1px 10px 0px 10px; */
+    text-align: center;
+    /* margin-bottom: 8px; */
+    }
+    .my-family-dash-board-item{
+        border-radius: 50%;       
+    }
+    .dashboard-content{
+      background: -webkit-linear-gradient(-93deg, #2b75b5 48%, #5e97bb 68%);
+    //background: -webkit-linear-gradient(-93deg, #e3938f 30%, #c58d5f 68%);
+    }
+.footer-sec{
+        padding-left:0px !important;
+        text-align: center !important;
+           height: 0px !important;
+}
+.footer-name{
+    font-size: 9px !important;
+    margin-top: -10px;
+}
+.dashboard-login-section{
+        color: white;
+    font-size: 20px;
+}
+.dashboard-login{
+     color: #fb2121;
+}
+.family-record-list{
+    margin-top: 0% !important;
+}
+div > .row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+  }
+  .border-circle-color{
+    border: 3px solid #39bebc !important; 
+  }
+ }

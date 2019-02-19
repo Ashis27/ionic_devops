@@ -1,0 +1,238 @@
+<!--
+  Generated template for the BloodalcoholLevelPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Blood Alcohol Level</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="">
+     <!-- <div class="background_image"></div>  -->
+     <div class="progress_wrapper">
+      <div>
+        <round-progress
+        [current]="current"
+        [max]="max"
+        [color]="status"
+        [background]="'#eaeaea'"
+        [radius]="150"
+        [stroke]="25"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="true"
+        [responsive]="false"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"></round-progress></div>
+        <div class="progress_text"  [style.color]="status" *ngIf="(AllFieldsFil) && alcohol != '' && weight != ''">
+            <img [src]="smiley_src">
+            <p  class="result" [style.color]="status">
+              {{result}} %
+            </p>
+        </div>
+      </div>
+
+    <ion-row>
+      <ion-col col-12 class="padding-0">
+        <div class="gender_wrapper">
+          <ion-row>
+              <ion-col col-6 class="text-center-cls" (click)="getStyle('male')" [ngClass]="{'activate': sex=='male'}">
+                  <p style="margin:0px">Male</p>
+                  <img src="assets/imgs/calculator/male.png" class="gendercls">
+                </ion-col>
+                <ion-col col-6 class="text-center-cls" (click)="getStyle('female')" [ngClass]="{'activate': sex=='female'}">
+                    <p style="margin:0px">Female</p>
+                    <img src="assets/imgs/calculator/female.png" class="gendercls">
+                </ion-col>      
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  <!-- <ion-row>
+    <ion-col col-12 >
+      <ion-label>Alcohol consumed in ml</ion-label>
+    </ion-col>
+    <ion-col col-10 class="mar_col">
+      <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;">
+        <ion-input type="number" placeholder="Enter alcohol consumed" [(ngModel)]="alcohol" ></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col col-2 class="header_label">ml</ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-12 >
+        <ion-label>Weight</ion-label>
+      </ion-col>
+      <ion-col col-10 class="mar_col">
+        <ion-item>
+          <ion-input type="number" placeholder="Enter your weight" [(ngModel)]="weight" ></ion-input>
+        </ion-item>
+    </ion-col>
+    <ion-col col-2 class="header_label">Kgs</ion-col>
+    </ion-row> -->
+    <ion-col col-12 class="padding-0">
+      <ion-row>
+        <ion-col col-6>
+          <p class="text_col margin-top-bottom-5">Alcohol consumed(ml)</p>
+          <ion-input type="number" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" placeholder="ml" [(ngModel)]="alcohol"></ion-input>
+        </ion-col>
+        <ion-col col-6>
+          <p class="text_col margin-top-bottom-5">Weight</p>
+          <ion-input type="number" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" placeholder="kgs" [(ngModel)]="weight"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  <br>
+  <ion-row>
+    <ion-col col-12 no-padding>
+      <button ion-button block (click)="calculate()">Calculate</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-col col-12  class="Cal_Des" *ngIf="(!AllFieldsFil)">
+    <ion-row>
+      <ion-col col-12 >
+         <p class="cal_des"><strong>What is a Blood Alcohol Calculator (BAC)?</strong></p>
+            <p class="cal_des">A Blood Alcohol Calculator or your Blood Alcohol Concentration is a rough estimate of how much alcohol you have in your body. Or, it’s a rough estimate of how intoxicated you are.
+          </p>
+      </ion-col>
+    </ion-row>
+ </ion-col>
+
+    <!-- <p *ngIf="AllFieldsFil" class="result">{{result}}</p> -->
+
+    <div  class="suggestions" *ngIf="(AllFieldsFil) && alcohol != '' && weight != ''">
+         <ion-row *ngIf="(result > '0.00' && result <= '0.03') ">
+            <ion-col col-12  class="margin-top-bottom-15">
+               <p class="cal_des">
+                  <strong>Your total BAC is in a normal range. Do you still looking for an appointment ?... </strong>
+               </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+              </ion-col>
+              <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+              </ion-col>
+          </ion-row>
+          <ion-row *ngIf="(result > '0.03' && result <= '0.06')">
+            <ion-col col-12  class="margin-top-bottom-15">
+              <p class="cal_des">
+                 <strong>Your total BAC is high, You may consult a Physician </strong>
+              </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                  </strong></p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="(result > '0.06')">
+            <ion-col col-12  class="margin-top-bottom-15">
+            <p class="cal_des">
+               <strong>Your total BAC is very high, You may consult a Physician</strong>
+            </p>
+          </ion-col>
+          <ion-col col-5 no-padding>
+            <p class="for_appointment">For Appointment </p>
+          </ion-col>
+          <ion-col col-6 no-padding>
+            <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+              </strong></p>
+          </ion-col>
+        </ion-row> 
+    </div>
+
+    <div class="bac_ranges" *ngIf="(AllFieldsFil) && alcohol != '' && weight != ''">
+        <ion-row>
+          <ion-col col-12  color="primary" >
+              <p class="disclaimer_header">Avg Blood Alcohol Level Ranges</p>
+          </ion-col>
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_normal': result >= '0.00' && result <= '0.03'}">
+          <ion-col col-12>
+              <p class="ranges" text-left>
+                  <strong>BAC : >= 0.00 & <= 0.03</strong> 
+              </p>
+              <p class="ranges">Normal behavior, no impairment</p>
+          </ion-col>
+          <!-- <ion-col col-12><p class="ranges" text-left>Essential.</p></ion-col> -->
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.03' && result <= '0.06'}">
+          <ion-col col-12>
+             <p class="ranges" text-left>
+               <strong>BAC : > 0.03 & <= 0.06</strong> 
+             </p>
+             <p class="ranges">Mild euphoria and impairment; decreased inhibitions.</p>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.06' && result <= '0.10'}">
+          <ion-col col-12>
+             <p class="ranges" text-left>
+               <strong>BAC : > 0.06 & <= 0.10</strong> 
+             </p>
+             <p class="ranges">Buzzed, euphoric, increased impairment.</p>
+          </ion-col>
+          <!-- <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col> -->
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.10' && result <= '0.20'}">
+          <ion-col col-12>
+             <p class="ranges" text-left>
+               <strong>BAC : > 0.10 & <= 0.20</strong> 
+             </p>
+             <p class="ranges">Drunk, emotional swings, slurred speech, nausea, loss of reaction time and motor control.</p>
+          </ion-col>
+          <!-- <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col> -->
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.20' && result <= '0.30'}">
+          <ion-col col-12>
+             <p class="ranges" text-left>
+               <strong>BAC : > 0.20 & <= 0.30</strong> 
+             </p>
+             <p class="ranges">Confused, nauseated, poor mentation, blackout.</p>
+          </ion-col>
+          <!-- <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col> -->
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.30' && result <= '0.40'}">
+          <ion-col col-12>
+             <p class="ranges" text-left>
+               <strong>BAC : > 0.30 & <= 0.40</strong> 
+             </p>
+             <p class="ranges">Possibly unconscious, unarrousable, loss of bladder function, risk of death.</p>
+          </ion-col>
+          <!-- <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col> -->
+        </ion-row>
+        <ion-row [ngClass]="{'highlight_danger': result > '0.40'}">
+            <ion-col col-12>
+               <p class="ranges" text-left>
+                 <strong>BAC : > 0.40</strong> 
+               </p>
+               <p class="ranges">Unconscious, coma, impaired breathing, risk of death.</p>
+            </ion-col>
+            <!-- <ion-col col-6><p class="ranges" text-left>Need Treatment.</p></ion-col> -->
+        </ion-row>
+      </div>
+
+    <ion-col col-12 >
+      <ion-row class="disclaimer_wrapper">
+        <ion-col col-10  color="primary">
+          <p class="disclaimer_header">Disclaimer</p>
+        </ion-col>
+        <ion-col col-12 >
+          <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+</ion-content>

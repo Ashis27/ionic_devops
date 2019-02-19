@@ -1,0 +1,61 @@
+page-applycouponcode{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .payment-card{
+        width: 7%;
+        margin-right: 7px;
+    }
+    .otp-text{
+        font-size: 15px !important;
+    }
+    .premium-badge{
+        width: 25%;
+        margin-top: 10%;
+    }
+    .login-form-btn{
+        width: 100%;
+        background-color: var(--button-color) !important;
+        border-radius: 25px 25px 25px 25px;
+        height: 45px;
+        margin-top: 3%;
+        background: white;
+    }
+    .apply-coupon{
+    background-color: transparent;
+    border: 1px solid var(--button-color) !important;
+    padding: 10px 10px 10px 10px;
+    height: 45px;
+    color: var(--button-color) !important;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 20px 20px 20px 20px;
+    }
+    .login-input{
+        border: 1px solid var(--primary-color);
+        border-radius: 25px 25px 25px 25px;
+            margin-bottom: 2%;
+    }
+    input{
+        text-align:center;
+     }
+     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+         color: var(--para-text-color);
+         opacity: 1; /* Firefox */
+          text-align: center;
+     }
+     
+     :-ms-input-placeholder { /* Internet Explorer 10-11 */
+         color: var(--para-text-color);
+          text-align: center;
+     }
+     
+     ::-ms-input-placeholder { /* Microsoft Edge */
+         color: var(--para-text-color);
+          text-align: center;
+     }
+}

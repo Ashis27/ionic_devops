@@ -1,0 +1,162 @@
+<!--<ion-header no-border *ngIf="status">
+	<ion-navbar>
+		<ion-buttons>
+			<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>-->
+<ion-content class="login-page back-image">
+	<div class="logo">
+		<img src="assets/img/logo.png" alt="health-pro logo logo">
+	</div>
+	<ion-row>
+		<ion-col class="para-section-style">
+			<p class="para-text-color" text-center>
+				Your
+				<span class="default-color font-weight-400">Health</span> Our
+				<span class="default-color font-weight-400">Kare</span>
+			</p>
+		</ion-col>
+	</ion-row>
+	<form #signupForm="ngForm" novalidate (ngSubmit)="onSignup(signupForm)" class="login-form">
+		<ion-item class="login-input default-add">
+			<ion-label class="login-input-label">
+				<img class="form-image custom-img" src="assets/img/register/name_icon.svg" />
+				<!--<ion-icon name="ios-person" class="mobile-icon-size"></ion-icon>-->
+			</ion-label>
+			<ion-input [(ngModel)]="signup.FirstName" name="name" type="text" placeholder="Name" #firstname="ngModel" spellcheck="false"
+			 autocapitalize="off" required>
+			</ion-input>
+		</ion-item>
+		<!-- <ion-item class="login-input default-add">
+			<ion-label class="login-input-label">
+				<img class="form-image custom-img" src="assets/img/register/mail_icon.svg" />
+			</ion-label>
+			<ion-input [(ngModel)]="signup.UserLogin" name="email_id" type="email" placeholder="Email" #userlogin="ngModel" spellcheck="false"
+			 autocapitalize="off" required>
+			</ion-input>
+		</ion-item> -->
+
+
+		<ion-row class="login-input number-email-field contact-background">
+			<ion-col col-2>
+				<ion-select interface="popover" [(ngModel)]="signup.CountryCode" class="country-code" name="country_code" (ionChange)="selectedCountryCode(countryCode)">
+					<!--<ion-option>--Choose City--</ion-option>-->
+					<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+				</ion-select>
+			</ion-col>
+			<ion-col col-10 class="input-for-email-mobile">
+				<ion-item class="contact-number-field default-add">
+					<ion-input [(ngModel)]="signup.Contact" id="numberInput" name="mobile_number" type="tel" placeholder="Mobile Number" #contactNum="ngModel"
+					 spellcheck="false" autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+					</ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<!--<ion-item class="login-input">
+			<ion-label class="login-input-label">
+				<ion-icon name="ios-phone-portrait" class="mobile-icon-size"></ion-icon>
+			</ion-label>
+			<ion-input [(ngModel)]="signup.Contact" name="mobile_number" type="tel" placeholder="Mobile Number" #contact="ngModel" spellcheck="false"
+			 autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+			</ion-input>
+		</ion-item>-->
+		<!-- <ion-item class="login-input default-add">
+			<ion-label class="login-input-label">
+				<img class="form-image custom-img" src="assets/img/register/dob_icon.svg" /> DOB
+			</ion-label>
+			<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="showSelectedDate"
+			 (ionChange)="onSelectedDate()"></ion-datetime>
+		</ion-item> -->
+		<ion-row class="login-input number-email-field contact-background">
+			<ion-col col-1>
+				<img class="form-image pass-section" src="assets/img/register/lock.svg" />
+			</ion-col>
+			<ion-col col-9 class="input-for-email-mobile padding-5">
+				<ion-item class="contact-number-field default-add padding-10">
+					<ion-input [(ngModel)]="signup.Password" name="opt_password" [type]="isActive?'text':'password'" placeholder="Password (Optional)" #password="ngModel"
+					 spellcheck="false" autocapitalize="off">
+					</ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-2 class="text-aligh-right">
+				<ion-icon [name]="isActive?'eye':'eye-off'" class="eye-icon-style" item-right (click)="isActive=!isActive;" isActive=true>
+				</ion-icon>
+			</ion-col>
+		</ion-row>
+		<!-- <ion-item class="login-input">
+			<ion-label class="login-input-label">
+				<img class="form-image" src="assets/img/register/lock.svg" />
+			</ion-label>
+			<ion-input [(ngModel)]="signup.Password" name="password" type="password" placeholder="Password" #password="ngModel" spellcheck="false"
+			 autocapitalize="off" required>
+			</ion-input>
+		</ion-item>
+		<ion-item class="login-input">
+			<ion-label class="login-input-label">
+				<img class="form-image" src="assets/img/register/lock.svg" />
+			</ion-label>
+			<ion-input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" #confirmpassword="ngModel"
+			 spellcheck="false" autocapitalize="off" required>
+			</ion-input>
+		</ion-item> -->
+		<!--<div>
+			<ion-label class="login-input-label">
+				<ion-icon name="ios-person" class="mobile-icon-size"></ion-icon>
+			</ion-label>
+			<ion-list radio-group [(ngModel)]="signup.Sex" name="gender">
+				<ion-item class="radio-btn-sec" *ngFor="let gender of genders">
+					<ion-radio value="{{gender.Value}}" checked></ion-radio>
+					<ion-label class="radio-btn-name">{{gender.DisplayText}}</ion-label>
+				</ion-item>
+			</ion-list>
+		</div>-->
+		<!-- <ion-item class="login-input-select login-input default-add">
+			<ion-label class="reg-label-sec login-rem-sec-label login-input-label ">
+				<img class="form-image optional-image-bottom padding-2" *ngIf="signup.Sex == '100'" src="assets/img/register/male.svg" />
+				<img class="form-image optional-image-bottom padding-2" *ngIf="signup.Sex == '101'" src="assets/img/register/female.svg"
+				/>
+				<img class="form-image optional-image-bottom padding-2" *ngIf="signup.Sex == '102'" src="assets/img/register/male.svg" />
+				Gender</ion-label>
+			<ion-select interface="popover" [(ngModel)]="signup.Sex" name="gender">
+				<ion-option *ngFor="let gender of genders" value="{{gender.Value}}">{{gender.DisplayText}}</ion-option>
+			</ion-select>
+		</ion-item> -->
+		<!-- <ion-item class="login-input">
+			<ion-label class="login-input-label">
+				<img class="form-image custom-img" src="assets/img/register/referral_icon.svg" />
+			</ion-label>
+			<ion-input [(ngModel)]="signup.ReferralCode" name="referal_code" type="text" (keypress)="ValidateAlphaNumeric($event)" placeholder="Referral code?" #referralcode="ngModel"
+			 spellcheck="false" autocapitalize="off">
+			</ion-input>
+		</ion-item> -->
+		<ion-item class="tc_section default-add">
+			<ion-label class="terms-conditions">
+				<!-- By creating an account you agree to our -->
+				I accept the
+				<span class="tc_content" (tap)="getTermsAndConditions()">Terms & Conditions</span>
+				<!-- <span class="tc_content"> </span> -->
+			</ion-label>
+			<ion-checkbox [(ngModel)]="signup.TC" name="tc" #signupTc="ngModel" spellcheck="false" autocapitalize="off" required>
+			</ion-checkbox>
+		</ion-item>
+		<div text-center>
+			<button class="login-form-btn" ion-button type="submit">Sign Up</button>
+		</div>
+	</form>
+	<ion-row>
+		<ion-col col-12 class="" text-center>
+			<p class="optional-text">
+				You have an account?
+				<span class="ask-login-signup-text" (click)="onSignIn()"> Log In</span>
+			</p>
+		</ion-col>
+		<!-- <ion-col col-12 class="skip-section" text-center>
+			<p class="optional-text">
+				<span class="ask-login-signup-text" (click)="onSkipToDashboard()"> Skip To Dashboard</span>
+			</p>
+		</ion-col> -->
+	</ion-row>
+</ion-content>

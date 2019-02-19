@@ -1,0 +1,108 @@
+page-userprofile{
+.img-size{
+    background: url("../assets/hospitalImages/profile.jpg");
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-color: rgba(255, 0, 0, 0); */
+    width: 100%;
+    height: 100%;
+    max-width: 80px;
+    max-height: 80px;
+    margin-top: 10px;
+    border-radius: 50%;
+    border: 1px solid #a5c6e0;
+    padding: 5px;
+ }
+ .contact-number-field{
+        margin-top: -2px;
+        background-color: rgba(255, 255, 255, 0);
+        height: 35px;
+        padding-left: 0px;
+        padding-right: 16px;
+        padding-left: 16px;
+}
+ion-select > .select-icon{
+        width: 25px !important;
+}
+.toolbar-ios .segment-button{
+        max-width: 45% !important;
+}
+.segment-ios .segment-button{
+        border-color: #ffffff !important;
+        color:white !important;
+}
+.segment-ios .segment-button.segment-activated{
+        color: var(--primary-color) !important;
+        background-color: rgb(255, 255, 255) !important;
+}
+.edit-icon{
+    width: 25px;
+    margin-top: -5px;
+}
+.number-email-field{
+        padding: 0px 10px 0px 10px;
+}
+.login-form-top{
+    margin-top: 5%;
+}
+ .dropdown-icon-margin{
+         margin: 0px 0px -7px 0px;
+    max-width: 26px;
+ }
+ion-select{
+        padding: 10px 0px 0px 0px !important;
+}
+.contact-padding{
+    padding-left: 0;
+}
+.list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child, .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child{
+        border-bottom-color: #32db64;
+    -webkit-box-shadow: inset 0 -1px 0 0 #32db64;
+    box-shadow: inset 0 -1px 0 0 #32db64;
+
+}
+.edit-email-margin{
+            margin-left: -5px;
+}
+
+.update-label{
+        margin: 5px 0px 0px 0px;
+}
+ion-navbar{
+        background-color: var(--primary-color) !important;
+}
+ion-segment{
+    background: rgba(255, 255, 255, 0) !important; 
+}
+// .segment-button{
+//       color:var(--primary-color) !important;  
+// }
+// .segment-button.segment-activated{
+//         border-color: var(--primary-color) !important; ;
+// }
+.segment-activated{
+        border-bottom-color:white !important;
+}
+.bar-button-default {
+     margin: 0px !important;
+     color: var(--white-color) !important;
+ }
+.input-section{
+     height: 4em !important; 
+}
+.new-password{
+        max-width: 26px !important;
+}
+.new-password-sec{
+        height: 5em !important;
+}
+.city-locality{
+        padding: 10px 0px 0px 0px;
+        font-size: 16px !important;
+        color: #999 !important;
+}
+.city-location-label{
+        margin: 0px 15px -5px 0px;
+}
+}

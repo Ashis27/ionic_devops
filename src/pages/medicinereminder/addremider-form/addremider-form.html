@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Add a reminder</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content no-padding>
+    <ion-row style="height:80px">
+      <ion-col col-10 class="padding-0">
+        <ion-item>
+          <ion-label color="primary" stacked>Reminder Title</ion-label>
+          <ion-input type="text" [(ngModel)]="reminder.medicineName" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 (click)="addReminder()">
+        <img src="assets/img/edit_icon.svg" class="medicine-edit">
+      </ion-col>
+    </ion-row>
+  
+    <ion-row *ngIf="reminderType=='Medicine'" (click)='openPopUp()'>
+      <ion-col col-8 class="padding-0">
+        <ion-item>
+          <ion-label color="primary" stacked>Dosage</ion-label>
+          <ion-input type="text" class="medicine-dose-text" [(ngModel)]="reminder.medicineDose" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+      <!-- added by vinod start-->
+      <ion-col col-4 class="margin-auto dosageUnits">
+        <ion-item>
+          <ion-select interface="popover" [(ngModel)]="DosageUnit" class="country-code" name="country_code">
+            <ion-option *ngFor="let item of DosageUnits" value="{{item.unit}}">{{item.unit}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <!-- <ion-col col-9 class="padding-top-30px"><p>{{reminderType}}</p></ion-col> -->
+    </ion-row>
+  
+  
+    <!-- <ion-label color="primary" stacked class="" *ngIf="reminderType=='medicine'">Dosage</ion-label>
+    <ion-item *ngIf="reminderType=='medicine'" style="width:100%" (click)='openPopUp()'>
+       <span class="dval"> {{reminder.medicineDose}}</span>
+      <span class="medtype">{{reminder.medicineDose}}</span> 
+    </ion-item> -->
+  
+    <ion-item class="margin-bottom-15">
+      <ion-label color="primary" stacked>Timings</ion-label>
+      <ion-input type="text" placeholder="Select Time" [(ngModel)]="reminder.selectedTime" (tap)="selectTimings()" (press)="selectTimings()"></ion-input>
+    </ion-item>
+    <ion-item class="margin-bottom-15">
+      <ion-label color="primary" stacked>Days</ion-label>
+      <ion-input type="text" placeholder="Select Day" [(ngModel)]="reminder.selectedDays.value" (tap)="selectDays()" (press)="selectDays()"></ion-input>
+    </ion-item>
+    <!-- <ion-item class="margin-bottom-15">
+      <ion-label stacked>
+        Duration</ion-label>
+      <ion-select interface="popover" [(ngModel)]="reminder.duration.durationType" (ionChange)="changeDuration($event)" style="border-right: 0px !important;padding: 10px 0px 10px 0px !important;">
+        <ion-option value="days">Days</ion-option>
+        <ion-option value="weeks">Weeks</ion-option>
+        <ion-option value="months">Months</ion-option>
+        <ion-option value="forever">Forever</ion-option>
+      </ion-select>
+    </ion-item> -->
+    <ion-row>
+      <ion-col col-12 class="duaration">
+        <p>Duration</p>
+      </ion-col>
+      <ion-col col-6 no-padding>
+        <ion-item class="margin-bottom-15">
+          <ion-label stacked>From</ion-label>
+          <img src="assets/img/appointment1.svg" item-right class="reminder_icons">
+          <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="appo-calendar" min="{{minDate}}" max="{{maxDate}}"
+            placeholder="Duration From" [(ngModel)]="DurationFrom" (ngModelChange)="onSelectedDate()"></ion-datetime>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6 no-padding>
+        <ion-item class="margin-bottom-15">
+          <ion-label stacked>To</ion-label>
+          <img src="assets/img/appointment1.svg" item-right class="reminder_icons">
+          <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="appo-calendar" min="{{DurationFrom}}" max="{{maxDate}}"
+            placeholder="Duration To" [(ngModel)]="DurationTo" (ngModelChange)="onSelectedToDate()"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!-- <div class="durationrange">
+      <ion-item *ngIf="reminder.duration.durationType=='days'">
+        <ion-label>{{daysRange}} {{days}}</ion-label>
+        <ion-range min="1" max="7" step="1" snaps="true" class="range" (ionChange)="selectedRange('days',$event)" [(ngModel)]="daysRange"></ion-range>
+      </ion-item>
+      <ion-item *ngIf="reminder.duration.durationType=='weeks'">
+        <ion-label>{{weeksRange}} {{weeks}}</ion-label>
+        <ion-range min="1" max="3" step="1" snaps="true" class="range" (ionChange)="selectedRange('weeks',$event)" [(ngModel)]="weeksRange"></ion-range>
+      </ion-item>
+      <ion-item *ngIf="reminder.duration.durationType=='months'">
+        <ion-label>{{monthsRange}} {{months}}</ion-label>
+        <ion-range min="1" max="6" step="1" snaps="true" class="range" (ionChange)="selectedRange('months',$event)" [(ngModel)]="monthsRange"></ion-range>
+      </ion-item>
+    </div> -->
+  </ion-content>
+  <div class="customPopUp">
+    <div class="mainPopUp">
+      <div class="popTitle">Dosage</div>
+      <div class="maths">
+        <ion-icon name="ios-add-circle-outline" class="circle add" (click)="increaseDosage()"></ion-icon>
+        <ion-icon name="ios-remove-circle-outline" class="circle remove" (click)="reduceDosage()"></ion-icon>
+        <span class="doseVal">{{TempMedicineDosage}}</span>
+      </div>
+      <div class="bottom">
+        <div class="cancel float-left margin-left-10" (click)="cancelDosage()">CANCEL</div>
+        <div class="set float-right margin-right-10" (click)="setDosage()">SET</div>
+      </div>
+    </div>
+  </div>
+  <ion-footer (click)="SaveReminder()">
+    <ion-toolbar>
+      <ion-title class="footer-titel-class" text-center>
+        <img src="assets/img/saveIcon.svg" class="book-appo-footer-btn">
+        <span class="margin-left-right-5">Save</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

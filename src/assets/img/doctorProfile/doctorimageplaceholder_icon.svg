@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="94.5px" height="88.129px" viewBox="0 0 94.5 88.129" enable-background="new 0 0 94.5 88.129" xml:space="preserve">
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#EAEAEA" d="M47.25,2.929c22.644,0,41,18.356,41,41s-18.356,41-41,41
+		c-22.644,0-41-18.356-41-41S24.606,2.929,47.25,2.929z"/>
+	<ellipse fill="#B3B4B4" cx="47.25" cy="29.694" rx="13.803" ry="14.094"/>
+	<g>
+		<g>
+			<defs>
+				<ellipse id="SVGID_1_" cx="47.25" cy="44.929" rx="40.238" ry="40.272"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+			<ellipse clip-path="url(#SVGID_2_)" fill="#B3B4B4" cx="47.25" cy="77.386" rx="33.653" ry="26.649"/>
+		</g>
+	</g>
+</g>
+</svg>

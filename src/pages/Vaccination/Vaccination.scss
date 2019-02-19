@@ -1,0 +1,35 @@
+page-vaccine {
+    .content {
+        color: #000;
+        background-color: #efefef;
+    }
+    .book-appo-footer-btn{
+        width: 26px;
+        margin-bottom: -5px;
+    }
+    .footer .toolbar .toolbar-background{
+        background-color: var(--primary-color) !important;
+    }
+    .vaccine_des{
+        color: var(--dark-color) !important;
+        font-size: 16px !important;
+        margin: 10px 0px 10px 0px !important;
+        font-weight: 500;
+    }
+    .submit-btn{
+        background-color: var(--button-color) !important;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: white;
+        text-transform: capitalize !important;
+        margin: auto;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-style: dashed;
+        
+    }
+    ion-icon{
+        font-size:2.2em !important;
+    }
+}

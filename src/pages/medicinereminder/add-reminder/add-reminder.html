@@ -1,0 +1,70 @@
+<!--
+  Generated template for the AddReminderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>Add a reminder</ion-title>
+  </ion-navbar>
+</ion-header> -->
+<ion-content>
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="">
+          <ion-col col-1 class="close-sec padding-0 margin-auto" (click)="closeCurrentSection()">
+            <!-- <img src="assets/img/back-arrow.png" class="" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-11 class="header-title margin-top-bottom-5 padding-0">
+            <p class="para-margin-0 header-title para-overflow-hidden">{{status}} Medicine</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="margin-top-bottom-15">
+    <ion-col col-12 class="">
+      <ion-row class="input-box-border-radious number-email-field contact-background para-margin-0">
+        <ion-col col-1>
+          <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+        </ion-col>
+        <ion-col col-10 class="input-for-email-mobile padding-2">
+          <ion-item class="contact-number-field default-add padding-0">
+            <ion-input placeholder="Search Medicine" [(ngModel)]="medicinesearched" (keyup)="searchMedicine($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+           <!-- added by vinod start -->
+          <ion-col col-1 *ngIf="medicineList.length == 0 && mednotfound" class="close-sec padding-0 margin-auto" (click)="UserCustomMedicine()">
+            <ion-icon name="ios-add-outline" class="nav-add-arrow-icon"></ion-icon>
+        </ion-col>
+               <!-- added by vinod  end -->
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-searchbar placeholder="Name of reminder" [(ngModel)]="medicinesearched" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)">
+      </ion-searchbar> -->
+
+  <div class="medicinelist" *ngIf="medicineList.length > 0" no-padding>
+    <p class="search-header">Medicines
+    </p>
+    <ion-row class="medicine-list-border" *ngFor="let medicine of medicineList" (click)="selctedMedicine(medicine)">
+      <ion-col col-2>
+        <img class="search-medicine-list-image-back" src="assets/img/pils.svg" />
+      </ion-col>
+      <ion-col col-10>
+        <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-8 medicine-list-header">{{medicine.Name}}</p>
+        <!-- <p class="margin-top-2 medicine-sub-content">Useful For xyz Symptoms</p> -->
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row *ngIf="medicineList.length == 0 && mednotfound">
+    <ion-col col-12 text-center>
+      <img class="not-found" src="assets/img/pils.svg">
+      <p class="not-found-text">No Result Found</p>
+    </ion-col>
+  </ion-row>
+</ion-content>

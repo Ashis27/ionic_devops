@@ -1,0 +1,275 @@
+page-healthpackageprofile {
+    // .toolbar-title {
+    //     color: #eaeaea;
+    // }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .toolbar-content-ios > .title-header-text{
+        text-align: center !important;
+            }
+            
+    .time-slot-card-background{
+        margin: 0px !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+       //background-image:url(/assets/img/header_bg.png);
+       padding-bottom: 5px;
+       //position: fixed;
+        z-index: 1;
+    }
+    .package-navbar-back{
+        background-color: var(--primary-color) !important;
+    }
+    .cart-icon{
+        width: 30px;
+    }
+    .not-center-found{
+       margin-top: 15%;
+    }
+// .card-ios > .package-navbar-back {
+//     padding: 20px 10px 10px 10px !important;
+// }
+.footer-ios > .toolbar-ios ion-title{
+    padding: 0px !important;
+    margin-top: -3px;
+}
+
+    .review-color{
+        color:white;
+        font-size: 12px;
+        margin-left: 10px;
+        // vertical-align: text-top;
+    }
+    #notification-button {            
+        position: relative;
+        width: 42px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+  #notifications-badge {
+        background-color:var(--button-color);
+        position: absolute;
+        top: -1px;
+        right: -5px;
+        border-radius: 100%;
+        padding: 5px 7px 5px 7px;
+    }
+    .avtar-margin{
+        margin: -15px 15px 8px 0 !important;
+    }
+    .dioLocation{
+        width: 12px;
+        margin-right: 5px;
+        vertical-align: initial;
+        float: left;
+    }
+    .color-white{
+        color:white !important;
+    }
+  
+       .test-list{
+        font-size: 20px;
+        color: #39bebc;
+        margin-right: 10px;
+    }
+       
+    .profile-w-h{
+        width: 80px !important;
+        height: 80px !important;
+        border: 2px solid white;
+        background-color: #e6e5e5;
+        padding: 14px 0px;
+    }
+    .profile-user-name{
+        //font-size: 20px !important;
+       // color: #eaeaea !important;
+    }
+    .price-text{
+        font-size: 1.8rem !important;
+    }
+    .float-left{
+        float:left;
+    }
+    .item {
+    
+        background-color: rgba(255, 255, 255, 0);
+    }
+    
+    .toolbar-background {
+        border-color: rgba(255, 0, 0, 0) !important;
+        background: rgba(255, 0, 0, 0) !important;
+    }
+    .doc-profile-detail-content1{
+    color:#eaeaea !important;
+    font-size: 14px !important;
+    }
+    .doc-profile-detail-content2{
+        color:#eaeaea !important;
+        font-size: 12px !important;
+        margin-top: 6px;
+        }
+    
+        .no-of-vote{
+            vertical-align: super;
+        }
+    .search-location-alignment{
+        float: right;
+        width: 22px;
+    }
+    
+
+    .star-color{
+        color:var( --warning-color);
+     }
+ 
+    .text-center-class{
+        text-align: center;
+    }
+    
+    .search-header{
+        background: #39bebc;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+
+       .medicine-list-border{
+        //border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-list-header{
+        font-size: 16px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .experince-icon-w{
+        width: 22px;
+        display: inline;
+       
+        vertical-align: middle;
+    }
+    .review-color{
+        color:white;
+        font-size: 11px;
+        vertical-align: text-top;
+    }
+    .labal-color-dig{
+        color: white !important;
+    }
+    ion-select {
+    
+        border-right: none;
+    
+    }
+
+    .select-md .select-icon .select-icon-inner {
+
+        color: #fff;
+    }
+    .medicinelist{
+        padding: 0px 12px 0px 12px;
+    }
+
+    .price-content-font{
+        font-size: 14px;
+    font-weight: 500;
+    }
+    .original-price {
+        text-decoration: line-through;
+        //color: #9e0000;
+    }
+    .padding-15{
+        padding: 15px;
+    }
+        .original-price-cont {
+          
+            color: #9e0000;
+        }
+        //  .discount-price {
+        //     //color: #038607;
+        //   //  color:white !important;
+        // }
+
+        .price-font-size{
+            font-size: 18px;
+        }
+        .rupee-icon{
+            width: 16px;
+    vertical-align: middle;
+    margin-right: 2px;
+        }
+
+        .border-bottom-price{
+            border-bottom: 0.5px solid #dadada;
+        }
+
+        .item-list-header{
+            font-size: 14px !important;
+        }
+        .cart-value{
+            margin: 1px 2px 2px 30px;
+            background-color: #ff7600;
+            color: white;
+            border-radius: 100px;
+            border: 1px solid white;
+            font-size: 10px;
+            padding: 1px;
+        }
+        .cart-icon{
+            width: 32px;
+            float: right;
+        }
+        .white-space{
+            white-space: nowrap;
+        }
+        .search-dio-footer-btn{
+            width: 26px;
+            margin-bottom: -5px;
+        }
+
+        .footer .toolbar .toolbar-background {
+            background-color: var(--primary-color) !important;
+        }
+        .toolbar-title {
+            padding: 0 0px;
+        }
+
+        .price-sub-content {
+            color: #545454;
+            background-color: #e4e0e0;
+            margin: 0px;
+            padding: 8px 0px 6px 5px;
+            font-size: 16px;
+        }
+        .btn-devider-border{
+            border-right:0.5px solid #e4e0e0;
+        }
+        .walletegrey{
+            width: 21px;
+            vertical-align: bottom;
+            margin-right: 4px;
+        }
+
+        .testwhite{
+            width: 26px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+     
+    } 

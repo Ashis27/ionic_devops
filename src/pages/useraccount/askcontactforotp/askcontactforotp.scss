@@ -1,0 +1,58 @@
+.select-icon {
+    position: relative;
+    width: 15px !important;
+    height: 19px;
+}
+ion-select{
+padding: 11px 0px 0px 3px !important;
+        overflow: visible !important;
+    max-width: 100% !important;
+    border-right: 1px dashed gainsboro;
+    z-index: 1;
+}
+.number-email-field{
+        height: 4.9rem !important;
+}
+.select-text{
+   overflow: visible !important;
+}
+.popover-content{
+        width: 110px !important;
+            margin-top: 20px !important;
+}
+.input-email-mobile-sec {
+    margin-left: -5px !important;
+}
+.mobile-icon-size{
+   color:var(--icon-color);
+}
+.mail-icon{
+    padding: 9px 0px 0px 10px !important;
+}
+.contact-number-field{
+     margin-top: -4px !important;
+     background-color: rgba(255, 255, 255, 0);
+     height: 35px;
+     padding-left: 0px;
+     margin-left: 5px !important;
+}
+    .back-image{
+//     background-repeat: no-repeat !important;
+//     width: 100% !important;
+//     background-position: center !important;
+//     background-size: 100% !important;
+//     background: url('../assets/img/login/login_bg.svg');
+       background-repeat: no-repeat !important;
+       width: 100% !important;
+       background-position: center !important;
+       background-size: cover !important;
+       background: url(../assets/img/login/login_bg.svg);
+       height: 100%;
+ }
+.bar-button-default{
+    margin: 10px 20px 0px 20px !important;
+    color: var(--icon-color) !important;
+}
+.askotp-password .toolbar-background{
+    background: #ffffff !important;
+}

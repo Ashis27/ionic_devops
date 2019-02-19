@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="profile-back-sec package-navbar-back">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 white-space margin-auto para-overflow-hidden">
+        <span class="">{{selectedTest.LabTestName}}</span>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card class="time-slot-card-background">
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="profile-w-h" [src]="(selectedTest.ImageUrl != null && selectedTest.ImageUrl != '') ? selectedTest.ImageUrl :'assets/img/dc_icon/labTest.svg'"
+        />
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{selectedTest.LabTestName}}
+        </h4>
+        <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.CenterName}}
+        </p>
+        <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+          <span class="content-row-seprator">
+            <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+          </span>
+          {{selectedDiagnosticCenter.CityAreaName}}, {{selectedDiagnosticCenter.City}}
+        </p>
+       
+        <p class="price-text margin-top-5">
+          <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin-right: 10px !important;">₹ {{selectedTest.PriceAfterDiscount}}</span>
+          <span *ngIf="selectedTest.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{selectedTest.Price}}</span>
+          <span class="para-overflow-hidden DF_text margin-5" *ngIf="selectedTest.GenericDiscount > 0">
+            <span class="dc-inner-sub-text-size">({{selectedTest.GenericDiscount}}%</span>
+            <span class="inner-sub-text-size"> Off)</span>
+          </span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row *ngIf="labTestProfileDetails !=null">
+    <ion-col col-12 *ngIf="labTestProfileDetails.LabTestDescription!=''">
+      <p class="para-margin-0-1 price-sub-content search-header">
+        <ion-icon name="ios-list-outline"></ion-icon> Lab Test Description</p>
+      <div class="padding-top-0" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12>
+            <p class="para-list-header font-weight-400 margin-top-3 item-list-header" [innerHTML]="labTestProfileDetails.LabTestDescription">{{labTestProfileDetails.LabTestDescription}}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-fab bottom left (click)="getLocationOnMap()">
+    <button ion-fab mini>
+      <ion-icon name="ios-pin-outline"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6 class="btn-devider-border" (click)="addToCart(selectedTest,'Test')">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5 add-to-cart">Add To Cart</span>
+        </ion-title>
+      </ion-col>
+      <ion-col col-6 (click)="bookLabTest(selectedTest)">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5">Book Test</span>
+        </ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

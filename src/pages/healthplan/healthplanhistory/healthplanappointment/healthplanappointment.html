@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Appointment Schedule(s)</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="">
+  <ion-row class="sub-menu-header-sec appo-history-list">
+    <ion-col col-12 class="sub-menu-header" *ngFor="let item of appointmentHistoryList; let i = index" [ngClass]="i == 0 ?'':'timeline'">
+      <ion-row [ngClass]="i == 0 ?'padding-left-15':'vertical-allign'">
+        <ion-col col-1 class="margin-auto">
+          <ion-icon name="md-radio-button-off" [ngClass]="item.IsApproaching?'upcoming-process-color pulse':'complete-process-icon'"></ion-icon>
+        </ion-col>
+        <ion-col col-11 class="margin-auto border-bottom-color padding-bottom-10">
+          <ion-row (click)="gotoAppoDetails(item)">
+            <ion-col col-10 class="margin-auto">
+              <p class="appo-date margin-top-6 schedule-date">{{item.Date}}, {{item.Day}}</p>
+              <p class="doc-name margin-top-6">{{item.ProviderName}}</p>
+            </ion-col>
+            <ion-col col-2 class="margin-auto">
+              <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+            </ion-col>
+          </ion-row>
+          <ion-row style="height: 30px;">
+            <ion-col col-8 class="margin-auto padding-0">
+              <button *ngIf="!item.Expired && !item.Completed" class="btn book-appo-btn" (click)="bookAppointment(item)">Book Appointment</button>
+              <button *ngIf="item.Expired" class="btn exp-sec">Status : {{item.Completed?'Completed':'Pending'}}</button>
+              <button *ngIf="!item.Expired && item.Completed" class="btn exp-sec">Status : <span class="complete-text-style">Completed</span></button>
+            </ion-col>
+            <ion-col col-4 class="padding-0">
+              <p *ngIf="item.Expired && !item.Completed" class="expired-text-style">Expired</p>
+              <p *ngIf="!item.Expired && !item.Completed" class="upcoming-text-style">Upcoming</p>
+              <!-- <p *ngIf="!item.Expired && item.Completed" class="complete-text-style">Completed</p> -->
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col col-3 class="margin-auto">
+            <button [disabled]="!item.IsConditional" class="btn details-back" (click)="gotoAppoDetails()">Details</button>
+          </ion-col> -->
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar (click)="addNewAppointment()">
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/calendar_icon.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Book New Appointment</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

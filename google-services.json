@@ -1,0 +1,94 @@
+{
+  "project_info": {
+    "project_number": "1073663429783",
+    "firebase_url": "https://healthpro-207014.firebaseio.com",
+    "project_id": "healthpro-207014",
+    "storage_bucket": "healthpro-207014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073663429783:android:db3f449214a4c5f6",
+        "android_client_info": {
+          "package_name": "com.kare4u.healthproapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073663429783-r3r678kcqf8f55jbnk6apj81pid12s1m.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1073663429783-ib845ckvai1beq015n6kpm2qcfsbvdbk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kare4u.healthproapp",
+            "certificate_hash": "22329b4c610ba7d2b013e476bc82444caa06cfcb"
+          }
+        },
+        {
+          "client_id": "1073663429783-r3r678kcqf8f55jbnk6apj81pid12s1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Hb66RwUIdc-N9kmcRMbAW-2LVfZdnsE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073663429783-r3r678kcqf8f55jbnk6apj81pid12s1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073663429783:android:239916b70510f709",
+        "android_client_info": {
+          "package_name": "com.kare4u.healthproprovider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073663429783-r3r678kcqf8f55jbnk6apj81pid12s1m.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1073663429783-r3r678kcqf8f55jbnk6apj81pid12s1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Hb66RwUIdc-N9kmcRMbAW-2LVfZdnsE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

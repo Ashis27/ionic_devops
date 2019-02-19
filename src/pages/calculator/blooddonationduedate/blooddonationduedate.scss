@@ -1,0 +1,137 @@
+page-blooddonationduedate {
+    .background-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: 100% !important;
+        background: linear-gradient(to bottom, #fff 0%, #7ad0ec 100%);
+      }
+    .scroll-content{
+        padding:0px !important;
+    }
+    
+    .bg_image{
+        width: 100%;
+        height:200px;
+        background-image: url('../assets/imgs/calculator/blood_donation1.jpg') ;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    // .list{
+    //     margin:5px 5px 16px;
+    // }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+
+
+    ion-label{
+        // margin-left: 17px !important;
+         margin-top: 9px !important;
+         font-weight: 500;
+     }
+     .col{
+         padding: 0px !important;
+     }
+     ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+     ion-item{
+         margin-top: -3px !important;
+     }
+     .mar_col{
+         margin-top: -10px;
+     }
+     .margin-left{
+        margin-left:1%;
+        margin-bottom: 2% !important;        
+     }
+     
+     .button{
+        width:100%;
+        // margin-left: 1%;
+        background-color:#f15c23 !important;
+        color:white;
+     }
+     .toolbar-background{    
+         background: #39bebc !important;
+        
+        
+     }
+     .toolbar-title{
+        color: #fff8f8 !important;
+     }
+     ion-label{
+         color:#2d2d2d !important;
+     }
+     p{
+        // font-size: 25px;
+         text-align: center;
+          color: #34bdbc;
+     }
+     .item{
+         padding-left: 1px !important;
+         padding-right: 1px !important; 
+     }
+
+     .header_label{
+         font-weight:300;
+     }
+     .text-input{
+        margin: 13px 0px !important;
+     }
+     .item-inner{
+         border-bottom: none !important;
+     }
+
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+      //  font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+         margin:20px 0px 10px 0px;
+     }
+    .appointment_book{
+        font-size: 12px;
+        text-align: left;
+        color: #34bdbc;
+        text-decoration: underline;
+    }
+    .result{
+        font-size: 16px;
+        margin: 0px;
+    }
+    .progress_text{
+        img{
+            width:35px;
+            height:35px;
+        }
+    }
+    
+
+     .Cal_Des{
+
+     }
+}

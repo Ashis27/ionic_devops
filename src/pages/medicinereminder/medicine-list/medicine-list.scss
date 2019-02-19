@@ -1,0 +1,135 @@
+medicine-list {
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .active-city-text{
+        font-size: 13px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .active-location-text{
+       font-size: 14px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .label-ios > .location-search-header{
+    padding: 10px 0px 0px 0px !important;
+    }
+   .content-ios{
+    margin-top:-20px;
+}
+.toolbar-ios {
+    padding-top: 20px !important;
+}
+
+.item-ios{
+    padding-top:30px;
+  }
+   .menu-header-sec{
+      background-color: var(--primary-color) !important;
+      text-align: center;
+   }
+//    .appo-fixed-sec{
+//     position: fixed !important;
+//     width: 100%;
+//     height: 60%;
+//     overflow: auto;
+//    }
+.search-header{
+    background: #e8e8e8;
+    padding: 10px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    margin: 3px 0px 3px 0px;
+    color: #464646 !important;
+    width: 100%;
+   }
+   .book-btn{
+    border: 1px solid var(--primary-color);
+    padding: 7px 0px 6px 0px;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--primary-color);
+    font-size: 13px;
+    margin: 10px 0px 0px 0px;
+   }
+   .search-type-name{
+       color:var(--icon-color);
+   }
+   .see-all{
+       float: right;
+       color: var(--primary-color);
+   }
+   .active-back{
+    border: 2px solid var(--button-color);
+   }
+
+   @keyframes pulse_animation {
+	0% { transform: scale(1); }
+	30% { transform: scale(1); }
+	40% { transform: scale(1.08); }
+	50% { transform: scale(1); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.05); }
+	80% { transform: scale(1); }
+	100% { transform: scale(1); }
+}
+.pulse {
+	animation-name: pulse_animation;
+	animation-duration: 6000ms;
+	transform-origin:70% 70%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.medicine-list-border{
+    margin: 3px 0px 0px 0px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px #afafaf;
+}
+
+.medicine-list-header{
+    font-size: 16px !important;
+}
+.margin-top-8 {
+    margin: 8px 0px 0px 0px !important;
+}
+.medicine-sub-content{
+    color: #ababab;
+}
+.float-right{
+    float:right
+}
+.time-style{
+    padding: 2px;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 5px;
+    color: #39bebc;
+}
+.time-breaker{
+    font-weight: bold;
+    color: #39bebc;
+}
+.content {
+    color: #000;
+    background-color: #efefef;
+}
+.book-appo-footer-btn{
+    width: 26px;
+    margin-bottom: -5px;
+}
+.footer .toolbar .toolbar-background{
+    background-color: var(--primary-color) !important;
+  }
+.color-white{
+    color:white;
+}
+
+
+}

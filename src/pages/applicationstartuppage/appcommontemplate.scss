@@ -1,0 +1,111 @@
+// Styles for all of the user pages:
+// Login, Signup, Support
+page-user {
+    .back-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background: url(../assets/img/login/login_bg.svg);
+        height: 100%;
+}
+
+  .logo {
+    padding: 0px 0;
+    // min-height: 150px;
+    text-align: center;
+    img {
+    //   max-width: 100%;
+    //   margin-top: -5%;
+      max-width: 100%;
+     // margin-top: -10%;
+      margin-bottom: -10%;
+    }
+  }
+  .list {
+    margin-bottom: 0;
+  }
+  .login-form-top{
+   margin-top: 10px;
+}
+.login-input{
+    border: 1px solid var(--primary-color);
+    border-radius: 25px 25px 25px 25px;
+        margin-bottom: 2%;
+}
+ .form-image{
+         max-width: 26px !important;
+    margin-top: 3px;
+ }
+ .dropdown-icon-margin{
+         margin: 0px 15px -5px 0px;
+ }
+
+
+.login-form{
+  margin: 0px 15px 0px 15px;
+}
+
+.login-facebook-btn{
+   width: 100%;
+    background: var(--facebook-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.login-google-btn{
+   width: 100%;
+    background: var(--google-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.social-btn-sec{
+    margin: 0px 6px 10px 6px;
+}
+.facebook-icon{
+    font-size: 1.8em;
+}
+.googleplus-icon{
+    font-size: 1.8em;
+}
+.social-btn-size{
+     font-size: 1em !important;
+    margin-left: 10px;
+        margin-top: 3px;
+    text-transform: capitalize;
+        font-weight: 100;
+}
+.optional-text{
+    color:var(--para-text-color) !important; 
+   font-weight: 400;
+ margin: 3px 0px 0px 0px !important;
+
+}
+.mobile-icon-size{
+      font-size: 1.5em;
+}
+.login-input-label{
+  margin: 0px !important;
+  font-size: 13px;
+}
+.custom-img{
+    margin: 0px 10px -6px 0px;
+}
+.optional-image-bottom{
+    margin: 0px 10px -10px 0px !important;
+}
+.ask-login-signup-text{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--black-light-color);
+ }
+ .country-code{
+padding: 11px 0px 0px 0px !important;
+        overflow: visible !important;
+    max-width: 100% !important;
+    border-right: 1px dashed gainsboro;
+    z-index: 1;
+    text-align: right;
+}
+
+
+}

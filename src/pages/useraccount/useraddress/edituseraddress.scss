@@ -1,0 +1,60 @@
+page-edituseraddress{
+
+.contact-number-field{
+     height: auto !important;
+}
+.ion-select{
+    padding: 0px 0px 0px 0px !important;
+}
+.update-style{
+font-size: 15px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0px 0px 0px;
+}
+.add-btn-label{
+          margin: 0px;
+}
+.address-text{
+    
+}
+.default-add-margin-top{
+    margin-top: 10px !important;
+}
+.content-ios{
+    margin-top: 10px !important;
+}
+ion-label{
+    color: #83c5c5;
+}
+.popover-content {
+    width: 150px !important;
+    margin-top: 0px !important;
+    margin-left: 90px !important;
+}
+.address-title{
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--primary-color);
+}
+.address-sec{
+margin: 15px 5px 0px 5px;
+    border-bottom: 1px solid gainsboro;
+}
+.not-available{
+    color: var(--danger-color);
+    font-size: 20px;
+}
+.address-inner-text{
+    font-weight: 400px;
+}
+ion-label{
+    color:var(--primary-color) !important;
+}
+// .default-add{
+//     margin-top: 15px;
+//     margin-bottom: 10px;
+// }
+
+}

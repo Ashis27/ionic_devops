@@ -1,0 +1,266 @@
+page-journallist {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .upload-icon-w {
+        width: 20px;
+        margin-bottom: -2px;
+    }
+    .footer .toolbar .toolbar-background {
+        background-color: var(--primary-color) !important;
+    }
+    .date-background {
+        background-color: #f3f3f3;
+        padding: 2px;
+        box-shadow: 0px 1px 3px #a7a7a7;
+        margin-top: 0;
+    }
+    .upload-date-font {
+        font-size: 16px;
+        color: #867e7e;
+    }
+    .list-back {
+        background: rgba(255, 255, 255, 0.38823529411764707) !important;
+    }
+    .upload-date1-font {
+        font-size: 22px;
+        color: black;
+    }
+    .display-grid {
+        display: grid;
+    }
+    .not-found {
+        width: 20% !important;
+        margin-top: 30% !important;
+    }
+    .journal-slide {
+        height: auto;
+    }
+    .back-color {
+        background-color: #f2f2f2 !important;
+    }
+    .journal-card {
+        // background: white;
+        // margin: 5px;
+        background: #f2f2f2;
+        padding: 6px;
+        padding-bottom: 5rem;
+    }
+    .journal-title {
+        margin-bottom: 0;
+        color: #858585;
+        font-weight: 500;
+    }
+    .journal-content {
+        margin-top: 2px;
+    }
+    .range .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+        color: rgba(57, 190, 188, 0) !important;
+        background: #39bebc !important;
+    }
+    .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+        transform: scale(1);
+    }
+    .range-ios .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+        color: #457fe6;
+    }
+    .range-tick {
+        top: 15px!important;
+        width: 1px !important;
+        height: 8px!important;
+        background: #a8a4a4!important;
+    }
+    .slider-login-btn {
+        margin: 0px 20px 0px 20px;
+        font-weight: bold;
+    }
+    .login-arrow-icon {
+        font-size: 1.2em;
+    }
+    .signup-arrow-icon {
+        font-size: 1.2em;
+    }
+    .slider-btn-sec {
+        //margin: 0px 25px 0px 25px;
+        position: fixed;
+        bottom: -5%;
+        z-index: 1;
+        // height: 5%
+    }
+    .slider-dashboard-skip-text {
+        margin: 0px 13% 0px 13%;
+        position: fixed;
+        bottom: 0%;
+        z-index: 1;
+    }
+    ion-slide {
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: 100% !important;
+    }
+    ion-slides {
+        height: 40% !important;
+    }
+    .slider-btn-sec {
+        bottom: -5%;
+        z-index: 1;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+    }
+    .test-journal-header {
+        margin: 0;
+        font-weight: 700;
+        color: #9a9797;
+    }
+    .test-journal-body {
+        margin: 3px 5px;
+        color: #a8a8a8;
+    }
+    .pulse {
+        transform: scale(0.9);
+        animation: pulse 2s infinite;
+        border-radius: 50%;
+        background: rgb(234, 234, 234);
+    }
+    .date {
+        font-size: 1.5rem;
+        margin: 5px;
+        /* border: 1px solid #39bebc; */
+        -webkit-box-shadow: 0 0 40px -10px #2f3939;
+        box-shadow: 4px 5px 15px -2px #cdc9c9;
+        padding: 3px 5px;
+        border-radius: 5px;
+        background: white;
+        font-weight: 600;
+        color: #39bebc;
+    }
+    @-webkit-keyframes pulse {
+        0% {
+            -webkit-box-shadow: 0 0 0 0 rgb(234, 234, 234);
+        }
+        70% {
+            -webkit-box-shadow: 0 0 0 5px rgb(234, 234, 234);
+        }
+        100% {
+            -webkit-box-shadow: 0 0 0 0 rgb(234, 234, 234);
+        }
+    }
+    @keyframes pulse {
+        0% {
+            -moz-box-shadow: 0 0 0 0 rgb(234, 234, 234);
+            box-shadow: 0 0 0 0 rgb(234, 234, 234);
+        }
+        70% {
+            -moz-box-shadow: 0 0 0 10px rgb(234, 234, 234);
+            box-shadow: 0 0 0 5px rgb(234, 234, 234);
+        }
+        100% {
+            -moz-box-shadow: 0 0 0 0 rgb(234, 234, 234);
+            box-shadow: 0 0 0 0 rgb(234, 234, 234);
+        }
+    }
+    .trimester-btn-style {
+        background: #c0d0cf;
+        border-radius: 50%;
+        padding: 10px;
+        margin-bottom: 5px;
+        color: #3a3a3a;
+    }
+    .active-trimester-btn {
+        background: #ffc6b4 !important;
+        border-radius: 50%;
+        padding: 10px !important;
+        margin-bottom: 5px;
+        color: #585858 !important;
+    }
+    .trimester-img {
+        width: 35px;
+    }
+    .active-trimester-text {
+        font-weight: bold;
+        color: #e07070 !important;
+        margin-left: -7px;
+    }
+    .trimester-text {
+        margin: 0;
+        color: #868686;
+    }
+    .journal-date {
+        color: #fc7176;
+        font-weight: bold;
+        // border: 1px solid #fc7176;
+        border-radius: 5px;
+        padding: 2px;
+    }
+    .range-md .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+        transform: scale(1);
+    }
+    .range-ios .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    .item-range.item-range {
+        border-bottom: 1px solid rgba(222, 222, 222, 0) !important;
+    }
+    .range-pin::before {
+        background: rgba(52, 52, 52, 0.12) !important;
+    }
+    ion-fab[bottom] {
+        bottom: 8% !important;
+    }
+    .top-button {
+        text-align: center;
+        margin-top: -3rem;
+        margin-bottom: 1rem;
+        z-index: 20;
+    }
+    .top-button>button {
+        background: #ffffff;
+        margin: 0;
+        padding: 10px;
+        width: 6rem;
+        height: 5rem;
+        color: #d4d2d2;
+        box-shadow: 8px 9px 8px -5px #cacaca;
+    }
+    .top-button-icon {
+        font-size: 4rem;
+    }
+    .date-right {
+        position: absolute;
+        right: -4px;
+        bottom: -7px !important;
+    }
+    .date-left {
+        position: absolute;
+        left: -4px;
+        bottom: -7px !important;
+    }
+    .item-range {
+        padding: 0px 7px 5px 7px;
+        background: none;
+    }
+    .item-range>.item-inner {
+        border: none !important;
+    }
+    .range {
+        padding: 0 20px;
+    }
+    .not-found-journal {
+        color: #97d3d2 !important;
+        font-size: 4rem !important;
+        margin: 10px 0px 0px 0px !important;
+        font-weight: 700;
+    }
+}

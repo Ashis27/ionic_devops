@@ -1,0 +1,44 @@
+<!--
+  Generated template for the VaccineRemindersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="">
+          <ion-col col-1 class="close-sec padding-0 margin-auto" (click)="closeCurrentSection()">
+            <!-- <img src="assets/img/back-arrow.png" class="" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-11 class="header-title margin-top-bottom-5 padding-0">
+            <p class="para-margin-0 header-title para-overflow-hidden">Vaccine</p>
+          </ion-col>
+          <!-- <ion-col col-3 text-right class="close-sec margin-auto" (click)="deleteAllReminder()">
+            <p class="margin-right-15 color-white" *ngIf="VaccineReminders.length > 0 && isAvailable">CLEAR</p>
+          </ion-col> -->
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img class="not-found" src="assets/img/vaccination/mother_baby.svg">
+       <p class="vaccine_des">Add baby details for managing Vaccines</p>
+       <button class="submit-btn" ion-button full (click)="addBabyVaccination()">
+         <ion-icon name="add"></ion-icon>
+       </button>
+    </ion-col>
+  </ion-row>
+</ion-content> 
+<!-- <ion-footer (click)="addVaccineReminder()">
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/addW.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Add Vaccine Reminder</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

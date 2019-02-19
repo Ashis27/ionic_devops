@@ -1,0 +1,79 @@
+<ion-content>
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="">
+          <ion-col col-1 class="close-sec padding-0 margin-auto" (click)="closeCurrentSection()">
+            <!-- <img src="assets/img/back-arrow.png" class="" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-8 class="header-title margin-top-bottom-5 padding-0">
+            <p class="para-margin-0 header-title para-overflow-hidden">Reminder List</p>
+          </ion-col>
+          <ion-col col-3 text-right class="close-sec margin-auto" (click)="deleteAllReminder()">
+            <p class="margin-right-15 color-white" *ngIf="addedMedicineReminder.length > 0 && isAvailable">CLEAR</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>Reminder List</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only *ngIf="isAvailable" (click)="deleteAllReminder()">
+            <p class="margin-right-15">CLEAR</p>
+        </button>
+    </ion-buttons>
+  </ion-navbar> -->
+  <ion-row *ngIf="addedMedicineReminder.length > 0" class="padding-5">
+    <ion-col col-12 class="appo-fixed-sec padding-bottom-0 medicine-list-border" *ngFor="let item of addedMedicineReminder">
+      <ion-row>
+        <ion-col col-10 (click)="editReminder(item)">
+          <ion-row>
+            <ion-col col-2 class="padding-left-0">
+              <img class="search-list-image-back" src="assets/img/pils.svg" />
+            </ion-col>
+            <ion-col col-10 class="padding-bottom-10 padding-left-15">
+              <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-0 medicine-list-header">{{item.MedicineName}}</p>
+              <p class="margin-top-6 medicine-sub-content">Dose : {{item.MedicineDose}}</p>
+              <p class="margin-top-6 medicine-sub-content">
+                <span>Start Date : {{item.StartDate}}</span>
+              </p>
+              <p class="margin-top-6 medicine-sub-content">
+                <span class="">End Date : {{item.EndTime}}</span>
+              </p>
+              <p class="margin-top-6 medicine-sub-content">
+                <span>
+                  Time:
+                </span>
+                <span class="time-style" *ngFor="let time of item.medicineTimeDetails; let i=index">{{time.selectedTime}}
+                </span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-2 (click)="deleteReminder(item)" class="margin-auto">
+          <img class="search-medicine-list-image-back" src="assets/img/delete.svg" />
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="addedMedicineReminder.length == 0 && !isAvailable">
+    <ion-col col-12 text-center>
+      <img class="not-found " src="assets/img/set-alarm.svg">
+      <p class="not-found-text margin-6 margin-top-10">You have no reminder!</p>
+      <p class="margin-6">Set a reminder to take medicine without miss</p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer (click)="addReminder()">
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/addW.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Add Reminder</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

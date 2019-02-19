@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar>
+   <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Medical Record</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>
+      <span class="vertical-align-m">Medical Record</span>
+    </ion-title>
+  </ion-navbar> -->
+  <ion-row>
+    <ion-col col-12 class="padding-0">
+      <div>
+        <ion-segment [(ngModel)]="upload">
+          <ion-segment-button value="byMe" class="text-center-cls border-right segBordder text-transfer-capitalize" (click)="tabSelection('user')">
+            <p class="margin-5 tab-heading-color font-size-16">Uploaded By Me</p>
+          </ion-segment-button>
+          <ion-segment-button value="byProv" class="text-center-cls segBordder text-transfer-capitalize" (click)="tabSelection('doctor')">
+            <p class="margin-5 tab-heading-color font-size-16">Uploaded By Doctor</p>
+          </ion-segment-button>
+        </ion-segment>
+        <!-- <ion-refresher (ionRefresh)="retriveConsumerDigitalDocuments(1,true)">
+          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+          </ion-refresher-content>
+        </ion-refresher> -->
+      </div>
+      <div [ngSwitch]="upload" *ngIf="documentsBySelf.length > 0">
+        <ion-list *ngSwitchCase="'byMe'">
+          <ion-row class="border-bottom-color" *ngFor="let item of documentsBySelf">
+            <ion-col col-2 text-center class="upload-date-font" (click)="selectedRecord(item)">
+              <p class="display-grid date-background">
+                <span>{{item.currentMonth}}</span>
+                <span class="upload-date1-font default-color">{{item.currentDate}}</span>
+                <span>{{item.currentYear}}</span>
+              </p>
+            </ion-col>
+            <ion-col col-8 class="" (click)="selectedRecord(item)">
+              <ion-row>
+                <ion-col col-12 class="padding-top-btm-5">
+                  <h4 class="profile-user-name file-name-margin font-weight-400">Records for
+                    <span class="font-weight-500">{{item.DocumentFor == 'Self'?userName:item.DocumentFor}}</span>
+                  </h4>
+                  <!-- <p class="margin-top-5">Dr. Amit Jain, Dentist</p> -->
+                  <p class="margin-top-5">Relation
+                    <span class="font-weight-500 default-color"> {{item.Relation == '' ?'(Self)':item.Relation}}</span>
+                  </p>
+                  <!-- <p class="margin-top-5">Document Type
+                    <span class="font-weight-500"> {{item.DocumentTypeName}}</span>
+                  </p> -->
+                  <p class="margin-top-5">Number Of Records
+                    <span class="font-weight-500 default-color"> {{item.CountRecord}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col text-right col-2 class="popover-btntrp">
+              <button ion-button icon-only (click)="presentPopover($event,item.TotalRecord,'user')">
+                <ion-icon name="more"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'byProv'">
+          <ion-row class="border-bottom-color" *ngFor="let item of documentsBySelf">
+            <ion-col col-2 text-center class="upload-date-font" (click)="selectedRecord(item)">
+              <p class="display-grid date-background">
+                <span>{{item.currentMonth}}</span>
+                <span class="upload-date1-font default-color">{{item.currentDate}}</span>
+                <span>{{item.currentYear}}</span>
+              </p>
+            </ion-col>
+            <ion-col col-8 class="" (click)="selectedRecord(item)">
+              <ion-row>
+                <ion-col col-12 class="padding-top-btm-5">
+                  <h4 class="profile-user-name file-name-margin font-weight-400">Records for
+                    <span class="font-weight-500">{{item.DocumentFor == 'Self'?userName:item.DocumentFor}}</span>
+                  </h4>
+                  <!-- <p class="margin-top-5">Dr. Amit Jain, Dentist</p> -->
+                  <p class="margin-top-5">Relation
+                    <span class="font-weight-500 default-color"> {{item.Relation == '' ?'(Self)':item.Relation}}</span>
+                  </p>
+                  <!-- <p class="margin-top-5">Document Type
+                    <span class="font-weight-500"> {{item.DocumentTypeName}}</span>
+                  </p> -->
+                  <p class="margin-top-5">Report Type
+                    <span class="font-weight-500 default-color"> {{item.ReportType}}</span>
+                  </p>
+                  <p class="margin-top-5">Uploaded By
+                    <span class="font-weight-500 default-color"> {{item.UploadedBy}}</span>
+                  </p>
+                  <p class="margin-top-5">Number Of Records
+                    <span class="font-weight-500 default-color"> {{item.CountRecord}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col text-right col-2 class="popover-btntrp">
+              <button ion-button icon-only (click)="presentPopover($event,item.TotalRecord,'provider')">
+                <ion-icon name="more"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </div>
+      <div *ngIf="documentsBySelf.length == 0 && !healthrecordAvailableStatus">
+        <div text-center>
+          <img class="not-found" src="assets/img/documents.svg">
+          <p class="msg-text">Oops! Your Record is empty.</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>
+<ion-footer *ngIf="upload == 'byMe'">
+  <ion-toolbar (click)="goToUpload()">
+    <ion-title class="footer-titel-class">
+      <span class="margin-left-right-5">Upload New Record</span>
+      <img src="assets/img/upload.svg" class="upload-icon-w">
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

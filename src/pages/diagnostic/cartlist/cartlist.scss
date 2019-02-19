@@ -1,0 +1,177 @@
+cart-list {
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .search-list-image-back {
+        max-width: 50px !important;
+        background: #e4e4e4 !important;
+        height: 50px !important;
+        width: 50px !important;
+        border-radius: 50% !important;
+        padding: 10px 0px 9px 0px !important;
+    }
+    .package-back{
+        background: #f9f9f9;
+    }
+    .para-margin-3-0 {
+        margin: 3px 0px 0px 0px !important;
+    }
+    .medicine-list-header{
+        font-size: 14px !important;
+
+    }
+    .total-price-text{
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--button-color);
+    }
+    .dioLocation{
+        width: 15px;
+        margin-right: 5px;
+        vertical-align: sub;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .reatingicon {
+        color: #b7ab15 !important;
+        font-size: 14px !important;
+    }
+    .padding008{
+        padding: 0px 0px 0px 8px;
+    }
+    .header-title-margin{
+        margin: 10px 0px 0px 0px;
+        font-weight: 400;
+        font-size: 15px;
+    }
+    .pack-list-header{
+        font-size: 16px !important;
+    }
+    .rupee-icon{
+        width: 16px;
+    vertical-align: sub;
+    }
+    .total-rupee-icon{
+        width: 20px;
+    vertical-align: sub;
+    }
+    .value-font{
+        font-size: 17px;
+    }
+    .actual-value{
+        margin-left: 5px;
+    font-size: 17px;
+    text-decoration: line-through;
+    color: #797676;
+    }
+    .discount-text{
+        margin-left: 5px;
+    font-size: 15px;
+    color: #269800;
+    }
+    .margin-10{
+        margin: 10px 0px 0px 0px;
+    }
+    .delete-icon{
+        width: 30px;
+    vertical-align: middle;
+    float: right;
+    }
+    .border-bottom-price{
+        border-bottom: 0.5px solid #dadada;
+    }
+
+    .button-clear {
+        border: 1px solid var(--button-color) !important;
+        color:var(--button-color) !important;
+        height: 27px !important;
+        padding: 0px 5px !important;
+        float: right !important;
+    }
+    .list {
+        margin: 0px 0 0px !important;
+    }
+    .item{
+        padding-left: 0px !important;
+    }
+    .rupee-icon1{
+        width: 13px;
+        vertical-align: text-top;
+    }
+    .font-15{
+        font-size:15px;
+    }
+
+    .gift-box{
+        width: 33px;
+        margin-left: 0px;
+    }
+    .padding-3{
+        padding: 3px !important;
+    }
+    .rupee3{
+        float: left;
+        width: 20px;
+    }
+
+    .footer .toolbar .toolbar-background {
+        background-color: var(--primary-color) !important;
+    }
+   
+    .float-left{
+        float:left;
+    }
+    .margin1315{
+        margin: 8px 0px 0px 8px;
+    }
+    .package-padding{
+        padding: 10px 0px 10px 10px !important;
+    }
+    .address-margin-left{
+        margin-left: -3px !important;
+    }
+    .header-bottom{
+        margin-bottom: 3px !important;
+    }
+
+    .margin123{
+        margin: 7px 0px 0px 3px;
+    }
+    .margin-r-15{
+        margin-right: 15px;
+    }
+
+    .cart-continue-btn {
+     
+        height: 3rem !important;
+        background-color: #f15f29 !important;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 0px -1px rgba(0, 0, 0, 0.2), 0 0px 4px 0 rgba(0, 0, 0, 0.12) !important;
+       
+    }
+    .margin-top-9{
+        margin-top: 9px;
+    }
+
+    .text-input::-moz-placeholder {
+      font-size:15px;
+      }
+      
+      .text-input:-ms-input-placeholder {
+        font-size:15px;
+      }
+      
+      .text-input::-webkit-input-placeholder {
+        font-size:15px;
+      }
+
+      .content-ios > .scroll-content > .cart-ios{
+        margin-top: 0% !important;
+    }
+    } 

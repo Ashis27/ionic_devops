@@ -1,0 +1,158 @@
+<ion-content>
+    <ion-navbar class="header-margin-time-slot">
+      <button ion-button menuToggle class="nav-icon-color">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <ion-title>Select Date and time</ion-title>
+    </ion-navbar>
+    <div *ngIf="isDocAvailable">
+      <ion-card class="time-slot-card-background">
+        <ion-item class="">
+          <ion-avatar item-start class="avtar-margin">
+            <img class="img-size" [src]="(doctorInfo.ProviderImage != null && doctorInfo.ProviderImage != '') ? doctorInfo.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <h4 class="profile-user-name para-overflow-hidden">{{doctorInfo.ProviderName}}
+              <span style="float:right;width: 25px;">
+                <img src="assets/img/medical_icon.svg">
+              </span>
+            </h4>
+            <p class="para-overflow-hidden" *ngIf="doctorInfo.SpecializationName != null && doctorInfo.SpecializationName!=''">{{doctorInfo.SpecializationName}}</p>
+            <p>
+              <rating class="rating-sec" [(ngModel)]="doctorInfo.ProviderRating" readOnly="true" max="5" emptyStarIconName="star-outline"
+                halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+              <!-- <ion-icon name="star"></ion-icon> &nbsp;-->
+              <span class="review-color">{{doctorInfo.TotalRatedUser}} Reviews</span>
+            </p>
+            <p class="margin-top-10 para-overflow-hidden" (click)="changeHospital()">
+              <span class="display-inline">
+                <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+              </span>
+              <span class="font-weight-doc-loc hospital-name"> {{selectedHospitalName}}</span>
+              <span class="font-weight-doc-loc default-color padding-10" *ngIf="hospitalList.length > 1">
+                <ion-icon name="ios-arrow-down" class="hospital-drop-down-arrow"></ion-icon>
+              </span>
+            </p>
+          </div>
+        </ion-item>
+      </ion-card>
+      <ion-row class="appo-dtl-date-header">
+        <ion-col col-7>
+          <p class="margin-6 padding-10">
+            Select Date</p>
+        </ion-col>
+        <ion-col col-5>
+          <img src="assets/img/appointment1.svg" class="calander-icon-margin">
+          <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="appo-calendar" min="{{minDate}}" max="{{maxDate}}"
+            [(ngModel)]="showSelectedDate" (click)="isDateSelected = true" (ionChange)="onSelectedDate(true)"></ion-datetime>
+        </ion-col>
+      </ion-row>
+      <!-- added by vinod start -->
+      <ion-row style="background: white;" class="forecast_container">
+        <ion-slides #slides *ngIf="sevenDaysAvailability.length > 0" (ionSlideNextEnd)="loadNext()" (ionSlidePrevEnd)="loadPrev()" [initialSlide]="1"
+            class="slideroption" pager="false" loop="false" >
+          <ion-slide *ngFor="let n of numbers">
+          <ion-col col-12 class="display-inherit" *ngIf="sevenDaysAvailability.length > 0">
+            <div *ngFor="let item of sevenDaysAvailability; let i = index"  class="scheduleDays" (press)="slectedDateFromAvailableSchedule(item,$event)"
+                (click)="slectedDateFromAvailableSchedule(item,$event)" [ngClass]="i == 0?'active-schedule':''">
+              <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentMonth}}</div>
+              <div [ngClass]="item.Available?'quick-date-li-date':'disable-sec quick-date-li-date'">{{item.currentDate}}</div>
+                   <!-- <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentYear}}</div> -->
+              <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentDay}}</div>
+            </div>
+          </ion-col>    
+        </ion-slide>
+      </ion-slides>
+     </ion-row>
+     <!-- added by vinod end -->
+      <!-- <ion-row style="background: white;" class="forecast_container">
+        <ion-col col-12 class="display-inherit" *ngIf="sevenDaysAvailability.length > 0">
+          <div *ngFor="let item of sevenDaysAvailability; let i = index" class="scheduleDays" (press)="slectedDateFromAvailableSchedule(item,$event)"
+            (click)="slectedDateFromAvailableSchedule(item,$event)" [ngClass]="i == 0?'active-schedule':''">
+            <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentMonth}}</div>
+            <div [ngClass]="item.Available?'quick-date-li-date':'disable-sec quick-date-li-date'">{{item.currentDate}}</div>
+           <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentYear}}</div> 
+            <div [ngClass]="item.Available?'':'disable-sec'">{{item.currentDay}}</div>
+          </div>
+        </ion-col>
+      </ion-row> -->
+      <ion-row *ngIf="scheduleDetails!= null && scheduleDetails!= undefined">
+        <ion-col>
+          <ion-row *ngIf="scheduleDetails.Morning.length > 0">
+            <ion-col col-12 class="morning-slot-border text-center-cls">
+              <h5>
+                <img src="assets/img/morning_icon.svg" class="morning-icon-width">
+                <span class="morning-text-class">Morning</span>
+                <span class="morning-time-text">Before 12.00 PM</span>
+              </h5>
+              <ion-row>
+                <ion-col col-12 *ngIf="scheduleDetails.Morning.length > 0">
+                  <div class="li-time-selector" *ngFor="let morningSchedule of scheduleDetails.Morning" (press)="slotSelectedToBookAppo(morningSchedule.TimeSlot,$event,'am')"
+                    (click)="slotSelectedToBookAppo(morningSchedule.TimeSlot,$event,'am')">{{morningSchedule.TimeSlot}}</div>
+                </ion-col>
+                <ion-col col-12 *ngIf="scheduleDetails.Morning.length == 0">
+                  <p class="not-available">No Time Slot Available for this session.</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="scheduleDetails.Afternoon.length > 0">
+            <ion-col col-12 class="morning-slot-border text-center-cls">
+              <h5>
+                <img src="assets/img/afternoon.svg" class="morning-icon-width">
+                <span class="morning-text-class">Afternoon</span>
+                <span class="morning-time-text">After 12.00 PM</span>
+              </h5>
+              <ion-row>
+                <ion-col col-12 *ngIf="scheduleDetails.Afternoon.length > 0">
+                  <div class="li-time-selector" *ngFor="let afternoonSchedule of scheduleDetails.Afternoon" (press)="slotSelectedToBookAppo(afternoonSchedule.TimeSlot,$event,'pm')"
+                    (click)="slotSelectedToBookAppo(afternoonSchedule.TimeSlot,$event,'pm')">{{afternoonSchedule.TimeSlot}}</div>
+                </ion-col>
+                <ion-col col-12 *ngIf="scheduleDetails.Afternoon.length == 0">
+                  <p class="not-available">No Time Slot Available for this session.</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="scheduleDetails.Evening.length > 0">
+            <ion-col col-12 class="morning-slot-border text-center-cls">
+              <h5>
+                <img src="assets/img/evening_icon.svg" class="morning-icon-width">
+                <span class="morning-text-class">Evening</span>
+                <span class="morning-time-text">After 06.00 PM</span>
+              </h5>
+              <ion-row>
+                <ion-col col-12 *ngIf="scheduleDetails.Evening.length > 0">
+                  <div class="li-time-selector" *ngFor="let eveningSchedule of scheduleDetails.Evening" (press)="slotSelectedToBookAppo(eveningSchedule.TimeSlot,$event,'pm')"
+                    (click)="slotSelectedToBookAppo(eveningSchedule.TimeSlot,$event,'pm')">{{eveningSchedule.TimeSlot}}</div>
+                </ion-col>
+                <ion-col col-12 *ngIf="scheduleDetails.Evening.length == 0">
+                  <p class="not-available">No Time Slot Available for this session.</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="scheduleDetails== null && isEmptySlots" class="margin-top-20">
+        <ion-col col-12 text-center>
+          <img src="assets/img/cross-calendar.svg" class="not-found margin-top-20" />
+        </ion-col>
+        <ion-col col-12>
+          <p class="not-available" text-center>No time slot available for this date.
+            <br/> Please select another date.</p>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div *ngIf="!isDocAvailable">
+      <ion-row>
+        <ion-col col-12 text-center>
+          <img src="assets/img/bookAppointment/specialities_icon.svg" class="not-found margin-top-20" />
+        </ion-col>
+        <ion-col col-12 text-center>
+          <p class="not-found-text">Sorry! {{doctorInfo.ProviderName}} is not available!</p>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-content>

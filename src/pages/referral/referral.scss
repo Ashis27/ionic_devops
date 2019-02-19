@@ -1,0 +1,103 @@
+page-referral{
+    .margin-top-2{
+        margin-top:2px;
+    }
+    .search-list-image-back{
+        margin-top:11px;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+    .img-width{
+        font-size:25px;
+        color:var(--icon-color);
+    }
+      .round {
+        position: relative;
+        margin-top:18px;
+      }
+    .width-30{
+        width: 85px;
+        background-color:white;
+        color:#35adff;  
+        padding:2px;   
+        font-weight: 400;
+        font-size: 11px;
+    }
+    .book-appo-border-bottom-color{
+        //border-left: 5px solid var(--primary-color);
+        border-radius: 5px;
+        box-shadow: 0px 1px 2px 1px rgba(0, 0, 255, .1);    
+        margin-bottom:5px;
+    }
+    .segment .segment-button.activated, .segment .segment-button.segment-activated {
+        border-color: #ffffff;
+       
+    }
+    .segment .segment-button {
+      
+        color: #ffffff;
+       
+    }
+    .arrow{
+        font-size: 1.6em;
+    }
+    .document-default-img{
+        color: red;
+      }
+      .document-container{
+        background: #eae9e9;
+        margin-bottom: 3px;
+        padding: 4px;
+      }
+      .document-img-container{
+    
+        width: 35px;
+        height: 45px;
+        
+        // border-radius: 67px;
+        
+      }
+      .document-name{
+        margin: 0px 0px 0px 4px;
+        font-weight: 500;
+      }
+      .document-dec{
+        margin: 0px 0px 0px 4px;
+        
+      }
+      .document-add-name{
+        margin: 12px 0px 0px 4px;
+        font-weight: 500;
+        color: #35adff;
+        font-weight: 500;
+      }
+      .bar-button-default {
+        margin: 10px 20px 0px 20px !important;
+        color: #ffffff !important;
+    }
+    .btn-danger-style {
+   
+      
+        border: 1px solid var(--button-color) !important;
+
+        background-color: var(--button-color) !important;
+        font-size: 15px;
+        color: var(--white-color) !important;
+       
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        border-radius: 5px !important;
+        -webkit-box-shadow: 0px 0px 0px;
+        box-shadow: 0px 0px 0px;
+      
+        width: 100%;
+        height: 45px;
+    }
+}

@@ -1,0 +1,116 @@
+page-BookAppointment{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .active-city-text{
+        font-size: 13px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .active-location-text{
+       font-size: 14px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .content-ios > .scroll-content > .ios-margin-top{
+    margin-top:-20px;
+}
+.item-ios{
+    padding-top:10px;
+  }
+   .menu-header-sec{
+      background-color: var(--primary-color) !important;
+      text-align: center;
+   }
+//    .appo-fixed-sec{
+//     position: fixed !important;
+//     width: 100%;
+//     height: 60%;
+//     overflow: auto;
+//    }
+.search-header{
+    background: #e8e8e8;
+    padding: 10px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    margin: 3px 0px 3px 0px;
+    color: #464646 !important;
+    width: 100%;
+   }
+   .book-btn{
+    border: 1px solid var(--primary-color);
+    padding: 7px 0px 6px 0px;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--primary-color);
+    font-size: 13px;
+    margin: 10px 0px 0px 0px;
+   }
+   .contact-number-field{
+    margin-top: -2px !important;
+   }
+   .search-type-name{
+       color:var(--icon-color);
+   }
+   .see-all{
+       float: right;
+       color: var(--primary-color);
+   }
+   .active-back{
+    border: 2px solid var(--button-color);
+   }
+
+   @keyframes pulse_animation {
+	0% { transform: scale(1); }
+	30% { transform: scale(1); }
+	40% { transform: scale(1.08); }
+	50% { transform: scale(1); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.05); }
+	80% { transform: scale(1); }
+	100% { transform: scale(1); }
+}
+.pulse {
+	animation-name: pulse_animation;
+	animation-duration: 6000ms;
+	transform-origin:70% 70%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+// .appo-fixed-sec{
+//     overflow-x: auto;
+//     height: 55%;
+//     position: fixed;
+// }
+.km-text{
+    font-weight: 500;
+    color: var(--button-color);
+    /* width: 100%; */
+    text-align: center;
+    font-size: 13px;
+}
+.location-img-sec{
+    float: left;
+}
+.location-img{
+    width: 20px;
+    margin-top: -3px;
+}
+.med-icon{
+    padding-top: 12px;
+}
+.distance-text{
+    color: var(--primary-color);
+    //margin-left: 7px;
+}
+.solid-btn-style {
+    // background-color: var(--primary-color) !important;
+     padding: 10px 10px 10px 10px;
+     height: 29px !important;
+     width: 100%;
+ }
+}

@@ -1,0 +1,95 @@
+<!--
+  Generated template for the DaysSelectionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Days</ion-title>
+    <ion-buttons left (click)="closeDays()">
+      <button ion-button icon-only>
+        <ion-icon name="close" class="color-white"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-buttons right (click)="saveDays()">
+            <button ion-button icon-only>SET</button>
+        </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="selected_days_format" no-lines>
+    <ion-row>
+      <ion-col col-12 class="day-selection-background">
+        <ion-item class="transparent-back">
+          <ion-label>Everyday</ion-label>
+          <ion-radio value="everyday" checked></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="day-selection-background">
+        <ion-item class="transparent-back">
+          <ion-label>Selected days of week</ion-label>
+          <ion-radio value="selected_days"></ion-radio>
+        </ion-item>
+        <div class="weeks" *ngIf="selected_days_format=='selected_days'">
+          <ion-row>
+            <ion-col class="select-day" *ngFor="let Day of DaysArray;let i=index" (click)="SelectedDays(i)" [ngClass]="Day.isActivated ?'dayActive':'select-day'">
+              {{Day.day}}
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="day-selection-background">
+        <ion-item class="transparent-back">
+          <ion-label>In interval of days</ion-label>
+          <ion-radio value="interval_of_days" [disabled]="isDisabled"></ion-radio>
+        </ion-item>
+        <div class="dayss" *ngIf="selected_days_format=='interval_of_days'">
+          <div class="maths">
+            <span (click)='daysData("add")'>
+              <button ion-button icon-only clear>
+                <ion-icon name="add-circle" class="circle"></ion-icon>
+              </button>
+            </span>
+            <span (click)='daysData("remove")'>
+              <button ion-button icon-only clear>
+                <ion-icon name="remove-circle" class="circle"></ion-icon>
+              </button>
+            </span>
+            <span class="daysVals"> Every
+              <span class="daysValue">{{daysVal}}</span> Days </span>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <!-- <ion-item class="login-input">
+			<ion-label class="login-input-label">
+				<img class="form-image custom-img" src="assets/img/register/dob_icon.svg" /> Select a Start Date
+			</ion-label>
+			<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="showSelectedDate"
+			 ></ion-datetime>
+		</ion-item>
+  <div class="srartsDate day-selection-background">
+    <p class="search-header">Select a Start Date
+    </p>
+    <ion-item class="transparent-back">
+      <ion-label stacked class="label-color">Starts Day
+        <img src="assets/img/calendar_time_icon_pri.svg" class="calender-icon">
+      </ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="startsDate"></ion-datetime>
+    </ion-item>
+  </div> -->
+</ion-content>
+<ion-footer (click)="saveDays()">
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/saveIcon.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Save</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

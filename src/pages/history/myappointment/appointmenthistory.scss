@@ -1,0 +1,101 @@
+page-appointmenthistory {
+
+    .time-slot-card-background{
+        margin: 15px 0px 0px 0px !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .segment-ios .segment-button.segment-activated{
+        background-color: rgb(255, 255, 255) !important;
+        border-bottom: 1px solid var(--button-color) !important;
+}
+.segment-ios .segment-button{
+    border-top: 0px !important;
+    border-color:   #e2e2e2;
+}
+.call-btn{
+    color: #4CAF50 !important;
+    font-size: 13px !important;
+}
+.call-icon{
+    margin-right: 3px;
+    font-size: 20px;
+}
+.profile-w-h{
+    width: 80px !important;
+    height: 80px!important;
+    border: 2px solid white;
+}
+.cancelled-status{
+    color: var(--button-color);
+}
+ .calander-icon-margin
+ {
+   
+    width: 28px;   
+    float: right;
+    margin-top: -4px;                         
+}
+
+                         
+.avtar-margin
+{
+    margin: 8px 12px 8px 0px !important;  
+}
+
+.tab-heading-color{
+    color:var( --black-light-color);
+}
+.img-size{
+    // background: url(../assets/img/bookAppointment/specialities_icon.svg);
+    max-width: 70px;
+    background: #e4e4e4;
+    height: 70px !important;
+    width: 70px !important;
+    border-radius: 50%;
+    border: 1px solid #e4e4e4;
+    padding: 3px;
+    margin-top: -35px !important;
+}
+.past-appo-img-size{
+    max-width: 50px;
+    background: #e4e4e4;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 3px;
+}
+.doc-location-dtl-icon{
+    width: 17px;
+    display: inline;
+    margin-left: -3px;
+    vertical-align: bottom;
+}
+.doc-dtl-date-icon{
+    width: 26px;
+    display: inline;
+    vertical-align: bottom;
+    margin-left: -3px;
+    margin-top: 3px;
+}
+.booked-for-text{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.historyBottom > .item-inner > .input-wrapper > .label {
+    margin: 13px 8px 0px 0 !important;
+}
+.booked-for-color{
+    color:var(--primary-color)
+}
+
+}

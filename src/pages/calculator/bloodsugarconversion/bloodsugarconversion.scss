@@ -1,0 +1,153 @@
+page-bloodsugarconversion {
+    .background-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: 100% !important;
+        background: linear-gradient(to bottom, #fff 0%, #7ad0ec 100%);
+      }
+    .scroll-content{
+        padding:0px !important;
+    }
+    
+    .bg_image{
+        width: 100%;
+        height:200px;
+        background-image: url('../assets/imgs/calculator/bloodtosugar.jpg') ;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+    .measurement_text{
+        font-weight:300;
+    }
+
+.btn1{
+    background-color: white !important;
+    width: 100px;
+    border-radius: 0px;
+    font-weight: 400;
+    color:#39bebc;
+    text-transform: none;
+}
+.btn2{
+    margin-left: -5px;
+}
+.margin-left{
+    margin-left:1%;
+}
+ion-navbar{
+    background-color: var(--primary-color) !important;
+}
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+}
+.selected{
+    background-color: #39bebc !important;
+    color:white;
+}
+.toolbar-background{    
+    background: #39bebc !important;
+   
+   
+}
+.toolbar-title{
+   color: #fff8f8 !important;
+}
+ion-label{
+    color:#2d2d2d !important;
+    font-weight: 500
+}
+.select {
+    padding: 13px 8px 13px 16px;
+    width:100%;
+    border-radius: 2px;
+    /* height: 25px; */
+   
+}
+
+.label {
+    -webkit-transform: translate3d(0, 0, 0) !important; 
+     transform: translate3d(0, 0, 0) !important; 
+}
+.btnCal{
+    width:100%;
+    // margin-left:1%;
+    background-color:#f15c23 !important;
+    color:white;
+}
+// .align{
+//     text-align: right !important;
+// }
+.ite{
+   margin-left: 20% !important;
+}
+ion-select {
+   
+     max-width: 100%; 
+}
+// p{
+//    // font-size: 25px;
+//     text-align: center;
+//     color: #39bebc;
+// }
+
+.header_label{
+    font-weight: 300;
+}
+.text-input{
+    margin: 13px 0px !important;
+ }
+
+ .disclaimer_header,.Cal_header{
+    text-align: left;
+    font-size: 15px !important; 
+    // background-color:#39bebc;
+    color: #39bebc;
+    padding: 5px 0px;
+    margin: 0px;
+    text-decoration: underline;
+ }
+ .cal_des{
+   // font-size: 12px !important; 
+    text-align: left;
+    color: #222;
+    margin: 0px;
+ }
+ .disclaimer_des{
+    font-size: 10px !important; 
+    text-align: left;
+    color: #222;
+    margin:0px;
+ }
+ .disclaimer_wrapper{
+    margin-top:30px;
+ }
+.result{
+    font-size: 18px;
+    margin: 5px;
+}
+
+.progress_smiley{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width:50%;
+    font-size:8px;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+ .Cal_Des{
+
+ }
+ .bloodsugar_ranges{
+     width:96%;
+     margin-left:3%;
+ }
+
+}

@@ -1,0 +1,129 @@
+page-waisttohip {  
+    .background-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: 100% !important;
+        background: linear-gradient(to bottom, #fff 0%, #7ad0ec 100%);
+      }
+    .scroll-content{
+        padding:0px !important;
+    }
+    
+    .bg_image{
+        width: 100%;
+        height:200px;
+        background-image: url('../assets/imgs/calculator/Waist-to-Hip-Ratio.jpg') ;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    .list{
+        margin:5px 5px 16px;
+    }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+    
+
+    .toolbar-background{    
+        background: #39bebc !important;
+    }
+    .margin-left{
+        margin-left:1%;
+    }
+    .toolbar-title{
+       color: #fff8f8 !important;
+    }
+    ion-label{
+        color:#2d2d2d !important;
+        font-weight: 500;
+    }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .btn{
+        width:100%;
+        // margin-left:1%;
+        background-color:#f15c23 !important;
+        color:white;
+    }
+    .item-input{
+      border: none !important
+    }
+    p{
+     //   font-size: 25px;
+    text-align: center;
+    // color: #34bdbc;
+    }
+    .header_label{
+        font-weight: 300;
+        margin: 18px 8px 13px 0;
+    }
+    .text-input{
+        margin: 13px 0px !important;
+     }
+     .input{
+        background-color: rgba(83, 79, 79, 0.1803921568627451);
+        // color:#fff;
+      }
+    .text-input{
+        text-align:center;
+        font-size:20px;
+    }
+
+
+
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+      //  font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+         margin-top:30px;
+     }
+    // .appointment_book{
+    //     font-size: 12px;
+    //     text-align: left;
+    //     color: #34bdbc;
+    //     text-decoration: underline;
+    // }
+    .result{
+        font-size: 16px;
+        margin: 0px;
+        text-align: center;
+    }
+    .progress_smiley{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        width:50%;
+        font-size:8px;
+        transform: translate(-50%,-50%);
+        text-align: center;
+    }
+    .waisthip_ranges{
+        width: 96%;
+        margin-left: 3%;
+    }
+}

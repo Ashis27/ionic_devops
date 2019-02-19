@@ -1,0 +1,309 @@
+
+page-doctorprofile{
+
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+}
+.img-size{
+    background: url("../assets/img/bookAppointment/specialities_icon.svg");
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 90px !important;
+    max-height: 90px !important;
+    margin-top: 0px;
+    border-radius: 50% !important;
+    border: 1px solid #a5c6e0;
+    padding: 5px;
+}
+.book-appo-footer-btn{
+    width: 35px;
+    margin-bottom: -7px;
+}
+.footer .toolbar .toolbar-background{
+    background-color: var(--primary-color) !important;
+  }
+// .doc-profile-sec{
+//     margin-top: 65%;
+// }
+.time-slot-card-background{
+   // padding-top:25px;
+    margin: 0px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    box-shadow: none !important;
+   background-image:url('../assets/img/doctorProfile/profile_back.png');
+   padding-bottom: 45px;
+    //position: fixed;
+    z-index: 1;
+    //left: 50%;
+    //transform: translate(-50%, -3%);
+   // height: 50%;
+}
+
+.avtar-margin{
+    margin: 8px 15px 8px 0 !important;
+}
+
+.profile-w-h{
+    width: 90px !important;
+    height: 90px !important;
+    border: 2px solid white;
+}
+.profile-user-name{
+    font-size: 20px !important;
+    color: #eaeaea !important;
+}
+
+.item {
+
+    background-color: rgba(255, 255, 255, 0);
+}
+
+// .toolbar-background {
+//     border-color: rgba(255, 0, 0, 0);
+//     background: rgba(255, 0, 0, 0) !important;
+// }
+
+.doc-profile-detail-content1{
+color:#eaeaea !important;
+font-size: 14px !important;
+}
+.doc-profile-detail-content2{
+    color:#eaeaea !important;
+    font-size: 12px !important;
+    margin-top: 6px;
+    }
+
+    .rup-icon-alignment{
+        width: 16px;
+    vertical-align: sub;
+    }
+
+    .price-value-size{
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .consult-chrgs-font{
+        font-size: 12px;
+    color: #949494;
+    }
+
+    .charge-percntz{
+        float: right;
+    color: #da8404;
+    margin-top:0px;
+    }
+    .no-of-vote{
+        vertical-align: super;
+    }
+.search-location-alignment{
+    float: right;
+    width: 22px;
+}
+
+.experince-icon-w{
+    width: 22px;
+    display: inline;
+   
+    vertical-align: middle;
+}
+.star-color{
+    color:var( --warning-color);
+ }
+ .review-color{
+    color:white;
+    font-size: 12px;
+    margin-left: 5px !important;
+
+    // vertical-align: text-top;
+}
+.text-center-class{
+    text-align: center;
+}
+
+.quick-link-icon-width1{
+    width: 24px;
+}
+.not-found{
+    margin-top: 0% !important;
+}
+  #map_canvas {
+    // width: 320px !important;    
+    // height: 150px !important;
+     background-color : transparent;
+    // margin-top: 25px;
+   }
+.quick-link-icon-width2{
+    width: 33px;
+}
+.quick-link-icon-width3{
+    width: 24px;
+}
+.quick-link-font{
+    font-size:12px;
+    margin: 0px;
+}
+
+.quick-link-fix-body{
+    box-shadow: 0px 1px 4px #cccccc;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    background-color: white;
+    width: 90%;
+    z-index: 111;
+    margin: -39px 0px 0px 19px;
+}
+
+.get-dir-icon{
+    width: 19px;
+vertical-align: bottom;
+}
+.quick-link-div-devider{
+   
+    padding-bottom: 3px;
+    padding-top: 2px;
+}
+.quick-link-div-padding{
+   
+    
+    padding-bottom: 3px;
+    padding-top: 2px;
+}
+.price-list-section-margin{
+    margin-top: 68%;
+}
+.user-name{
+    font-size: 17px;
+    margin: 12px 0px 0px 0px;
+}
+
+.money-icon-margin{
+    margin-top: 12px;
+    width: 24px;
+}
+
+.doc-detail-section-devider{
+    border-bottom: 1px solid #d2d2d2;
+}
+.verification-icon-wdth{
+    width:20px;
+}
+
+.profile-detail-font-color{
+    color: #adabab;
+}
+.clinic-detail-sub{
+    color: #919191;
+}
+.p-margin-bottom{
+    margin-bottom: 4px;
+}
+
+.p-margin-top{
+    margin-top: 1px;
+}
+
+.clinic-gallery-li{
+    display:inline;
+    float:left;
+    border-radius: 4px;
+    margin:0px 5px;
+}
+.clinic-gallery-ul{
+    display:inline;
+    float:left;
+}
+.glry-border-rds{
+    border-radius: 6px;
+    width: 65px;
+}
+.middle-alignment{
+    vertical-align: middle;
+}
+.rating-sec{
+    float: left !important;
+}
+.calendar-color{
+    color: #798483;
+}
+.calendar-icon-margin{
+    margin-top: 0px;
+    width: 18px;
+    margin-bottom: -3px;
+}
+
+.calender-font-size{
+    font-size: 13px;
+    color: #829898;
+}
+.search-header{
+    background: #e8e8e8;
+    padding: 10px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    margin: 3px 0px 3px 0px;
+    color: #464646 !important;
+    width: 100%;
+   }
+.rating-sec > ul {
+    padding: 0px;
+    margin: 0px;
+    &.rating li {
+      padding: 0px !important;
+      background: none;
+      color: #ffb400;
+  
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .user-rating-message{
+    width:100%;
+    height:100px;
+    border: 1px solid whitesmoke;
+  }
+  .review-sec > ul {
+    padding: 0px;
+    text-align: center;
+    margin: 15px;
+    &.rating li {
+        margin-top: 20px;
+      padding: 0px !important;
+      background: none;
+      color: #efc970;
+  
+      ion-icon {
+        font-size: 50px !important;
+      }
+    }
+  }
+//   .content-ios{
+//     margin-top:-20px;
+// }
+.card-ios{
+    padding-top:10px;
+}
+.ios-nav-header{
+    margin-top:-20px !important; 
+}
+.title-ios {
+    padding-top: 0px !important;
+    padding: 0px;
+}
+
+.bottom-section-margin{
+    margin: 0px 15px 50px 0px !important;
+}
+}
+
+
+
+
+                    

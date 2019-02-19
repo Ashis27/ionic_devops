@@ -1,0 +1,584 @@
+.color-theme-default {
+    $default-menu-background:'../assets/hospitalImages/loginBack.jpg';
+    
+    
+    // .bar-button-default{
+    //     margin: 10px 20px 0px 20px !important;
+    //     color: var(--icon-color) !important;
+    // }
+    // .toolbar{
+    //     min-height: auto !important;
+    // }
+    
+    .default-color{
+        color:var(--primary-color) !important;
+    }
+    // .back-button{
+    //      color:var(--para-text-color) !important; 
+    // }
+    // .toolbar-background{
+    //     color:var(--white-color) !important; 
+    // }
+    
+    
+    
+    
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: var(--dark-alpha-Dot5);
+        opacity: 1; /* Firefox */
+        font-size: 13px;
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: var(--dark-alpha-Dot5);
+        font-size: 13px;
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: var(--dark-alpha-Dot5);
+        font-size: 13px;
+    }
+    
+    }
+    .error .toast-container {
+        background: var(--danger-color) !important;
+    }
+    .success .toast-container {
+            background: var(--success-color) !important;
+    }
+    .warning .toast-container {
+            background:var(--warning-color) !important;
+    }
+    
+    .row:before,
+    .row:after {
+    content: initial !important;
+    display: table;
+    }
+    
+    ion-icon.action-sheet-icon.icon.icon-ios
+    {
+    display: none !important;
+    }
+    
+    ion-header .toolbar-ios {
+    padding-top: 20px !important;
+    }
+    .alert-ios .alert-message{
+        text-align: left !important;
+    }
+    .title-ios{
+    padding-top: 20px !important;
+    }
+    
+    .content-background{
+            background: #3ec6d2;
+    }
+    ion-item{
+        font-size: 1.6rem !important;
+    }
+    .login-form-btn{
+        width: 100%;
+        background-color: var(--button-color) !important;
+        border-radius: 25px 25px 25px 25px;
+        height: 45px;
+        margin-top: 3%;
+        background: white;
+        text-transform: capitalize !important;
+    }
+    .border-form-btn{
+        width: 55%;
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+        height: 40px;
+        margin-top: 3%;
+        background: white;
+        color: var(--primary-color);
+        box-shadow: 0px 0px 0px;
+    }
+    .btn-margin{
+        margin: 15px 20px 0px 15px;
+    }
+    .default-btn{
+            width: 100%;
+        background-color: var(--button-color);
+        height: 45px;
+        border-radius: 5px;
+    }
+    .calculator-btn{
+    width: 100%;
+    background-color: var(--button-color) !important;
+    color:white !important;
+    padding: 10px 10px 10px 10px;
+    height: 45px !important;
+    //border-radius: 5px;
+    }
+    // .input-cover{
+    //     position: relative !important;
+    // }
+    
+    // .scroll-content {
+    //   padding-bottom:0!important;
+    // }
+    // .col {
+    // position : initial !important;
+    // }
+    .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+      border-bottom-color: transparent !important;
+        -webkit-box-shadow: inset 0 -1px 0 0 transparent !important;
+        box-shadow: inset 0 -1px 0 0 transparent !important;
+    }
+    .item-input.item-input-has-focus .item-inner,
+    .item-input.input-has-focus .item-inner {
+      border-bottom-color: transparent !important;
+      -webkit-box-shadow: inset 0 -1px 0 0 transparent !important;
+      box-shadow: inset 0 -1px 0 0 transparent !important;
+    }
+    .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child{
+        border-bottom-color: rgba(245, 61, 61, 0) !important;
+        -webkit-box-shadow: inset 0 -1px 0 0 rgba(245, 61, 61, 0) !important;
+        box-shadow: inset 0 -1px 0 0 rgba(245, 61, 61, 0) !important;
+    }
+    .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child{
+          border-bottom-color: rgba(245, 61, 61, 0) !important;
+        -webkit-box-shadow: inset 0 -1px 0 0 rgba(245, 61, 61, 0) !important;
+        box-shadow: inset 0 -1px 0 0 rgba(245, 61, 61, 0) !important;
+    }
+    .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+    .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+      border-bottom-color: transparent !important;
+      -webkit-box-shadow: inset 0 -1px 0 0 transparent !important;
+      box-shadow: inset 0 -1px 0 0 transparent !important;
+    }
+    .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child, .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child{
+      border-bottom-color: transparent !important;
+      -webkit-box-shadow: inset 0 -1px 0 0 transparent !important;
+      box-shadow: inset 0 -1px 0 0 transparent !important;
+    }
+    .right-arrow-img{
+        max-width: 30px;
+        margin: 10px 0px 0px 0px;
+    
+    }
+    .menu-inner-margin{
+            margin: 0px -10px 0px 15px;
+    }
+      .not-found{
+        width: 15%;
+        margin-top: 45%;
+      }
+      .booking-type{
+          color:var(--primary-color) !important;
+      }
+        .not-found-text{
+        color: var(--dark-color) !important;
+        font-size: 16px !important;
+        margin: 10px 0px 0px 0px !important;
+        font-weight: 500;
+      }
+        .modal-header-size{
+           font-size: 20px !important;
+           margin-left: 10px !important;
+      }
+      .default-address{
+        font-weight: 500;
+        color: var(--dark-color) !important;
+    }
+    .back-arrow{
+        width:100% !important;
+        margin-top: 3px !important; 
+    }
+    .list-margin{
+        margin: 0px 15px 0px 15px !important;
+    }
+    .list-address-margin{
+        margin: 0px 10px 0px 10px !important;
+    }
+    .address-country-code{
+        margin-top: 10px;
+    }
+    
+    
+     .dropdown-icon-margin{
+        margin: 0px 10px -7px 0px;
+        max-width: 26px;
+     }
+      .contact-number-field{
+            margin-top: -2px;
+            background-color: rgba(255, 255, 255, 0);
+            height: 35px;
+            padding-left: 0px;
+            padding-right: 16px;
+            padding-left: 16px;
+    }
+    .number-email-field{
+            padding: 0px 10px 0px 10px;
+    }
+    
+    .action-btn{
+        font-size: 18px;
+        color:white;
+        margin-top: 10% !important;
+    }
+    .fab {
+        color: #fff;
+        background-color: var(--primary-color) !important;
+    }
+    
+    .header-background{
+        background-color: var(--primary-color) !important;
+    }
+    .header-text{
+        color:white !important;
+    }
+    .border-bottom-color{
+        border-bottom: 0.5px solid #e0e0e0 !important;
+    }
+    .update-style{
+        font-size: 15px;
+        color: var(--primary-color) !important;
+        border: 1px solid var(--primary-color) !important;
+        padding: 10px 5px 5px 5px;
+        text-align: center;
+        border-radius: 5px !important;
+        box-shadow: 0px 0px 0px;
+        width: 100%;
+        height: 45px;
+        background: white !important;
+    }
+    .profile-update-style{
+        font-size: 15px;
+        color: var(--primary-color) !important;
+        border: 1px solid var(--primary-color) !important;
+        padding: 7px 5px 5px 5px;
+        text-align: center;
+        border-radius: 5px !important;
+        -webkit-box-shadow: 0px 0px 0px;
+        box-shadow: 0px 0px 0px;
+        width: 100%;
+        height: 34px;
+        background: white !important;
+    }
+    .btn-back-style{
+        font-size: 15px;
+        color: var(--white-color) !important;
+        border: 1px solid var(--primary-color) !important;
+        padding: 5px 5px 5px 5px;
+        text-align: center;
+        border-radius: 5px !important;
+        box-shadow: 0px 0px 0px;
+        background-color: var(--primary-color) !important;
+        width: 100%;
+        height: 45px;
+        }
+        .not-now-btn-back-style{
+            font-size: 15px;
+            // color: var(--white-color) !important;
+            // border: 1px solid var(--danger-color) !important;
+            padding: 5px 5px 5px 5px;
+            text-align: center;
+            border-radius: 5px !important;
+            box-shadow: 0px 0px 0px;
+            // background: var(--danger-color) !important;
+            background: var(--border-color) !important;
+            color: #636262 !important;
+            border: 1px solid var(--border-color) !important;
+            width: 100%;
+            height: 45px;
+        }
+        .solid-btn-style{
+            background-color: var(--primary-color) !important;
+            padding: 10px 10px 10px 10px;
+            height: 35px;
+            width: 100%;
+          }
+          .transparent-btn-style{
+            background-color:transparent;
+            border: 1px solid var(--primary-color) !important;
+            padding: 10px 10px 10px 10px;
+            height: 35px;
+            color: var(--primary-color) !important;
+            width: 100%;
+          }
+    
+     .location-search-header{
+         height: 35px;
+      }
+    
+      .input-item-border.item-block .item-inner{
+          border: 0.55px solid #c8c7cc !important;
+    }
+    .left-arrow-style{
+        margin: 30px 20px 0px 20px !important;
+        color: var(--icon-color) !important;
+    }
+    .margin-top-0{
+        margin-top: 0%;
+    }
+    .eye-icon-style{
+        font-size: 1.6em;
+        margin-top: 8px;
+        color: var(--icon-color);
+    }
+    .list .item-input:last-child {
+        border-bottom: 0px !important;
+    }
+    .item-field-margin {
+        margin: 0px 10px -5px 0px !important;
+        max-width: 26px !important;
+    }
+    
+    .user-input-field-margin-left-15{
+         margin-left:-15px;
+    }
+    .gender-item{
+        height:4em !important;
+    }
+    .footer-icon{
+        margin: -5px 0px -20px 5px !important;
+        width: 55% !important;
+      }
+      .footer-row-section{
+        height: 60px !important;
+        padding: 0px;
+      }
+      .footer-name{
+        font-size: 11px !important;
+      }
+      .input-box-row{
+        margin: 0px 0px 0px 5px;
+    }
+    
+    .input-box-border-radious{
+    border: 1px solid var(--primary-color);
+    border-radius: 25px 25px 25px 25px;
+        margin-bottom: 2%;
+    }
+    .input-box-img{
+        padding: 6px 0px 0px 0px;
+        font-size: 10;
+        width: 25px !important;
+        max-width: 25px !important;
+     }
+     .input-for-email-mobile{
+        margin-left: -5px;
+    }
+    .horizontal-list-circle-menu-image{
+        max-width: 60px;
+        background: white;
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        padding: 10px 0px 9px 0px;
+       }
+       .search-list-image-back{
+        max-width: 50px;
+        background: #e4e4e4;
+        height: 50px !important;
+        width: 50px !important;
+        border-radius: 50% !important;
+        padding: 10px 0px 9px 0px;
+       }
+       .search-medicine-list-image-back{
+        max-width: 40px;
+        background: #e4e4e4;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        padding: 10px 0px 10px 0px;
+       }
+       .delete-image-back{
+        max-width: 40px;
+        background: rgba(230, 230, 230, 0.43);
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        padding: 10px 0px 10px 0px;
+        box-shadow: 0px 2px 3px #5a5a5a;
+       }
+       .remove-button-sec{
+        background: #ffffff;
+        color: #888888;
+        padding: 6px 0px 6px 0px;
+        text-align: center;
+        margin: 0px 2px 0px 2px !important;
+        border-radius: 3px;
+        border: 1px solid #efefef;
+        box-shadow: 0px 3px 6px #e2c3b7;
+       }
+    .nav-confirm-button{
+        max-width: 60px !important;
+        background: #e8e8e8;
+        height: 60px !important;
+        width: 60px !important;
+        border-radius: 50%;
+        border: 2px solid #e8e8e8;
+        -webkit-box-shadow: 0px 1px 3px #444444;
+        box-shadow: 0px 1px 3px #444444;
+        padding: 10px;
+    }
+    // Border bottom color
+    .nav-confirmation-border{
+        border-right: 1px solid #e2e2e2;
+    }
+    .book-appo-border-bottom-color{
+        border-bottom: 0.5px solid #f5f5f5;
+    }
+    .address-border-bottom-color{
+        border-bottom: 0.5px solid #dbf1f0;
+    }
+    .border-top-color{
+        border-top: 0.5px solid #ececec;
+    }
+    .border-top-color-margin-10{
+        border-top: 0.5px solid #ececec;
+        margin-top: 10px;
+    }
+    .border-bottom-color{
+        border-bottom: 0.2px solid #e2e2e2 !important;
+    }
+    .age-group-section{
+        margin: 5px 0px 0px 5px !important;font-size: 13px !important;
+      }
+      .age_grp_color{
+        color:var(--primary-color) !important;
+      }
+    /////Doctor profile///////////////
+    .doctor-profile-heading{
+        font-size: 17px;
+        color: var(--para-text-color);
+        font-weight: 400;
+    }
+    .para-list-top-header{
+        font-size: 1.7rem;
+        color: var(--black-light-color) !important;
+    }
+    ///////////////color///////////////
+    .doctor-profile-subheader-color{
+        color: var(--icon-color);
+    }
+    .orage-color{
+        color:var(--button-color) !important;
+    }
+    .hospital-list-image-back{
+        max-width: 50px;
+        background: #d2d2d2;
+        height: 50px !important;
+        width: 50px !important;
+        border-radius: 50%;
+        padding: 5px 0px 4px 0px !important;
+    }
+    .favourite-list-back{
+        max-width: 60px !important;
+        background: #e4e4e4;
+        height: 60px !important;
+        width: 60px !important;
+        border-radius: 50%;
+        border: 2px solid #dedede;
+        box-shadow: 0px 1px 3px #444444;
+    }
+    .button-inner .action-sheet-icon{
+        color: #707776 !important;
+    }
+    .card-box-shadow{
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 0px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+    .toolbar-title-ios{
+        color:white !important;
+        margin-bottom: 6px;
+    }
+    .list-item-border{
+        border:0px !important;
+    }
+    ion-navbar > .toolbar-content > .title > .toolbar-title{
+        font-size: 1.8rem !important;
+        padding: 0 12px;
+        font-weight: 500;
+        color: #fff !important;
+    }
+    .footer-ios > .toolbar-ios ion-title{
+        padding: 10px !important;
+    
+    }
+    .footer-titel-class > .toolbar-title-ios{
+        margin-bottom: 0px !important;
+    }
+    .footer-btn-text{
+        font-size: 15px;
+        text-transform: capitalize;
+    }
+    .quick-navigation{
+        text-align: center;
+        font-size: 17px;
+        color: #8a8a8a;
+    }
+    .price-font-style{
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        color: var(--button-color) !important;
+       // margin-top: -5px !important;
+        line-height: 1 !important;
+        // float: left;
+        //margin-right: 7px !important;
+    }
+    .profile-price-font-style{
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--button-color) !important;
+        float: left;
+        margin: 2px 0px 5px 0px !important;
+    }
+    .dc_card_shadow_border{
+        box-shadow: 0px 6px 10px rgba(189, 189, 189, 0.9490196078431372);
+        background: rgba(232, 232, 232, 0.168627);
+       // margin: 0px -5px 0px -5px !important;
+    }
+    .dc-inner-sub-text-size{
+        font-size: 14px !important;
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+    .see-all-card{
+        box-shadow: 0px 2px 6px #bdbdbdf2 !important;
+        /* background: rgba(232, 232, 232, 0.168627); */
+        margin: 0px !important;
+        width: 100%;
+        padding: 0px 5px 0px 5px;
+    }
+    .km-text{
+        font-weight: 500;
+        color: var(--button-color);
+        /* width: 100%; */
+        text-align: center;
+        font-size: 13px;
+    }
+    .price-start-from
+    {
+        font-size: 12px !important;
+        color: #1b7b7b;
+        font-weight: 500;
+    }
+    .see-all{
+        float: right;
+        color: var(--primary-color);
+    }
+    .original-price-font-style{
+        text-decoration: line-through var(--button-color);
+      //  float: right;
+        margin-top: 5px !important;
+        font-size: 13px !important;
+        color: #828282 !important;
+        // text-align: center;
+        margin-bottom: 8px !important;
+        line-height: 1 !important;
+    }
+    .discount-value-show{
+        float: left;
+        margin-top: -3px !important;
+        margin-left: 0px !important;
+    
+    }
+    
+    
+       
+    

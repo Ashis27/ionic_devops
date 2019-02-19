@@ -1,0 +1,224 @@
+<ion-content *ngIf="appoDetails !=null">
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="location-search-header" (click)="closeCurrentSection()">
+          <ion-col col-1 class="close-sec margin-auto">
+            <!-- <img src="assets/img/back-arrow.png" class="back-arrow" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-11 class="header-title margin-top-bottom-5 margin-auto">
+            <p class="para-margin-0 header-title para-overflow-hidden">Appointment Confirmation</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-card class="time-slot-card-background appo-detail-border-bottom">
+    <ion-item class="padding-0">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="img-size" [src]="(appoDetails.ProviderImage != null && appoDetails.ProviderImage != '') ? appoDetails.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+        />
+        <!-- <img [src]="appoDetails.ProviderImage" class="profile-w-h"> -->
+      </ion-avatar>
+      <div class="card">
+        <ion-row>
+          <ion-col col-12 class="">
+            <h4 class="profile-user-name-big para-overflow-hidden">{{appoDetails.ProviderName}}
+            </h4>
+            <p class="para-overflow-hidden">{{appoDetails.Specialization}}</p>
+          </ion-col>
+          <!-- <ion-col col-5>
+            <ion-row>
+              <ion-col col-4>
+                <img src="assets/img/qlt copy.svg" class="certificate-icon">
+              </ion-col>
+              <ion-col col-8 class="padding-top-8">
+                <p text-center class="certificate-text-color para-margin-0">HealthPro</p>
+                <p text-center class="certificate-text-color para-margin-0">Guarantee</p>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+        </ion-row>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row class="appo-detail-border-bottom">
+    <ion-col col-12 class="appo-dtl-padding">
+      <p>
+        <span>
+          <img src="assets/img/calendar_time_icon.svg" class="doc-dtl-date-icon">
+        </span>
+        <span class="profile-user-name-big margin-left-12"> {{appoDetails.Date}},
+        </span>
+        <span class="profile-user-name-big selected-time"> {{appoDetails.TimeSlot}}
+          <!-- <span *ngIf="appoDetails.TimeSlot < '12.00' ">AM</span>
+          <span *ngIf="appoDetails.TimeSlot > '12.00' ">PM</span> -->
+        </span>
+      </p>
+      <!-- <p class="float-right-class margin-top-bottom-5 text-aligh-right">
+        <span>
+          <button ion-button clear class="reschedule-btn" (click)="rescheduleAppointment()">RESCHEDULE</button>
+        </span>
+        <span>
+          <button ion-button clear class="cancel-btn" (click)="cancelAppointment(false,'cancel')">CANCEL</button>
+        </span>
+      </p> -->
+    </ion-col>
+  </ion-row>
+  <ion-row class="appo-detail-border-bottom padding-top-bottom-12">
+    <ion-col col-12 class="appo-dtl-padding">
+      <ion-row>
+        <ion-col col-6 class="border-right">
+          <p class="margin-bottom-0 margin-top-0">
+            <span>
+              <img src="assets/img/booked_icon.svg" class="doc-dtl-date-icon">
+            </span>
+            <span class="appo-dtl-sub-heading margin-left-12">Booked for</span>
+          </p>
+          <p class="font-weight-500 margin-left-42c booked-for-color">{{appoDetails.AppointmentFor}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <p class="margin-bottom-0 margin-top-0">
+            <span>
+              <img src="assets/img/procedure_icon.svg" class="doc-dtl-date-icon">
+            </span>
+            <span class="appo-dtl-sub-heading margin-left-12">Procedure</span>
+          </p>
+          <p class="font-weight-500 margin-left-42c">Consultation</p>
+        </ion-col>
+        <!-- <ion-col col-5 text-center>
+            <p class="para-margin-0">
+              <span class="wallete-a-text">Appointment ID</span>
+            </p>
+            <p class="para-margin-0" *ngIf="latestUpcomingAppoDetails !=null">
+              <span class="doc-id-text">APPO-{{latestUpcomingAppoDetails.id}}</span>
+            </p>
+          </ion-col> -->
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row class="appo-detail-border-bottom" *ngIf="hospital!=null">
+    <ion-col col-12 class="appo-dtl-padding">
+      <p class="para-overflow-hidden">
+        <span>
+          <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-dtl-date-icon">
+        </span>
+        <span class="appo-dtl-sub-heading margin-left-12">{{hospital.Name}}</span>
+      </p>
+      <p class="p-margin-bottom p-margin-top margin-left-42b">
+        <span *ngIf="hospital.Address !=''">{{hospital.Address}}, </span>
+        <span *ngIf="hospital.City !=''">{{hospital.City}}, </span>
+        <br/>
+        <span *ngIf="hospital.Address !=''">{{hospital.State}}</span>
+        <span *ngIf="hospital.Zip !=''">{{hospital.Zip}}, </span>
+        <span *ngIf="hospital.Phone1 !=''">Phone: {{hospital.Phone1}}</span>
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 class="appo-dtl-padding padding-right-5">
+      <ion-row>
+        <ion-col col-12 class="margin-auto">
+          <button ion-button class="login-form-btn" (click)="redirectPage('DashBoard')">
+            <span class="footer-btn-text">Dashboard</span>
+          </button>
+        </ion-col>
+        <ion-col col-12 class="margin-auto quick-navigation">
+          <p>-------- Quick Navigation --------</p>
+        </ion-col>
+        <ion-col col-6 text-center class="margin-auto" (click)="redirectPage('DiagnosticGenericSearch')">
+          <p class="nav-confirmation-border">
+            <img src="assets/img/dashboard/booktest_icon.svg" class="nav-confirm-button">
+          </p>
+          <p>
+            <span class="footer-btn-text"> Health Package</span>
+          </p>
+        </ion-col>
+        <ion-col col-6 text-center class="margin-auto" (click)="redirectPage('CalculatorList')">
+          <p class="nav-confirmation-border">
+            <img src="assets/img/dashboard/calculator.svg" class="nav-confirm-button">
+          </p>
+          <p>
+            <span class="footer-btn-text"> Health Calculator</span>
+          </p>
+        </ion-col>
+        <ion-col col-6 text-center class="margin-auto" (click)="redirectPage('MedicineList')">
+          <p class="nav-confirmation-border">
+            <img src="assets/img/dashboard/medicalremainder_icon.svg" class="nav-confirm-button">
+          </p>
+          <p>
+            <span class="footer-btn-text"> Medicine Reminder</span>
+          </p>
+        </ion-col>
+        <ion-col col-6 text-center class="margin-auto" (click)="redirectPage('AppointmentHistory')">
+          <p class="nav-confirmation-border">
+            <img src="assets/img/dashboard/bookappointment_icon.svg" class="nav-confirm-button">
+          </p>
+          <p>
+            <span class="footer-btn-text"> Appointment History</span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row class="border-bottom padding-top-bottom-12">
+    <ion-col col-12 class="appo-dtl-padding">
+      <ion-row>
+        <ion-col col-7 class="border-right">
+          <p class="margin-bottom-0 margin-top-0">
+            <span>
+              <img src="assets/img/procedure_icon.svg" class="doc-dtl-date-icon">
+            </span>
+            <span class="appo-dtl-sub-heading margin-left-12">Procedure</span>
+          </p>
+          <p class="font-weight-500 margin-left-42c">Consultation</p>
+        </ion-col>
+        <ion-col col-5 text-center>
+          <p class="para-margin-0">
+            <img src="assets/img/fees_icon.svg" class="wallete-w">
+            <span class="wallete-w-text">Fees</span>
+          </p>
+          <p class="para-margin-0" *ngIf="appoDetails.PriceToShow != 'Not Available'">
+            <img src="assets/img/rupee_icon.svg" class="rupee-icon-width">
+            <span class="doc-fee-text">{{appoDetails.PriceToShow}}</span>
+          </p>
+          <p class="para-margin-0" *ngIf="appoDetails.PriceToShow == 'Not Available'">
+            <span class="font-weight-500">{{appoDetails.PriceToShow}}</span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+
+
+  <!-- <ion-row class="fixed-button-appo-dtl">
+    <ion-col col-12 class="appo-dtl-padding">
+      <button ion-button class="login-form-btn" (click)="closeCurrentSection()">Done</button>
+    </ion-col>
+  </ion-row> -->
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-12 class="appo-dtl-padding padding-right-5">
+        <ion-row>
+          <ion-col col-6 class="margin-auto">
+            <button ion-button class="login-form-btn" (click)="goToDashBoard()">
+              <span class="footer-btn-text">DashBoard</span>
+            </button>
+          </ion-col>
+          <ion-col col-6 class="margin-auto">
+            <button ion-button class="login-form-btn" (click)="bookPackage()">
+              <span class="footer-btn-text"> Book Package</span>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row> -->
+
+<!-- <ion-title class="footer-titel-class" text-center>
+      <span class="margin-left-right-5">Done</span>
+    </ion-title> -->
+<!-- </ion-toolbar>
+</ion-footer> -->

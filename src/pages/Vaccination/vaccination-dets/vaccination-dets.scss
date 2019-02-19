@@ -1,0 +1,82 @@
+page-vaccination-dets {
+    .des_wrapper{
+       width:100%;
+    }
+    .header-background .item-inner{
+        border-bottom: none !important;
+    }
+    .des_wrapper ion-item{
+        padding:5px !important;
+    }
+    .label {
+        margin:0 !important;
+    }
+    .des_div{
+        width:100%;
+        position:relative;
+    }
+    .card-header, .card-header-ios{
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .card-content, .card-content-ios{
+        padding: 9px 17px 4px !important;
+    }
+    .fab {
+        background-color: var(--button-color) !important;
+    }
+    .sts-btn-wrapper img {
+        width: 20px;
+        height: 20px;
+    }
+    .vaccine-btn-complete{
+      color:var(--primary-color);
+    }
+    .vaccine-btn-skip{
+      color: var(--button-color);
+    }
+    .item-ios [item-left]{
+        margin:0 !important;
+    }
+    
+    .text_heder{
+        font-size:15px;
+        font-weight: bold;
+    }
+    .item-md.item-block, .item-inner{
+        padding-right:0px !important;
+    }
+      .sts-btn-wrapper .label, .label-ios{
+        margin:0px !important;
+      }
+      .sts-btn-wrapper button{
+        font-size:1em !important;
+        text-transform: none !important;
+        //border: 1px solid red;
+        //border-radius: 25px 25px 25px 25px;
+        padding: 5px 1.6em;
+        height: 30px;
+        width: 100px;
+      }
+      .vaccine-txt-complete{
+        color:var(--primary-color) !important;
+        padding-left:5px;
+      }
+      .vaccine-txt-skip{
+        color:var(--button-color) !important;
+        padding-left:5px;
+      }
+      .vaccine-txt-dets{
+        color:var(--success-color) !important;
+        padding-left:5px;
+      }
+      .card_header_bg{
+        background: #56d9d7 !important;
+      }
+      .sts-txt{
+          text-align: right;
+          margin-right:5px;
+          font-size:13px;
+          color:red;
+          font-style: italic;
+      }
+}

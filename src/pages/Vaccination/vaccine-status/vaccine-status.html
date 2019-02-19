@@ -1,0 +1,263 @@
+<!--
+  Generated template for the VaccineStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Vaccination Calendar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="">
+  <ion-row class="nav-wrapper">
+    <ion-col col-12 class="">
+      <!-- <ion-row class="margin-bottom-5">
+        <ion-col col-1 class="close-sec  margin-auto" (click)="closeCurrentSection()">
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+        </ion-col>
+        <ion-col col-11 class="header-title margin-top-bottom-5 padding-0">
+          <p class="para-margin-0 header-title para-overflow-hidden">Vaccination Calendar</p>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col col-12 class="close-sec  margin-auto" >
+          <ion-item class="item_header_bg" text-center>
+            <ion-label>Choose Child</ion-label>
+            <ion-select  (ionChange)="selectedChild()" [(ngModel)]="Selectedchild">
+              <ion-option *ngFor="let child of childDets;let i=index"  value="{{child.value}}">{{child.text}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-12 text-center>
+            <p class="age-text">
+              <span *ngIf="years">{{years}} Years </span>
+              <span *ngIf="months">{{months}} Months </span>
+              <span *ngIf="days">{{days}} Days </span>
+            </p>
+        </ion-col>
+      </ion-row>
+    </ion-col> 
+  </ion-row> 
+    
+   
+
+<div class="prof-date-wrapper">
+  <div class="date_txt">
+  <ion-row>
+    <ion-col col-4 class="margin-auto" text-center no-padding>
+      <p class="para-margin-0 date">{{present_day}}</p>
+    </ion-col>
+    <ion-col col-8 no-padding>
+      <p class="para-margin-0 font-size-16 font-weight-500">{{present_day_text}}</p>
+      <p class="para-margin-0 font-weight-400"><span>{{present_month}},</span><span> {{present_year}}</span></p>
+    </ion-col>
+  </ion-row>
+  </div>
+  <div class="childProfImg">
+    <img class="childImg" [src]="baby_prof_img" >
+  </div>
+</div>
+
+<ion-row class="status_wrapper" *ngIf="!(no_vaccinations)">
+  <ion-col col-6 no-padding class="margin-auto" text-center (click)="VaccinationStatus('upcoming')" [ngClass]="{'active':selectedTab == 'upcoming'}">
+    <div class="tab">
+      <ion-item>
+        <img src="assets/img/vaccination/future.svg" item-left>
+      <span [style.color]="selectedTab == 'upcoming'?'#39bebc':''">Upcoming</span></ion-item>
+    </div>
+  </ion-col>
+  <ion-col col-6 class="margin-auto" text-center (click)="VaccinationStatus('past')" [ngClass]="{'active':selectedTab == 'past'}" >
+    <div class="tab">
+      <ion-item>
+        <img src="assets/img/vaccination/past.svg" item-left>
+      <span [style.color]="selectedTab == 'past'?'#39bebc':''">Past</span></ion-item>
+    </div>
+  </ion-col>
+
+  <section id="conference-timeline" *ngIf="selectedTab == 'upcoming'">
+    <div class="conference-center-line" *ngIf="upcomingVaccines.length>0"></div>
+    <div class="conference-timeline-content">
+      <div class="timeline-article" *ngFor="let vaccines of upcomingVaccines;let i=index">
+        <div class="content-left-container">
+          <div class="content-left">
+            <p class="margin-top-bottom-5" (click)="getFullDes(vaccines)">
+              {{vaccines.VaccinationAtAge}} 
+              (<span>{{vaccines.date}}</span>
+              <span>{{vaccines.month}}</span>
+              <span>{{vaccines.year}})</span>
+            </p>
+            <div class="vaccines_div margin-top-bottom-5" *ngIf="vaccines.VaccinationdetailList.length>0" (click)="getFullDes(vaccines)">
+              <span class="para-text-color"  *ngFor="let vaccine of vaccines.VaccinationdetailList;let i=index"><span>{{vaccine.VaccinationShortCode}}</span><span [ngClass]="{'visibility':i+1==vaccines.VaccinationdetailList.length}">, </span></span>
+            </div>
+           
+            <!-- <div *ngIf="temp_vaccines.length>0" (click)="getFullDes(vaccines)">
+              <span class="para-text-color" *ngFor="let vaccine of temp_vaccines">{{vaccine}}</span>
+            </div> -->
+            <div class="sts-btn-wrapper">
+                <ion-row>
+                  <ion-col col-4></ion-col>
+                  <ion-col col-4 no-padding>
+                    <ion-item clear>
+                      <button ion-button clear (click)="completeVaccination(vaccines)"><img src="assets/img/vaccination/Complete.svg" class="vaccine-btn-complete"><span class="vaccine-txt-complete">Complete</span></button>
+                    </ion-item>
+                  </ion-col>
+                 <ion-col col-4 no-padding>
+                  <ion-item clear>
+                    <button ion-button clear (click)="skipVaccination(vaccines)"><img src="assets/img/vaccination/Skip.svg" class="vaccine-btn-skip"><span class="vaccine-txt-skip">Skip</span></button>
+                  </ion-item>
+                 </ion-col>
+                </ion-row>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="meta-date" [ngClass]="{'pulse':i==0}" [style.background-color]='vaccines.bgcolor'>
+          <!-- <span class="date">{{vaccines.date}}</span>
+          <span class="month">{{vaccines.month}}</span> -->
+        </div>
+      </div>
+      </div>
+  </section>
+  
+  <section id="conference-timeline" *ngIf="selectedTab == 'past'">
+      <div class="conference-center-line" *ngIf="pastVaccines.length>0"></div>
+      <div class="conference-timeline-content">
+        <div class="timeline-article" *ngFor="let vaccines of pastVaccines;let i=index">
+          <div class="content-left-container">
+            <div class="content-left ">
+              <p class="margin-top-bottom-5" (click)="getFullDes(vaccines)">{{vaccines.VaccinationAtAge}}
+                <span>( {{vaccines.date}}</span>
+                <span>{{vaccines.month}}</span>
+                <span>{{vaccines.year}} )</span>
+              </p>
+              
+               <!-- <div class="flex">
+                 <img src="assets/img/edit_icon.svg" class="medicine-edit">
+                 <ion-datetime placeholder="" class="medicine-edit" displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="editedDate"></ion-datetime>
+               </div> -->
+              <div class="vaccines_div margin-top-bottom-5" *ngIf="vaccines.VaccinationdetailList.length>0" (click)="getFullDes(vaccines)">
+                <span class="para-text-color" *ngFor="let vaccine of vaccines.VaccinationdetailList;let i=index">
+                    <span>{{vaccine.VaccinationShortCode}}</span><span [ngClass]="{'visibility':i+1==vaccines.VaccinationdetailList.length}">, </span></span>
+                  <ion-row *ngIf="vaccines.VaccinationdetailList[0].ProviderName">
+                    <ion-col col-1 class="margin-auto" no-padding>
+                      <img class="past_provider_img" src="assets/img/bookAppointment/specialities_icon.svg">
+                    </ion-col>
+                    <ion-col col-11>
+                      <p class="margin-top-bottom-5">{{vaccines.VaccinationdetailList[0].ProviderName}}</p>
+                    </ion-col>
+                  </ion-row>
+              </div>
+              
+              <div class="sts-btn-wrapper">
+                  <ion-row>
+                    <ion-col col-4></ion-col>
+                    <ion-col col-4 *ngIf="vaccines.VaccinationGroupCompleted && !vaccines.VaccinationGroupSkipped"></ion-col>
+                    <ion-col col-4 no-padding *ngIf="vaccines.VaccinationGroupCompleted && !vaccines.VaccinationGroupSkipped">
+                      <ion-item clear>
+                        <button ion-button clear><img src="assets/img/vaccination/Complete.svg" class="vaccine-btn-complete"><span class="vaccine-txt-complete">Completed</span></button>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-4 no-padding (click)="completeVaccination(vaccines)" *ngIf="vaccines.VaccinationGroupSkipped">
+                      <ion-item clear>
+                        <button ion-button clear><img src="assets/img/vaccination/Complete.svg" class="vaccine-btn-skip"><span class="vaccine-txt-complete">Complete</span></button>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-4 no-padding  *ngIf="vaccines.VaccinationGroupSkipped ">
+                      <ion-item clear>
+                        <button ion-button clear><img src="assets/img/vaccination/Skip.svg" class="vaccine-btn-skip"><span class="vaccine-txt-skip">Skipped</span></button>
+                      </ion-item>
+                    </ion-col>
+                    <!-- <ion-col col-4 no-padding>
+                      <ion-item clear>
+                        <button ion-button clear (click)="Undo_Vaccine(vaccine)"><img src="assets/img/vaccination/undo.svg" class="vaccine-btn-complete"><span class="vaccine-txt-undo">Undo</span></button>
+                      </ion-item>
+                    </ion-col> -->
+                  </ion-row>
+              </div> 
+            </div>
+          </div>
+          <div class="meta-date"  [style.background-color]='vaccines.bgcolor'></div>
+        </div>
+       
+        </div>
+
+        <div style="height: 60px;">
+          &nbsp;
+        </div>
+    </section>
+  
+</ion-row>
+
+<ion-row *ngIf="no_vaccinations" class="novaccination">
+  <ion-col col-12>
+      <p class="para-list-header">Not yet created vaccination chart ?</p>
+    <p class="para-list-header">
+      Let's create right away
+    </p>
+    <button class="vaccine-submit-btton" ion-button  (click)="askDets()"  full>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="!(childrensFound)" class="novaccination">
+  <ion-col col-12>
+    <p class="para-list-header">Not yet added baby details ?</p>
+    <p class="para-list-header">
+      Add Baby Details
+    </p>
+    <button class="vaccine-submit-btton" ion-button type="submit" (click)="gotoAddChild(1)"  full>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-col>
+</ion-row>
+
+<div class="customPopUp">
+  <div class="mainPopUp">
+  <div class="popup_title">
+    <span>Add Details</span>
+    <!-- <ion-icon name="close" class="popup_close" (click)="closePopup()"></ion-icon> -->
+  </div>
+  <ion-row class="medicine_form">
+   <ion-col col-12 class="">
+    <ion-item class="doc-hos-dets-input">
+      <ion-label class="doc-hos-dets-label">
+        <img class="form-image custom-img" src="assets/img/vaccination/hospital.svg" />
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="hospitalname" (tap)="searchModal($event,'hospital')" placeholder="Hospital Name" spellcheck="false" autocapitalize="off"></ion-input>
+   </ion-item>
+   <ion-item class="doc-hos-dets-input">
+     <ion-label class="doc-hos-dets-label">
+        <img class="form-image custom-img" src="assets/img/vaccination/doctor.svg" />
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="doctorname"  (tap)="searchModal($event,'doctor')" placeholder="Doctor Name" spellcheck="false" autocapitalize="off"></ion-input>
+   </ion-item>
+    <ion-row>
+      <ion-col col-12 class="text-align-center" text-center>
+        <button ion-button class="add-medication-modal-btn margin-top-25" (click)="addBabyVaccines()">Save</button>
+        <button ion-button class="add-medication-modal-btn margin-top-25" (click)="cancelBabyVaccines()">Cancel</button>
+      </ion-col>
+    </ion-row> 
+   </ion-col>
+ </ion-row>
+ </div>
+</div>
+</ion-content>
+
+<ion-fab left bottom (click)="gotoAddChild(2)">
+  <button ion-fab color="light"><ion-icon name="md-add"></ion-icon></button>
+</ion-fab>
+<!-- <ion-fab right bottom (click)="ShareVaccineInfo()">
+  <button ion-fab color="light"><ion-icon name="md-share"></ion-icon></button>
+</ion-fab> -->
+
+
+
+

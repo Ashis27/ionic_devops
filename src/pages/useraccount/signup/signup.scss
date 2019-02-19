@@ -1,0 +1,87 @@
+.gender-sec{
+    margin-left: 15px !important;
+}
+.radio-btn-sec{
+    width: 33%;
+    float:left;
+}
+.radio-btn-name{
+    font-size: 15px;
+}
+.skip-section{
+    margin-top: 5%;
+}
+ .terms-conditions{
+      text-overflow: clip !important ;
+      white-space: normal !important;
+      font-size: 14px;
+ }
+ .tc-checkbox{
+   margin: 9px 15px 9px 4px !important; 
+ }
+ .sign-up-label{
+       flex: 0 0 30px;
+ }
+ .contact-background{
+     background: white;
+ }
+ .tc_content{
+         font-weight: 500;
+         text-decoration: underline;
+ }
+ .tc_section{
+    background: rgba(255, 0, 0, 0);
+ }
+ .datetime-text{
+ color: var(--para-text-color) !important;
+}
+.contact-number-field{
+    margin-top: -2px;
+    background-color: rgba(255, 255, 255, 0);
+    height: 35px;
+    padding-left: 0px;
+    margin-left: 1px;
+}
+
+ .popover-content{
+ width: 150px !important;
+    margin-top: 0px !important;
+    margin-left: 0px;
+}
+
+ion-select{
+        padding: 4px 0px 0px 0px !important;
+}
+ion-checkbox{
+    margin: 9px 15px 9px 4px !important;
+}
+.skip-section{
+    margin-top: 1% !important;
+}
+.para-section-style{
+    padding: 0px 20px 20px 20px !important;
+}
+.login-form-btn{
+    margin-top: 0% !important;
+}
+.checkbox-checked
+{
+    border-color: var(--button-color) !important;
+    background-color: var(--button-color) !important;
+}
+.item-checkbox{
+    ion-checkbox{
+        button.item-cover{
+            width: 38%;
+        }
+    }
+
+    ion-label{
+        button.item-cover{
+            width: 85%;
+            right: 0;
+            left: auto;
+        }
+    }
+
+}

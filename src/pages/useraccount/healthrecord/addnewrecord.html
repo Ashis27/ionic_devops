@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="title-header-text margin-auto">
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="section != 'provider'">{{action}} Record</p>
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="section == 'provider'">View Record</p>
+    </div>
+    <ion-buttons end class="nav-button-width margin-right-10" (click)="goToCart()">
+
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-row [ngClass]="isOpenFromPopover?'ios-nav-header':''">
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="location-search-header">
+          <ion-col col-1 class="close-sec margin-auto" (click)="closeCurrentSection()">
+            <img src="assets/img/back-arrow.png" class="" />
+          </ion-col>
+          <ion-col col-11 class="header-title margin-top-bottom-5 back-sec margin-auto">
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="section != 'provider'">{{action}} Record</p>
+            <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="section == 'provider'">View Record</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
+  <ion-row class="appo-detail-border-bottom">
+    <ion-col col-2 text-center class="upload-date-font">
+      <p class="display-grid date-background">
+        <span>{{currentMonth}}</span>
+        <span class="upload-date1-font default-color">{{currentDate}}</span>
+        <span>{{currentYear}}</span>
+      </p>
+    </ion-col>
+    <ion-col col-8 class="">
+      <ion-row>
+        <ion-col col-12 class="padding-top-btm-5">
+          <ion-row>
+            <ion-col col-4 class="padding-0">
+              <h4 class="profile-user-name file-name-margin font-weight-400 record-font-size">Records for
+              </h4>
+            </ion-col>
+            <ion-col col-8 class="padding-0 default color">
+              <!-- <h4 class="profile-user-name file-name-margin font-weight-400 input-margin-ul">
+                <ion-input type="text" placeholder="Rahul Sharma"></ion-input>
+              </h4> -->
+              <ion-select interface="popover" [disabled]="section == 'provider'" class="family-list default-color" [(ngModel)]="uploadedDocumentDetails.DocumentFor"
+                name="family_details" style="border-right: 0px;" (ionChange)="changeMember()">
+                <ion-option *ngFor="let item of documentsFor" value="{{item.Value}}">{{item.DisplayText}}</ion-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row class="margin-top-2">
+            <ion-col col-4 class="padding-0">
+              <p class="margin-top-5 record-font-size">Relation </p>
+            </ion-col>
+            <ion-col col-8 class="padding-0">
+              <p class="margin-top-5 input-margin-ul default color padding-left-8 ">
+                {{selectedMmemberRelation}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <!--   <ion-row class="margin-top-5">
+            <ion-col col-12 class="padding-0">
+              <p class="margin-top-5 input-margin-ul">
+                <ion-input type="text" class="default-color" placeholder="Enter doctor name"></ion-input>
+              </p>
+            </ion-col>
+          </ion-row> -->
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col text-right col-2 class="popover-btntrp" *ngIf="action != 'Add'">
+      <button ion-button icon-only *ngIf="section == 'user'" (click)="presentPopover($event,'user')">
+        <ion-icon name="more"></ion-icon>
+      </button>
+      <button ion-button icon-only *ngIf="section == 'provider'" (click)="presentPopover($event,'provider')">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isPresAvailable">
+    <ion-col col-2 text-center>
+      <img src="assets/img/prescription.svg" class="money-icon-margin">
+    </ion-col>
+    <ion-col col-10 class="border-bottom-color">
+      <p>Prescriptions</p>
+      <p class="clinic-gallery-ul para-margin-0">
+        <span *ngFor="let item of uploadedDocument; let i = index">
+          <span class="clinic-gallery-li" *ngIf="item.DocumentType == prescription" (click)="getOptionToViewOrDelete(item,i)">
+            <!-- <img src="assets/img/prescription.jpg" class="glry-border-rds"> -->
+            <img [src]="(item.FileExtension == 'application/pdf')?'assets/img/prescription.jpg':item.fileUrlPath" class="glry-border-rds">
+          </span>
+        </span>
+        <span class="clinic-gallery-li add-border-rds" *ngIf="action == 'Add'" (click)="uploadFileWithOption('prescription')">
+          <ion-icon name="add"></ion-icon>
+        </span>
+        <!-- <span class="clinic-gallery-li add-border-rds-bacground1" (click)="doPrompt()">
+            <ion-icon name="remove"></ion-icon>
+          </span> -->
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isReportAvailable">
+    <ion-col col-2 text-center>
+      <img src="assets/img/medical-history.svg" class="money-icon-margin">
+    </ion-col>
+    <ion-col col-10 class="border-bottom-color">
+      <p>Reports</p>
+      <p class="clinic-gallery-ul para-margin-0">
+        <span *ngFor="let item of uploadedDocument;let i = index">
+          <span class="clinic-gallery-li" *ngIf="item.DocumentType == report" (click)="getOptionToViewOrDelete(item,i)">
+            <!-- <img src="assets/img/report.gif" class="glry-border-rds"> -->
+            <img [src]="(item.FileExtension == 'application/pdf')?'assets/img/report.gif':item.fileUrlPath" class="glry-border-rds">
+          </span>
+        </span>
+        <span class="clinic-gallery-li add-border-rds" *ngIf="action == 'Add'" (click)="uploadFileWithOption('report')">
+          <ion-icon name="add"></ion-icon>
+        </span>
+        <!-- <span class="clinic-gallery-li add-border-rds-bacground2">
+          <ion-icon name="remove"></ion-icon>
+        </span> -->
+
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="">
+    <ion-col col-2 text-center>
+      <img src="assets/img/chat.svg" class="money-icon-margin">
+    </ion-col>
+    <ion-col col-10 class="border-bottom-color">
+      <p>Your Comment</p>
+      <p class="text-align-justify">
+        <ion-textarea class="" [(ngModel)]="uploadedDocumentDetails.Description" rows="2" placeholder=" Leave a message (Optional)"></ion-textarea>
+      </p>
+    </ion-col>
+  </ion-row>
+  <div id="openEditImage" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <ion-grid *ngIf="openImagePath!=null && openImagePath !=''" class="padding-0">
+        <ion-row text-right class="header-back modal-position-fixed">
+          <ion-col col-8 class="document-name margin-auto">
+            <p class="color-white" style="font-size: 15px;">{{openImagePath.DocumentTypeName}}</p>
+          </ion-col>
+          <ion-col col-4 class="color-white margin-auto">
+            <ion-icon name="ios-download-outline" class="download-icon" *ngIf="isAndroidPlatform" (click)="downloadDocument(openImagePath.fileUrlPath,openImagePath,false)"></ion-icon>
+            <ion-icon name="ios-close-circle-outline" class="close-icon" (click)="closeModal()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <img class="view-image" [src]="openImagePath.fileUrlPath" />
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div id="downloadProgress" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content download-progress">
+      <ion-row class="indivisual-sec-border para-margin-bottom-5">
+        <ion-col col-6 text-left class="padding-0">
+          <p>
+            <span text-left>Downloading..</span>
+          </p>
+        </ion-col>
+        <ion-col col-6 text-right class="padding-0">
+          <p>
+            <span text-right class="download-percentage">{{countProgress}}% Completed</span>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="indivisual-sec-border" *ngIf="countProgress > 0 && countProgress <= 100 && downloadStatus">
+        <div class="progress-outer">
+          <div class="progress-inner" [style.width.%]="countProgress"></div>
+          <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+        </div>
+      </ion-row>
+      <ion-row class="indivisual-sec-border para-margin-bottom-5" *ngIf="pre_download_status">
+        <ion-col col-12 text-center class="padding-0">
+          <img style="height: 10px;" src="assets/img/progress.gif" />
+        </ion-col>
+      </ion-row>
+      <!-- <p text-right class="cancel-text">
+        <span (click)="cancelDownload()" class="download-percentage">CANCEL</span>
+      </p> -->
+      <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="!isImageModalOpened">
+  <ion-toolbar *ngIf="action == 'Add' && section == 'user'" (click)="uploadConsumerDocumentRecord()">
+    <ion-title class="footer-titel-class">
+      <span class="margin-left-right-5">Upload</span>
+      <img src="assets/img/upload.svg" class="upload-icon-w">
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="action == 'Edit' && section == 'user'" (click)="updateRecordDetails()">
+    <ion-title class="footer-titel-class">
+      <span class="margin-left-right-5">Update</span>
+      <img src="assets/img/upload.svg" class="upload-icon-w">
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

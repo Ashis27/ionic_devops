@@ -1,0 +1,82 @@
+popover-page{
+    .theme-color-size{
+           font-size: 3em;
+    margin-left: .2em;
+    }
+    .theme-color-default{
+        color:#ae1010;
+    }
+    .theme-color1{
+        color: #3EBAD1;
+    }
+    .theme-color2{
+        color: #3575DF;
+    }
+    .theme-color3{
+        color: #FF6600;
+    }
+    .theme-color4{
+        color: #5261BC;
+    }
+    .theme-color5{
+        color: #96AA39;
+    }
+    .theme-color6{
+        color: #4BB368;
+    }
+    .theme-color7{
+        color: #00796A;
+    }
+    .notification{
+         color: #da6d70 !important;
+    }
+    .notification-back{
+        background: #da6d70 !important;
+    }
+    .popover-icon{
+            color: #777f88 !important;
+    font-size: 18px;
+    }
+    .user-record-details-sec{
+        margin-top: 10px;
+        color: #3d434a;
+        margin-left: 10px;
+        font-size: 15px;
+}
+.spec-arrow{
+        margin-top: 10px;
+            color: #798596;
+            text-align: right;
+}
+.indivisual-sec-border{
+        //
+            height: 25px;
+}
+.indivisual-sec-border-delete{
+    // height: 25px;
+    margin-bottom: 10px;
+}
+.icon-profile{
+        font-size: 14px;
+    /* border-radius: 50%; */
+    /* border: 1px solid #4077bb; */
+    /* padding: 5px 6px 4px 6px; */
+    color: #798596;
+    margin-top: 10px;
+}
+.icon-record-profile{
+    font-size: 18px;    
+    margin-top: 3px;
+     color: #798596;
+}
+
+    
+}
+.popover-md .popover-wrapper .popover-content{
+        margin-top: 45px !important;
+    margin-left: -5px !important;
+}
+.popover-ios .popover-wrapper .popover-content{
+        margin-top: 0px !important;
+    margin-left: 0px !important;
+}

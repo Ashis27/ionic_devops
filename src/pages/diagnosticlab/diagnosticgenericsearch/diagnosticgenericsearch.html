@@ -1,0 +1,934 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+    <ion-row class="location-search-header">
+      <!-- <ion-col col-1 class="close-sec">
+        <img src="assets/img/back-arrow.png" class="back-arrow" />
+      </ion-col> -->
+      <ion-col col-8 class="title-header-text header-title margin-top-bottom-5 margin-auto">
+        Diagnostic
+      </ion-col>
+      <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon filter-icon-upload float-right" src="assets/img/cartWhite.svg" />
+      </ion-col>
+      <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" (click)="getLocation()">
+        <img class="menu-search-img filter-icon-upload" src="assets/img/register/location.svg" />
+      </ion-col>
+      <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" *ngIf="isSelected>1" (click)="goToFilter()">
+        <img class="menu-search-img filter-icon-upload filter_icon" src="assets/img/dc_icon/filter.svg" />
+      </ion-col>
+      <!-- <ion-col col-4 class="header-title" (click)="getLocation()">
+        <p class="active-city-text para-overflow-hidden">Location
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </p>
+        <p class="active-location-text para-overflow-hidden">
+          <span *ngIf="selectedCityAndLocation.activeLocation !=''">{{selectedCityAndLocation.activeLocation}},</span> {{selectedCityAndLocation.activeCity}}
+        </p>
+      </ion-col> -->
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="margin-top-bottom-15 search-input-ios">
+    <ion-col col-12 class="">
+      <ion-row class="input-box-border-radious number-email-field contact-background para-margin-0">
+        <ion-col col-1>
+          <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+        </ion-col>
+        <ion-col col-11 class="input-for-email-mobile padding-2">
+          <ion-item class="contact-number-field default-add padding-0">
+            <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Search Here  "
+              (keyup)="searchResultByKeyword()" (click)="selectAllText($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row class="menu-header-sec">
+    <ion-col col-3 class="padding-top-bottom-20" *ngFor="let item of appointmentConfig">
+      <img class="horizontal-list-circle-menu-image animated {{item.ModuleName}}" [ngClass]="item.ModuleName=='Patho Labs'? 'diagnostic_centers active-back pulse':''"
+        [src]="item.Image" (click)="getSelectedDetails(item)" />
+      <p class="header-text para-margin-0">
+        {{item.ModuleName}}
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isSelected == 0">
+    <ion-col col-12 *ngIf="diagnosticCenters.length > 0">
+      <p class="search-header">Diagnostic Centers
+        <span class="see-all" (click)="seeAllCenters()">See All</span>
+      </p>
+      <ion-row class="dc_card_shadow_border padding-left-right-5" *ngFor="let provider of diagnosticCenters">
+        <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedDiagnosticCenter(provider._source)">
+          <img [ngClass]="(provider._source.ProviderImage != null && provider._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+            [src]="(provider._source.ProviderImage != null && provider._source.ProviderImage != '') ? provider._source.ProviderImage :'assets/img/dc_icon/dc.svg'"
+          />
+        </ion-col>
+        <ion-col col-7 class="margin-auto padding-left-5" (click)="selectedDiagnosticCenter(provider._source)">
+          <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{provider._source.CenterName}}</p>
+          <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{provider._source.CityAreaName}}</p> -->
+          <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+            <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span>
+            <span class="inner-sub-text-size">Package(s)</span>
+          </p>
+          <p class="para-overflow-hidden DF_text margin-5" *ngIf="provider._source.TestCount > 0">
+            <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span>
+            <span class="inner-sub-text-size">Test(s)</span>
+          </p> -->
+          <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+            <span class="content-row-seprator">
+              <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+            </span>
+            {{provider._source.CityAreaName}}
+          </p>
+          <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+            <!-- <span class="content-row-seprator">
+              <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+            </span> -->
+            {{provider._source.City}}
+          </p>
+        </ion-col>
+        <ion-col col-3 class="">
+          <ion-row *ngIf="provider.fields != undefined && provider.fields != null">
+            <ion-col col-12 (click)="showMap(provider._source.Latlong)">
+              <ion-icon name="ios-pin-outline"></ion-icon>
+              <span class="km-text">{{provider.fields.distance[0]}} km</span>
+            </ion-col>
+            <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                    <p class="para-overflow-hidden DF_text margin-5">
+                      <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                    </p>
+                    <p class="para-overflow-hidden DF_text margin-5">
+                      <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                    </p>
+                  </ion-col> -->
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col col-2>
+      
+              </ion-col>
+              <ion-col col-10 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                <p class="para-overflow-hidden DF_text margin-5">
+                  <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> Package(s) | 
+                  <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> Test(s)
+                </p>
+                <p>Available</p>
+              </ion-col> -->
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="healthPackages.length > 0">
+      <p class="search-header">Health Package
+        <span class="see-all" (click)="seeAllPackages()">See All</span>
+      </p>
+      <ion-row *ngFor="let package of healthPackages">
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="package._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Package is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar':package._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedHealthPackage(package._source)">
+              <img [ngClass]="(package._source.ProviderImage != null && package._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(package._source.ProviderImage != null && package._source.ProviderImage != '') ? package._source.ProviderImage :'assets/img/dc_icon/package2.svg'"
+              />
+            </ion-col>
+            <ion-col col-10 class="margin-top-10 padding-left-5" (click)="selectedHealthPackage(package._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{package._source.LabPackageName}}</p>
+              <p class="margin-top-5">
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CenterName}}
+                <!-- <span *ngIf="package.fields != undefined && package.fields != null" class="margin-left-10" (click)="showMap(package._source.Latlong)">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text"> {{package.fields.distance[0]}} km</span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CityAreaName}}, {{package._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{package._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.TestCount > 0">
+                        <span class="dc-inner-sub-text-size" *ngIf="package._source.TestCount > 0">{{package._source.TestCount}}</span>
+                        <span class="inner-sub-text-size"> Test(s)</span>
+                      </p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{package._source.PriceAfterDiscount}}</p>
+                           <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                            <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{package._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="package._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{package._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="package._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+
+                <ion-col col-4 class="margin-auto" (click)="addToCart(package._source,'Package')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookHealthPackage(package._source)">Book Package</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+
+
+
+
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="labProfile.length > 0">
+      <p class="search-header">Lab Profile
+        <span class="see-all" (click)="seeAllLabProfile()">See All</span>
+      </p>
+      <ion-row *ngFor="let profile of labProfile">
+
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="profile._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Profile is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar':profile._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedLabProfile(profile._source)">
+              <img [ngClass]="(profile._source.ProviderImage != null && profile._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(profile._source.ProviderImage != null && profile._source.ProviderImage != '') ? profile._source.ProviderImage :'assets/img/dc_icon/package2.svg'"
+              />
+            </ion-col>
+            <ion-col col-10 class="margin-top-10 padding-left-5" (click)="selectedLabProfile(profile._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{profile._source.LabProfileName}}</p>
+              <p class="margin-top-5">
+                <span class="content-row-seprator" *ngIf="profile._source.Gender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="profile._source.Gender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="profile._source.Gender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{profile._source.CenterName}}
+                <!-- <span *ngIf="profile.fields != undefined && profile.fields != null" class="margin-left-10" (click)="showMap(profile._source.Latlong)">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text"> {{profile.fields.distance[0]}} km</span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{profile._source.CityAreaName}}, {{profile._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{profile._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="profile._source.TestCount > 0">
+                        <span class="dc-inner-sub-text-size" *ngIf="profile._source.TestCount > 0">{{profile._source.TestCount}}</span>
+                        <span class="inner-sub-text-size"> Test(s)</span>
+                      </p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="profile._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{profile._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{profile._source.PriceAfterDiscount}}</p>
+                           <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                            <p class="para-overflow-hidden DF_text margin-5" *ngIf="profile._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{profile._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{profile._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="profile._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{profile._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="profile._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{profile._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(profile._source,'Package')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookLabProfile(profile._source)">Book Profile</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+
+
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="labTests.length > 0">
+      <p class="search-header">Lab Tests
+        <span class="see-all" (click)="seeAllLabTest()">See All</span>
+      </p>
+      <ion-row *ngFor="let test of labTests">
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="test._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Scan is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar' :test._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedLabTest(test._source)">
+              <img [ngClass]="(test._source.ProviderImage != null && test._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(test._source.ProviderImage != null && test._source.ProviderImage != '') ? test._source.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+              />
+            </ion-col>
+            <ion-col col-10 class="margin-auto padding-left-5" (click)="selectedLabTest(test._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{test._source.LabTestName}}</p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{test._source.CenterName}}
+                <!-- <span *ngIf="test.fields != undefined && test.fields != null" class="margin-left-10" (click)="showMap(test._source.Latlong)">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text"> {{test.fields.distance[0]}} km</span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{test._source.CityAreaName}}, {{test._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{test._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="test._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{test._source.PriceAfterDiscount}}</p>
+                            <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                            <p class="para-overflow-hidden DF_text margin-5" *ngIf="test._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{test._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="test._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{test._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="test._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(test._source,'Test')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookLabTest(test._source)">Book Test</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+
+
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="radiologyScans.length > 0">
+      <p class="search-header">Radiology Scan
+        <span class="see-all" (click)="seeAllScan()">See All</span>
+      </p>
+      <ion-row *ngFor="let scan of radiologyScans">
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="scan._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Scan is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar' : scan._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedLabScan(scan._source)">
+              <img [ngClass]="(scan._source.ProviderImage != null && scan._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(scan._source.ProviderImage != null && scan._source.ProviderImage != '') ? scan._source.ProviderImage :'assets/img/dc_icon/scan.svg'"
+              />
+            </ion-col>
+            <ion-col col-10 class="margin-auto padding-left-5" (click)="selectedLabScan(scan._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{scan._source.LabTestName}}</p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CenterName}}
+                <!-- <span *ngIf="scan.fields != undefined && scan.fields != null" class="margin-left-10" (click)="showMap(scan._source.Latlong)">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text">{{scan.fields.distance[0]}} km</span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CityAreaName}}, {{scan._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{scan._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="scan._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{scan._source.PriceAfterDiscount}}</p>
+                            <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                            <p class="para-overflow-hidden DF_text margin-5" *ngIf="scan._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{scan._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="scan._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{scan._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="scan._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(scan._source,'Scan')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookLabScan(scan._source)">Book Test</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+
+        </ion-col>
+
+
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="healthPackages.length == 0 && diagnosticCenters.length == 0 && labTests.length == 0 && radiologyScans.length == 0 && !isAvailableResult">
+      <img src="assets/img/empty.svg" class="not-found margin-top-20" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isSelected == 1">
+    <ion-col col-12 class="appo-fixed-sec" *ngIf="diagnosticCenters.length > 0">
+      <p class="search-header">Diagnostic Centers
+      </p>
+
+      <ion-row *ngFor="let provider of diagnosticCenters">
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="provider._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Lab is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar':provider._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedDiagnosticCenter(provider._source)">
+              <img [ngClass]="(provider._source.ProviderImage != null && provider._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(provider._source.ProviderImage != null && provider._source.ProviderImage != '') ? provider._source.ProviderImage :'assets/img/dc_icon/dc.svg'"
+              />
+            </ion-col>
+            <ion-col col-7 class="margin-auto padding-left-5" (click)="selectedDiagnosticCenter(provider._source)">
+              <p class="para-overflow-hidden para-list-header margin-top-5">
+                <!-- <span class="content-row-seprator">
+                          <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                        </span> -->
+                {{provider._source.CenterName}}
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{provider._source.CityAreaName}}
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <!-- <span class="content-row-seprator">
+                          <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                        </span> -->
+                {{provider._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{provider._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span>
+                        <span class="inner-sub-text-size">Package(s)</span>
+                      </p>
+                      <p class="para-overflow-hidden DF_text margin-5" *ngIf="provider._source.TestCount > 0">
+                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span>
+                        <span class="inner-sub-text-size">Test(s)</span>
+                      </p> -->
+            </ion-col>
+            <ion-col col-3 class="">
+              <ion-row *ngIf="provider.fields != undefined && provider.fields != null">
+                <ion-col col-12 (click)="showMap(provider._source.Latlong)">
+                  <ion-icon name="ios-pin-outline"></ion-icon>
+                  <span class="km-text">{{provider.fields.distance[0]}} km</span>
+                </ion-col>
+                <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                          <p class="para-overflow-hidden DF_text margin-5">
+                            <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                          </p>
+                          <p class="para-overflow-hidden DF_text margin-5">
+                            <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                          </p>
+                        </ion-col> -->
+              </ion-row>
+            </ion-col>
+            <!-- <ion-col col-2>
+            
+                    </ion-col>
+                    <ion-col col-10 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                      <p class="para-overflow-hidden DF_text margin-5">
+                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> Package(s) | 
+                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> Test(s)
+                      </p>
+                      <p>Available</p>
+                    </ion-col> -->
+          </ion-row>
+        </ion-col>
+
+
+
+      </ion-row>
+
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="diagnosticCenters.length == 0 && !isDCAvailable">
+      <img src="assets/img/bookAppointment/symptoms.svg" class="not-found margin-top-20" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isSelected == 2">
+    <ion-col col-12 class="appo-fixed-sec" *ngIf="healthPackages.length > 0">
+      <p class="search-header">Health Package
+      </p>
+      <ion-row *ngFor="let package of healthPackages">
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="package._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Package is not available</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar':package._source.isActive == 0}">
+
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedHealthPackage(package._source)">
+              <img [ngClass]="(package._source.ProviderImage != null && package._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(package._source.ProviderImage != null && package._source.ProviderImage != '') ? package._source.ProviderImage :'assets/img/dc_icon/package2.svg'"
+              />
+
+            </ion-col>
+
+            <ion-col col-7 class="padding-left-5 margin-top-10" (click)="selectedHealthPackage(package._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{package._source.LabPackageName}}</p>
+              <p class="margin-top-5">
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CenterName}}
+                <!-- <span *ngIf="package.fields != undefined && package.fields != null" class="margin-left-10" (click)="showMap(package._source.Latlong)">
+                                    <ion-icon name="ios-pin-outline"></ion-icon>
+                                    <span class="km-text">{{package.fields.distance[0]}} km</span>
+                                  </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CityAreaName}}, {{package._source.City}}
+              </p>
+              <p class="age-group-section">
+                <span class="content-row-seprator">
+                  Age:
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 4">Only for child</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 3">Above 60 Years</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 2">Between 25 and 60 Years</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 1">Below 25 Years</span>
+                </span>
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{package._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.TestCount > 0">
+                                  <span class="dc-inner-sub-text-size" *ngIf="package._source.TestCount > 0">{{package._source.TestCount}}</span>
+                                  <span class="inner-sub-text-size"> Test(s)</span>
+                                </p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.GenericDiscount > 0">
+                                  <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}</span>
+                                  <span class="inner-sub-text-size">% Off</span>
+                                </p> -->
+
+
+
+            </ion-col>
+            <ion-col col-3 class="">
+              <ion-row *ngIf="package.fields != undefined && package.fields != null">
+                <ion-col col-12 (click)="showMap(package._source.Latlong)">
+                  <ion-icon name="ios-pin-outline"></ion-icon>
+                  <span class="km-text">{{package.fields.distance[0]}} km</span>
+                </ion-col>
+                <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                                      <p class="para-overflow-hidden DF_text margin-5">
+                                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                                      </p>
+                                      <p class="para-overflow-hidden DF_text margin-5">
+                                        <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                                      </p>
+                                    </ion-col> -->
+              </ion-row>
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                                <ion-row>
+                                  <ion-col col-12 class="padding-0">
+                                    <div class="DF_package_div" text-center>
+                                      <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{package._source.PriceAfterDiscount}}</p>
+                                       <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                                      <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.GenericDiscount > 0">
+                                        <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}</span>
+                                        <span class="inner-sub-text-size">% Off</span>
+                                      </p>
+                                    </div>
+                                  </ion-col>
+                                </ion-row>
+                              </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{package._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="package._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{package._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="package._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(package._source,'Package')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookHealthPackage(package._source)">Book Package</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+
+          </ion-row>
+        </ion-col>
+
+
+      </ion-row>
+
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="healthPackages.length == 0 && !isPackageAvailable">
+      <img src="assets/img/bookAppointment/symptoms.svg" class="not-found margin-top-20" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isSelected == 3">
+    <ion-col col-12 *ngIf="labTests.length > 0">
+      <p class="search-header">Lab Test
+      </p>
+      <ion-row *ngFor="let test of labTests">
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="test._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Test is not available</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar' :test._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedLabTest(test._source)">
+              <img [ngClass]="(test._source.ProviderImage != null && test._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(test._source.ProviderImage != null && test._source.ProviderImage != '') ? test._source.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+              />
+            </ion-col>
+            <ion-col col-7 class="margin-auto padding-left-5" (click)="selectedLabTest(test._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{test._source.LabTestName}}</p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{test._source.CenterName}}
+                <!-- <span *ngIf="test.fields != undefined && test.fields != null" class="margin-left-10" (click)="showMap(test._source.Latlong)"
+                          class="margin-left-10">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text"> {{test.fields.distance[0]}} km
+                          </span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{test._source.CityAreaName}}, {{test._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{test._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="test._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <ion-col col-3 class="">
+              <ion-row *ngIf="test.fields != undefined && test.fields != null">
+                <ion-col col-12 (click)="showMap(test._source.Latlong)">
+                  <ion-icon name="ios-pin-outline"></ion-icon>
+                  <span class="km-text">{{test.fields.distance[0]}} km</span>
+                </ion-col>
+                <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                            <p class="para-overflow-hidden DF_text margin-5">
+                              <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                            </p>
+                            <p class="para-overflow-hidden DF_text margin-5">
+                              <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                            </p>
+                          </ion-col> -->
+              </ion-row>
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{test._source.PriceAfterDiscount}}</p>
+                            <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                            <p class="para-overflow-hidden DF_text margin-5" *ngIf="test._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{test._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="test._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{test._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="test._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{test._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(test._source,'Test')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookLabTest(test._source)">Book Test</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+        </ion-col>
+
+
+
+
+      </ion-row>
+
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="labTests.length == 0 && !isTestAvailable">
+      <img src="assets/img/bookAppointment/symptoms.svg" class="not-found margin-top-20" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="isSelected == 4">
+    <ion-col col-12 *ngIf="radiologyScans.length > 0">
+      <p class="search-header">Radiology Scan
+      </p>
+      <ion-row *ngFor="let scan of radiologyScans">
+
+        <ion-col col-12>
+          <ion-row class="dc_card_shadow_border padding-left-right-5">
+            <ion-col col-11 class="NotAviblMsg" *ngIf="scan._source.isActive == 0">
+              <p class="NotAviblMagMargin">Sorry! Scan is not available</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="dc_card_shadow_border padding-left-right-5" [ngClass]="{'testMar' : scan._source.isActive == 0}">
+            <ion-col col-2 class="margin-auto padding-top-bottom-15" (click)="selectedLabScan(scan._source)">
+              <img [ngClass]="(scan._source.ProviderImage != null && scan._source.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(scan._source.ProviderImage != null && scan._source.ProviderImage != '') ? scan._source.ProviderImage :'assets/img/dc_icon/scan.svg'"
+              />
+            </ion-col>
+            <ion-col col-7 class="margin-auto padding-left-5" (click)="selectedLabScan(scan._source)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-5">{{scan._source.LabTestName}}</p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CenterName}}
+                <!-- <span *ngIf="scan.fields != undefined && scan.fields != null" class="margin-left-10" (click)="showMap(scan._source.Latlong)">
+                          <ion-icon name="ios-pin-outline"></ion-icon>
+                          <span class="km-text">{{scan.fields.distance[0]}} km</span>
+                        </span> -->
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CityAreaName}}, {{scan._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-5">{{scan._source.CityAreaName}}</p> -->
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="scan._source.GenericDiscount > 0">
+                        <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}</span>
+                        <span class="inner-sub-text-size">% Off</span>
+                      </p> -->
+            </ion-col>
+            <ion-col col-3 class="">
+              <ion-row *ngIf="scan.fields != undefined && scan.fields != null">
+                <ion-col col-12 (click)="showMap(scan._source.Latlong)">
+                  <ion-icon name="ios-pin-outline"></ion-icon>
+                  <span class="km-text">{{scan.fields.distance[0]}} km</span>
+                </ion-col>
+                <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                              <p class="para-overflow-hidden DF_text margin-5">
+                                <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                              </p>
+                              <p class="para-overflow-hidden DF_text margin-5">
+                                <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                              </p>
+                            </ion-col> -->
+              </ion-row>
+            </ion-col>
+            <!-- <ion-col col-3 class="col">
+                      <ion-row>
+                        <ion-col col-12 class="padding-0">
+                          <div class="DF_package_div" text-center>
+                            <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{scan._source.PriceAfterDiscount}}</p>
+                             <p class="price-start-from para-overflow-hidden margin-top-bottom-5 DF_text">Starts from</p>
+                             <p class="para-overflow-hidden DF_text margin-5" *ngIf="scan._source.GenericDiscount > 0">
+                              <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}</span>
+                              <span class="inner-sub-text-size">% Off</span>
+                            </p> 
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col> -->
+            <ion-col col-12 class="padding-0 border-top-color-margin-10">
+              <ion-row class="text-center-appobtn  padding-left-right-5">
+                <ion-col col-4 class="padding-left-0 margin-auto">
+                  <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{scan._source.PriceAfterDiscount}}</p>
+                  <p *ngIf="scan._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{scan._source.Price}}</p>
+                  <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="scan._source.GenericDiscount > 0">
+                    <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}%</span>
+                    <span class="inner-sub-text-size"> Off</span>
+                  </p>
+                </ion-col>
+                <ion-col col-4 class="margin-auto" (click)="addToCart(scan._source,'Scan')">
+                  <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+                </ion-col>
+                <ion-col col-4 class="margin-auto">
+                  <button ion-button small class="button-primary solid-btn-style " (click)="bookLabScan(scan._source)">Book Test</button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="radiologyScans.length == 0 && !isScanAvailable">
+      <img src="assets/img/bookAppointment/symptoms.svg" class="not-found margin-top-20" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <!-- <ion-row>
+    <ion-col col-12 text-center *ngIf="diagnosticCenters.length == 0 && healthPackages.length == 0 && radiologyScans.length == 0 && labTests.length == 0 && !isAvailableResult">
+      <img src="assets/img/bookAppointment/hospital_icon.svg" class="" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row> -->
+</ion-content>

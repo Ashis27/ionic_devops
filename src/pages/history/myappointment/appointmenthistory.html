@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Appointment History</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-refresher (ionRefresh)="retrieveUpcomingAppointmentsList(1,true)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher> -->
+  <ion-row>
+    <ion-col col-12 class="padding-0">
+      <div>
+        <ion-segment [(ngModel)]="tabValue">
+          <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" class="text-center-cls segBordder" [ngClass]="i == 0?'border-right':''"
+            value="appo-{{i}}" (click)="tabSelection($event,option)">
+            <p class="margin-5 tab-heading-color font-size-16">{{option}}</p>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div [ngSwitch]="tabValue">
+        <ion-list *ngSwitchCase="'appo-0'">
+          <div *ngIf="upcomingAppointmentDetails.length > 0 && !optionObj">
+            <ion-card class="time-slot-card-background border-bottom" *ngFor="let appo of upcomingAppointmentDetails">
+              <ion-item class="">
+                <ion-avatar item-start class="avtar-margin">
+                  <img class="img-size" [src]="(appo.ProviderImage != null && appo.ProviderImage != '') ? appo.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+                  />
+                </ion-avatar>
+                <div class="card">
+                  <h4 class="profile-user-name-big para-overflow-hidden">{{appo.ProviderName}}
+                    <span style="float:right;width: 25px;">
+                      <img src="assets/img/medical_icon.svg">
+                    </span>
+                  </h4>
+                  <p class="para-overflow-hidden">
+                    <!-- <span>Opthromologist</span> -->
+                    <span>
+                      <img src="assets/img/history/appointment/location_icon.svg" class="doc-location-dtl-icon">
+                    </span>
+                    <span class="font-weight-500"> {{appo.Hospital}}</span>
+                    <!-- <span> 1.2 Miles</span> -->
+                  </p>
+                  <p>
+                    <span>
+                      <img src="assets/img/history/appointment/calendar_icon.svg" class="doc-dtl-date-icon">
+                    </span>
+                    <span class="profile-user-name-big">{{appo.bookedDate}}, {{appo.bookedTimeSlot}}
+                      <!-- <span *ngIf="appo.TimeSlot < '12.00' ">AM</span>
+                      <span *ngIf="appo.TimeSlot > '12.00' ">PM</span> -->
+                    </span>
+                    <br/>
+                    <br/>
+                    <span class="orage-color">[
+                      <span *ngIf="appo.leftDays>0">{{appo.leftDays}} days,</span>
+                      <span *ngIf="appo.leftHrs>0"> {{appo.leftHrs}} hrs,</span>
+                      <span *ngIf="appo.leftMins>0">{{appo.leftMins}} mins</span> left ]
+                    </span>
+                  </p>
+                </div>
+              </ion-item>
+              <ion-item class="historyBottom padding-left-5 margin-top-13">
+                <ion-avatar item-start class="avtar-margin">
+                  <div class="profile-w-h"></div>
+                </ion-avatar>
+                <div class="card ">
+                  <p class="booked-for-text para-overflow-hidden">
+                    <span>Booked for </span>
+                    <span class="booked-for-color"> {{appo.ConsumerName}}</span>
+                  </p>
+                  <!-- <p>
+                      <img src="assets/img/googlemap.jpg" class="map-image" (click)="getDirection(appo.url)">
+                    </p> -->
+                  <p class="float-right-class margin-top-bottom-5" text-right>
+                    <span>
+                      <button ion-button clear class="call-btn" (click)="_callHospital(appo.HospitalContact)"> <ion-icon name="ios-call-outline" class="call-icon"></ion-icon> CALL</button>
+                    </span>
+                    <span>
+                      <button ion-button clear class="reschedule-btn" (click)="rescheduleAppointment(appo)">RESCHEDULE</button>
+                    </span>
+                    <span>
+                      <button ion-button clear class="cancel-btn" (click)="cancelAppointment(false,appo,'cancel')">CANCEL</button>
+                    </span>
+                  </p>
+                </div>
+              </ion-item>
+            </ion-card>
+          </div>
+          <div *ngIf="upcomingAppointmentDetails.length == 0">
+            <div text-center *ngIf="upcomingAppointmentDetails.length == 0 && !optionObj && upcomingAvailableStatus">
+              <img src="assets/img/calendar.svg" class="not-found" />
+              <p class="not-found-text">No Result Found!</p>
+            </div>
+            <div text-center *ngIf="upcomingAppointmentDetails.length == 0 && !optionObj && upcomingAvailableStatus">
+              <button class="border-form-btn" (click)="bookAppointment()" ion-button type="button">Book Appointment</button>
+            </div>
+          </div>
+        </ion-list>
+        <ion-list *ngSwitchCase="'appo-1'" style="margin-top:10px !important;">
+          <div *ngIf="pastAppointmentDetails.length > 0 && optionObj">
+            <ion-row *ngFor="let pastAppo of pastAppointmentDetails" class="heath-package-card book-appo-border-bottom-color">
+              <ion-col col-12>
+                <ion-row class="health-record-sec">
+                  <ion-col col-12>
+                    <ion-row class="indivisual-sec-border">
+                      <ion-col col-12 class="record-padding padding-0">
+                        <ion-row>
+                          <ion-col col-2 class="padding-0">
+                            <ion-avatar item-start class="avtar-margin">
+                              <img class="past-appo-img-size" [src]="(pastAppo.ProviderImage != null && pastAppo.ProviderImage != '') ? pastAppo.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+                              />
+                            </ion-avatar>
+                          </ion-col>
+                          <ion-col col-7 class="padding-2 margin-auto">
+                            <p class="user-record-details-sec margin-left-5 para-list-top-header margin-top-6 font-weight-500 para-overflow-hidden">{{pastAppo.ProviderName}}</p>
+                            <p class="margin-top-bottom-5 para-overflow-hidden margin-left-5">
+                              <span>
+                                <img src="assets/img/history/appointment/location_icon.svg" class="doc-location-dtl-icon">
+                              </span>
+                              <span class=""> {{pastAppo.Hospital}}</span>
+                            </p>
+                            <p class="margin-top-bottom-5 margin-left-5">
+                              <span>
+                                <img src="assets/img/history/appointment/calendar_icon.svg" class="doc-location-dtl-icon">
+                              </span>
+                              <span class=""> {{pastAppo.bookedDate}}, {{pastAppo.bookedTimeSlot}}
+                              </span>
+                            </p>
+                            <p class="booked-for-text margin-top-15 para-overflow-hidden margin-left-5">
+                              <span>Booked for </span>
+                              <span class="booked-for-color"> {{pastAppo.ConsumerName}}</span>
+                            </p>
+                          </ion-col>
+                          <ion-col col-3 class="spec-arrow padding-0 margin-auto" (click)="reBookAppointment(pastAppo)">
+                            <p class="profile-update-style">Book</p>
+                          </ion-col>
+                        </ion-row>
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div *ngIf="pastAppointmentDetails.length == 0">
+            <div text-center *ngIf="pastAppointmentDetails.length == 0 && optionObj && pastAvailableStatus">
+              <img src="assets/img/calendar.svg" class="not-found" />
+              <p class="not-found-text">No Result Found!</p>
+            </div>
+            <!-- <div text-center *ngIf="pastAppointmentDetails.length == 0 && optionObj && pastAvailableStatus">
+              <button class="border-form-btn" (click)="bookAppointment()" ion-button type="button">Book Appointment</button>
+            </div> -->
+          </div>
+        </ion-list>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

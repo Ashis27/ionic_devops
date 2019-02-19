@@ -1,0 +1,66 @@
+<ion-header no-border>
+	<ion-navbar class="otp-password">
+		<ion-buttons>
+			<button ion-button menuToggle class="left-arrow-style">
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content class="back-image">
+	<div class="logo">
+		<img src="assets/img/logo.png" alt="health-pro logo">
+	</div>
+	<ion-list class="login-form-top">
+		<ion-row>
+			<ion-col class="para-section-style">
+				<p class="para-text-color">
+					Enter
+					<span class="optional-text">Code</span>
+				</p>
+				<p class="otp-text">
+					<span *ngIf="isLoggedInWithContact">We have sent you an SMS on <span class="login-id-sec">+{{login.Contact}}</span> with a 6 digit code(OTP)</span>
+					<span *ngIf="!isLoggedInWithContact">We have sent a 6 digit code(OTP) to the email <span class="login-id-sec">{{login.UserLogin}}</span></span>
+				</p>
+			</ion-col>
+		</ion-row>
+		<form #otpcodeverification="ngForm" (ngSubmit)="onLoginWithOTP(otpcodeverification)" class="login-form">
+			<ion-item class="login-input login-with-otp-input">
+				<ion-input [(ngModel)]="otpCode" name="otp" type="tel" maxlength="6" (keypress)="onlyNumber($event)" placeholder="OTP" #otpverification="ngModel"
+				 spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<ion-col col-12 class="skip-section" text-right>
+					<p class="OTP-text">
+						<span class="">I haven't received OTP
+							<span class="ask-login-signup-text" (click)="resendOTP()">Resend?</span>
+						</span>
+					</p>
+				</ion-col>
+			<div text-center>
+				<button class="login-form-btn" style="text-transform: none !important;" ion-button type="submit">Verify OTP</button>
+			</div>
+			<!-- <ion-col col-12 class="skip-section" text-center>
+				<p class="optional-text">
+					<span class="">I haven't received OTP
+						<span class="ask-login-signup-text" (click)="resendOTP()">Resend?</span>
+					</span>
+				</p>
+			</ion-col> -->
+		</form>
+		<ion-row class="login-with-otp-btn">
+			<ion-col col-12 class="" text-center>
+				<p class="optional-text">
+					OR
+				</p>
+			</ion-col>
+			<ion-col col-12>
+				<div text-center>
+					<button class="login-form-btn login-with-otp"  ion-button (click)="redirectToPasswordLogin()">Login using password </button>
+				</div>
+			</ion-col>
+		</ion-row>
+
+	</ion-list>
+
+</ion-content>

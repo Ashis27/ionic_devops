@@ -1,0 +1,177 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Health Record For {{userDetails.DisplayText}}</ion-title>
+        <ion-buttons end>
+            <!--<button ion-button (click)="dismiss()"> 
+        <ion-icon name="Close">Close</ion-icon>
+      </button>-->
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="viewAllRecords()" *ngIf="healthRecordStatus=='upload'">
+                VIEW RECORDS
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="tabValue">
+            <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" value="uploadedRec-{{i}}" (click)="tabSelection($event,option)">
+                {{option}}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding class="profile-back">
+    <ion-refresher (ionRefresh)="retriveOfflineConsumerDigitalDocuments($event)" *ngIf="optionObj == 0">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-refresher (ionRefresh)="retriveConsumerOfflineDigitalDocumentsByDoc($event)" *ngIf="optionObj == 1">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-row *ngIf="filterStatus" class="animated bounceInRight filterSection">
+        <ion-col col-6>
+            <ion-row class="">
+                <ion-col col-2>
+                    <ion-icon item-left class="icon-filter-profile" name="person"></ion-icon>
+                </ion-col>
+                <ion-col col-10>
+                    <ion-input type="text" class="color_payment-label" [(ngModel)]="searchName" placeholder="Search Name" (ionChange)="getFilterAppoNameSearch($event)"></ion-input>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col col-6>
+            <ion-row class="">
+                <ion-col col-2>
+                    <ion-icon item-left class="icon-filter-profile" name="calendar"></ion-icon>
+                </ion-col>
+                <ion-col col-10>
+                    <ion-select [(ngModel)]="searchDate" (ionChange)="filterDateAppo(searchDate)" class="filter_sec">
+                        <ion-option *ngFor="let item of filterValue" value="{{item.Key}}">{{item.Value}}</ion-option>
+                    </ion-select>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="" *ngIf="documentsBySelf.length > 0 && healthRecordStatus=='recordDetails'" style="margin-top: -15px">
+        <ion-col col-12>
+            <div class="progress_text">
+                Uploaded file size
+            </div>
+            <div class="show_value">{{current}}/{{max}} MB </div>
+            <round-progress class="calculate_size" [current]="current" [max]="max" [color]="show_color" [background]="'#eaeaea'" [radius]="125"
+                [stroke]="20" [rounded]="false" [clockwise]="true" [responsive]="false" [duration]="1000" [animation]="'easeInOutQuart'"
+                [animationDelay]="0" (onRender)="getCurrentValue($event)"></round-progress>
+        </ion-col>
+        <ion-col col-12 class="animated">
+            <ion-row *ngFor="let document of documentsBySelf" class="heath-package-card">
+                <ion-col col-12>
+                    <ion-row class="health-record-sec">
+                        <ion-col col-12>
+                            <ion-row class="indivisual-sec-border">
+                                <ion-col col-11 class="record-padding" (click)="openSeletedFile(document,false)">
+                                    <ion-row>
+                                        <ion-col col-1 *ngIf="document.file_extension !='PDF'">
+                                            <img class="img-size" src="assets/hospitalImages/Docs/{{document.file_extension}}.png" />
+                                            <!--<ion-icon item-left class="icon-record-profile" name="document"></ion-icon>-->
+                                        </ion-col>
+                                        <ion-col col-1 *ngIf="document.file_extension =='PDF'">
+                                            <img class="img-size" src="assets/hospitalImages/Docs/_PDF.png" />
+                                            <!--<ion-icon item-left class="icon-record-profile" name="document"></ion-icon>-->
+                                        </ion-col>
+                                        <ion-col col-11>
+                                            <p class="user-record-details-sec"> {{document.FileName}} </p>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-col>
+                                <ion-col col-1 class="spec-arrow" (click)="recordDetails(document)">
+                                    <ion-icon item-right class="ion-appo" name="more"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row class="indivisual-sec-border" *ngIf="!document.downloadStatus">
+                                <ion-col col-11 (click)="openSeletedFile(document,false)" class="record-padding">
+                                    <ion-row>
+                                        <ion-col col-1>
+                                            <ion-icon item-left class="icon-profile" name="document"></ion-icon>
+                                        </ion-col>
+                                        <ion-col col-3>
+                                            <p class="user-details-sec"> {{document.DocumentSize}} </p>
+                                        </ion-col>
+                                        <ion-col col-1>
+                                            <ion-icon item-left class="icon-profile" name="calendar"></ion-icon>
+                                        </ion-col>
+                                        <ion-col col-4>
+                                            <p class="user-details-sec" style="color:red" *ngIf="document.CreatedDate=='Uploading...'"> {{document.CreatedDate}} </p>
+                                            <p class="user-details-sec" *ngIf="document.CreatedDate!='Uploading...'"> {{document.CreatedDate}} </p>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-col>
+                                <ion-col col-1 class="spec-arrow" (click)="recordDetails(document)">
+                                </ion-col>
+                            </ion-row>
+                            <ion-row class="indivisual-sec-border" *ngIf="countProgress > 0 && countProgress <= 100 && document.downloadStatus">
+                                <div class="progress-outer">
+                                    <div class="progress-inner" [style.width.%]="countProgress"></div>
+                                    <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div>
+                                </div>
+                            </ion-row>
+                            <ion-row class="indivisual-sec-border" *ngIf="document.pre_download_status">
+                                <ion-col col-12 text-center class="record-padding">
+                                    <img style="height: 10px;" src="assets/hospitalImages/progress.gif" />
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+
+    <div *ngIf="documentsBySelf.length == 0 && healthRecordStatus=='recordDetails' && healthrecordAvailableStatus">
+        <div text-center>
+            <img class="not-found" src="assets/img/documents.svg">
+            <p class="msg-text">Oops! Your Record is empty.</p>
+        </div>
+    </div>
+    <ion-fab bottom left (click)="filterAppointment()" *ngIf="healthRecordStatus == 'recordDetails'">
+        <button ion-fab mini>
+            <ion-icon name="funnel"></ion-icon>
+        </button>
+    </ion-fab>
+    <ion-fab bottom right (click)="uploadNewDocument()" *ngIf="healthRecordStatus == 'recordDetails'">
+        <button ion-fab mini>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+        <ion-item class="footer-sec footer-row-section default-add">
+            <ion-row class="footer-row-section">
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HOME</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">EMERGENCY</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HISTORY</p>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer> -->

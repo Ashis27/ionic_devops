@@ -1,0 +1,31 @@
+ <div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img class="splash-logo-width" src="assets/img/logo.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
+<div id="custom-overlay" class="back-color" *ngIf="downloadProgressFlag && codePushSyncStatus !='Up to Update'">
+  <div class="flb">
+    <div class="progress-outer">
+      <div class="Aligner-item Aligner-item--top"></div>
+      <img class="splash-logo-width" src="assets/img/logo.png">
+      <div class="Aligner-item Aligner-item--bottom"></div>
+      <p text-center class="code-push-content">{{codePushSyncStatus}}</p>
+      <p text-center class="code-push-content-status padiing-top-10" *ngIf="downLoadProgressStatus!=null && downLoadStatus">Downloading {{receiveFileSize}} of {{totalFileSize}} KB</p>
+    </div>
+  </div>
+</div>
+<div class="color-theme-default">
+    <span>
+<ion-menu [content]="content" hidden>
+  <ion-header class="menu-slider-back">
+    <ion-toolbar class="toolbar-menu-background" >
+    </ion-toolbar>
+    </ion-header>
+    <ion-content>
+    </ion-content>
+    </ion-menu>
+    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+    </span>
+</div>

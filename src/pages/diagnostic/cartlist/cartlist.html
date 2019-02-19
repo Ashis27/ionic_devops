@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> My Cart</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="addedPackageFromCart.length > 0" (click)="removeAllPackages()">
+        <p class="margin-right-15">CLEAR</p>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="cart-ios">
+    <ion-col *ngIf="addedPackageFromCart.length > 0">
+      <div class="medicinelist medicine-list-border" no-padding *ngFor="let item of addedPackageFromCart; let i = index">
+        <ion-row class="border-bottom-color package-back">
+          <ion-col col-2 class="margin-auto">
+            <img class="search-list-image-back" [src]="(item.DiagnosticCenterName.ProviderImage != null && item.DiagnosticCenterName.ProviderImage != '') ? item.DiagnosticCenterName.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+            />
+            <!-- <img class="search-list-image-back" src="assets/img/bookAppointment/doctor_icon.svg" /> -->
+          </ion-col>
+          <ion-col col-10 class="margin-auto">
+            <p class="para-list-header font-weight-400 profile-user-name para-overflow-hidden para-margin-3-0 header-bottom">{{item.DiagnosticCenterName.CenterName}}</p>
+            <p class="margin-top-2 medicine-sub-content address-margin-left">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{item.DiagnosticCenterName.City}}, {{item.DiagnosticCenterName.CityAreaName}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="padding008 border-bottom-price package-padding" *ngFor="let pck of item.Package;let j = index">
+          <ion-col col-10>
+            <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{pck.PackageName}}</p>
+            <p class="margin-top-6">
+              <span class="content-row-seprator" *ngIf="pck.PackageGender == 1">
+                <img class="dioLocation" src="assets/img/male.svg" /> Male
+              </span>
+              <span class="content-row-seprator" *ngIf="pck.PackageGender == 2">
+                <img class="dioLocation" src="assets/img/female.svg" /> Female
+              </span>
+              <span class="content-row-seprator" *ngIf="pck.PackageGender == 3">
+                <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+              </span>
+            </p>
+            <p class="margin-top-6">
+              <img class="rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" />
+              <!-- <span class="value-font">{{pck.PriceAfterDiscount}}</span>
+              <span class="actual-value">{{pck.OriginalPrice}}</span> -->
+
+              <span class="actual-value" *ngIf="pck.PriceAfterDiscount > 0">{{pck.OriginalPrice}}</span>
+              <span *ngIf="pck.PriceAfterDiscount > 0"> / </span>
+              <span class="value-font">{{pck.PriceAfterDiscount}}</span>
+            </p>
+          </ion-col>
+          <ion-col col-2 text-right (click)="deletePackage(i,j)">
+            <p class="margin-10">
+              <img class="search-medicine-list-image-back" src="assets/img/delete.svg" />
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="">
+          <ion-col col-6 class="margin-auto">
+            <img src="assets/img/doctorProfile/rupee_icon.svg" class="rupee3 total-rupee-icon margin1315">
+            <span class="float-left margin123 total-price-text">{{item.totalPrice}}</span>
+          </ion-col>
+          <ion-col col-6>
+            <button name="square" type="button" class="btn-back-style float-right popup-btn" (click)="bookSelectedPackages(item)">Proceed</button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+    <ion-col text-center *ngIf="addedPackageFromCart.length == 0 && !isAvailable">
+      <img src="assets/img/emptyCart.svg" class="not-found" />
+      <p class="not-found-text">No Item Available!</p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/rupee_icon _white.svg" class="rupee3 margin1315">
+      <span class="float-left margin123">455</span>
+      <span>
+        <button ion-button button-small class="float-right margin-r-15 cart-continue-btn">Continue</button>
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

@@ -1,0 +1,185 @@
+page-healthplandiagnosticappointment{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .verticalLine {
+        width:1%;
+        height:75%;
+        background:green;
+        margin: auto;
+      }
+      .schedule-date{
+        font-size: 17px;
+        font-weight: 500;
+        color: #4e4e4e;
+      }
+      .details-back{
+        background: transparent !important;
+        font-size: 16px;
+        border: 1px solid #60bfbe;
+        padding: 7px 7px 7px 7px;
+        border-radius: 1px;
+        text-align: center;
+        box-shadow: 0px 2px 6px #afafaf;
+      }
+      .book-appo-btn{
+        margin-top: 10px;
+        background: transparent !important;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--primary-color);
+        margin-left: 0px;
+      }
+      .appo-history-list{
+        // border-left: 2px solid green;
+        // /* height: 513px; */
+        // position: absolute;
+        // left: 4%;
+        // margin-left: -3px;
+        // top: 0;
+      }
+      .complete-process-icon{
+        color:grey;
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: -2px;
+      }
+      .upcoming-process-color{
+        color:var(--primary-color);
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: -2px;
+      }
+      .doc-name{
+        color: #585858;
+      }
+      .fab {
+        contain: initial;
+    }
+    
+    ion-fab {
+        ion-fab-list button[ion-fab] {
+            overflow: visible;
+            position: relative;
+    
+          div.label {
+            position: absolute;
+            right: 48px;
+            background: rgba(0,0,0,0.7);
+            height: 24px;
+            line-height: 16px;
+            padding: 5px 8px;
+            border-radius: 3px;
+            color: #fff;
+            box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+    .timeline {
+      list-style-type: none;
+      position: relative;
+  }
+  .timeline:before {
+      content: ' ';
+      background: #d4d9df;
+      display: inline-block;
+      position: absolute;
+      left: 29px;
+      width: 2px;
+      // height: 39%;
+  }
+  .timeline:after {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 30px;
+    width: 2px;
+    height: 88%;
+    top: -50px;
+}
+  .timeline > .vertical-allign {
+    margin: 0px 0;
+    padding-left: 15px;
+  }
+  .timeline > .vertical-allign:before {
+      content: ' ';
+      background: white;
+      display: inline-block;
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid #22c0e8;
+      left: 20px;
+      width: 20px;
+      height: 20px;
+      z-index: 400;
+  }
+  .footer .toolbar .toolbar-background{
+    background-color: var(--primary-color) !important;
+  }
+  .book-appo-footer-btn{
+    width: 35px;
+    margin-bottom: -7px;
+}
+.upcoming-text-style{
+  text-align: center;
+  color: #e88a66;
+  margin-top: 10px;
+  font-weight: 500;
+}
+.pending-text-style{
+  text-align: center;
+  color: #e88a66;
+  margin-top: 10px;
+}
+.complete-text-style{
+  color:#52c152 !important;
+}
+.expired-text-style{
+  text-align: center;
+  color: #9e9e9e;
+  margin-top: 5px;
+  font-weight: 200;
+}
+.exp-sec{
+  color: #9e9e9e;
+  font-size: 16px;
+  background: transparent;
+}
+.pulse {
+  transform: scale(0.9);
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+  background: rgba(49, 204, 196, 0.4);
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(49, 204, 196, 0.4);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+    box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(49, 204, 196, 0.4);
+      box-shadow: 0 0 0 10px rgba(49, 204, 196, 0.4);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+      box-shadow: 0 0 0 0 rgba(49, 204, 196, 0.4);
+  }
+}
+   }

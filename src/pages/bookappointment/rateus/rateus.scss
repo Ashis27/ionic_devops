@@ -1,0 +1,104 @@
+
+page-rateus{
+    .modal_content {
+        position: relative;
+    top: 15%;
+    left: 0px;
+    /* right: 1px; */
+    width: 100%;
+    /* height: 55%; */
+    padding: 10px;
+    z-index: 100;
+    margin: 0 auto;
+    padding: 10px;
+    color: #66696f;
+    background: #e8e8e8;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e8e8e8));
+    background: linear-gradient(to bottom, #fff 0%, #e8e8e8 100%);
+    border-radius: 5px;
+    -webkit-box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+    box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+  }
+   .main-view{
+    background: rgba(53, 51, 51, 0.34);
+  }
+  .rate-us-msg{
+      text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #515a61;
+  }
+  div > .row{
+      margin-left: 0px;
+      margin-right: 0px;
+  }
+  #skipToNext{
+      position: relative;
+    /* bottom: 30px; */
+    width: 100%;
+    background: #7cba84 !important;
+    text-align: right;
+    cursor: pointer;
+    /* z-index: 5; */
+    float: right;
+    margin-right: 0px;
+    color: #ffffff;
+    margin-bottom: 1px;
+    padding: 9px 0px 5px 0px;
+    text-align: center;
+}
+    .rate-us-icon{
+        width: 65px;
+    height: 65px;
+    margin-top: 5px;
+    }
+    .rate-us-image{
+        text-align: center;
+         margin-top: 0px;
+    }
+    .toolbar-background{
+        background: rgb(124, 186, 132) !important;
+    }
+    .submitRate{
+text-align: right;
+    margin-top: 10%;
+    }
+    .toolbar-title{
+        color:white;
+    }
+    ion-item{
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+    .range-md .range-knob-handle .range-pin {
+  transform: translate3d(0, 0, 0) scale(1); }
+
+.range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+  transform: scale(1); }
+
+.range-ios .range-knob-handle .range-pin {
+  transform: translate3d(0, 0, 0) scale(1); }
+  .item-range.item-range{
+      border-bottom: 1px solid rgba(222, 222, 222, 0) !important;
+  }
+.range-pin::before{
+    background:rgba(52, 52, 52, 0.12) !important;
+}
+ion-label{
+    display: block;
+    overflow: auto !important;
+    flex: 1;
+font-size: 17px !important;
+    text-overflow: inherit !important;
+    white-space: inherit;
+        text-align: center !important;
+}
+.rate-us-sec{
+text-align: center;
+margin-top: -30px !important;
+padding: 0px !important;
+}
+}

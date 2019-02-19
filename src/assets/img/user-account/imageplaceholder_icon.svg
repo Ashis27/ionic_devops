@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="141.5px" height="141.5px" viewBox="0 0 141.5 141.5" enable-background="new 0 0 141.5 141.5" xml:space="preserve">
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M70.75,6.452c34.79,0,62.992,28.228,62.992,63.047
+		c0,34.82-28.203,63.048-62.992,63.048S7.758,104.32,7.758,69.5C7.758,34.68,35.96,6.452,70.75,6.452z"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#EAEAEA" d="M70.75,10.562c32.522,0,58.886,26.388,58.886,58.938
+		c0,32.55-26.364,58.938-58.886,58.938S11.864,102.05,11.864,69.5C11.864,36.95,38.228,10.562,70.75,10.562z"/>
+	<ellipse fill="#B2B3B3" cx="70.75" cy="48.281" rx="22.25" ry="22.719"/>
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M70.75,11.062c32.522,0,58.886,26.388,58.886,58.938c0,32.55-26.364,58.938-58.886,58.938
+				S11.864,102.55,11.864,70C11.864,37.45,38.228,11.062,70.75,11.062z"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<ellipse clip-path="url(#SVGID_2_)" fill="#B2B3B3" cx="70.75" cy="117.5" rx="49.25" ry="39"/>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,225 @@
+page-actionbox {
+    .time-slot-card-background {
+        margin: 15px 0px 0px 0px !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .segment-ios .segment-button.segment-activated {
+        background-color: rgb(255, 255, 255) !important;
+        border-bottom: 1px solid var(--button-color) !important;
+    }
+    .segment-ios .segment-button {
+        border-top: 0px !important;
+        border-color: #e2e2e2;
+    }
+    .call-btn {
+        color: #4CAF50 !important;
+        font-size: 13px !important;
+    }
+    .call-icon {
+        margin-right: 3px;
+        font-size: 20px;
+    }
+    .profile-w-h {
+        width: 80px !important;
+        height: 80px!important;
+        border: 2px solid white;
+    }
+    .cancelled-status {
+        color: var(--button-color);
+    }
+    .calander-icon-margin {
+        width: 28px;
+        float: right;
+        margin-top: -4px;
+    }
+    .avtar-margin {
+        margin: 8px 12px 8px 0px !important;
+    }
+    .tab-heading-color {
+        color: var( --black-light-color);
+    }
+    .img-size {
+        // background: url(../assets/img/bookAppointment/specialities_icon.svg);
+        max-width: 70px;
+        background: #e4e4e4;
+        width: 66px !important;
+        border-radius: 50%;
+        border: 1px solid #e4e4e4;
+        padding: 5px;
+    }
+    .past-appo-img-size {
+        max-width: 50px;
+        background: #e4e4e4;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        padding: 3px;
+    }
+    .doc-location-dtl-icon {
+        width: 17px;
+        display: inline;
+        margin-left: -3px;
+        vertical-align: bottom;
+    }
+    .doc-dtl-date-icon {
+        width: 26px;
+        display: inline;
+        vertical-align: bottom;
+        margin-left: -3px;
+        margin-top: 3px;
+    }
+    .booked-for-text {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .historyBottom>.item-inner>.input-wrapper>.label {
+        margin: 13px 8px 0px 0 !important;
+    }
+    .booked-for-color {
+        color: var(--primary-color)
+    }
+    .back-color {
+        background-color: #f9f9f9 !important;
+    }
+    .due-date {
+        color: var(--primary-color);
+        float: left;
+        font-weight: 400;
+        font-size: 16px;
+    }
+    .card-img {
+        border-right: 2px solid var(--health-plan-pregnancy-color);
+        // padding: 0 13px;
+    }
+    .card-title {
+        color: #636363;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .dash-action {
+        font-weight: bold;
+        color: var(--button-color);
+        float: right;
+        font-size: 16px;
+        margin-top: 10px;
+        // margin: 8px 0 0 0;
+    }
+    .pregnancy-status>.range-slider>.range-bar {
+        top: 18px;
+        height: 5px;
+        background: white !important;
+    }
+    .dashboard-header {
+        background: url("https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy_back.png") !important;
+    }
+    .img-banner {
+        height: 9rem;
+        border-radius: 50%;
+        border: 2px solid var(--health-plan-pregnancy-color);
+        margin: -40px 0 -50px 0;
+        background: white;
+        padding: 10px;
+    }
+    .no-color {
+        background: none !important;
+    }
+    .no-color>.item-inner {
+        border: none !important;
+    }
+    // actionsheet css
+    .ion-md-share {
+        color: #ED4248;
+    }
+    .ion-md-arrow-dropright-circle {
+        color: #508AE4;
+    }
+    .ion-md-heart-outline {
+        color: #31D55F;
+    }
+    .action-sheet-cancel ion-icon,
+    .action-sheet-destructive ion-icon {
+        color: #757575;
+    }
+    #dashboard-menu {
+        background: rgb(255, 255, 255) !important;
+        box-shadow: 10px 10px 100px 60px #191919;
+        border-radius: 40px 40px 0px 0px;
+    }
+    .menu-sections {
+        text-align: center;
+    }
+    .menu-sections>img {
+        width: 45%;
+    }
+    .menu-sections>p {
+        color: #737373;
+        font-weight: 500;
+    }
+    .menu-position {
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+    }
+    .button-menu {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+    .button-menu>button {
+        font-size: 3rem;
+        padding: 0px 11px;
+        height: 5rem;
+        border-radius: 50%;
+    }
+    .color-white {
+        color: white;
+    }
+    .booking-slot {}
+    .fab[mini] {
+        margin: 8px;
+        width: 50px;
+        height: 50px;
+        line-height: 40px;
+    }
+    .fab ion-icon {
+        font-size: 35px;
+    }
+    .range .range-knob {
+        width: 50px !important;
+        height: 50px !important;
+        top: -5px !important;
+        background: var(--primary-color) !important;
+        outline: none !important;
+    }
+    .weeks-number {
+        font-size: 17px;
+        font-weight: bold;
+        color: #3af1ee;
+    }
+    .card-body {
+        margin: 0 0 2px;
+        font-size: 1.3rem;
+        font-weight: normal;
+        line-height: 1.1;
+        color: #898787;
+    }
+    p {
+        color: gray;
+    }
+    .actioncard {
+        box-shadow: 4px 5px 18px -2px #b9b7b7;
+    }
+    .pending-card {
+        box-shadow: 4px 5px 18px -2px #b9b7b7;
+        margin-bottom: 2rem;
+    }
+}

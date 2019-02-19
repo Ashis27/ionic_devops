@@ -1,0 +1,121 @@
+page-applicationstartuppage {
+  #custom-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    width:100%;
+    //background-color: #429f33 !important;
+     animation: colorchange 1.5s; /* animation-name followed by duration in seconds*/
+           /* you could also use milliseconds (ms) or something like 2.5s */
+        -webkit-animation: colorchange 5s; /* Chrome and Safari */
+  }
+  
+  .flb {
+   // background-color: rgb(124, 186, 132);
+    height:100%;
+    width:100%;
+    animation: zoomIn 2s linear forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Aligner-item {
+    max-width: 50%;
+  }
+  .Aligner-item--top {
+    align-self: flex-start;
+  }
+  .Aligner-item--bottom {
+    align-self: flex-end;
+  }
+  #custom-overlay img {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    animation: animation 4100ms linear infinite both;
+    animation-delay: 1s;
+  }
+  .splash-logo-width{
+    width:100% !important;
+  }
+  //  @keyframes colorchange
+  //     {
+  //       0%   {background:var(--primary-color);}
+  //       50%  {background:var(--primary-color)}
+  //       75%  {background:var(--primary-alpha-Dot75)}
+  //       100% {background:var(--primary-alpha-Dot25)}
+  //     }
+  
+  //     @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+  //     {
+  //       0%   {background:var(--primary-color);}
+  //       50%  {background:var(--primary-color)}
+  //       75%  {background:var(--primary-alpha-Dot75)}
+  //       100% {background:var(--primary-alpha-Dot25)}
+  //     }
+  // }
+   @keyframes colorchange
+      {
+        0%   {background:var(--white-color);}
+        50%  {background:var(--white-color)}
+        75%  {background:var(--white-color)}
+        100% {background:var(--primary-alpha-Dot25)}
+      }
+  
+      @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+      {
+        0%   {background:var(--white-color);}
+        50%  {background:var(--white-color)}
+        75%  {background:var(--white-color)}
+        100% {background:var(--primary-alpha-Dot25)}
+      }
+      .indivisual-sec-border .progress-inner {
+        min-width: 1%;
+      white-space: nowrap;
+      overflow: hidden;
+      /* padding: 1px 0px 1px 0px; */
+      border-radius: 3px;
+      background-color: #7cba84 !important;
+      font-size: 13px;
+      height: 4px;
+      color: white;
+      margin-top: 5px;
+      margin-left: 5px;
+      }
+      .indivisual-sec-border .progress-outer {
+        width: 96% !important;
+     }
+     .download-progress{
+      background: #ececec !important;
+      height: 14% !important;
+      margin-top: 65% !important;
+      padding: 10px 0px 0px 15px !important;
+      width: 90% !important;
+     // margin: auto !important;
+      border-radius: 5px !important;
+      margin-left: 5%;
+      margin-right: 5%;
+  }
+  .code-push-content-status{
+    color: #f37646;
+    font-size: 16px;
+    margin: 0px;
+    font-weight: 400;
+  }
+  .code-push-content{
+    color: #777777;
+    font-size: 18px;
+    margin: 0px;
+    font-weight: 500;
+  }
+  .back-color{
+    background-color: var(--white-color) !important;
+  }
+  
+  }
+  
+  

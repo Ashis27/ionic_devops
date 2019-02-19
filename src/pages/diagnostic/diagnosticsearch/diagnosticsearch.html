@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+    <ion-row class="location-search-header">
+      <!-- <ion-col col-1 class="close-sec">
+        <img src="assets/img/back-arrow.png" class="back-arrow" />
+      </ion-col> -->
+      <ion-col col-8 class="title-header-text header-title margin-top-bottom-5 margin-auto" (click)="selectedDiagnosticCenter()">
+        Diagnostic
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon filter-icon-upload float-right" src="assets/img/cartWhite.svg" />
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="getLocation()">
+        <img class="menu-search-img filter-icon-upload" src="assets/img/register/location.svg" />
+      </ion-col>
+      <!-- <ion-col col-4 class="header-title" (click)="getLocation()">
+        <p class="active-city-text para-overflow-hidden">Location
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </p>
+        <p class="active-location-text para-overflow-hidden">
+          <span *ngIf="selectedCityAndLocation.activeLocation !=''">{{selectedCityAndLocation.activeLocation}},</span> {{selectedCityAndLocation.activeCity}}
+        </p>
+      </ion-col> -->
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="margin-top-bottom-15 search-input-ios">
+    <ion-col col-12 class="">
+      <ion-row class="input-box-border-radious number-email-field contact-background para-margin-0">
+        <ion-col col-1>
+          <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+        </ion-col>
+        <ion-col col-11 class="input-for-email-mobile padding-2">
+          <ion-item class="contact-number-field default-add padding-0">
+            <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Search Diagnostic Center, Test, Package"
+              (keyup)="getResultBySearchedKeyword()" (click)="selectAllText($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-row class="" *ngIf="diagnostic.length >0">
+    <p class="search-header">Best Diagnostic Center In Your Location
+    </p>
+    <ion-col col-12 *ngFor="let center of diagnostic" (click)="selectedDiagnosticCenter(center)">
+      <div class="medicinelist" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-2>
+            <img class="img-size" [src]="(center.ProviderImage != null && center.ProviderImage != '') ? center.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+            />
+          </ion-col>
+          <ion-col col-10>
+            <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-3-0 medicine-list-header">{{center.CenterName}}</p>
+            <p class="margin-top-2 medicine-sub-content">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{center.CityAreaName}}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row> -->
+  <ion-row class="" *ngIf="diagnostic.length >0">
+    <p class="search-header">
+      <span>Diagnostic Center</span>
+      <span class="float-right" (click)="seeAllCenters()">See All</span>
+    </p>
+    <ion-col col-12 *ngFor="let center of diagnostic" (click)="selectedDiagnosticCenter(center)">
+      <div class="medicinelist" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-2>
+            <img class="img-size" [src]="(center.ProviderImage != null && center.ProviderImage != '') ? center.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+            />
+          </ion-col>
+          <ion-col col-10 class="margin-auto padding-10">
+            <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-0 medicine-list-header">{{center.CenterName}}</p>
+            <p class="margin-top-6 medicine-sub-content">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{center.CityAreaName}}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="" *ngIf="packages.length >0">
+    <p class="search-header">
+      <span>Health Packages</span>
+      <span class="float-right" (click)="seeAllPackages()">See All</span>
+    </p>
+    <ion-col col-12 *ngFor="let package of packages" class="padding-0">
+      <ion-card class="card-box-shadow" class="padding-left-right-10">
+        <ion-item class="padding-0" (click)="selectedHealthPackage(package)">
+          <ion-avatar item-start class="avtar-margin">
+            <img class="img-size padding-0" [src]="(package.ImageUrl != null && package.ImageUrl != '') ? package.ImageUrl :'assets/img/package2.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <ion-row>
+              <ion-col col-11>
+                <h4 class="profile-user-name para-overflow-hidden">{{package.PackageName}}
+                </h4>
+              </ion-col>
+              <ion-col col-1>
+                <span style="float:right;width: 25px;">
+                  <img src="assets/img/doctorProfile/medical_icon.svg">
+                </span>
+              </ion-col>
+            </ion-row>
+            <p class="margin-top-2 medicine-sub-content para-margin-0 para-overflow-hidden">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{package.CenterName}}, {{package.CityAreaName}}</p>
+            <p class="margin-6">
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 1">
+                <img class="dioLocation" src="assets/img/male.svg" /> Male
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 2">
+                <img class="dioLocation" src="assets/img/female.svg" /> Female
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 3">
+                <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+              </span>
+            </p>
+            <p class="margin-6">
+              <span class="">
+                <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+              <span class="original-price" *ngIf="package.GenericDiscount > 0">{{package.OriginalPrice}}</span>
+              <span *ngIf="package.GenericDiscount > 0"> / </span>
+              <span class="discount-price">{{package.PriceAfterDiscount}}</span>
+            </p>
+          </div>
+        </ion-item>
+        <ion-row class="text-center-appobtn border-top-color padding-5">
+          <ion-col col-4 class="">
+          </ion-col>
+          <ion-col col-4 class="" (click)="addToCart(package)">
+            <button ion-button small outline class="transparent-btn-style">Add To Cart</button>
+          </ion-col>
+          <ion-col col-4 class="">
+            <button ion-button small class="button-primary solid-btn-style " (click)="bookPackage(package)">Book Package</button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+
+      <!-- <div class="medicinelist" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-2 (click)="selectedHealthPackage(package)">
+            <img class="img-size" [src]="(package.ProviderImage != null && package.ProviderImage != '') ? package.ProviderImage :'assets/img/package2.svg'"
+            />
+          </ion-col>
+          <ion-col col-8 (click)="selectedHealthPackage(package)">
+            <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-3-0 medicine-list-header">{{package.PackageName}}</p>
+            <p class="margin-top-2 medicine-sub-content margin-6">
+              <img class="dioLocation" src="assets/img/doctorProfile/location_icon.svg" />{{package.CenterName}}, {{package.CityAreaName}}</p>
+            <p class="margin-6">
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 1">
+                <img class="dioLocation" src="assets/img/male.svg" /> Male
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 2">
+                <img class="dioLocation" src="assets/img/female.svg" /> Female
+              </span>
+              <span class="content-row-seprator" *ngIf="package.PackageGender == 3">
+                <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+              </span>
+            </p>
+            <p class="margin-6">
+              <span class="">
+                <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+              <span class="original-price">{{package.OriginalPrice}}</span> /
+              <span class="discount-price">{{package.PriceAfterDiscount}}</span>
+            </p>
+          </ion-col>
+          <ion-col col-2 class="text-align-right margin-auto" (click)="addToCart(package)">
+            <img class="cart-add-icon" src="assets/img/add.svg" />
+          </ion-col>
+        </ion-row>
+      </div> -->
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 text-center *ngIf="diagnostic.length == 0 && packages.length == 0 && !isCenterAvailable &&  !isPackageAvailable">
+      <img src="assets/img/bookAppointment/hospital_icon.svg" class="not-center-found" />
+      <p class="not-found-text">No result for the selected city and area!
+        <br/> Try a different search</p>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+</ion-content>

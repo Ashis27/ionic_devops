@@ -1,0 +1,297 @@
+page-bmicalculator {
+//  .col{
+//     padding: 0px !important;
+//   }
+.background_image{
+    position: fixed;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        height: 100%;
+        background-position: center !important;
+        background-size: cover;
+        opacity: 0.4;
+        filter: alpha(opacity=40);
+        background-image: url('../assets/imgs/calculator/bmi.jpg') ;
+        z-index:-1;
+  }
+.scroll-content{
+    padding:0px !important;
+    z-index:1;
+}
+
+
+// .bg_image{
+//     width: 100%;
+//     height:200px;
+//     background-image: url('../assets/imgs/calculator/Body-Fat.jpg') ;
+//     background-repeat: no-repeat;
+//     background-size:100%;
+// }
+.list{
+    margin:5px 5px 16px !important;
+}
+.item{
+    background-color: transparent !important;
+    border-bottom:1px solid #fff !important;
+}
+
+
+
+    .label {
+        font-weight: 500;
+        margin: 0px 0px 0px 0px !important;
+    }
+    .item, .item-md {
+        border-bottom:none !important; 
+        padding: 0px !important;
+    }
+    .item-inner {
+        padding: 0px !important;
+    }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .input-wrapper{
+        padding: 0px !important;
+    }
+    .input-cover{
+        margin-top: -3px;
+    }
+    img{
+      margin-top: 13px;        
+    }
+    .button{
+        background-color:#f15c23 !important;
+        color:white;
+        width:100%;
+        // margin-left:1%;
+    }
+    .toolbar-background{    
+        background: #39bebc !important;
+    }
+    .toolbar-title{
+       color: #fff8f8 !important;
+    }
+    ion-label{
+        color:#2d2d2d !important;
+    }
+    // p{
+    //   //  font-size: 25px;
+    // text-align: center;
+    // color: #34bdbc;
+    // }
+
+
+// vinod styles starts here
+
+    .margin-bottom-5{
+        margin-bottom:5px;
+    }
+    .col-padding-0{
+       padding: 0px !important;
+    }
+    .padding-top-20{
+        padding:20px 0px 0px 0px;
+        font-weight:300;
+     }
+    .header_label{
+        font-weight: 300;
+    }
+    .text-input{
+        margin: 13px 0px !important;
+     }
+
+
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+       // font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+        margin-top:30px;
+     }
+    // .appointment_book{
+    //     font-size: 12px;
+    //     text-align: left;
+    //     color: #34bdbc;
+    //     text-decoration: underline;
+    // }
+    .result{
+        font-size: 16px;
+        margin:5px
+    }
+    
+     .Cal_Des{
+
+     }
+     ion-select{
+        padding: 4px 0px 4px 0px !important;
+        margin:9px 0px !important;
+     }
+     .select_label{
+        margin: 0px 0px 0px 12px !important;
+        color: rgba(45,45,45,0.6) !important;
+        font-size: 14px;
+     }
+     .input, .selectitem{
+        background-color: rgba(83, 79, 79, 0.1803921568627451) !important;
+        color:#222;
+        border-radius:5px;
+        //line-height: 22px;
+        //height: 45px;
+      }
+    .text-input{
+        text-align:center;
+        font-size:18px;
+    }
+
+    //  .progress_wrapper{
+    //     width:100%;
+    //     height:auto;
+    //     margin:10px 0px 5px 0px;
+    //     position: relative;
+    //  }
+
+    //  round-progress{
+    //      width:150px !important;
+    //      height:150px !important;
+    //      margin: 0 auto;
+    //      padding-bottom: none !important;
+    //      position: relative;
+    //  }
+    // .gender_wrapper{
+    //     width:60%;
+    //     margin:0 auto;
+    // }
+    //  .progress_wrapper .preogress_text{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 0;
+    //     transform: translateY(-50%);
+    //     -webkit-transform: translateY(-50%);
+    //     text-align: center;
+    //     width: 100%;
+    //     z-index: 1;
+    //     font-size:25px;
+    //     font-weight:500
+    // }
+    
+    // .gendercls{
+    //     width: 40px;
+    //     height:40px;
+    //     background: transparent;
+    //     background-color: rgb(300, 300, 300);
+    // }
+    // .text_col{
+    //     color:var(--icon-color);
+    // }
+    // .activate{
+    //     box-shadow: 1px 1px 1px 1px #e0f4f4;
+    // }
+}
+
+
+// added by vinod for calculators  13/07/2018
+.progress_wrapper{
+    width:100%;
+    height:auto;
+    margin:10px 0px 5px 0px;
+    position: relative;
+ }
+
+ .progress_text{
+    img{
+        width:35px;
+        height:35px;
+    }
+ }
+
+ round-progress{
+     width:150px !important;
+     height:150px !important;
+     margin: 0 auto;
+     padding-bottom: none !important;
+     position: relative;
+ }
+.gender_wrapper{
+    width:60%;
+    margin:0 auto;
+}
+ .progress_wrapper .progress_text{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    font-size:16px;
+    font-weight:500
+}
+.gendercls{
+    width: 40px;
+    height:40px;
+    margin-top:5px;
+    background: transparent;
+}
+.text_col{
+   color:var(--icon-color);
+   text-align: center;
+}
+.activate{
+    box-shadow: 1px 1px 1px 1px #e0f4f4;
+    border-radius: 5px;
+}
+ion-select{
+    border-right: none !important; 
+}
+
+// .highlight_danger{
+//     // border:1px solid var(--button-color);
+//     color: red !important;
+//     font-size:large !important;
+// }
+
+// .highlight_normal{
+//     // border:1px solid var(--button-color);
+//     color: #34bdbc !important;
+//     font-size:large !important;
+// }
+// .now_highlight{
+//     color: #34bdbc;
+//     font-weight:300;
+//     font-size:16px;
+// }
+.bmi_ranges{
+    width:94%;
+    margin-left:3%;
+}
+
+
+
+
+
+  

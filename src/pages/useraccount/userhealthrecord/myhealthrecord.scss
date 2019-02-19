@@ -1,0 +1,340 @@
+page-myhealthrecord{
+     .profile-section{
+            height: 180px;
+    }
+    .img-height{
+        height:100px !important;
+    }
+    .hos-logo{
+        text-align: center;
+            background-color: rgba(113, 155, 183, 0.91);
+    }
+    .profile-back{
+       // background-color: #e4e4e4;
+
+    }
+    .icon-btn-color{
+        background: #7da4bd !important;
+      
+    }
+    .icon-color{
+  color:white !important;
+    }
+
+    .familyListNotAvailable{
+        color: #415371;
+    font-weight: bold;
+    }
+    .login-input-dropdown{
+            // margin-top: 5px !important;
+             margin-bottom: 5px !important;
+             height: 40px;
+                 background-color:rgba(255, 255, 255, 0.17) !important;
+                 padding:0px !important
+    }
+
+    .icon-profile-upload{
+              font-size: 19px;
+    /* border-radius: 50%; */
+    /* border: 1px solid #4077bb; */
+    /* padding: 5px 6px 4px 6px; */
+    color: #798596;
+        margin-top: 17px !important;
+    }
+    .login-input-family-details{
+            border: 1px solid #527388;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    }
+    .family-desc{
+           // padding: 5px !important;
+           height:45px !important;
+               margin-top: -15px !important;
+    }
+     .healthPackage-img{
+        margin-top: 15px;
+    }
+    
+   
+    .btn-width{
+        width: 5% !important;
+    }
+    .card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+    width:150px;
+    height:150px;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+  }
+    }
+        .ion-appo{
+         color: #969c96 !important;
+        font-size: 1.5em !important;
+}
+.record-card{
+        padding-left: 5px !important;
+    font-size: 1.5rem !important;
+}
+
+    .download-icon{
+        text-align: right !important;
+    }
+    .record-desc{
+        overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    }
+.footer-sec{
+        padding-left:0px !important;
+        text-align: center !important;
+           height: 0px !important;
+}
+.footer-name{
+    font-size: 9px !important;
+    margin-top: -10px;
+}
+ .heath-package-card{
+     
+        font-size: 14px !important;
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+    border-radius: 2px !important;
+    }
+    .health-record-card{
+        margin-top: 0px !important;
+    }
+
+    .uploadedDocument{
+      ///  width: 25px;
+        height: 20px;
+    }
+    
+.view-file{
+           color: #b3b3b3 !important;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 10px;
+}
+.deleteIcon{
+    color: #da5353;
+    font-size: 20px !important;
+}
+  .progress-bar {
+    background-color: #dbe1e6;
+    height: 20px;
+    width: 80%;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+    border-radius: 5px;
+  
+    span {
+        text-align: center;
+        display: inline-block;
+        height: 100%;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+        background-color: #347dbb;
+        transition: width .4s ease-in-out;    
+    }
+}
+.user-details-sec{
+        margin-top: 10px;
+        color: #8b948d;
+    font-size: 10px;
+}
+.user-record-details-sec{
+        margin-top: 5px;
+    color: #3d434a;
+        overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.spec-arrow{
+        margin-top: 10px;
+            color: #798596;
+            text-align: right;
+}
+.spec-arrow-view{
+    margin-top: 0px;
+            color: #798596;
+            text-align: right;
+}
+.indivisual-sec-border{
+        //
+     height: 25px;
+}
+.icon-profile{
+        font-size: 14px;
+    /* border-radius: 50%; */
+    /* border: 1px solid #4077bb; */
+    /* padding: 5px 6px 4px 6px; */
+     color: #8b948d;
+    margin-top: 8px;
+    margin-left: 1px;
+}
+.icon-record-profile{
+    font-size: 25px;
+   // margin-top: 5px;
+     color: #798596;
+}
+.health-record-sec{
+   border-bottom: 1px solid #ffffff;
+    background: rgba(230, 230, 230, 0.44)!important;
+    margin-top: -5px !important;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px #c3c3c3;
+}
+.upload-doc{
+        margin-top: 0px;
+}
+.emergency-service{
+       width:40%;
+          margin-top: 20%;
+   }
+    .msg-text{
+     font-size: 1.7rem !important;
+    color: #697b8e;
+    }
+    .content-textarea{
+      background: rgba(255, 255, 255, 0.17) !important;
+      padding-left: 0px !important;
+    }
+    .upload-sec{
+            color: #a8a8a8;
+    }
+    .img-size{
+          //height: 100% !important;
+    margin-top: 5px;
+    }
+    .active-download{
+            border-bottom: 1px solid #ffffff;
+    opacity: 0.5 !important;
+    background: rgb(103, 111, 103) !important;
+    margin-top: -5px !important;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px #c3c3c3;
+    }
+    .indivisual-sec-border .progress-inner {
+      min-width: 1%;
+    white-space: nowrap;
+    overflow: hidden;
+    /* padding: 1px 0px 1px 0px; */
+    border-radius: 3px;
+    background-color: #7cba84 !important;
+    font-size: 13px;
+            height: 4px;
+    color: white;
+        margin-top: 5px;
+    margin-left: 5px;
+    }
+    .progress_count{
+            margin-top: 5px;
+    margin-left: 5px;
+    }
+    .indivisual-sec-border .progress-outer {
+       width: 96% !important;
+    }
+    .icon-filter-profile{
+            color: #f4f4f4 !important;
+                margin-top: 13px;
+    }
+    input::placeholder {
+  color: white !important;
+}
+.filter_sec .select-text{
+      color: white !important;
+}
+.select-icon-inner{
+     color: white !important;
+}
+.filterSection{
+margin-left: -16px !important;
+    margin-right: -16px !important;
+    margin-top: -17px !important;
+    text-align: center;
+        margin-bottom: 15px !important;
+}
+.text-input{
+    color: white !important;
+}
+ion-select{
+        max-width: 100% !important;
+    text-align: left !important;
+}
+.memeber-sec .select-text{
+        color: #878a8e !important;
+}
+.memeber-relation .select-text{
+        color: #878a8e !important;
+}
+.memeber-sec .select-icon-inner{
+      color: #878a8e !important;
+}
+.memeber-relation .select-icon-inner{
+            color: #878a8e !important;
+}
+textarea.text-input {
+    display: block;
+    margin-left: 0px !important;
+        color: #909498 !important;
+}
+.record-padding{
+    padding:0px !important;
+}
+ion-badge{
+        padding: 6px 7px 2px 7px !important;
+}
+.calculate_size{
+        width: 35% !important;
+    margin: auto !important;
+        height: 95% !important;
+            padding: 5px;
+}
+.show_value{
+   text-align: center;
+    margin-top: 15%;
+    font-size: 15px;
+    color: #a7a7a7;
+    position: absolute;
+    line-height: 1;
+    margin-left: 38%;
+}
+circle{
+    stroke: rgba(124, 187, 131, 0.26) !important;
+}
+.progress_text{
+      font-size: 17px;
+    color: #bfa02f;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+  }
+}

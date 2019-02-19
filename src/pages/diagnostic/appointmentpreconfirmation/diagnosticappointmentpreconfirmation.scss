@@ -1,0 +1,223 @@
+page-diagnosticappointmentpreconfirmation {
+
+    .time-slot-card-background{
+        margin: 0px !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .bar-button-default-ios{
+        margin-top: 15px !important;
+    }
+    .appo-dtl-date-header{
+        
+        font-weight: 500;
+    }
+    .appo-dtl-padding{
+        padding: 0px 18px;
+       
+    }
+    .doc-detail-location-icon{
+        width: 17px !important;
+        float:left;
+    }
+    .pay-now-back{
+        background-color: var(--primary-color) !important;
+    }
+    .selected-datetime-header{
+        color: #f15c23;
+        font-weight: 400 !important;
+    }
+    .hospital-margin-left{
+        margin: -10px 0px 15px 42px !important;
+    }
+    .appo-dtl-sub-heading {
+        font-size: 17px;
+        color: #252525;
+        font-weight: 400;
+        vertical-align: super;
+    }
+    .doc-dtl-date-icon{
+        width: 30px;
+        display: inline;
+        vertical-align: bottom;
+        margin-left: -3px;
+       
+    }
+    .img-size{
+        // background: url(../assets/img/bookAppointment/specialities_icon.svg);
+        max-width: 60px;
+        background: #e4e4e4;
+        height: 60px !important;
+        width: 60px !important;
+        border-radius: 50%;
+        border: 2px solid #e4e4e4;
+        padding: 3px;
+    }
+    .border-bottom{
+        border-bottom: 1px solid #6dcfcd;
+    }
+    .family-icon{
+        width: 23px !important;
+    }
+    .confirm-btn{
+        margin-top: 10%;
+    }
+    .wallete-w{
+        width:30px;
+    }
+    .doc-fee-text{
+        font-size: 15px;
+        vertical-align: bottom;
+        font-weight: 500;
+    }
+    .doc-id-text{
+        font-size: 20px;
+        vertical-align: bottom;
+       
+    }
+    .rupee-icon-width{
+       // width:18px;
+       width: 16px;
+    vertical-align: bottom;
+    }
+    .wallete-w-text{
+        font-weight: 500;
+        vertical-align: super;
+        font-size: 16px;
+    }
+    .wallete-a-text{
+      
+        vertical-align: super;
+        font-size: 16px;
+    }
+    .rating-sec > ul {
+        padding: 0px;
+        margin: 0px;
+        &.rating li {
+          padding: 0px !important;
+          background: none;
+          color: #ffb400;
+      
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+
+.profile-w-h{
+    width: 70px !important;
+    height: 70px!important;
+    border: 2px solid white;
+}
+ .calander-icon-margin
+ {
+   
+    width: 28px;   
+    float: right;
+    margin-top: -4px;                         
+}
+.review-color{
+    color:var(--primary-color);
+}
+.star-color
+{
+    color:var( --warning-color);
+}
+
+                         
+.avtar-margin
+{
+    margin: 8px 12px 8px 12px !important;  
+}
+
+.selected-time{
+color:var( --button-color);
+}
+.selected-time-left{
+    color:var( icon-color);
+}
+.time-change-link{
+    color:var(--primary-color);
+    margin-top:9px;
+}
+
+
+
+.morning-icon-width{
+    width: 28px;
+    vertical-align: middle;
+}
+
+.days-text-color{
+    color:var(--primary-color)
+}
+
+
+
+.tab-alignment{
+    margin-top: 46px;
+
+}
+
+
+
+.tab-heading-color{
+    color:var( --black-light-color);
+}
+
+
+.body-content-header{
+font-size:15px;
+font-weight: 500;
+}
+
+   .check-box-content{
+    margin-left: 10px;
+    vertical-align: super;
+   }
+   .radio-btn-sec{
+    width: 50%;
+    float:left;
+}
+   .add-member-icon{
+    width: 25px;
+    // vertical-align: bottom;
+    margin-top:-5px;
+   }
+   .family-radio{
+    margin-right: 10px !important;
+   }
+   .width-100{
+       width:100%;
+   }
+   .item {
+    padding-left: 0px;}
+    .list .item-block .item-inner {
+        border-bottom: 1px solid #39bebc !important;
+    }
+    .default-add.item-block .item-inner{
+        border-bottom: 0 !important;
+      }
+    .button-round {
+        width: 100% !important;
+        background-color: var( --button-color) !important;
+    }
+
+    .list-ios{
+        margin: -1px 0 5px !important;
+    }
+    .segment-ios .segment-button{
+        //border-color: #ffffff !important;
+        color:white !important;
+        border: 0px;
+}
+.segment-ios .segment-button.segment-activated{
+        background-color: rgb(255, 255, 255) !important;
+        border-bottom: 2px solid #f35f1f !important;
+}
+}

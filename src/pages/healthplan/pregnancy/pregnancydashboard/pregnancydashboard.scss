@@ -1,0 +1,181 @@
+page-pregnancydashboard {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .back-color {
+        background-color: #f2f2f2 !important;
+    }
+    .due-date {
+        color: var(--primary-color);
+        float: left;
+        font-weight: 400;
+        font-size: 16px;
+    }
+    .card-img {
+        border-right: 2px solid var(--health-plan-pregnancy-color);
+        padding: 0 13px;
+    }
+    .card-title {
+        color: #636363;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .dash-action {
+        font-weight: bold;
+        color: var(--button-color);
+        float: right;
+        font-size: 16px;
+        margin-top: -5px;
+        // margin: 8px 0 0 0;
+    }
+    .pregnancy-status>.range-slider>.range-bar {
+        top: 12px;
+        height: 15px;
+        // background: white;
+        border-radius: 8px;
+    }
+    .pregnancy-status {
+        padding: 0 !important;
+    }
+    .range-md .range-tick {
+        margin-left: -1px;
+        border-radius: 50%;
+        position: absolute;
+        top: 7px;
+        z-index: 1;
+        width: 1px;
+        height: 26px;
+        background: #fff;
+        pointer-events: none;
+    }
+    // .dashboard-header {
+    //     background: url("https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy_back.png") !important;
+    // }
+    .img-banner {
+        height: 9rem;
+        border-radius: 50%;
+        border: 2px solid var(--health-plan-pregnancy-color);
+        margin: -40px 0 -50px 0;
+        background: white;
+        padding: 10px;
+    }
+    .no-color {
+        background: none !important;
+    }
+    .no-color>.item-inner {
+        border: none !important;
+    }
+    // actionsheet css
+    .ion-md-share {
+        color: #ED4248;
+    }
+    .ion-md-arrow-dropright-circle {
+        color: #508AE4;
+    }
+    .ion-md-heart-outline {
+        color: #31D55F;
+    }
+    .action-sheet-cancel ion-icon,
+    .action-sheet-destructive ion-icon {
+        color: #757575;
+    }
+    #dashboard-menu {
+        background: rgb(255, 255, 255) !important;
+        box-shadow: 10px 10px 100px 60px #191919;
+        border-radius: 40px 40px 0px 0px;
+    }
+    .menu-sections {
+        text-align: center;
+    }
+    .menu-sections>img {
+        width: 45%;
+    }
+    .menu-sections>p {
+        color: #737373;
+        font-weight: 500;
+    }
+    .menu-position {
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+    }
+    .button-menu {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+    .button-menu>button {
+        font-size: 3rem;
+        padding: 0px 11px;
+        height: 5rem;
+        border-radius: 50%;
+    }
+    .color-white {
+        color: white;
+    }
+    .booking-slot {
+        padding: 3px 16px !important;
+    }
+    .fab[mini] {
+        margin: 8px;
+        width: 50px;
+        height: 50px;
+        line-height: 40px;
+    }
+    .fab ion-icon {
+        font-size: 35px;
+    }
+    .range .range-knob {
+        width: 40px !important;
+        height: 40px !important;
+        top: 5px !important;
+        background: #f0eded !important;
+        outline: none !important;
+    }
+    .weeks-number {
+        font-size: 17px;
+        font-weight: bold;
+        color: #3af1ee;
+    }
+    .range-md .range-knob-handle {
+        top: 16px;
+        transition: 2s !important;
+    }
+    .range-md .range-bar-active {
+        background-color: rgb(247, 133, 150) !important;
+        transition: 2s;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+    .range-knob-handle .range-knob {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+        -webkit-animation: pulse 2s infinite;
+        animation: pulse 2s infinite;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.474);
+    }
+    .statusImg {
+        box-shadow: 0 0 19px 1px #3b3a3a;
+        border-radius: 50%;
+        margin-left: 14px;
+    }
+    .card-body {
+        margin: 0 0 2px;
+        font-size: 1.3rem;
+        font-weight: normal;
+        line-height: 1.1;
+        color: #898787;
+    }
+    .actioncard {
+        box-shadow: 4px 5px 18px -2px #b9b7b7;
+        margin: 24px auto;
+    }
+    .menu-sections>p {
+        color: #b2b2b2;
+    }
+}

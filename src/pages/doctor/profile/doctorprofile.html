@@ -1,0 +1,314 @@
+<ion-content>
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-card class="time-slot-card-background">
+        <ion-row class="profile-back-sec margin-10">
+          <ion-col col-1 (click)="closeCurrentPage()" class="close-sec">
+            <!-- <img src="assets/img/back-arrow.png" class="back-arrow" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-9 class="back-sec">
+            <p class="para-margin-0 header-title">
+              Doctor Profile
+            </p>
+          </ion-col>
+          <!-- <ion-col col-1 class="text-aligh-right setting-icon padding-0" (click)="redirectTo('UserSetting')">
+                <img src="assets/img/doctorProfile/share_icon.svg">
+            </ion-col> -->
+        </ion-row>
+        <ion-item class="" *ngIf="isDocAvailable && isDocInfoAvailable">
+          <ion-avatar item-start class="avtar-margin">
+            <img class="img-size" [src]="(doctorDetails.providerImage != null && doctorDetails.providerImage != '') ? doctorDetails.providerImage.ProviderImagePath :'assets/img/bookAppointment/specialities_icon.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <h4 class="profile-user-name para-overflow-hidden">{{doctorDetails.provider.Name}}
+            </h4>
+            <p class="doc-profile-detail-content1 para-overflow-hidden">
+              {{doctorDetails.SpecializationText}}
+              <span *ngIf="doctorDetails.DoctorEducation.length > 0">
+                <span class="doc-profile-detail-content1" *ngFor="let education of doctorDetails.DoctorEducation">, {{education.Education}}</span>
+              </span>
+              <!-- <span *ngFor="let spec of doctorDetails.DoctorSpecialization; letdoctorDetails.DoctorEducation i = index">{{spec.SpecializationText}}
+              <span *ngIf="i >= 0 && doctorDetails.DoctorSpecialization.length > i+1">, </span> -->
+              <!-- </span> -->
+            </p>
+            <p class="doc-profile-detail-content2" *ngIf="doctorDetails.DoctorExperience.length > 0">
+              <span>
+                <img src="assets/img/doctorProfile/experience_icon.svg" class="experince-icon-w">
+              </span>
+              <span class="middle-alignment">{{doctorDetails.DoctorExperience[0].YearsOfExperience}} Years Experience</span>
+            </p>
+            <p *ngIf="doctorDetails.ProviderOverAllRating != null && doctorDetails.ProviderOverAllRating!='' ">
+              <rating class="rating-sec" [(ngModel)]="doctorDetails.ProviderOverAllRating.AverageRating" readOnly="true" max="5" emptyStarIconName="star-outline"
+                halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+              <!-- <ion-icon name="star"></ion-icon> &nbsp; -->
+              <span class="review-color" (click)="getReview()">{{doctorDetails.ProviderOverAllRating.TotalCount}} Review(s)</span>
+            </p>
+            <p *ngIf="doctorDetails.ProviderOverAllRating == null || doctorDetails.ProviderOverAllRating=='' ">
+              <rating class="rating-sec" (ngModel)="0" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                starIconName="star" nullable="false"></rating>
+              <!-- <ion-icon name="star"></ion-icon> &nbsp; -->
+              <span class="review-color" (click)="getReview()">0 Review</span>
+            </p>
+          </div>
+        </ion-item>
+      </ion-card>
+      <ion-row class="text-center-class quick-link-fix-body" *ngIf="isDocAvailable && isDocInfoAvailable">
+        <ion-col col-12>
+          <ion-row>
+            <ion-col col-3 class="quick-link-div-devider" (click)="bookAppointment()">
+              <img src="assets/img/doctorProfile/calendar_icon.svg" class="quick-link-icon-width2">
+              <p class="quick-link-font">BOOK</p>
+            </ion-col>
+            <ion-col col-3 class="quick-link-div-devider" (click)="_call(doctorDetails.Address.Phone1)">
+              <img src="assets/img/doctorProfile/call1.svg" class="quick-link-icon-width1">
+              <p class="quick-link-font">CALL</p>
+            </ion-col>
+            <ion-col col-3 class="quick-link-div-devider" (click)="myFavourite()">
+              <img src="assets/img/doctorProfile/fav2.svg" *ngIf="!isSelectedFav" class="quick-link-icon-width3">
+              <img src="assets/img/doctorProfile/fav3.svg" *ngIf="isSelectedFav" class="quick-link-icon-width3">
+              <p class="quick-link-font">FAVORITE</p>
+            </ion-col>
+            <ion-col col-3 class="quick-link-div-padding" (click)="getReview()">
+              <img src="assets/img/doctorProfile/rev1.svg" class="quick-link-icon-width1">
+              <p class="quick-link-font">REVIEW</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="isSelectedReview" class="">
+        <!-- <ion-row class="feedback-question-loggedIn-user">
+            <ion-col col-12 *ngFor="let question of feedbackQuestionList; let i = index;">
+              <ion-row>
+                <ion-col>
+                  <b class="">{{i+1}}. {{question.FeedbackQuestion}}</b>
+                </ion-col>
+              </ion-row>
+              <ion-item class="login-input" *ngIf="question.Type == 1">
+                <ion-item>
+                  <ion-range min="1" max="5" step="1" snaps="true" color="dashboard_user" [(ngModel)]="feedbackAns[i].Value"></ion-range>
+                  <ion-badge class="prifile-card" item-right>{{feedbackAns[i].Value}}</ion-badge>
+                </ion-item>
+              </ion-item>
+              <ion-item *ngIf="question.Type == 2">
+                <ion-textarea placeholder="Leave a Message" [(ngModel)]="feedbackAns[i].Value"></ion-textarea>
+              </ion-item>
+              <ion-list radio-group [(ngModel)]="feedbackAns[i].Value" *ngIf="question.Type == 3">
+                <ion-item>
+                  <ion-radio checked="false" [value]="true"></ion-radio>
+                  <ion-label>True</ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-radio checked="false" [value]="false"></ion-radio>
+                  <ion-label>False</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row> -->
+        <ion-row>
+          <ion-col col-12>
+            <rating class="review-sec" [(ngModel)]="userRating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+              starIconName="star" nullable="false"></rating>
+          </ion-col>
+          <ion-col col-12>
+            <ion-textarea placeholder="Leave a Message" class="user-rating-message" [(ngModel)]="userMessage"></ion-textarea>
+          </ion-col>
+          <ion-col col-6>
+            <button class="btn-back-style" ion-button type="button" (click)="isSelectedReview = !isSelectedReview">Not Now</button>
+          </ion-col>
+          <ion-col col-6>
+            <button class="btn-back-style" ion-button type="button" (click)="submitFeedback()">Submit</button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="" *ngIf="submittedFeedbackList.length > 0">
+          <p class="search-header">Feedback From User</p>
+          <ion-col col-12 class="border-bottom-color" *ngFor="let item of submittedFeedbackList; let i = index;">
+            <ion-row class="">
+              <ion-col col-1>
+                <img class="money-icon-margin" src="assets/img/register/name_icon.svg" />
+              </ion-col>
+              <ion-col col-11>
+                <p class="user-name">
+                  <span class="para-overflow-hidden">{{item.Name}}</span>
+                  <span class="float-right calender-font-size">
+                    <img class="calendar-icon-margin" src="assets/img/register/dob_icon.svg" /> {{item.CreatedDate}}
+                  </span>
+                </p>
+                <p class="user-message">{{item.Value}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- <div *ngIf="!isSelectedReview" class="doc-profile-sec"> -->
+      <!-- <ion-row class="price-list-section-margin margin-right-15" *ngIf="doctorDetails.AppoCharges == null">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/money_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-12 class="">
+            <p>
+              <span *ngIf="doctorDetails.AppoCharges !=null">
+                <img src="assets/img/doctorProfile/rupee_icon.svg" class="rup-icon-alignment">
+                <span class="price-value-size">{{doctorDetails.AppoCharges.ConsultationCharge}}</span>
+                <span class="consult-chrgs-font">Cunsolutation Fees</span>
+              </span>
+              <span *ngIf="doctorDetails.AppoCharges ==null">
+                <img src="assets/img/doctorProfile/rupee_icon.svg" class="rup-icon-alignment">
+                <span class="price-value-size">500</span>
+                <span class="consult-chrgs-font">Cunsolutation Fees</span>
+              </span>
+              <span class="charge-percntz">
+                <img src="assets/img/doctorProfile/verification_icon.svg" class="verification-icon-wdth">
+                <span class="no-of-vote">Verification Done</span>
+              </span>
+            </p>
+          </ion-col>
+        </ion-row> -->
+      <div *ngIf="isDocAvailable && isDocInfoAvailable">
+        <ion-row class="margin-right-15" *ngIf="doctorDetails.ProfileDetails != null && doctorDetails.ProfileDetails != ' '">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/stethescope_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-10 class=" border-bottom-color">
+            <p class="doctor-profile-subheader-color" [innerHTML]="doctorDetails.ProfileDetails">
+              {{doctorDetails.ProfileDetails}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-row class="margin-right-15" *ngIf="hospitalList.length > 0">
+        <ion-col col-12>
+          <ion-row *ngFor="let hospital of hospitalList">
+            <ion-col col-2 class="text-center-class">
+              <img src="assets/img/doctorProfile/chamber_icon.svg" class="money-icon-margin">
+            </ion-col>
+            <ion-col col-10 class="">
+              <p class="p-margin-bottom">
+                <span class="doctor-profile-heading">{{hospital.Name}}, {{hospital.Branch}}</span>
+              </p>
+              <!-- <p class="clinic-detail-sub p-margin-bottom p-margin-top">Normal Vaginal Delyvery(NVD) : Caesacean Section</p> -->
+              <p class="doctor-profile-subheader-color p-margin-bottom p-margin-top">
+                <span *ngIf="hospital.Address !=''">{{hospital.Address}}, </span>
+                <span *ngIf="hospital.City !=''">{{hospital.City}}, </span>
+                <br/>
+                <span *ngIf="hospital.Address !=''">{{hospital.State}}</span>
+                <span *ngIf="hospital.Zip !=''">{{hospital.Zip}}, </span>
+                <span *ngIf="hospital.Phone1 !=''">Phone: {{hospital.Phone1}}</span>
+              </p>
+              <p class="get-dir-color para-margin-0" (click)="getDirection(hospital.Latitude,hospital.Longitude)">
+                <img src="assets/img/direction.svg" class="get-dir-icon"> Get Direction</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-right-15" style="height: 110px;margin-bottom: 15px !important;">
+        <ion-col col-2 class="padding-0"></ion-col>
+        <ion-col col-10 class="padding-0">
+          <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row *ngIf="isDocAvailable && isDocInfoAvailable">
+        <ion-col col-2 class="padding-0"></ion-col>
+        <ion-col col-10 class="padding-0" (click)="getDirection()">
+          <p class="get-dir-color para-margin-0">
+            <img src="assets/img/direction.svg" class="get-dir-icon"> Get Direction</p>
+        </ion-col>
+      </ion-row> -->
+      <ion-row class="margin-right-15" *ngIf="isDocAvailable && isDocInfoAvailable">
+        <ion-col col-12>
+          <!-- <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div> -->
+          <ion-row class="margin-right-15" *ngIf="doctorDetails.DoctorEducation.length > 0">
+            <ion-col col-2 class="text-center-class">
+              <img src="assets/img/doctorProfile/education_icon.svg" class="money-icon-margin">
+            </ion-col>
+            <ion-col col-10 class="">
+              <p class="p-margin-bottom">
+                <span class="doctor-profile-heading">Qualification</span>
+              </p>
+              <p class="clinic-detail-sub p-margin-bottom p-margin-top" *ngFor="let education of doctorDetails.DoctorEducation">{{education.Education}}, {{education.City}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="bottom-section-margin" *ngIf="doctorDetails.DoctorSpecialization.length > 0">
+            <ion-col col-2 class="text-center-class">
+              <img src="assets/img/doctorProfile/specialization_icon.svg" class="money-icon-margin">
+            </ion-col>
+            <ion-col col-10 class="">
+              <p class="p-margin-bottom">
+                <span class="doctor-profile-heading">Specialization</span>
+              </p>
+              <p class="doctor-profile-subheader-color p-margin-bottom p-margin-top" *ngFor="let spec of doctorDetails.DoctorSpecialization">{{spec.SpecializationText}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <!-- </div> -->
+
+
+      <!-- <ion-row class="margin-right-15">
+    <ion-col col-2 class="text-center-class">
+      <img src="assets/img/doctorProfile/stethescope_icon.svg" class="money-icon-margin">
+    </ion-col>
+    <ion-col col-10 class=" border-bottom-color">
+      <p class="p-margin-bottom">
+        <span class="doctor-profile-heading">Services</span>
+      </p>
+      <p class="doctor-profile-subheader-color p-margin-bottom p-margin-top">Normal Vaginal Delyvery</p>
+      <p class="doctor-profile-subheader-color p-margin-bottom p-margin-top">Normal Vaginal Delyvery</p>
+    </ion-col>
+  </ion-row> -->
+      <!-- <ion-row class="margin-right-15">
+    <ion-col col-2 class="text-center-class">
+      <img src="assets/img/doctorProfile/gallery_icon.svg" class="money-icon-margin">
+    </ion-col>
+    <ion-col col-10 class=" border-bottom-color">
+      <p class="p-margin-bottom">
+        <span class="doctor-profile-heading">Clinic Gallery</span>
+      </p>
+      <p class="clinic-gallery-ul">
+        <span class="clinic-gallery-li">
+          <img src="assets/img/doctorProfile/header_bg.png" class="glry-border-rds">
+        </span>
+        <span class="clinic-gallery-li">
+          <img src="assets/img/doctorProfile/header_bg.png" class="glry-border-rds">
+        </span>
+        <span class="clinic-gallery-li">
+          <img src="assets/img/doctorProfile/header_bg.png" class="glry-border-rds">
+        </span>
+      </p>
+    </ion-col>
+  </ion-row> -->
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="!isDocInfoAvailable">
+    <!-- <ion-navbar>
+      <ion-row class="profile-back-sec margin-10">
+        <ion-col col-1 (click)="closeCurrentPage()" class="close-sec">
+          <img src="assets/img/back-arrow.png" class="back-arrow" />
+        </ion-col>
+        <ion-col col-9 class="back-sec">
+          <p class="para-margin-0 header-title">
+            Profile
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-navbar> -->
+    <ion-col col-12 text-center>
+      <img src="assets/img/bookAppointment/specialities_icon.svg" class="not-found" />
+      <p class="not-found-text">Sorry! {{doctorInfo.ProviderName}} is not available!</p>
+      <div text-center class="margin-top-15">
+        <button class="border-form-btn" (click)="closeCurrentPage()" ion-button type="button">Back</button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer *ngIf="isDocAvailable && isDocInfoAvailable">
+  <ion-toolbar (click)="bookAppointment()">
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/calendar_icon.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Book Appointment</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

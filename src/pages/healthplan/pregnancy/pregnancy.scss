@@ -1,0 +1,35 @@
+page-pregnancy{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .back-color{
+        background-color: #f9f9f9 !important;
+    }
+    .img-size{
+        width:55%;
+        margin-left: 75px;
+    }
+    .wlcome-user-text{
+        font-size: 19px;
+        font-weight: 600;
+        color: #5f5f5f;
+    }
+    .preg-text{
+        color: #f1444a;
+    font-weight: 500;
+    }
+    .preg-text-style{
+        margin: 0px;
+        color: #585858;
+        font-weight: 400;
+    }
+    .btn-style{
+        width: 75%;
+        background: var(--primary-color);
+        box-shadow: 3px 4px 8px #95dcdb;
+    }
+}

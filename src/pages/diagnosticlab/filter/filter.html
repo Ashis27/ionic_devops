@@ -1,0 +1,132 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle hidden>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Filter</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only class="close-button" (click)="closeModal()">
+        <ion-icon name="ios-close-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header> -->
+<ion-content>
+  <ion-row>
+    <ion-item class="header-background">
+      <ion-row class="location-search-header">
+        <ion-col col-2 text-left class="close-button" (click)="closeModal()">
+          <ion-icon name="ios-close-circle-outline"></ion-icon>
+        </ion-col>
+        <ion-col col-8 text-center class="header-title margin-top-bottom-5 margin-auto">
+          Filter
+        </ion-col>
+        <!-- <ion-col col-2 text-right class="apply-filter margin-auto" (click)="applyFilter()">
+          Apply
+        </ion-col> -->
+        <ion-col col-2 text-right class="apply-filter margin-auto" (click)="clearFilter()">
+          <span *ngIf="isSelectedFilterOption">Clear</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 class="padding-top-bottom-5">
+      <ion-row>
+        <ion-col col-12 class="padding-top-bottom-5">
+          <p class="para-margin-0-1 price-sub-content search-header">
+            <span>
+              <img class="filter-icon" src="assets/img/dc_icon/sort_tab.svg" />Sort By</span>
+          </p>
+        </ion-col>
+        <ion-col col-12>
+          <ion-row>
+            <!-- <ion-col col-4>
+              <button ion-button class="sort_by_btn sort_by_option" (click)="selectedSortOption($event,'popularity',false)">Popularity</button>
+            </ion-col> -->
+            <ion-col col-4>
+              <button ion-button class="sort_by_btn sort_by_option item_false" (click)="selectedSortOption($event,'PriceAfterDiscount',false)">Low-High Price</button>
+            </ion-col>
+            <ion-col col-4>
+              <button ion-button class="sort_by_btn sort_by_option item_true" (click)="selectedSortOption($event,'PriceAfterDiscount',true)">High-Low Price</button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 class="padding-top-bottom-5 padding-top-0">
+      <ion-row>
+        <ion-col col-12 class="padding-top-bottom-5">
+          <p class="para-margin-0-1 price-sub-content search-header">
+            <span>
+              <img class="filter-icon" src="assets/img/dc_icon/filter_tab.svg" />Filter By</span>
+          </p>
+        </ion-col>
+        <ion-col col-12>
+          <p class="price-range-sec border-bottom-color">
+            <span>Price Range
+              <span class="price-range-back">{{dc_filter.minPrice}}</span>
+              <span>-</span>
+              <span class="price-range-back">{{dc_filter.maxPrice}}</span>
+            </span>
+          </p>
+          <ion-row>
+            <ion-item class="padding-left-0 default-add">
+              <ion-range dualKnobs="true" min="minPrice" max="maxPrice" steps="10" [(ngModel)]="priceRangeObject" (ionChange)="setPrice($event,priceRangeObject)"
+                color="secondary">
+                <ion-label range-left>{{minPrice}}</ion-label>
+                <ion-label range-right>{{maxPrice}}</ion-label>
+              </ion-range>
+            </ion-item>
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 *ngIf="activeTab == 'HealthPackage' || activeTab == 'LabProfile'">
+          <p class="price-range-sec border-bottom-color">
+            <span>Age Range
+              <!-- <span class="price-range-back">{{dc_filter.minAge}}</span>
+              <span>-</span>
+              <span class="price-range-back">{{dc_filter.maxAge}}</span> -->
+            </span>
+          </p>
+          <ion-row>
+            <!-- <ion-item class="padding-left-0">
+                  <ion-range dualKnobs="true" min="minAge" max="maxAge" [(ngModel)]="ageRangeObject" (ionChange)="setAge(ageRangeObject)"
+                    color="secondary">
+                    <ion-label range-left>{{minAge}}</ion-label>
+                    <ion-label range-right>{{maxAge}}</ion-label>
+                  </ion-range>
+                </ion-item> -->
+            <ion-list radio-group [(ngModel)]="selectedAgeValue" class="width-100" name="age">
+              <ion-item class="age-radio-btn-sec default-add list-item-border padding-left-5" *ngFor="let item of ageGroups; let i = index">
+                <ion-label class="radio-btn-name">{{item.Value}}</ion-label>
+                <ion-radio class="family-radio" item-left value="{{item.StandardCodesValuesID}}" style="margin: 0px 6px 0px 0px;" (ionSelect)="selectedAge()"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 *ngIf="activeTab == 'HealthPackage' || activeTab == 'LabProfile'">
+          <p class="price-range-sec border-bottom-color">
+            <span>Gender</span>
+          </p>
+          <ion-row>
+            <ion-list radio-group [(ngModel)]="selectedGenderValue" class="width-100" name="gender">
+              <ion-item class="radio-btn-sec default-add list-item-border padding-left-5" *ngFor="let item of genders; let i = index">
+                <ion-label class="radio-btn-name">{{item.Value}}</ion-label>
+                <ion-radio class="family-radio" item-left value="{{item.StandardCodesValuesID}}" style="margin: 0px 6px 0px 0px;" (ionSelect)="selectedGender()"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <span>
+        <button ion-button button-small class="float-right margin-r-15 cart-continue-btn filter-apply-button" (click)="applyFilter()">Apply</button>
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

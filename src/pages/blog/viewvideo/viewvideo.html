@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+ 
+    <button ion-button menuToggle > 
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{HeaderInfo.AssociatedActivity}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar style="padding-top:0px !important" no-border-top *ngIf="filterStatus">
+    <ion-searchbar (ionInput)="searchBlogText($event)" autocorrect="off" [(ngModel)]="searchKeyword" placeholder="Search Here"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+        <div id="parent">
+          <iframe class="frame" id="if" [src]="this.HeaderInfo.VideoURL" frameborder="0" allowfullscreen></iframe>
+        </div>
+      <div>
+        <p class="videoTitle">
+          {{HeaderInfo.VideoTitle}}.
+        </p>
+        <p class="time-con">
+          <span class="time-ago-text" *ngIf="HeaderInfo.days>0">{{HeaderInfo.days}} day(s)
+          </span>
+          <span class="time-ago-text" *ngIf="HeaderInfo.days==0 && HeaderInfo.hrs > 0">{{HeaderInfo.hrs}} hr(s)
+          </span>
+          <span class="time-ago-text" *ngIf="HeaderInfo.days==0 && HeaderInfo.hrs == 0 && HeaderInfo.mins>0 ">{{HeaderInfo.mins}} minute(s)
+          </span>
+          <span class="time-ago-text" *ngIf="HeaderInfo.days==0 && HeaderInfo.hrs == 0 && HeaderInfo.mins==0&& HeaderInfo.secs>0 ">{{HeaderInfo.secs}} seconds</span>
+          <span class="time-ago-text"> ago</span>
+          <span class="leftspan">{{HeaderInfo.Createddate}}</span>
+          <span class="associatedActivity">{{HeaderInfo.AssociatedActivity}}</span>
+        </p>
+       
+        <p class="VideoDescription">
+          {{HeaderInfo.VideoDescription}}
+        </p>
+      </div>
+</ion-content>

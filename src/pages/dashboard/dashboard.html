@@ -1,0 +1,213 @@
+<ion-content>
+    <ion-row class="app-header-sec margin-right-5">
+        <ion-col col-12 class="app-header" [ngClass]="isIosPlatform?'padding-13':''">
+            <ion-row>
+                <ion-col col-2>
+                    <img class="menu-image" (click)="checkuserAuthAndRedict('UserAccount')" src="assets/img/dashboard/menu_icon.svg" />
+                </ion-col>
+                <ion-col col-6>
+                    <p class="app-title">
+                        {{appTitle}}
+                    </p>
+                </ion-col>
+                <ion-col col-4 class="location">
+                    <ion-row>
+                        <ion-col text-center col-4 class="notification-icon-sec" (click)="redirectTo('UserWallet')">
+                            <img class="menu-search-img hidden" src="assets/img/register/wallete.svg" />
+                        </ion-col>
+                        <ion-col text-center col-4 class="notification-icon-sec" (click)="redirectTo('UserNotification')">
+                            <ion-badge *ngIf="showNotificationCount > 0" id="notifications-badge" color="danger">{{showNotificationCount}}</ion-badge>
+                            <img class="menu-search-img" src="assets/img/dashboard/notifiation_deselected.svg" />
+                        </ion-col>
+                        <ion-col text-center col-4 class="notification-icon-sec" (click)="redirectTo('CityLocation')">
+                            <img class="menu-search-img" src="assets/img/register/location.svg" />
+                        </ion-col>
+                        <!--<ion-col col-8 class="location-sec">
+              <p class="active-city-text para-overflow-hidden">Location</p>
+              <p class="active-location-text para-overflow-hidden">
+                {{selectedCityAndLocation.activeLocation}}, {{selectedCityAndLocation.activeCity}}
+              </p>
+            </ion-col>-->
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <!-- Generic search for doctors/hospital/spec/symptoms/surgery -->
+            <ion-row class="generic-search">
+                <ion-col col-1 (click)="selectGenericSearch()">
+                    <img class="input-box-img" src="assets/img/dashboard/dashboard-search.svg" />
+                </ion-col>
+                <ion-col col-11 class="input-for-email-mobile">
+                    <ion-item class="contact-number-field default-add padding-0">
+                        <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Doctors, Specializations, Clinics, Hospitals" (keyup)="selectGenericSearch()" (press)="selectGenericSearch()" (tap)="selectGenericSearch()">
+                        </ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+
+    </ion-row>
+    <ion-slides #slides *ngIf="dashBoardConfig && dashBoardConfig.length > 0" (ionSlideWillChange)="onSlideChangeStart($event)" class="slideroption" pager="true" autoplay="4000" loop="true" speed="2000">
+        <ion-slide *ngFor="let item of dashBoardConfig" [style.background]="'url(' + item.Image + ')'">
+        </ion-slide>
+    </ion-slides>
+
+
+    <ion-row class="menu-header-sec">
+        <ion-col col-12 class="menu-header">
+            <ion-row class="menu-img-row">
+                <ion-col col-4 *ngFor="let item of dashboardMenuConfig" (click)="redirectTo(item.Component)">
+                    <img [class]="item.Component == 'BookAppointment'?'padding-top-bottom-5 horizontal-list-circle-menu-image':'horizontal-list-circle-menu-image'" [src]="item.Image" />
+                    <p class="dashboard-menu-title">
+                        {{item.Title}}
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <ion-row class="sub-menu-header-sec">
+        <ion-col col-12 class="sub-menu-header">
+            <ion-item class="item-bottom" (click)="checkuserAuthAndRedict('HealthRecordList')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="assets/img/dashboard/upload.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Medical Records</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Manage Prescriptions and Lab reports</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+
+                </ion-row>
+            </ion-item>
+            <ion-item class="item-bottom" (click)="checkuserAuthAndRedict('MedicineList')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="assets/img/dashboard/medicalremainder_icon.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Medicine Reminders</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Set alerts so you never miss a dose</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="item-bottom" (click)="setRootAsVideomenueslistingPage()">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="assets/img/video_icon.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Health Corner</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Health videos and blogs</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="item-bottom margin-bottom-5" (click)="checkuserAuthAndRedict('CalculatorList')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="assets/img/dashboard/calculator.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Health Calculators</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">BMI, Blood Pressure, Blood Sugar etc.</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="item-bottom margin-bottom-5" (click)="checkuserAuthAndRedict('VaccineStatusPage')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img calc-width" src="assets/img/dashboard/vaccine.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Child Vaccination Schedule</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Manage your baby vaccines</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="item-bottom margin-bottom-5" (click)="checkuserAuthAndRedict('HealthPlanDashBoard')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img calc-width" src="assets/img/healthPlan/health.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Health Plan</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Get up to date with your subscribed plan</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <!-- <ion-item class="item-bottom margin-bottom-5" (click)="checkuserAuthAndRedict('HealthTrack')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img calc-width" src="assets/img/healthPlan/health.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Daily Steps Trends</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Get up to date with your subscribed plan</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item> -->
+            <!-- <ion-item class="item-bottom margin-bottom-5" (click)="checkuserAuthAndRedict('Pharmacy')">
+                <ion-row class="menu-inner-margin">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img calc-width" src="assets/img/dashboard/pharmacy.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="inner-text-padding margin-auto">
+                        <p class="para-list-header">Pharmacy</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Order your medicine</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item> -->
+        </ion-col>
+
+    </ion-row>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-item class="footer-sec footer-row-section default-add">
+            <ion-row class="footer-row-section">
+                <ion-col col-3 text-center class="padding-0 footer-image-sec margin-auto" (click)="redirectToMenu('HospitalForEmergency',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">EMERGENCY</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec margin-auto" (click)="redirectToMenu('UserFavouriteDoctors',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">FAVOURITE</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec margin-auto" (click)="redirectToMenu('UserHistory',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HISTORY</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec margin-auto" (click)="redirectToMenu('Reporting',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/supports.svg" />
+                    <br>
+                    <p class="footer-name bar-button">SUPPORT</p>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer>

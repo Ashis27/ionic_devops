@@ -1,0 +1,268 @@
+<!--
+  Generated template for the BloodpressurePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Blood Pressure</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="">
+      <!-- <div class="background_image"></div>   -->
+    <div class="progress_wrapper">
+      <div>
+        <round-progress
+        [current]="current"
+        [max]="max"
+        [color]="status"
+        [background]="'#eaeaea'"
+        [radius]="150"
+        [stroke]="25"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="true"
+        [responsive]="false"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"></round-progress></div>
+        <div class="progress_text" [style.color]="status" *ngIf="(allFieldsFil)">
+          <img [src]="smiley_src">
+          <p class="result" [style.color]="status" >
+              {{result}}
+          </p>
+        </div>
+      </div>
+      
+  
+  <ion-col col-12 class="padding-0">
+    <ion-row>
+      <ion-col col-4>
+        <p class="text_col margin-top-bottom-5 para-overflow-hidden">Age(Years)</p>
+        <ion-input type="number" placeholder="Years" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="bloodPressure.age" ></ion-input>
+      </ion-col>
+      <ion-col col-4>
+        <p class="text_col margin-top-bottom-5 para-overflow-hidden">Systolic</p>
+        <ion-input type="number" placeholder="mmHg" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="bloodPressure.systolic"></ion-input>
+      </ion-col>
+      <ion-col col-4>
+        <p class="text_col margin-top-bottom-5 para-overflow-hidden">Diastolic</p>
+        <ion-input type="number" placeholder="mmHg" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="bloodPressure.dystolic"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+  <ion-col col-12>
+     <button ion-button block (click)="calculateBloodPressure()" class="btn">Calculate</button>
+  </ion-col>
+  <!-- <p *ngIf="allFieldsFil" class="result">
+    {{result}}
+  </p> -->
+  <!-- <p class="result" [style.color]="status" *ngIf="allFieldsFil">
+      {{result}}
+  </p> -->
+  <div class="suggestions_col" *ngIf="(allFieldsFil) && bloodPressure.age != '' && bloodPressure.systolic != '' && bloodPressure.dystolic != '' ">
+      <ion-row>
+        <!-- <ion-col col-10  color="primary" >
+          <p class="Cal_header">Suggestions</p>
+        </ion-col> -->
+        <ion-col col-12 >
+            <!--Hypotension(low blood pressure)"Normal",Elevated",Hypertension (Stage1)",Hypertension (Stage2)"-->
+            <ion-row *ngIf="(result==='Low Blood Pressure')" >
+              <ion-col col-12 no-padding class="margin-top-bottom-15">
+              <p class="cal_des" >
+                <strong>Your blood pressure is very low! Possible hypotension. You may consult a Physician.</strong>
+              </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+            </ion-col>
+           </ion-row>
+           <ion-row *ngIf="(result==='Normal')">
+             <ion-col col-12 class="margin-top-bottom-15">
+                <p class="cal_des" >
+                    <strong>Your blood pressure is very Normal. Do you still looking for an appointment ?... </strong>
+                </p>
+             </ion-col>
+             <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="(result==='Elevated')">
+            <ion-col col-12 no-padding class="margin-top-bottom-15">
+              <p class="cal_des" >
+                 <strong>Your blood pressure is in Elevated, Your lifestyle changes to help lower your numbers.</strong>
+              </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+            </ion-col>
+            </ion-row>
+          <ion-row *ngIf="(result==='Hypertension (Stage1)' || result==='Hypertension (Stage2)' )">
+            <ion-col col-12 no-padding class="margin-top-bottom-15">
+              <p class="cal_des" >
+              <p class="cal_des">
+                <strong>Your blood pressure is very high. You may consult a Physician</strong>
+              </p>
+           </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+</div>
+<div class="bloodpressure_ranges" *ngIf="(allFieldsFil) && (bloodPressure.age!= '' && bloodPressure.systolic != '' && bloodPressure.dystolic != '') && bloodPressure.age <= '60'">
+    <ion-row>
+        <ion-col col-12  color="primary" >
+            <p class="disclaimer_header">Avg Blood Pressure Ranges</p>
+        </ion-col>
+      </ion-row>
+    <ion-row [ngClass]="{'highlight_danger': result == 'Hypotension(low blood pressure)'}">
+        <ion-col col-6>
+          <p class="ranges" text-left>
+            <strong>systolic <= 90 & diastolic <= 60</strong> 
+          </p>
+        </ion-col>
+        <ion-col col-6>
+            <p class="ranges" text-left>Hypotension(low blood pressure).</p>
+        </ion-col>
+    </ion-row>
+    
+    <ion-row [ngClass]="{'highlight_normal': result ==  'Normal'}">
+      <ion-col col-6>
+          <p class="ranges" text-left>
+              <strong>systolic <= 120 & diastolic <= 80</strong> 
+          </p>
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Normal.</p></ion-col>
+    </ion-row>
+
+    <ion-row [ngClass]="{'highlight_normal': result == 'Elevated'}">
+        <ion-col col-6>
+           <p class="ranges" text-left>
+             <strong>systolic < 130 & diastolic <80</strong> 
+           </p>
+        </ion-col>
+        <ion-col col-6><p class="ranges" text-left>Elevated.</p></ion-col>
+      </ion-row>
+    <ion-row [ngClass]="{'highlight_danger': result == 'Hypertension (Stage1)'}">
+      <ion-col col-6>
+         <p class="ranges" text-left>
+           <strong>systolic < 140 & diastolic <90</strong> 
+         </p>
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Hypertension (Stage1).</p></ion-col>
+    </ion-row>
+    
+    <ion-row  [ngClass]="{'highlight_danger': result == 'Hypertension (Stage2)'}">
+      <ion-col col-6>
+        <p class="ranges" text-left>
+          <strong>systolic >= 140 & diastolic >=90</strong> 
+        </p> 
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Hypertension (Stage2)</p></ion-col>
+    </ion-row>
+    
+  </div>
+<div class="bloodpressure_ranges" *ngIf="(allFieldsFil) && (bloodPressure.age!= '' && bloodPressure.systolic != '' && bloodPressure.dystolic != '') && bloodPressure.age > '60'">
+    <ion-row>
+        <ion-col col-12  color="primary" >
+            <p class="disclaimer_header">Avg BloodPressure Ranges</p>
+        </ion-col>
+      </ion-row>
+    <ion-row [ngClass]="{'highlight_danger': result == 'Low Blood Pressure'}">
+        <ion-col col-6>
+          <p class="ranges" text-left>
+            <strong>systolic <= 90 & diastolic <= 60</strong> 
+          </p>
+        </ion-col>
+        <ion-col col-6>
+            <p class="ranges" text-left>Hypotension(low blood pressure).</p>
+        </ion-col>
+    </ion-row>
+    
+    <ion-row [ngClass]="{'highlight_normal': result ==  'Normal'}">
+      <ion-col col-6>
+          <p class="ranges" text-left>
+              <strong>systolic <= 120 & diastolic <= 80</strong> 
+          </p>
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Normal.</p></ion-col>
+    </ion-row>
+
+    <ion-row [ngClass]="{'highlight_normal': result == 'Elevated'}">
+        <ion-col col-6>
+           <p class="ranges" text-left>
+             <strong>systolic <= 130 & diastolic <80</strong> 
+           </p>
+        </ion-col>
+        <ion-col col-6><p class="ranges" text-left>Elevated.</p></ion-col>
+      </ion-row>
+    <ion-row [ngClass]="{'highlight_danger': result == 'Hypertension (Stage1)'}">
+      <ion-col col-6>
+         <p class="ranges" text-left>
+           <strong>systolic <= 140 & diastolic <=90</strong> 
+         </p>
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Hypertension (Stage1).</p></ion-col>
+    </ion-row>
+    
+    <ion-row  [ngClass]="{'highlight_danger': result == 'Hypertension (Stage2)'}">
+      <ion-col col-6>
+        <p class="ranges" text-left>
+          <strong>systolic > 140 & diastolic >90</strong> 
+        </p> 
+      </ion-col>
+      <ion-col col-6><p class="ranges" text-left>Hypertension (Stage2)</p></ion-col>
+    </ion-row>
+    
+  </div>
+
+
+  <div class="Cal_Des" *ngIf="!allFieldsFil">
+      <ion-row>
+        <!-- <ion-col col-10 color="primary" >
+          <p class="Cal_header">Description</p>
+        </ion-col> -->
+        <ion-col col-12 >
+           <p class="cal_des"><strong>What is a Blood Pressure Calculator ?</strong></p>
+              <p class="cal_des">Blood pressure is an important and vital health indicator. High blood pressure may lead to atherosclerosis. This blood pressure calculator to check whether your blood pressure is at healthy level.
+            </p>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  <ion-col col-12  class="disclaimer_wrapper">
+    <ion-row>
+      <ion-col col-10  color="primary">
+        <p class="disclaimer_header">Disclaimer</p>
+      </ion-col>
+      <ion-col col-12 >
+        <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.  
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-content padding class="main-view">
+    <div class="modal_content">
+        <ion-row class="" style="border-bottom: 0.1px solid #9bdad9!important;">
+            <ion-col col-12 class="padding-0">
+                <p class="new-member-text">Update Information</p>
+            </ion-col>
+            <!-- <ion-col col-1 (click)="closeCurrentSection()">
+                <ion-icon name="ios-close-circle-outline" class="icon-size"></ion-icon>
+            </ion-col> -->
+        </ion-row>
+        <ion-row class="login-input margin-top-bottom-5" style="border-bottom: 0.1px solid #e6e6e6 !important;"
+            *ngIf="!isContactAvailable">
+            <ion-col col-12>
+                <p class="update-info"><ion-icon name="ios-information-circle-outline"></ion-icon> Please update to get the confirmation details</p>
+            </ion-col>
+            <ion-col col-12>
+                <ion-row>
+                    <ion-col col-2 class="padding-0 margin-auto">
+                        <ion-select interface="popover" [(ngModel)]="userProfile.CountryCode" class="country-code default-add" name="country_code default-add"
+                            style="padding: 0px 5px 0px 0px !important;border-right: 0px;">
+                            <ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+                        </ion-select>
+                    </ion-col>
+                    <ion-col col-10 class="input-for-email-mobile ">
+                        <ion-item class="contact-number-field contact-padding default-add">
+                            <ion-input [(ngModel)]="userProfile.Contact" id="numberInput" name="mobile_number" type="tel" placeholder="Mobile Number"
+                                #usercontact="ngModel" spellcheck="false" autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)"
+                                required>
+                            </ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="login-input margin-top-bottom-5" style="border-bottom: 0.1px solid #e6e6e6 !important;" *ngIf="!isEmailAvailable">
+            <ion-col col-12>
+                    <p class="update-info"><ion-icon name="ios-information-circle-outline"></ion-icon> Please update to get the confirmation details</p>
+            </ion-col>
+            <ion-col col-12>
+                <ion-item class="login-input default-add padding-left-0">
+                    <ion-label class="login-input-label">
+                        <img class="form-image custom-img" src="assets/img/register/mail_icon.svg" style="width: 30px;" />
+                    </ion-label>
+                    <ion-input [(ngModel)]="userProfile.UserLogin" name="email_id" type="email" placeholder="Email" #userlogin="ngModel" spellcheck="false"
+                        autocapitalize="off" required>
+                    </ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rate-us-sec">
+            <ion-col col-6 class="no-thanks-btn">
+                <button name="no_thanks" type="button" class="popup-btn" (click)="skip()">No Thanks</button>
+            </ion-col>
+            <ion-col col-6 class="continue-btn">
+                <button name="continue" type="button" class="btn-back-style popup-btn" (click)="updateConsumerContactInfo()">Continue</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

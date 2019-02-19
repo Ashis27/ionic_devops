@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Quick Appointment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="recentAppointmentList.length > 0">
+    <ion-col col-12>
+      <p class="search-header">Recent Appointment With</p>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row class="book-appo-border-bottom-color" *ngFor="let provider of recentAppointmentList">
+        <ion-col col-2 class="margin-auto" (click)="redirectTo('DoctorProfile',provider)">
+          <img class="favourite-list-back" [src]="(provider.ProviderImage != null && provider.ProviderImage != '') ? provider.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+          />
+        </ion-col>
+        <ion-col col-7 class="margin-auto padding-left-20" (click)="redirectTo('DoctorProfile',provider)">
+          <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-bottom-5">{{provider.ProviderName}}</p>
+          <p class="inner-sub-text-size para-overflow-hidden para-margin-bottom-5">
+            {{provider.SpecializationName}}
+          </p>
+          <p class="inner-sub-text-size para-overflow-hidden para-margin-bottom-5">
+            {{provider.Hospital}}
+          </p>
+        </ion-col>
+        <ion-col col-3 class="margin-auto" (click)="bookAppointment(provider)">
+          <!-- <p class="profile-update-style">BOOK</p> -->
+          <button ion-button small class="button-primary solid-btn-style">BOOK</button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="providers.length > 0">
+    <ion-col col-12>
+      <p class="search-header">Favourite Doctor(s)</p>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row class="book-appo-border-bottom-color" *ngFor="let provider of providers">
+        <ion-col col-2 class="margin-auto" (click)="redirectTo('DoctorProfile',provider)">
+          <img class="favourite-list-back" [src]="(provider.ProviderImage != null && provider.ProviderImage != '') ? provider.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+          />
+        </ion-col>
+        <ion-col col-7 class="margin-auto padding-left-20" (click)="redirectTo('DoctorProfile',provider)">
+          <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-bottom-5">{{provider.ProviderName}}</p>
+          <p class="inner-sub-text-size para-overflow-hidden para-margin-bottom-5">
+            {{provider.SpecializationName}}
+          </p>
+        </ion-col>
+        <ion-col col-3 class="margin-auto" (click)="bookAppointment(provider)">
+          <!-- <p class="profile-update-style">BOOK</p> -->
+          <button ion-button small class="button-primary solid-btn-style">BOOK</button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center *ngIf="providers.length == 0 && recentAppointmentList.length == 0 && !isRecentAppoAvailable && !isFavouriteAvailable">
+    <ion-col col-12 text-center>
+        <img src="assets/img/calendar.svg" class="not-found" />
+      <p class="not-found-text">No Result Found!</p>
+    </ion-col>
+    <ion-col col-12 text-center>
+        <button class="border-form-btn" (click)="bookNewAppointment()" ion-button type="button">Book Appointment</button>
+      </ion-col>
+  </ion-row>
+</ion-content>

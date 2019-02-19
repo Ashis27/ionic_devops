@@ -1,0 +1,197 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Update Status</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content class="back-image">
+    <ion-item class="header-background">
+        <ion-row class="location-search-header">
+            <ion-col col-1 (click)="closeUploadModal()" class="close-sec">
+                <ion-icon name="ios-close"></ion-icon>
+            </ion-col>
+            <ion-col col-11 class="header-title margin-top-bottom-5 margin-auto">
+                Update Status
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-row class="sub-menu-header-sec">
+        <!-- <ion-col col-12 class="sub-menu-header">
+            <ion-item class="notification-back default-add">
+                <ion-label class="custom-label">
+                    <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/complete.svg" class="note-icon margin-left-right-5"> Is Completed
+                </ion-label>
+                <ion-toggle [(ngModel)]="uploadedDocumentDetails.Completed" [checked]="isCompleted" (ionChange)="onChangeCompleteStatus()"></ion-toggle>
+            </ion-item>
+        </ion-col> -->
+        <!-- *ngIf="uploadedDocumentDetails.Completed" -->
+        <ion-col col-12 class="sub-menu-header" >
+            <ion-item class="login-input default-add">
+                <ion-label class="login-input-label custom-label">
+                    <img class="form-image custom-img" src="assets/img/register/dob_icon.svg" /> Completion Date
+                </ion-label>
+                <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="{{minDate}}" max="{{maxDate}}" [(ngModel)]="showSelectedDate" (ionChange)="onSelectedDate()"></ion-datetime>
+            </ion-item>
+        </ion-col>
+        <ion-col col-12 class="sub-menu-header">
+            <ion-item class="login-input default-add">
+                <ion-label class="login-input-label">
+                    <img class="form-image optional-image-bottom padding-2 custom-img" [src]="pageStatus == 'pregnancyAppointment'?'https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/doctor.svg':'assets/img/doctorProfile/chamber_icon.svg'"
+                    />
+                </ion-label>
+                <ion-input [(ngModel)]="providerName" name="name" type="text" placeholder="Provider name">
+                </ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col col-12 class="sub-menu-header">
+            <ion-row>
+                <ion-col col-2 text-center>
+                    <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/edit.svg" class="note-icon">
+                </ion-col>
+                <ion-col col-10 class="" style="margin-left: -15px;">
+                    <p class="custom-label">Add Note</p>
+                    <ion-item class="default-add padding-left-0" style="background-color: transparent;">
+                        <textarea class="feedback-msg" [(ngModel)]="uploadedDocumentDetails.Note" name="message" placeholder="" #feedbackMessage="ngModel" spellcheck="false" autocapitalize="off" required></textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+
+        <ion-col col-12 class="sub-menu-header">
+            <ion-row>
+                <ion-col col-2 text-center>
+                    <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/plus.svg" class="add-vital-icon">
+                </ion-col>
+                <ion-col col-10 class="" style="margin-left: -15px;">
+                    <p class="custom-label margin-top-10">Add Vital
+                        <span (click)="addVital(true)" class="float-right">
+              <ion-icon name="ios-add-circle-outline" class="add-icon"></ion-icon>
+            </span>
+                    </p>
+                    <ion-row class="vital-back" *ngIf="vitals.length > 0">
+                        <ion-col *ngFor="let item of vitals; let i= index" class="padding-0 vital-item">
+                            <ion-row>
+                                <ion-col col-10>
+                                    <ion-item class="login-input default-add" style="padding-left: 10px;">
+                                        <ion-label class="login-input-label">
+                                            <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/edit.svg" class="vital-icon">
+                                        </ion-label>
+                                        <ion-input [(ngModel)]="item.VitalName " name="name" type="text" placeholder="Vital name">
+                                        </ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-2 class="margin-auto" (click)="removeVital(i)">
+                                    <ion-icon name="ios-close-circle-outline" class="close-icon"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <ion-item class="login-input default-add" style="padding-left: 10px;">
+                                        <ion-label class="login-input-label">
+                                            <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/receipt.svg" class="vital-icon">
+                                        </ion-label>
+                                        <ion-input [(ngModel)]="item.Value" name="name" type="text" placeholder="Result">
+                                        </ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-6>
+                                    <ion-item class="login-input default-add" style="padding-left: 10px;">
+                                        <ion-label class="login-input-label">
+                                            <img src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/number-list.svg" class="vital-icon">
+                                        </ion-label>
+                                        <ion-input [(ngModel)]="item.Unit" maxlength="10" (keypress)="onlyNumber($event)" name="name" type="text" placeholder="mg/dl">
+                                        </ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <ion-item class="login-input default-add">
+                                <ion-label class="login-input-label custom-label">
+                                    <img class="form-image custom-img" src="assets/img/register/dob_icon.svg" /> Completion Date
+                                </ion-label>
+                                <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" [(ngModel)]="item.SelectedDate" (ionChange)="onSelectedVitalDate(item)"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+
+        <ion-col col-12 class="sub-menu-header margin-top--20">
+            <ion-row>
+                <ion-col col-2 text-center>
+                    <img src="assets/img/medical-history.svg" class="money-icon-margin">
+                </ion-col>
+                <ion-col col-10 class="" style="margin-left: -15px;">
+                    <p class="custom-label">Upload Document</p>
+                    <p class="clinic-gallery-ul para-margin-0">
+                        <span *ngFor="let item of uploadedDocument;let i = index">
+              <span class="clinic-gallery-li" (click)="getOptionToViewOrDelete(item,i)">
+                <img [src]="(item.FileExtension == 'application/pdf')?'assets/img/report.gif':item.fileUrlPath" class="glry-border-rds">
+              </span>
+                        </span>
+                        <span class="clinic-gallery-li add-border-rds" *ngIf="!isAdded" (click)="uploadFileWithOption()">
+              <ion-icon name="add"></ion-icon>
+            </span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col col-12 class="sub-menu-header">
+            <button class="btn-back-style pharmacy-feedback-btn" ion-button type="submit" (click)="SaveHealthPlanAppointmentStatus()">Submit</button>
+        </ion-col>
+    </ion-row>
+    <div id="openEditImage" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <ion-grid *ngIf="openImagePath!=null && openImagePath !=''" class="padding-0">
+                <ion-row text-right class="header-back modal-position-fixed">
+                    <ion-col col-8 class="document-name margin-auto">
+                        <p class="color-white" style="font-size: 15px;">{{openImagePath.DocumentTypeName}}</p>
+                    </ion-col>
+                    <ion-col col-4 class="color-white margin-auto">
+                        <ion-icon name="ios-download-outline" class="download-icon" *ngIf="isAndroidPlatform" (click)="downloadDocument(openImagePath.fileUrlPath,openImagePath,false)"></ion-icon>
+                        <ion-icon name="ios-close-circle-outline" class="close-icon" (click)="closeModal()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <img class="view-image" [src]="openImagePath.fileUrlPath" />
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+    <div id="downloadProgress" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content download-progress">
+            <ion-row class="indivisual-sec-border para-margin-bottom-5">
+                <ion-col col-6 text-left class="padding-0">
+                    <p>
+                        <span text-left>Downloading..</span>
+                    </p>
+                </ion-col>
+                <ion-col col-6 text-right class="padding-0">
+                    <p>
+                        <span text-right class="download-percentage">{{countProgress}}% Completed</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="indivisual-sec-border" *ngIf="countProgress > 0 && countProgress <= 100 && downloadStatus">
+                <div class="progress-outer">
+                    <div class="progress-inner" [style.width.%]="countProgress"></div>
+                    <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+                </div>
+            </ion-row>
+            <ion-row class="indivisual-sec-border para-margin-bottom-5" *ngIf="pre_download_status">
+                <ion-col col-12 text-center class="padding-0">
+                    <img style="height: 10px;" src="assets/img/progress.gif" />
+                </ion-col>
+            </ion-row>
+            <!-- <p text-right class="cancel-text">
+        <span (click)="cancelDownload()" class="download-percentage">CANCEL</span>
+      </p> -->
+            <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+        </div>
+    </div>
+</ion-content>

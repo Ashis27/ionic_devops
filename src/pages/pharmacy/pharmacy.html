@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Order Medicine</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="back-image">
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img src="assets/img/dashboard/orderonline_icon.svg" class="not-found" />
+      <p class="not-found-text">To be Launched!!!</p>
+    </ion-col>
+    <ion-col col-12 text-center class="pharmacy-feedback-section">
+      <p class="pharmacy-feedback-text">
+        <span class="">Interested to order medicines from the app?</span>
+      </p>
+      <p class="not-found-text">
+        <span>Your feedback will make a difference.</span>
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <form #pharmacyFeedbackform="ngForm" (ngSubmit)="submitPharmacyFeedback(pharmacyFeedbackform)" class="pharmacy-form">
+      <ion-item class="default-add">
+        <textarea class="feedback-msg" [(ngModel)]="pharmacyFeedback.Message" name="message" placeholder="Leave a message" #feedbackMessage="ngModel"
+          spellcheck="false" autocapitalize="off" required></textarea>
+      </ion-item>
+      <button class="btn-back-style pharmacy-feedback-btn" ion-button type="submit">Submit</button>
+    </form>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+      <ion-item class="footer-sec footer-row-section default-add">
+        <ion-row class="footer-row-section">
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HOME</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">EMERGENCY</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HISTORY</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer> -->

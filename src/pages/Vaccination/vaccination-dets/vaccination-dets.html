@@ -1,0 +1,79 @@
+<!--
+  Generated template for the VaccinationDetsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+    <ion-row>
+      <ion-col class="padding-0">
+        <ion-item class="header-background">
+          <ion-row class="">
+            <ion-col col-1 class="close-sec padding-0 margin-auto" (click)="closeCurrentSection()">
+              <!-- <img src="assets/img/back-arrow.png" class="" /> -->
+              <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+            </ion-col>
+            <ion-col col-11 class="header-title margin-top-bottom-5 padding-0">
+              <p class="para-margin-0 header-title para-overflow-hidden">Vaccine Details</p>
+            </ion-col>
+            <!-- <ion-col col-3 text-right class="close-sec margin-auto" (click)="deleteAllReminder()">
+              <p class="margin-right-15 color-white" *ngIf="VaccineReminders.length > 0 && isAvailable">CLEAR</p>
+            </ion-col> -->
+          </ion-row>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <div class="des_wrapper">
+      <ion-list>
+        <div class="des_div" *ngFor="let vaccine of Vaccines;let i=index">
+          <ion-card>
+            <ion-card-header color="light" class="card_header_bg">
+              {{vaccine.VaccinationShortCode}} <span *ngIf="vaccine.VaccinationName!=''">({{vaccine.VaccinationName}})</span>
+            </ion-card-header>
+            <ion-card-content >
+                <p class="para-text-color card_des">{{vaccine.VaccinationInfo}}</p>
+                <!-- <p *ngIf="!vaccine.disease"><span class="text_heder">DISEASE : </span><span>{{vaccine.disease}}</span></p> -->
+            </ion-card-content>
+            <!-- <ion-row>
+              <ion-col col-8></ion-col>
+              <ion-col col-4>
+                <button ion-button class="login-form-btn">Complete</button>
+              </ion-col>
+            </ion-row> -->
+            <div class="sts-btn-wrapper">  
+              <ion-row>
+                <!-- <ion-col col-12>
+                  <p *ngIf="vaccine.VaccinationAlreadyGiven=='1'" class="sts-txt">You have completed the vaccine</p>
+                  <p *ngIf="vaccine.VaccinationSkipped==true" class="sts-txt">You have skipped the vaccine</p>
+                </ion-col> -->
+                <ion-col col-4>
+                  <button ion-button clear (click)="showDetail(i)"><img src="assets/img/vaccination/info.svg" class="vaccine-btn-skip"><span class="vaccine-txt-dets">Details</span></button>
+                </ion-col>
+                <ion-col col-4 *ngIf="vaccine.VaccinationAlreadyGiven=='1'">
+                  <button ion-button clear  [disabled]="vaccine.VaccinationAlreadyGiven=='1'"><img src="assets/img/vaccination/Complete.svg" class="vaccine-btn-complete"><span class="vaccine-txt-complete">Completed</span></button>
+
+              </ion-col>
+                  <ion-col col-4 *ngIf="vaccine.VaccinationAlreadyGiven!='1'">
+                      <button ion-button clear (click)="complete_status(vaccine,i)" [disabled]="vaccine.VaccinationAlreadyGiven=='1'"><img src="assets/img/vaccination/Complete.svg" class="vaccine-btn-complete"><span class="vaccine-txt-complete">Complete</span></button>
+    
+                  </ion-col>
+                 <ion-col col-4 *ngIf="vaccine.VaccinationAlreadyGiven!='1' && vaccine.VaccinationSkipped==true">
+                    <button ion-button clear (click)="skip_vaccine(vaccine,i)" [disabled]="vaccine.VaccinationSkipped==true"><img src="assets/img/vaccination/Skip.svg" class="vaccine-btn-skip"><span class="vaccine-txt-skip">Skipped</span></button>
+
+                  </ion-col>
+                  <ion-col col-4 *ngIf="vaccine.VaccinationAlreadyGiven!='1' && vaccine.VaccinationSkipped==false">
+                    <button ion-button clear (click)="skip_vaccine(vaccine,i)" [disabled]="vaccine.VaccinationSkipped==true"><img src="assets/img/vaccination/Skip.svg" class="vaccine-btn-skip"><span class="vaccine-txt-skip">Skip</span></button>
+
+                  </ion-col>
+              </ion-row>
+            </div>
+          </ion-card>
+        </div>
+      </ion-list>
+    </div>
+</ion-content>
+
+<ion-fab left bottom (click)="gotoDashboard()">
+  <button ion-fab color="light"><ion-icon name="home"></ion-icon></button>
+</ion-fab>

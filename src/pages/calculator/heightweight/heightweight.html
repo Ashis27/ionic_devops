@@ -1,0 +1,149 @@
+<!--
+  Generated template for the HeightweightPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Height Weight Conversion</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="">
+    <!-- <div class="bg_image"></div> -->
+    <div class="progress_wrapper">
+      <div>
+        <round-progress
+        [current]="current"
+        [max]="max"
+        [color]="status"
+        [background]="'#eaeaea'"
+        [radius]="150"
+        [stroke]="25"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="true"
+        [responsive]="false"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"></round-progress></div>
+        <div class="progress_text" [style.color]="status" *ngIf="(AllFieldsFil) && sex != '' && selectedFoot != '' && this.selectedInches != ''">
+            <img [src]="smiley_src">
+            <p class="result"> {{result}}</p>
+        </div>
+      </div>
+      
+      <ion-col col-12 class="padding-0">
+        <div class="gender_wrapper">
+        <ion-row>
+            <ion-col col-6 class="text-center-cls" (click)="getStyle('male')" [ngClass]="{'activate': sex=='male'}">
+                <p style="margin:0px">Male</p>
+                <img src="assets/imgs/calculator/male.png" class="gendercls">
+              </ion-col>
+              <ion-col col-6 class="text-center-cls" (click)="getStyle('female')" [ngClass]="{'activate': sex=='female'}">
+                  <p style="margin:0px">Female</p>
+                  <img src="assets/imgs/calculator/female.png" class="gendercls">
+              </ion-col>      
+        </ion-row>
+      </div>
+    </ion-col>
+      
+      <ion-col col-12 class="padding-0">
+        <ion-row>
+          <ion-col col-6>
+            <p class="text_col margin-top-bottom-5">Height(ft)</p>
+            <ion-input type="number" (ionChange)="CheckAllFil()" placeholder="Feet" [(ngModel)]="selectedFoot"></ion-input>
+          </ion-col>
+          <ion-col col-6>
+            <p class="text_col margin-top-bottom-5">Height(inch)</p>
+            <ion-input type="number" (ionChange)="CheckAllFil()" placeholder="Inch" [(ngModel)]="selectedInches"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-row>
+        <ion-col col-12 class="padding-0">
+          <button ion-button block (click)="calculate()">Calculate</button>
+        </ion-col>
+      </ion-row>
+  <!-- <ion-row class="margin-left">
+    <ion-col col-11>
+        <ion-item class="padding-left-0 item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+            <ion-label  >Gender</ion-label>
+            <ion-select [(ngModel)]="sex" style="border-right: 0px dashed gainsboro;">
+              <ion-option value="male">Male</ion-option>
+              <ion-option value="female">Female</ion-option>
+            </ion-select>
+          </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="margin-left">
+    <ion-col col-12>
+      <ion-label>Height</ion-label>
+    </ion-col>
+    <ion-col col-6 class="mar_col">
+      <ion-item class="padding-left-0 item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+        <ion-label class="header_label">Feet</ion-label>
+        <ion-select [(ngModel)]="selectedFoot" (ngModelChange)="resetInches()" style="border-right: 0px dashed gainsboro;">
+          <ion-option value={{num}} *ngFor="let num of foots" >{{num}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col col-5 class="mar_col">
+      <ion-item class="padding-left-0 item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+        <ion-label class="header_label">Inches</ion-label>
+        <ion-select [(ngModel)]="selectedInches" style="border-right: 0px dashed gainsboro;">
+          <ion-option value={{num}} *ngFor="let num of inches" >{{num}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+ <br>
+  <ion-row >
+    <ion-col col-12>
+      <button ion-button block (click)="calculate()">Calculate</button>
+    </ion-col>
+  </ion-row> -->
+  <!-- <p *ngIf="AllFieldsFil" class="result"> {{result}}</p> -->
+
+  <!-- <ion-col col-12  class="suggestions_col" *ngIf="AllFieldsFil">
+      <ion-row class="margin-left">
+        <ion-col col-12 > 
+          <ion-row>
+           <p class="cal_des" >
+              <strong>Your Weight should be between {{result}}. </strong>
+           </p>
+          </ion-row> 
+        </ion-col>
+      </ion-row>
+  </ion-col> -->
+
+
+  <ion-col col-12  class="Cal_Des" *ngIf="(!AllFieldsFil) && sex != '' && selectedFoot != '' && this.selectedInches != ''">
+      <ion-row class="margin-left">
+        <!-- <ion-col col-10 color="primary" >
+          <p class="Cal_header">Description</p>
+        </ion-col> -->
+        <ion-col col-12 >
+           <p class="cal_des"><strong>What is a Height Weight Conversion?</strong></p>
+              <p class="cal_des">Which let's you to know what weight you should have.
+            </p>
+        </ion-col>
+      </ion-row>
+  </ion-col>
+
+  <ion-col col-12 >
+    <ion-row class="disclaimer_wrapper margin-left">
+      <ion-col col-10  color="primary" >
+        <p class="disclaimer_header">Disclaimer</p>
+      </ion-col>
+      <ion-col col-12 >
+        <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals. 
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-content>

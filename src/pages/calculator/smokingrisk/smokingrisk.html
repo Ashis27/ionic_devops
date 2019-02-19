@@ -1,0 +1,141 @@
+<!--
+  Generated template for the SmokingriskPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Smoking Risk</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="">
+      <!-- <div class="background_image"></div> -->
+      <div class="progress_wrapper">
+          <div>
+            <round-progress
+            [current]="current"
+            [max]="max"
+            [color]="status"
+            [background]="'#eaeaea'"
+            [radius]="150"
+            [stroke]="25"
+            [semicircle]="false"
+            [rounded]="true"
+            [clockwise]="true"
+            [responsive]="false"
+            [duration]="800"
+            [animation]="'easeInOutQuart'"
+            [animationDelay]="0"></round-progress></div>
+            <div class="progress_text" [style.color]="status" *ngIf="(AllFieldsFil) && NoOfCigarettes != '' && startSmokingDate!='' ">
+                <img [src]="smiley_src">
+                <p *ngIf="AllFieldsFil" class="result">
+                    {{result}}
+                 </p>
+            </div>
+          </div>
+          
+      <!-- <ion-row class="margin-left">
+        <ion-col col-12>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select  (ngModelChange)="calculate()" [(ngModel)]="Gender">
+              <ion-option value="male">Male</ion-option>
+              <ion-option value="female">Female</ion-option>
+           </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
+      <ion-row class="margin-left">
+          <ion-col col-12 >
+              <ion-label>No. of cigarettes per day?</ion-label>
+          </ion-col>
+          <ion-col col-12 class="mar_col">
+            <ion-item>
+              <ion-input type="number" (ionChange)="CheckAllFil()" [(ngModel)]="NoOfCigarettes" (keypress)="RestrictDecimels($event)"  placeholder="Enter no.of cigarettes" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <!-- <ion-col col-2 class="header_label"></ion-col> -->
+      </ion-row>
+      <ion-row class="margin-left">
+        <ion-col col-12 >
+          <ion-label>When did you start smoking?</ion-label>
+        </ion-col>
+        <ion-col col-12 class="mar_col">
+          <ion-item>
+            <span item-right><ion-icon name="ios-calendar-outline"></ion-icon></span>
+            <ion-label class="header_label">Smoking start date</ion-label>
+            <ion-datetime (ionChange)="CheckAllFil()" displayFormat="DD-MMM-YYYY" max="{{maxDate}}" pickerFormat="DD-MMM-YYYY" [(ngModel)]="startSmokingDate" (ngModelChange)="chooseMInDate()"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-left">
+          <ion-col col-12 >
+            <ion-label>If you quit smoking, when was that?</ion-label>
+          </ion-col>
+          <ion-col col-12 class="mar_col">
+            <ion-item>
+              <span item-right><ion-icon name="ios-calendar-outline"></ion-icon></span>
+              <ion-label class="header_label">Smoking end date</ion-label>
+              <ion-datetime (ionChange)="CheckAllFil()" displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" [(ngModel)]="endSmokingDate" ></ion-datetime>
+            </ion-item>
+          </ion-col>
+    </ion-row>
+        <br>
+        <ion-row>
+            <ion-col col-12 class="padding-0">
+              <button ion-button block (click)="calculate()">Calculate</button>
+            </ion-col>
+          </ion-row>
+        
+          <ion-col col-12 no-padding class="Cal_Des" *ngIf="!AllFieldsFil">
+            <ion-row class="margin-left">
+              <!-- <ion-col col-10  color="primary">
+                <p class="Cal_header">Description</p>
+              </ion-col> -->
+              <ion-col col-12 class="margin-top-bottom-15 padding-5">
+                 <p class="cal_des"><strong>What is a Smoking Risk Calculator?</strong></p>
+                    <p class="cal_des">This smoking risk calculator can tell how much time smoking has taken off your life and how many more years will be gone if you continue this unhealthy habit.
+                  </p>
+              </ion-col>
+            </ion-row>
+        </ion-col>
+  
+          <p class="result_des margin-top-10 padding-5" *ngIf="AllFieldsFil">
+            <strong>The fact that you smoked {{NoOfCigarettes}} cigarettes per day means, cigarettes have taken {{result}} off your life.</strong>
+          </p>
+  
+         <div no-padding class="suggestions" *ngIf="(AllFieldsFil) && NoOfCigarettes != '' && startSmokingDate!='' ">
+          <ion-row class="margin-left" class="margin-top-bottom-15">
+              <!-- <ion-col col-12 no-padding>
+                <p class="cal_des">
+                  <strong>Your Creatinine Clearance Level are not in a normal range. You should consult a doctor <span class="now_highlight">Now !..</span></strong>
+                </p>
+             </ion-col> -->
+             <ion-col col-5 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+              </strong></p>
+            </ion-col>
+          </ion-row> 
+        </div>
+      
+        <ion-col col-12 no-padding>
+          <ion-row class="disclaimer_wrapper margin-left">
+            <ion-col col-10  color="primary">
+              <p class="disclaimer_header">Disclaimer</p>
+            </ion-col>
+            <ion-col col-12 no-padding>
+              <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals. 
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+  </ion-content>
+  

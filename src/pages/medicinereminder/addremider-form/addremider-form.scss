@@ -1,0 +1,259 @@
+page-addremider-form {
+    ion-label{
+      color:#39bebc !important;
+    }
+    .dosage{
+        color:#39bebc;;
+        font-size: 1.6em !important; 
+        margin-top:26px  
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .dosage_label{
+        margin-left:4% !important;
+    }
+    .select-icon{
+        top:2px;
+    }
+    .dval,.medtype{
+        color:#000;
+    }
+    .range-knob{
+        background:#39bebc !important;
+    }
+    .item-range ion-range{
+        width:90% !important;
+        padding: 0px !important;
+
+    }
+    .range-tick-active {
+        background:#39bebc !important;
+    }
+    .listHeader{
+        border-bottom: 0.5px solid #bbb7b7;
+        height: 40px;
+        line-height: 3;
+        margin: 0px 12px;
+        padding-left: 2px;
+        color: #39bebc;
+        font-size: 16px;
+        background-color: #f7eded;
+    }
+    .medicine-dose-text{
+
+    }
+    .medicine_items{
+     padding-left: 6px;
+     border-radius:5px;
+     margin-bottom:5px;
+     border-left:4px solid #39bebc;
+     min-height:5rem;
+    }
+    ion-icon{
+     color:#39bebc !important;
+    }
+    .padding-top-30px{
+        padding-top:30px;
+        font-weight: 500;
+    }
+
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    
+    .medicine-list-header{
+        font-size: 16px !important;
+    }
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .medicine-edit{
+        width: 22px;
+        float: right;
+        margin-top: 6px;
+    }
+    .label {
+        font-size: 1.5rem !important;
+    }
+    .footer .toolbar .toolbar-background{
+        background-color: var(--primary-color) !important;
+      }
+    .book-appo-footer-btn{
+        width: 20px;
+        margin-bottom: -5px;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .back-button-icon {
+            color: #ffffff !important;
+        }
+
+        .alert-head {
+            text-align: left;
+            text-align: start;
+            padding: 13px 16px 10px !important;
+            color: white !important;
+            background-color: var(--primary-color) !important
+        }
+
+// added by vinod start
+.dosageUnits{
+    padding:30px 0px 0px 0px;
+    .item-inner{
+        border-bottom: none !important;
+    }
+}
+.reminder_icons{
+    width:25px !important;
+    height: 25px !important;
+    max-width: 25px !important;
+    margin:25px 0px 0px 0px !important;
+}
+.duaration{
+    text-align:center;
+    font-size:large;
+    color: var(--primary-color) !important;
+    p{
+        margin:5px 0px 3px 0px  !important;
+    } 
+}
+// added by vinod end
+
+
+}
+
+
+.customPopUp{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999999999;
+}
+
+.mainPopUp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 80%;
+    height: 181px;
+    background: #fff;
+    
+    font-size: 14px;
+    text-align: justify;
+    transform: scale(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s;
+}
+
+.popTitle{
+    background: #39bebc;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    color: #fff;
+}
+.bottom{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    color: #39bebc;
+
+}
+.bottom .cancel{
+    //position: absolute;
+    bottom: 10px;
+    right: 24px;
+    font-size: 16px;
+   // color: #488aff;
+}
+
+.bottom .set {
+   // position: absolute;
+    bottom: 10px;
+    right: 99px;
+    font-size: 16px;
+}
+
+.circle{
+    color: #39bebc;
+}
+.doseVal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 45px;
+    height: 30px;
+    font-size: 15px;
+}
+ .add {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: auto;
+        right: 40px;
+        font-size: 28px;
+}
+ .remove {
+    position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+    margin: auto;
+    left: 40px;
+    font-size: 28px;
+}
+.maths {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 90%;
+    height: 50px;
+    line-height: 30px;
+    font-weight: bold;
+}
+.range-bar{
+    background:#39bebc !important;
+}
+
+.alert-head {
+    text-align: left;
+    text-align: start;
+    //padding: 13px 16px 10px !important;
+    color: white !important;
+    background-color: #00BEBC !important;
+    padding:15px !important;
+    //margin-bottom: 15px !important;
+}
+.alert-message{
+    padding-top: 15px !important;
+}
+    .alert-title {
+        font-size: 16px !important;
+    }

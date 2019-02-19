@@ -1,0 +1,44 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Payment Failed</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img src="assets/img/credit-card.svg" class="payment-failed" />
+      <p class="not-found-text">Oops!! Something went wrong. Your payment request was Declined.</p>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="orderDetails!=null && orderDetails!=undefined">
+      <p class="payment-info-border">Payment Information</p>
+      <ion-row>
+        <ion-col col-12 text-left>
+          <p class="">Payment Amount:
+            <span class="payment-info">{{orderDetails.BilledAmount}}</span>
+          </p>
+          <p class="">Payment Through:
+            <span class="payment-info">{{orderDetails.PaymentGateWay}}</span>
+          </p>
+          <p class="">Transaction No.:
+            <span class="payment-info">{{orderDetails.TransactionID}}</span>
+          </p>
+          <p class="">Refference No.:
+            <span class="payment-info">{{orderDetails.UniqueReference}}</span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6>
+      <button class="border-form-btn" (click)="backToDashBoard()" ion-button type="button">Back To DashBoard</button>
+    </ion-col>
+    <ion-col col-6>
+      <button class="border-form-btn" (click)="bookAgain()" ion-button type="button">Book Again</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

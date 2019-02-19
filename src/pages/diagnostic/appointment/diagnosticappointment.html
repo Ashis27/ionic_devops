@@ -1,0 +1,111 @@
+<ion-content>
+  <ion-navbar class="header-margin-time-slot">
+    <button ion-button menuToggle class="nav-icon-color">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>Select a time slot</ion-title>
+  </ion-navbar>
+  <ion-card class="time-slot-card-background margin-top-bottom-15">
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <!-- <img class="img-size" [src]="(providerInfo.DiagnosticCenterName.ProviderImage != null && providerInfo.DiagnosticCenterName.ProviderImage != '') ? providerInfo.DiagnosticCenterName.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+        /> -->
+        <img class="img-size" [src]="(providerInfo.DiagnosticCenterName.ProviderImage != null && providerInfo.DiagnosticCenterName.ProviderImage != '') ? providerInfo.DiagnosticCenterName.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+        />
+      </ion-avatar>
+      <div class="card margin-top">
+        <h4 class="profile-user-name">{{providerInfo.DiagnosticCenterName.CenterName}}
+          <span style="float:right;width: 25px;">
+            <img src="assets/img/medical_icon.svg">
+          </span>
+        </h4>
+        <p class="margin-top-6 para-overflow-hidden">
+          <span class="display-inline">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+          </span>
+          <span class="font-weight-doc-loc">{{providerInfo.DiagnosticCenterName.City}}, {{providerInfo.DiagnosticCenterName.CityAreaName}}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-row class="appo-dtl-date-header">
+        <ion-col col-7>
+          <p class="select-time-text padding-10">
+            Select Date</p>
+        </ion-col>
+        <ion-col col-5>
+          <img src="assets/img/appointment1.svg" class="calander-icon-margin">
+          <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="appo-calendar" min="{{minDate}}" max="{{maxDate}}"
+            [(ngModel)]="showSelectedDate" (ionChange)="onSelectedDate(true)"></ion-datetime>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-bottom-10" *ngIf="scheduleDetails.length > 0">
+        <ion-col col-12>
+          <div class="li-time-selector" *ngFor="let schedule of scheduleDetails" (press)="slotSelectedToBookAppo(schedule,$event)"
+            (click)="slotSelectedToBookAppo(schedule,$event)">{{schedule}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="scheduleDetails.length == 0 && !isEmptySlots" class="margin-top-20">
+    <ion-col col-12 text-center class="">
+      <img src="assets/img/cross-calendar.svg" class="not-found no-package-available" />
+    </ion-col>
+    <ion-col col-12>
+      <p class="not-available" text-center>No time slot available.
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 class="appo-dtl-date-header">
+      <p class="select-time-text padding-10">
+        Added Package List</p>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-12 *ngFor="let pck of providerInfo.Package" class="package-back">
+          <ion-row class="medicine-list-border">
+            <ion-col col-2 class="margin-auto">
+              <img class="search-list-image-back" [src]="(pck.ImageUrl != null && pck.ImageUrl != '') ? pck.ImageUrl :'assets/img/package2.svg'"
+              />
+            </ion-col>
+            <ion-col col-10 class="margin-auto">
+              <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-0 medicine-list-header">{{pck.PackageName}}</p>
+              <!-- <p>
+                <span class="display-inline">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+                </span>
+                <span class="font-weight-doc-loc">{{providerInfo.DiagnosticCenterName.CenterName}}</span>
+              </p> -->
+              <p class="margin-top-6 medicine-sub-content">
+                <span class="content-row-seprator" *ngIf="pck.PackageGender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="pck.PackageGender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="pck.PackageGender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="margin-top-6">
+                <span class="">
+                  <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+                <span class="original-price">{{pck.OriginalPrice}}</span> /
+                <span class="discount-price">{{pck.PriceAfterDiscount}}</span>
+              </p>
+              <!-- <p class="margin-top-6 medicine-sub-content para-overflow-hidden" *ngIf="pck.PackageDescription != ''">
+                {{pck.PackageDescription}}
+              </p> -->
+            </ion-col>
+            <!-- <ion-col col-2 class="text-align-right" (click)="removePckage(pck)">
+              <img class="cart-add-icon search-medicine-list-image-back" src="assets/img/delete.svg" />
+            </ion-col> -->
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

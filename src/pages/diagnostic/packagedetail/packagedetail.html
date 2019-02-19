@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="profile-back-sec package-navbar-back">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 white-space margin-auto">
+        <span class="">{{selectedPackage.PackageName}}</span>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row>
+    <!-- <ion-buttons end class="nav-button-width margin-right-10" (click)="goToCart()">
+      <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+      <img class="cart-icon" src="assets/img/cartWhite.svg" />
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card class="time-slot-card-background">
+    <!-- <ion-row class="profile-back-sec padding-15 package-navbar-back">
+      <ion-col col-1 class="close-sec margin-auto" (click)="closeCurrentPage()">
+        <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+      </ion-col>
+      <ion-col col-9 class="header-title margin-top-bottom-5 white-space margin-auto">
+        <span class="">{{selectedPackage.PackageName}}</span>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+    </ion-row> -->
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="profile-w-h" [src]="(selectedPackage.ImageUrl != null && selectedPackage.ImageUrl != '') ? selectedPackage.ImageUrl :'assets/img/package2.svg'"
+        />
+        <!-- <img src="assets/img/bookAppointment/doctor_icon.svg" class="profile-w-h"> -->
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{selectedPackage.PackageName}}
+        </h4>
+        <p class="margin-top-10">
+          <span class="content-row-seprator" *ngIf="selectedPackage.PackageGender == 1">
+            <img class="dioLocation" src="assets/img/male.svg" /> Male
+          </span>
+          <span class="content-row-seprator" *ngIf="selectedPackage.PackageGender == 2">
+            <img class="dioLocation" src="assets/img/female.svg" /> Female
+          </span>
+          <span class="content-row-seprator" *ngIf="selectedPackage.PackageGender == 3">
+            <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+          </span>
+        </p>
+        <p class="price-text margin-top-10">
+          <span class="float-left">
+            <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+          <!-- <span class="original-price">{{selectedPackage.OriginalPrice}}</span> / -->
+          <span class="discount-price">{{selectedPackage.PriceAfterDiscount}}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <!-- <p class=" para-margin-0-1 price-sub-content search-header">
+    <img src="assets/img/dashboard/walletgrey.svg" class="walletegrey" />Price Detail</p>
+  <ion-row>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-8>
+          <p class="margin-top-2 price-content-font ">Total Amount</p>
+        </ion-col>
+        <ion-col col-4>
+          <p class="text-aligh-right margin-top-2 price-content-font original-price price-font-size">
+            <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" />500</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="border-bottom-price">
+        <ion-col col-8>
+          <p class="margin-top-2 price-content-font">Discount</p>
+        </ion-col>
+        <ion-col col-4>
+          <p class="text-aligh-right margin-top-2 price-content-font price-font-size">5%</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-8>
+          <p class="margin-top-2 price-content-font ">Total Payble</p>
+        </ion-col>
+        <ion-col col-4>
+          <p class="text-aligh-right margin-top-2 price-content-font discount-price price-font-size">
+            <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" />475</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+  <ion-row *ngIf="selectedPackage.IndividualTests.length > 0">
+    <p class="para-margin-0-1 price-sub-content search-header">
+      <img src="assets/img/packagegray.svg" class="testwhite" />Individual Test(s)</p>
+    <ion-col col-12 *ngFor="let item of selectedPackage.IndividualTests">
+      <div class="medicinelist" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12>
+            <p class="para-list-header font-weight-400 para-overflow-hidden margin-top-3 item-list-header">
+              <span>
+                <ion-icon name="ios-checkmark-circle-outline" class="test-list"></ion-icon>
+              </span>
+              <span class="font-weight-500">{{item.TestName}}</span>
+            </p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+    <ion-col col-12 *ngIf="selectedPackage.PackageDescription !=''">
+      <p class="para-margin-0-1 price-sub-content search-header">
+        <img src="assets/img/packagegray.svg" class="testwhite" />Package Description</p>
+      <div class="medicinelist" no-padding>
+        <ion-row class="medicine-list-border">
+          <ion-col col-12>
+            <p class="para-list-header font-weight-400 margin-top-3 item-list-header" [innerHTML]="selectedPackage.PackageDescription">{{selectedPackage.PackageDescription}}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6 class="btn-devider-border" (click)="addToCart()">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5">Add To Cart</span>
+        </ion-title>
+      </ion-col>
+      <ion-col col-6 (click)="bookPackage()">
+        <ion-title class="footer-titel-class" text-center>
+          <!-- <img src="assets/img/cartWhite.svg" class="search-dio-footer-btn"> -->
+          <span class="margin-left-right-5">Book Package</span>
+        </ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,276 @@
+<!--
+  Generated template for the BmicalculatorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>BMI Calculator</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding >
+  <!-- <div class="background_image"></div>  -->
+    <div class="progress_wrapper">
+      <div>
+        <round-progress
+        [current]="current"
+        [max]="max"
+        [color]="status"
+        [background]="'#eaeaea'"
+        [radius]="150"
+        [stroke]="25"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="true"
+        [responsive]="false"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"></round-progress></div>
+        <div class="progress_text" [style.color]="status" *ngIf="(enteredAll) && (calculate.Weight != '' && calculate.HeightInFoot != '' && calculate.HeightInInch != '')">{{current}} 
+          <span>kg/m<sup>2</sup></span>
+          <p class="result" [style.color]="status">{{result}}</p>
+        </div>
+      </div>
+
+      <!-- <ion-col col-12 *ngIf="enteredAll">
+          <p *ngIf="enteredAll" class="result" [style.color]="status">{{result}}</p>
+      </ion-col> -->
+  <!-- <ion-list class="list">
+    <ion-row>
+      <ion-col col-12 class="col-padding-0">
+          <ion-label >Weight</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-bottom-5">
+      <ion-col col-10 class="col-padding-0">
+        <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;;">         
+          <ion-input type="number" placeholder="Enter your weight" [(ngModel)]="calculate.Weight" ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 class="padding-top-20">
+        Kgs
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12 class="col-padding-0"><ion-label >Height</ion-label></ion-col>
+
+        <ion-col col-6 class="mar_col">
+            <ion-item class="padding-left-0" class="item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+              <ion-label class="header_label">Feet</ion-label>
+              <ion-select [(ngModel)]="calculate.HeightInFoot" style="border-right: 0px dashed gainsboro;">
+                <ion-option value={{num}} *ngFor="let num of foots" >{{num}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4 class="mar_col">
+            <ion-item class="padding-left-0" class="padding-left-0" class="item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+              <ion-label class="header_label">Inches</ion-label>
+              <ion-select [(ngModel)]="calculate.HeightInInch" style="border-right: 0px dashed gainsboro;">
+                <ion-option value={{num}} *ngFor="let num of inches" >{{num}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+    </ion-row>
+    <ion-row> -->
+     
+      <!-- <ion-col col-4 class="col-padding-0">
+        <ion-item>        
+          <ion-input type="number" placeholder="Feet" [(ngModel)]="calculate.HeightInFoot" ></ion-input>
+        </ion-item>     
+      </ion-col>
+     <ion-col col-2 class="padding-top-20">Ft</ion-col>
+      <ion-col  col-4 class="col-padding-0">
+        <ion-item>
+          <ion-input type="number"  placeholder="Inches"  [(ngModel)]="calculate.HeightInInch" ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 class="padding-top-20">Inches</ion-col> -->
+    <!-- </ion-row>
+  
+  </ion-list>
+  <button ion-button block (click)="calculateBMI()">Calculate</button> -->
+  <!-- <p *ngIf="enteredAll" class="result">{{result}}</p> -->
+
+  
+
+  <!-- <ion-col col-12 class="padding-0">
+    <div class="gender_wrapper">
+    <ion-row>
+        <ion-col col-6 class="text-left-cls" (click)="getStyle('male')" [ngClass]="{'activate': gender=='male'}">
+            <p style="margin:0px">Male</p>
+            <img src="assets/imgs/calculator/male.png" class="gendercls">
+          </ion-col>
+          <ion-col col-6 class="text-left-cls" (click)="getStyle('female')" [ngClass]="{'activate': gender=='female'}">
+              <p style="margin:0px">Female</p>
+              <img src="assets/imgs/calculator/female.png" class="gendercls">
+          </ion-col>      
+    </ion-row>
+  </div>
+  </ion-col> -->
+  
+    <ion-col col-12 class="padding-0">
+      <ion-row>
+        <ion-col col-4>
+          <p class="text_col margin-top-bottom-5">Weight(kgs)</p>
+          <ion-input type="number" placeholder="Kgs" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="calculate.Weight" ></ion-input>
+        </ion-col>
+        <ion-col col-4>
+          <p class="text_col margin-top-bottom-5">Height(ft)</p>
+          <!-- <ion-input type="number" placeholder="Feet" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="calculate.HeightInFoot"></ion-input> -->
+          <ion-item class="selectitem" >
+            <ion-label class="header_label select_label">Feet</ion-label>
+            <ion-select [(ngModel)]="calculate.HeightInFoot" (ionChange)="CheckAllFil()">
+              <ion-option value={{feet}} *ngFor="let feet of feets">{{feet}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <p class="text_col margin-top-bottom-5">Height(inch)</p>
+          <!-- <ion-input type="number" placeholder="Inches" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" [(ngModel)]="calculate.HeightInInch"></ion-input> -->
+          <ion-item class="selectitem">
+            <ion-label class="header_label select_label">Inches</ion-label>
+            <ion-select [(ngModel)]="calculate.HeightInInch" (ionChange)="CheckAllFil()">
+              <ion-option value={{inch}} *ngFor="let inch of inches">{{inch}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-row>
+        <ion-col col-12 class="padding-0">
+            <button ion-button block full (click)="calculateBMI()">Calculate</button>
+        </ion-col>
+    </ion-row>
+
+    <div class="Cal_Des" class="margin-top-bottom-15" *ngIf="(!enteredAll) && (calculate.Weight != '' && calculate.HeightInFoot != '' && calculate.HeightInInch != '')">
+      <ion-row>
+        <ion-col col-12 >
+           <p class="cal_des"><strong>What is a Body Mass Index (BMI)?</strong></p>
+              <p class="cal_des">Body Mass Index (BMI) is a measure of body fat based on height and weight.
+            </p>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div  class="suggestions_col" *ngIf="(enteredAll) && (calculate.Weight != '' && calculate.HeightInFoot != '' && calculate.HeightInInch != '')"> 
+      <ion-row>
+        <ion-col col-12 class="margin-top-bottom-15">
+           <!-- <p class="cal_des" *ngIf="(result==='Under Weight' || result==='Normal Weight' )" >
+             <strong>Your BMI is under control</strong>
+           </p> -->
+           <!-- <ion-row *ngIf="(result==='Under Weight' || result==='Normal Weight' )">
+           <p class="cal_des" >
+              <strong>Your BMI is high, You may consult the doctor for immediate assistance.</strong>
+           </p>
+            <p class="appointment_book" (click)="bookAppointment()"><strong>Please Book Your Appointment Here 
+              
+            </strong></p>
+          </ion-row> -->
+          <ion-row *ngIf="(result==='Over Weight' || result==='severe' || result==='Obese' || result==='Class III Obese')">
+            <ion-col col-12 class="cal_des margin-top-bottom-5" no-padding>
+              <p class="cal_des" >
+                  <strong>Your BMI is very high. You may consult a Physician.</strong>
+              </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+              </strong></p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="!(result==='Over Weight' || result==='severe' || result==='Obese' || result==='Class III Obese')">
+            <ion-col col-12>
+              <p class="cal_des margin-top-bottom-5" no-padding>
+                 <strong>Do you still looking for an appointment ?...</strong> 
+           </ion-col>
+           <ion-col col-6 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+           <ion-col col-6 no-padding>
+            <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+               </strong></p>
+          </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="bmi_ranges" *ngIf="(enteredAll) && (calculate.Weight != '' && calculate.HeightInFoot != '' && calculate.HeightInInch != '')">
+      <ion-row>
+        <ion-col col-12  color="primary" >
+            <p class="disclaimer_header">Avg BMI Ranges</p>
+        </ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'highlight_danger': result ==  'severe'}">
+        <ion-col col-5 text-center>
+            <p class="ranges">
+                <strong>< 15 </strong> 
+            </p>
+        </ion-col>
+        <ion-col col-7 text-center><p class="ranges" >Severe.</p></ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'highlight_normal': result == 'Under Weight'}">
+        <ion-col col-5>
+           <p class="ranges" text-center>
+             <strong>>15 & <18.5</strong> 
+           </p>
+        </ion-col>
+        <ion-col col-7 text-center><p class="ranges" >Underweight.</p></ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'highlight_normal': result == 'Normal'}">
+        <ion-col col-5 text-center>
+          <p class="ranges" >
+            <strong>>18.5 & <25 </strong> 
+          </p>
+        </ion-col>
+        <ion-col col-7 text-center>
+            <p class="ranges" >Normal.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row  [ngClass]="{'highlight_danger': result == 'Over Weight'}">
+        <ion-col col-5 text-center>
+          <p class="ranges" >
+            <strong>>25 & <30 </strong> 
+          </p> 
+        </ion-col>
+        <ion-col col-7 text-center><p class="ranges" >Overweight.</p></ion-col>
+      </ion-row>
+      <ion-row  [ngClass]="{'highlight_danger': result == 'Obese'}">
+        <ion-col col-5 text-center>
+          <p class="ranges" >
+            <strong>>30 & <40 </strong> 
+          </p> 
+        </ion-col>
+        <ion-col col-7 text-center><p class="ranges" >Obese.</p></ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'highlight_danger': result ==  'Class III Obese'}">
+        <ion-col col-5 text-center>
+          <p class="ranges" >
+            <strong>>40 </strong> 
+          </p>
+        </ion-col>
+        <ion-col col-7 text-center><p class="ranges" >Need Immediate Treatment.</p></ion-col>
+      </ion-row>
+    </div>
+      
+  <ion-col col-12 >
+    <ion-row class="disclaimer_wrapper">
+      <ion-col col-10  color="primary" >
+        <p class="disclaimer_header">Disclaimer</p>
+      </ion-col>
+      <ion-col col-12 >
+        <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+
+</ion-content>
+

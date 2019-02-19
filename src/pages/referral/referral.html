@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Doctor Referrals</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+
+    <ion-row class="">
+        <ion-col col-12 *ngIf="referrals.length > 0">
+
+            <ion-row class="book-appo-border-bottom-color" *ngFor="let referral of referrals;let i=index">
+                <ion-col col-2 class="padding-2" (click)="GetMedicalRecordShareRequestsForConsumerBasedOnReferral(referral,referral.ProviderReferralConsumerId)">
+                    <img class="search-list-image-back" src="assets/img/refferral/doctor_icon.svg" *ngIf="referral.ProviderType == 10" />
+                    <img class="search-list-image-back" src="assets/img/refferral/hospital_icon.svg" *ngIf="referral.ProviderType == 11" />
+                    <img class="search-list-image-back" src="assets/img/refferral/diagnostic.png" *ngIf="referral.ProviderType == 12" />
+                </ion-col>
+                <ion-col col-8 class="padding-2" (click)="GetMedicalRecordShareRequestsForConsumerBasedOnReferral(referral,referral.ProviderReferralConsumerId)">
+                    <!-- <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-bottom-5">{{referral.ProviderReferred}}</p> -->
+                    <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-bottom-5">
+                        By : {{referral.ProviderReferred}}
+                    </p>
+                    <p class="inner-sub-text-size para-overflow-hidden para-text-color">
+                        To : {{referral.ProviderName}}
+                    </p>
+                    <p class="inner-sub-text-size para-overflow-hidden para-text-color">
+                            Date : {{referral.ReferredDate}}
+                        </p>
+                </ion-col>
+                <ion-col col-2 style="margin: auto;" (click)="GetMedicalRecordShareRequestsForConsumerBasedOnReferral(referral,referral.ProviderReferralConsumerId)">
+                    <ion-icon class="arrow" 
+                        *ngIf="!referral.IsOpen" name="ios-arrow-down"></ion-icon>
+                    <ion-icon class="arrow"  *ngIf="referral.IsOpen" name="ios-arrow-up"></ion-icon>
+                </ion-col>
+                <ion-col col-12>
+                    <div class="document-container" *ngFor="let doc of referral.MedicalRecords; let id = index">
+
+                        <ion-row *ngIf="!doc.MedicalRecord.IsDigitalDocumentPathPublic" (click)="viewIamge(doc.MedicalRecord.DigitalDocumentPath,doc.MedicalRecord)">
+
+                            <ion-col col-2 class="padding-0">
+                                <div class="document-img-container">
+
+                                    <img *ngIf="doc.MedicalRecord.FileTypeExtention != 'application/pdf'" src="assets/img/appointment/imgView.png" class="document-default-img">
+                                    <img *ngIf="doc.MedicalRecord.FileTypeExtention == 'application/pdf'" src="assets/img/appointment/pdfView.png" class="document-default-img">
+                                </div>
+                            </ion-col>
+                            <ion-col col-8 class="padding-0">
+                                <div>
+                                    <p class="document-name">{{doc.MedicalRecord.DigitalDocumentName}}</p>
+                                    <p class="document-dec">{{doc.MedicalRecord.Description}}</p>
+                                </div>
+                            </ion-col>
+                            <ion-col col-2 class="padding-0">
+                                <ion-item style="background-color: #eae9e9;">
+
+                                    <ion-label>&nbsp;</ion-label>
+                                    <ion-checkbox color="primary" [(ngModel)]="doc.MedicalRecord.IsSelected"></ion-checkbox>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="doc.IsDigitalDocumentPathPublic" (click)="viewPublicIamge(doc.MedicalRecord.DigitalDocumentPath,doc.MedicalRecord)">
+
+                            <ion-col col-2 class="padding-0">
+                                <div class="document-img-container">
+
+                                    <img *ngIf="doc.MedicalRecord.FileTypeExtention != 'application/pdf'" src="assets/img/appointment/imgView.png" class="document-default-img">
+                                    <img *ngIf="doc.MedicalRecord.FileTypeExtention == 'application/pdf'" src="assets/img/appointment/pdfView.png" class="document-default-img">
+                                </div>
+                            </ion-col>
+                            <ion-col col-8 class="padding-0">
+                                <div>
+                                    <p class="document-name">{{doc.MedicalRecord.DigitalDocumentName}}</p>
+                                    <p class="document-dec">{{doc.MedicalRecord.Description}}</p>
+                                </div>
+                            </ion-col>
+                            <ion-col col-2 class="padding-0">
+                                <ion-item style="background-color: #eae9e9;">
+
+                                    <ion-label>&nbsp;</ion-label>
+                                    <ion-checkbox color="primary" [(ngModel)]="doc.MedicalRecord.IsSelected"></ion-checkbox>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <div *ngIf="referral.MedicalRecords.length != 0">
+                        <ion-row>
+                                <ion-col col-6><button style="background-color: #f15c23;" class="btn-danger-style" ion-button (click)="rejectDocuments(referral)">Deny All</button></ion-col>
+                                <ion-col col-6><button class="btn-back-style " ion-button (click)="shareDocuments(referral)">Share</button></ion-col>
+                        </ion-row>
+                        
+                    </div>
+                    <ion-col col-12 *ngIf="referral.MedicalRecords.length == 0 && referral.IsOpen">
+                        <div style="text-align: center;">
+                            <p style="margin: 0;font-size: 12px;">
+                                <ion-icon name="document" style="font-size: 1.6em;color: #39bebc;"></ion-icon>
+                                &nbsp;No records shared by {{referral.ProviderReferred}}</p>
+
+                        </div>
+                    </ion-col>
+                </ion-col>
+
+            </ion-row>
+        </ion-col>
+        <ion-col col-12 *ngIf="referrals.length == 0" style="text-align: center;">
+                <div style="text-align: center;margin-top: 10px;">
+                        <ion-icon name="git-network" style="font-size: 1.9em;color: #39bebc;"></ion-icon>
+                        <p style="margin: 0;">
+                            
+                           No referrals!!!</p>
+
+                    </div>
+        </ion-col>
+
+
+    </ion-row>
+</ion-content>

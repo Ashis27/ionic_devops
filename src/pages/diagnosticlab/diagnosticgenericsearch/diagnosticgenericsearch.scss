@@ -1,0 +1,269 @@
+page-diagnosticgenericsearch {
+
+ 
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .active-city-text{
+        font-size: 13px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .toolbar-content-ios >.location-search-header> .title-header-text{
+    text-align: center !important;
+        }
+   .active-location-text{
+       font-size: 14px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .button-small{
+    font-size: 1.1rem !important;
+}
+//    .content-ios{
+//     //margin-top:-20px;
+// }
+.not-center-found{
+    width: 15% !important;
+    margin-top: 45%;
+}
+.item-ios{
+    padding-top:10px;
+  }
+  .img-size{
+    max-width: 50px;
+    background: #f1f1f1;
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50%;
+    border: 3px solid #d2d2d2;
+    padding: 3px;
+    margin-top: 0px !important;
+}
+.cart-add-icon {
+    max-width: 44px !important;
+    background: #ffffff !important;
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 50% !important;
+    padding: 0px 0px 0px 0px !important;
+    float: right;
+  //  margin-top: 15px;
+}
+// .add-to-cart{}
+.rupee-icon{
+    width: 13px;
+    vertical-align: sub;
+    margin-right: 0px;
+    float:left;
+}
+.original-price{
+    text-decoration: line-through;
+    color: #9e0000;
+}
+.discount-price{
+    color: #038607;
+}
+    .listHeader{
+        border-bottom: 0.5px solid #bbb7b7;
+        height: 40px;
+        line-height: 3;
+        margin: 0px 12px;
+        padding-left: 2px;
+        color: #39bebc;
+        font-size: 16px;
+        background-color: #f7eded;
+    }
+    .medicine_items{
+     padding-left: 6px;
+     border-radius:5px;
+     margin-bottom:5px;
+     border-left:4px solid #39bebc;
+     min-height:5rem;
+    }
+    ion-icon{
+     color:#39bebc !important;
+    }
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    
+    .medicine-list-header{
+        font-size: 16px !important;
+
+    }
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .filter-icon-upload{
+        width: 30px;
+    }
+    .review-color{
+        color:white;
+        font-size: 12px;
+        margin-left: 10px;
+        // vertical-align: text-top;
+    }
+    #notification-button {            
+        position: relative;
+        width: 42px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+  #notifications-badge {
+        background-color:var(--button-color);
+        position: absolute;
+        top: -1px;
+        right: -5px;
+        border-radius: 100%;
+        padding: 5px 7px 5px 7px;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+       .filter-icon-upload{
+        float: right;
+        width: 30px;
+        //margin-top: 5px;
+    }   
+    .filter_icon{
+        // width: 20px; 
+        margin-top: 3px;
+        /* float: left; */
+        text-align: center;
+        padding: 4px;
+    }
+    .age_grp_color{
+        color:var(--primary-color);
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .back-button-icon {
+            color: #ffffff !important;
+        }
+.contact-number-field{
+    margin-top: -2px !important;
+}
+
+
+
+
+        .menu-header-sec{
+            background-color: var(--primary-color) !important;
+            text-align: center;
+         }
+         .active-back{
+            border: 2px solid var(--button-color);
+           }
+           @keyframes pulse_animation {
+            0% { transform: scale(1); }
+            30% { transform: scale(1); }
+            40% { transform: scale(1.08); }
+            50% { transform: scale(1); }
+            60% { transform: scale(1); }
+            70% { transform: scale(1.05); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation-name: pulse_animation;
+            animation-duration: 6000ms;
+            transform-origin:70% 70%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+
+        .para-overflow {
+            text-overflow: ellipsis !important;
+            white-space: nowrap;
+            padding: 0px 0px 0px 13px !important;
+            overflow: hidden !important;
+            margin: 0px;
+            font-size: 15px !important;
+        }
+        .dioLocation{
+            width: 15px !important;
+            float: left;
+            margin-right: 5px;
+        }
+         .reatingicon {
+            color: #b7ab15 !important;
+            font-size: 14px !important;
+        }
+        .search-list-image-back {
+            max-width: 55px !important;
+            background: #e4e4e4 !important;
+            height: 55px !important;
+            width: 55px !important;
+            border-radius: 50% !important;
+            padding: 10px 0px 9px 0px !important;
+        }
+        .para-margin-3-0 {
+            margin: 3px 0px 0px 0px !important;
+        }
+        .search-dio-footer-btn{
+            width: 26px;
+            margin-bottom: -5px;
+        }
+
+        .footer .toolbar .toolbar-background {
+            background-color: var(--primary-color) !important;
+        }
+        .content-ios > .scroll-content > .search-input-ios{
+            margin: 5px 0px 0px 0px !important;
+        }
+        .result_list_bg{
+            background:#e4e4e4;
+         }
+        //  .DF_package_div{
+        //     padding: 2px;
+        //     /* -webkit-box-shadow: 1px 1px 1px 1px #673AB7; */
+        //     box-shadow: 0px 2px 3px #868686;
+        //     background: -webkit-gradient(linear, left top, right top, color-stop(13%, #a792dd), color-stop(21%, #a58fdc), color-stop(52%, #9c84d7), color-stop(96%, #8f75d1));
+        //     background: linear-gradient(to right, #8dd4d3 13%, #8ad0cf 21%, #79c7c6 52%, #39bebc 96%);
+        //     color: white;
+        //     border-radius: 5px;
+        // }
+
+        .testMar{
+            background-color:rgba(0, 0, 0, 0.27);;
+            opacity: 0.50;
+            pointer-events: none;
+        }
+
+        .NotAviblMsg{
+            color: #ffffff;
+            font-size: 16px;
+            position: absolute;
+            text-align: center;
+            background-color: rgba(95, 95, 95, 0.8784313725490196);
+            margin: 100px 0px 0px 7px !important;
+            padding: 0px !important;
+            z-index: 1111;
+        }
+
+        .NotAviblMagMargin{
+            margin: 5px 0px;
+        }
+    
+      
+}

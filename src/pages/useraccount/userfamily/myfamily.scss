@@ -1,0 +1,225 @@
+page-myfamily{
+
+    .img-height{
+        width: 70% !important;
+    }
+    .hos-logo{
+        text-align: center;
+            // background-color: rgba(113, 155, 183, 0.91);
+    }
+    .profile-back{
+           background-color: white;
+
+    }
+    .icon-btn-color{
+        background: #7da4bd !important;
+      
+    }
+    ion-select > .select-icon {
+        width: 15px !important;
+    }
+    .icon-color{
+       color:white !important;
+    }
+    .icon-profile{
+              color: #a5a5a5;
+    font-size: 2.0rem;
+    /* margin-top: 8px !important; */
+    padding: 5px 0px 0px 0px;
+    }
+        .icon-profile-edit{
+            color: #bf9d1b;
+    font-size: 1.5rem;
+    }
+    .login-input-dropdown{
+             margin-top: 5px !important;
+             margin-bottom: 10px !important;
+    }
+    .login-input-family-details{
+margin: 5px 10px 5px 10px;
+    }
+    .family-desc{
+            padding: 5px !important;
+    }
+.footer-sec{
+        padding-left:0px !important;
+        text-align: center !important;
+           height: 0px !important;
+}
+.footer-name{
+    font-size: 9px !important;
+   // margin-top: -10px;
+}
+.login-input{
+      margin-top: 5px;
+          border-bottom: 1px solid #bfd4e6;
+          color:#827c7c !important;
+}
+.login-inner-section > .item-inner{
+        margin-left: 15px !important;
+}
+ion-item{
+        background-color: rgba(248, 251, 253, 0.13) !important
+}
+.update-btn{
+       margin-top: 10px !important;
+    width: 100%;
+      height: 37px;
+    font-size: 18px;
+}
+.profile-details-sec .item-inner{
+    border-bottom-color: #e4e4e4 !important;
+    box-shadow: inset 0 -1px 0 0 #e4e4e4 !important;
+}
+.member-details{
+    padding-left: 0px !important;
+    text-align: center;
+    background: rgba(230, 230, 230, 0);
+}
+.member-details .item-inner{
+    margin-left: 5px !important;
+}
+.family-list-image{
+    width: 60px;
+    height: 60px;
+    background: #39bebc;
+    border-radius: 50%;
+    padding: 17px 0px 18px 0px;
+}
+// .scroll-content{
+//     padding:0px !important;
+// }
+.family-name-section{
+text-transform: uppercase;
+    color: #949494;
+    padding: 0px 0px 0px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+// .family-healthrecord{
+//  color: white !important;
+//     color: #ffffff !important;
+//     padding: 15px 9px 15px 8px;
+//     /* border: 0px solid #ad1818; */
+//     font-size: 40px;
+//     border-radius: 50%;
+
+//     width: 75px;
+//     height: 75px;
+//     }
+//     .datetime-text{
+//         color:#827c7c !important;
+//     }
+    .relation-sec{
+        color:#827c7c !important;
+            font-size: 13px;
+    }
+//     .list-details{
+//     background: #87b77a;
+//     border-radius: 15%;
+//     margin-bottom: 8px;
+//         box-shadow: 0px 1px 1px #464c45;
+//     }
+//     .edit-family{
+//         text-align: right;
+//             margin-bottom: -20px;
+//     }
+//     .family-top-sec{
+//         margin-top: -10px;
+//     }
+//     .not-available-sec{
+//         margin-top: 50%;
+//     }
+
+
+
+.profile-section{
+    margin-bottom: 10px;
+   //background-color: var(--primary-color) !important;
+    height: 200px;
+    border-bottom: 2px solid #efefef;
+    background: -webkit-linear-gradient(top, rgba(65, 198, 196, 0.42) 0%, rgba(117, 175, 191, 0.02) 84%, rgba(179, 179, 179, 0) 100%);
+}
+.text-input{
+    margin-left: 0px !important;
+}
+.edit-name-icon{
+    margin-top: -3px !important;
+}
+ion-navbar{
+    background-color: var(--primary-color) !important;
+}
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+  }
+  .family-back-image{
+    margin: -21px -21px 0px -21px;
+  }
+
+  .devider-section{
+    border-bottom: 4px solid #efefef;
+    margin: 0px -15px 0px -15px;
+  }
+  .relation-devider{
+   
+    margin: 0px -15px 0px -15px;
+  }
+  .money-icon-margin{
+    margin-top: 8px;
+    width: 24px;
+}
+.activate-gender {
+    -webkit-box-shadow: 1px 1px 1px 1px #e0f4f4;
+    box-shadow: 1px 1px 1px 1px #8f8f8f;
+    border-radius: 5px;
+    background-color: #ffffff !important;
+    color: black;
+}
+
+.activate-female {
+    -webkit-box-shadow: 1px 1px 1px 1px #e0f4f4;
+    box-shadow: 1px 1px 1px 1px #8f8f8f;
+    border-radius: 5px;
+    background-color: #ffffff !important;
+    color: black;
+}
+    .selectedReletion{
+        color: #ffffff;
+        font-size: 14px;
+        border: 1px solid var(--primary-color);
+        padding: 0px 0px 0px 0px;
+        margin: 0px 5px;
+        border-radius: 5px;
+        font-weight: 500;
+        background-color: var(--primary-color);
+        line-height: 0;
+    }
+
+    .nonSelectedReletion{
+        color: #ffffff;
+        font-size: 14px;
+        border: 1px solid var(--button-color);
+        padding: 0px 0px 0px 0px;
+        margin: 0px 5px;
+        border-radius: 5px;
+        font-weight: 500;
+        background-color: var(--button-color);
+        line-height: 0;
+        
+    }
+    .gendercls{
+        width: 28px;
+        height:28px;
+        margin-top:5px;
+        background: transparent;
+    }
+    .money-icon-margin {
+        margin: 8px 0px 2px 5px !important;
+        width: 28px !important;
+    }
+  
+}

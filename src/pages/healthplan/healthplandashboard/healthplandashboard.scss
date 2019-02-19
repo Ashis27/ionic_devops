@@ -1,0 +1,36 @@
+page-healthplandashboard {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .plan-header-bck {
+        background: #f1f1f1;
+        padding: 10px 0px 10px 5px;
+        font-size: 16px;
+        color: #21a09e;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+    .activate-btn {
+        background: #39bebc;
+        color: white;
+        padding: 10px 3px 10px 3px;
+        border-radius: 3px;
+        /* margin: -7px; */
+        /* font-size: 12px; */
+        width: 100%;
+        box-shadow: 0px 3px 6px #9a9a9a;
+    }
+    .card-img {
+        width: 80% !important;
+    }
+    p {
+        color: #b2b2b2 !important;
+    }
+    .para-list-header {
+        color: #6d6d6d !important;
+    }
+}

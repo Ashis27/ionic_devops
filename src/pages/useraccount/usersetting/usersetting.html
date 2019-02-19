@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Setting</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col col-12 class="account-setting-header">
+      <p class="account-setting para-list-header">Account Setting</p>
+    </ion-col>
+    <ion-row (click)="redirectTo('Reporting')" class="width-100">
+      <ion-col class="padding-0 width-100">
+        <ion-item class="setting-item-background default-add padding-left-5">
+          <ion-thumbnail item-start class="">
+            <img class="app-setting-img" src="assets/img/support.svg" />
+          </ion-thumbnail>
+          <p class="setting-header">Help desk</p>
+          <button ion-button clear item-end>
+            <span class="profile-forword-arrow">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+            </span>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row (click)="redirectTo('Feedback')" class="width-100">
+      <ion-col class="padding-0 width-100">
+        <ion-item class="setting-item-background default-add padding-left-5">
+          <ion-thumbnail item-start class="">
+            <img class="app-setting-img" src="assets/img/good-quality.svg" />
+          </ion-thumbnail>
+          <p class="setting-header">Feedback</p>
+          <button ion-button clear item-end>
+            <span class="profile-forword-arrow">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+            </span>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row (click)="getTermsAndConditions()" class="width-100">
+      <ion-col class="padding-0 width-100">
+        <ion-item class="setting-item-background default-add padding-left-5">
+          <ion-thumbnail item-start class="">
+            <img class="app-setting-img" src="assets/img/lock.svg" />
+          </ion-thumbnail>
+          <p class="setting-header">Terms & Conditions</p>
+          <button ion-button clear item-end>
+            <span class="profile-forword-arrow">
+              <img class="dashboard-sub-menu-img" src="assets/img/user-account/rightarrow_icon.svg" />
+            </span>
+          </button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-col col-12 text-center class="margin-top-10-percentage">
+      <ion-item class="logout-sec default-add" (click)="logOut()">
+        <p class="default-color margin-auto font-weight-400">
+          <span class="logout-text">Logout</span>
+          <span class="float-right">
+            <ion-icon name="log-out" class="icon-text"></ion-icon>
+          </span>
+        </p>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+      <ion-item class="footer-sec footer-row-section default-add">
+        <ion-row class="footer-row-section">
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HOME</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">EMERGENCY</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+          </ion-col>
+          <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+              <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+            <br>
+            <p class="footer-name bar-button">HISTORY</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-toolbar>
+  </ion-footer> -->

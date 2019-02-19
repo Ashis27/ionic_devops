@@ -1,0 +1,127 @@
+page-heartbeat {
+    .background-image{
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        background-position: center !important;
+        background-size: 100% !important;
+        background: linear-gradient(to bottom, #fff 0%, #7ad0ec 100%);
+      }
+    .scroll-content{
+        padding:0px !important;
+    }
+    
+    .bg_image{
+        width: 100%;
+        height:200px;
+        background-image: url('../assets/imgs/calculator/heartbeat.jpg') ;
+        background-repeat: no-repeat;
+        background-size:100%;
+    }
+    // .list{
+    //     margin:5px 5px 16px;
+    // }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .item-input{
+        border: none !important
+    }
+    .item{
+        padding: 0px !important
+    }
+    ion-label{
+        font-weight: 500;
+        margin:0 !important;
+    }
+    // .col{
+    //     padding: 0px !important;
+    // }
+    ion-item{
+        margin-top: -3px !important;
+    }
+    .mar_col{
+        margin-top: -10px;
+    }
+    .margin-left{
+        margin-left:1%;   
+     }
+    .button{
+        // margin-left: 1% !important;
+        width: 100% !important;
+        background-color:#f15c23 !important;
+        color:white;
+    }
+    .toolbar-background{    
+        background: #39bebc !important;
+       
+       
+    }
+    .toolbar-title{
+       color: #fff8f8 !important;
+    }
+    ion-label{
+        color:#2d2d2d !important;
+    }
+    p{
+      //  font-size: 25px;
+        text-align: center;
+        color: #34bdbc;
+    }
+    // .label {
+    //     margin: 10px 8px 14px 0 !important;
+    // }
+
+    .header_label{
+        font-weight:300;
+    }
+    .text-input{
+        margin: 5px 0px !important;
+     }
+
+     
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+       // font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+         margin:20px 0px 10px 0px;
+     }
+    .appointment_book{
+        font-size: 12px;
+        text-align: left;
+        color: #34bdbc;
+        text-decoration: underline;
+    }
+    .result{
+        font-size: 16px;
+        margin: 5px;
+    }
+     .Cal_Des{
+
+     }
+}

@@ -1,0 +1,60 @@
+page-bookedpackage{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .image-size{
+        width: 18px;
+        float: left;
+    }
+    .original-price{
+        text-decoration: line-through;
+        color: #9e0000;
+    }
+    .booking-date{
+        color:var(--button-color);
+        font-size: 16px;
+    }
+    .complete-text-color{
+        color:var(--primary-color);
+    }
+    .not-complete-text-color{
+        color:var(--button-color);
+    }
+    .payment-status{
+    color: #4a4949;
+    //font-weight: 500;
+    }
+    .rupee-image-size{
+        width: 20px !important;
+        float: left;
+    }
+    .tab-heading-color{
+        color:var( --black-light-color);
+    }
+    .booking-date-time{
+        color: #4a4949;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .segment-ios .segment-button.segment-activated{
+        background-color: rgb(255, 255, 255) !important;
+        border-bottom: 1px solid var(--button-color) !important;
+}
+.segment-ios .segment-button{
+    border-top: 0px !important;
+    border-color:   #e2e2e2;
+}
+    .user-name{
+        color: var(--primary-color);
+        font-size: 16px;
+    }
+    .booked-user-details{
+        margin-left: 23px;
+    }
+
+
+}

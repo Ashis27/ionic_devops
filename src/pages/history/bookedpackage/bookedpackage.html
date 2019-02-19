@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Booked Package</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col col-12 text-center class="padding-0">
+      <div>
+        <ion-segment [(ngModel)]="tabValue">
+          <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" class="text-center-cls segBordder" [ngClass]="i == 0?'border-right':''"
+            value="appo-{{i}}" (click)="tabSelection($event,option)">
+            <p class="margin-5 tab-heading-color font-size-16">{{option}}</p>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div *ngIf="bookedPackageList.length > 0">
+        <ion-card class="time-slot-card-background border-bottom" *ngFor="let pck of bookedPackageList">
+          <ion-item class="">
+            <ion-avatar item-start class="avtar-margin">
+              <img class="search-list-image-back" [src]="(pck.ProviderImage != null && pck.ProviderImage != '') ? pck.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+              />
+            </ion-avatar>
+            <div class="card">
+              <h4 class="profile-user-name-big para-overflow-hidden">{{pck.HealthPackageName}}
+                <span style="float:right;width: 25px;">
+                  <img src="assets/img/medical_icon.svg" class="image-size">
+                </span>
+              </h4>
+              <p class="booking-type margin-bottom-10">{{pck.ItemTypeDesc}}</p>
+              <p class="margin-top-bottom-5">
+                <img src="assets/img/rupee_icon.svg" class="image-size">
+                <span class="doc-fee-text">{{pck.PriceAfterDiscount}}</span>
+                <span class="original-price" *ngIf="pck.GenericDiscount>0">{{pck.OriginalPrice}}</span>
+                <span class="age_grp_color">({{pck.GenericDiscount}}%)</span>
+              </p>
+              <p class="para-overflow-hidden margin-top-bottom-5">
+                <span>
+                  <img src="assets/img/history/appointment/location_icon.svg" class="image-size">
+                </span>
+                <span class="font-weight-500"> {{pck.HospitalName}}</span>
+              </p>
+              <p class="margin-top-bottom-5">
+                <span>
+                  <img src="assets/img/history/appointment/calendar_icon.svg" class="image-size">
+                </span>
+                <span class="booking-date-time">{{pck.BookingDate}}, {{pck.BookingSlot}}
+                </span>
+              </p>
+            </div>
+          </ion-item>
+          <ion-item class="historyBottom padding-left-5 margin-top-13" *ngIf="pck.Name != null && pck.Name !=''">
+            <ion-avatar item-start class="avtar-margin">
+              <div class="profile-w-h"></div>
+            </ion-avatar>
+            <div class="card booked-user-details">
+              <p class="booked-for-text para-overflow-hidden">
+                <span>Booked for </span>
+                <span class="booked-for-color user-name"> {{pck.Name}}</span>
+              </p>
+            </div>
+          </ion-item>
+          <ion-item>
+            <div class="float-right">
+              <span>
+                <img src="assets/img/fees_icon.svg" class="rupee-image-size">
+              </span>
+              <span class="booking-date complete-text-color" *ngIf="pck.IsPaid">Paid
+              </span>
+              <span class="booking-date not-complete-text-color" *ngIf="!pck.IsPaid">Not Paid
+                </span>
+            </div>
+            <!-- <div *ngIf="pck.IsCompleted" class="float-right">
+              <span>
+                <img src="assets/img/complete.svg" class="image-size">
+              </span>
+              <span class="booking-date complete-text-color">Completed
+              </span>
+            </div>
+            <div *ngIf="!pck.IsCompleted" class="float-right">
+              <span>
+                <img src="assets/img/not-complete.svg" class="image-size">
+              </span>
+              <span class="booking-date not-complete-text-color">Pending
+              </span>
+            </div> -->
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center *ngIf="bookedPackageList.length == 0 && !isPackageAvailable">
+    <ion-col col-12>
+      <img src="assets/img/package2.svg" class="not-found" />
+      <p class="not-found-text">No Result found!</p>
+    </ion-col>
+    <ion-col col-12>
+      <button class="border-form-btn" (click)="bookPackage()" ion-button type="button">Book Package</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

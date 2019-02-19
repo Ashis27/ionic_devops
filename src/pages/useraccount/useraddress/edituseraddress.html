@@ -1,0 +1,121 @@
+<ion-content class="">
+	<ion-item class="header-background">
+		<ion-row class="location-search-header">
+			<ion-col col-1 (click)="closeModal()" class="close-sec">
+				<img src="assets/img/back-arrow.png" class="back-arrow" />
+			</ion-col>
+			<ion-col col-11 class="">
+				<p class="menu-inner-margin header-title" *ngIf="status"> Update Address</p>
+				<p class="menu-inner-margin header-title" *ngIf="!status"> Add Address</p>
+			</ion-col>
+		</ion-row>
+	</ion-item>
+	<ion-list class="login-form-top list-margin">
+		<form #validateform="ngForm" (ngSubmit)="validateAddress(validateform)" class="profile-form">
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Full Name</ion-label>
+				<ion-input [(ngModel)]="userAddress.FullName" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off"
+				 required>
+				</ion-input>
+			</ion-item>
+			<ion-row class="login-input number-email-field address-country-code border-bottom-color">
+				<ion-col col-2 class="padding-0 margin-auto">
+					<ion-select interface="popover" [(ngModel)]="countryCode" class="country-code" name="country_code" style="padding: 0px 0px 0px 0px !important;">
+						<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-10 class="input-for-email-mobile padding-0 margin-auto">
+					<ion-item class="contact-number-field default-add">
+						<ion-input [(ngModel)]="userAddress.Contact" name="mobile_number" type="tel" maxlength="10" (keypress)="onlyNumber($event)"
+						 #contact="ngModel" placeholder="Mobile Number" spellcheck="false" autocapitalize="off" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<!-- <ion-item class="login-input contact-number-field">
+				<ion-label floating>Mobile Number</ion-label>
+				<ion-input [(ngModel)]="userAddress.Contact" name="Mobile_number" (keypress)="onlyNumber($event)" maxlength="10" type="tel"
+				 #contact="ngModel" spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item> -->
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Pin Code</ion-label>
+				<ion-input [(ngModel)]="userAddress.PinCode" name="pin_code"  type="text" #pinCode="ngModel"
+				 spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<!-- (keypress)="onlyNumber($event)" -->
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Street Address</ion-label>
+				<ion-input [(ngModel)]="userAddress.StreetAddress" name="shipping_address" type="text" #shippingAddress="ngModel" spellcheck="false"
+				 autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Locality</ion-label>
+				<ion-input [(ngModel)]="userAddress.Locality" name="locality" type="text" #locality="ngModel" spellcheck="false" autocapitalize="off"
+				 required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Landmark</ion-label>
+				<ion-input [(ngModel)]="userAddress.LandMark" name="landmark" type="text" #landmark="ngModel" spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>City</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.City" name="city" style="padding: 0px 0px 15px 0px !important;border-right: 0;" required>
+					<ion-option *ngFor="let item of activeCity" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>State</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.State" name="state" style="padding: 0px 0px 15px 0px !important;border-right: 0;" required>
+					<ion-option *ngFor="let item of activeState" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Country</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.Country" name="country" style="padding: 0px 0px 15px 0px !important;border-right: 0;" required>
+					<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field default-add margin-top-bottom-10 default-add-margin-top">
+				<ion-label class="default-address">Set my default address</ion-label>
+				<ion-checkbox [(ngModel)]="userAddress.IsAddressSelected" name="default_address"></ion-checkbox>
+			</ion-item>
+			<div text-center class="add-btn-label">
+				<button class="btn-back-style" *ngIf="status" ion-button type="submit">Update Address</button>
+				<button class="btn-back-style" *ngIf="!status" ion-button type="submit">Add Address</button>
+			</div>
+		</form>
+	</ion-list>
+</ion-content>
+<!-- <ion-footer>
+		<ion-toolbar>
+		  <ion-item class="footer-sec footer-row-section default-add">
+			<ion-row class="footer-row-section">
+			  <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+				  <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+				<br>
+				<p class="footer-name bar-button">HOME</p>
+			  </ion-col>
+			  <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+				  <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+				<br>
+				<p class="footer-name bar-button">EMERGENCY</p>
+			  </ion-col>
+			  <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+				  <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+				<br>
+				<p class="footer-name bar-button">QUICK APPOINTMENT</p>
+			  </ion-col>
+			  <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+				  <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+				<br>
+				<p class="footer-name bar-button">HISTORY</p>
+			  </ion-col>
+			</ion-row>
+		  </ion-item>
+		</ion-toolbar>
+	  </ion-footer> -->

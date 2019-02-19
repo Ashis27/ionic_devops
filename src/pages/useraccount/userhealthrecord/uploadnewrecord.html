@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle (click)="closeModal()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload Record</ion-title>
+    <ion-buttons end>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="margin-left-right-5" *ngIf="uploadedDocument.length > 0">
+    <ion-col col-12 class="card-background-page" *ngFor="let doc of uploadedDocument; let id = index" style="width:100px;height:100px">
+      <ion-row class="health-record-sec">
+        <ion-col *ngIf="doc.FileExtension != 'application/pdf'">
+          <ion-row col-12 class="indivisual-sec-border">
+            <ion-col col-1>
+              <img src="assets/img/Docs/jpg.png" class="uploadedDocument" />
+            </ion-col>
+            <ion-col col-10>
+              <p class="user-record-details-sec"> {{doc.FileName}} </p>
+            </ion-col>
+            <ion-col col-1 class="spec-arrow-view">
+              <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row col-12 class="indivisual-sec-border" style="margin-bottom: 3px;">
+            <ion-col col-1>
+              <ion-icon item-left class="icon-profile" name="document"></ion-icon>
+            </ion-col>
+            <ion-col col-3>
+              <p class="user-details-sec"> {{doc.Size}} </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col *ngIf="doc.FileExtension == 'application/pdf' || doc.FileExtension == 'application/PDF'">
+          <ion-row class="indivisual-sec-border">
+            <ion-col col-1>
+              <img src="assets/img/Docs/pdf.png" class="uploadedDocument" />
+            </ion-col>
+            <ion-col col-10>
+              <p class="user-record-details-sec"> {{doc.FileName}} </p>
+            </ion-col>
+            <ion-col col-1 class="spec-arrow-view">
+              <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row col-12 class="indivisual-sec-border" style="margin-bottom: 3px;">
+            <ion-col col-1>
+              <ion-icon item-left class="icon-profile" name="document"></ion-icon>
+            </ion-col>
+            <ion-col col-3>
+              <p class="user-details-sec"> {{doc.Size}} </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-list class="upload-doc">
+    <ion-item class="login-input-dropdown">
+      <ion-icon item-left class="icon-profile-upload" name="contact"></ion-icon>
+      <ion-label>Member</ion-label>
+      <ion-select [(ngModel)]="uploadedDocumentDetails.DocumentFor" class="memeber-sec">
+        <ion-option *ngFor="let relation of documentsFor" value="{{relation.Value}}">{{relation.DisplayText}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="login-input-dropdown" (click)="uploadFileWithOption()">
+      <ion-icon item-left class="icon-profile-upload" name="document"></ion-icon>
+      <ion-label class="upload-sec">Choose File</ion-label>
+      <!-- <ion-badge class="prifile-card" item-right>{{totalFileCount}}</ion-badge> -->
+    </ion-item>
+    <ion-item style="padding-left: 0px;">
+      <ion-icon item-left class="icon-profile-upload" name="chatbubbles"></ion-icon>
+      <ion-textarea placeholder="Leave a Message (Optional)" [(ngModel)]="uploadedDocumentDetails.Description"></ion-textarea>
+    </ion-item>
+    <!-- <div>
+      <p class="view-file" (click)="viewFiles()">
+        <ion-icon name="eye"></ion-icon> View Uploaded Files</p>
+    </div> -->
+    <ion-grid>
+      <button ion-button name="square" class="simple-btn" (click)="uploadConsumerDocumentRecord()">Upload</button>
+    </ion-grid>
+  </ion-list>
+</ion-content>

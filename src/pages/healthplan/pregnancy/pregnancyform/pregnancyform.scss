@@ -1,0 +1,66 @@
+page-pregnancyform {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .back-color {
+        background-color: #f2f2f2 !important;
+    }
+    .btn-style {
+        width: 75%;
+        background: var(--health-plan-pregnancy-color);
+        box-shadow: 3px 4px 8px var(--health-plan-pregnancy-shadow-color);
+    }
+    .pregnancy-input {
+        border-bottom: 1px solid #d4d2d2;
+        height: 2.5em;
+        margin-top: -5px;
+    }
+    .img-form {
+        margin: 20px 0;
+    }
+    .form-chkbox {
+        position: absolute;
+        top: 9px;
+        right: 0px;
+    }
+    .form-chkbox>button {
+        width: 544%;
+        height: 500%;
+        position: absolute;
+        left: -440%;
+    }
+    .chkbox-img {
+        text-align: center;
+        border: 1px solid #9de3e2;
+        background: white;
+        border-radius: 55px;
+        // box-shadow: 6px 5px 13px #d6d6d6;
+        box-shadow: 4px 5px 18px -2px #b9b7b7;
+    }
+    .img-size {
+        max-height: 40px;
+    }
+    .content-center {
+        margin: 0px 19%;
+    }
+    .form-icon {
+        margin: 20% 0;
+        width: 54%;
+    }
+    .form-desc {
+        color: #f78c70;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .close-sec {
+        text-align: right;
+        color: var(--white-color);
+        margin-top: -12px;
+        font-size: 40px;
+    }
+    .display-none{display: none}
+}

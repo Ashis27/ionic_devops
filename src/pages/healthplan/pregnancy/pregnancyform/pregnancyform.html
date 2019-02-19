@@ -1,0 +1,133 @@
+<!-- <ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>My Pregnancy Plan</ion-title>
+    </ion-navbar>
+</ion-header> -->
+<ion-content class="back-color">
+    <ion-item class="header-background">
+        <ion-row class="location-search-header">
+            <ion-col col-1 class="close-sec" *ngIf="isRedirectFromDashBoard" (click)="closeUploadModal()">
+                <ion-icon name="ios-close"></ion-icon>
+            </ion-col>
+            <ion-col col-11 class="header-title margin-top-bottom-5 margin-auto">
+                My Pregnancy Plan
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-row>
+        <ion-col col-12>
+            <p text-center class="form-desc">
+                <!-- We need some basic info. to get started. -->
+                Details updated by {{pergnancyDetails.PregnancyPlanResponse.Doctor?pergnancyDetails.PregnancyPlanResponse.Doctor:'your doctor'}}
+            </p>
+        </ion-col>
+        <ion-col col-12>
+            <ion-row>
+                <form #pregnancyForm="ngForm" novalidate (ngSubmit)="onSubmit()" class="login-form myCurrentForm" style="overflow: hidden">
+                    <ion-col col-12>
+                        <ion-row>
+                            <ion-card style="box-shadow: 4px 5px 18px -2px #b9b7b7;">
+                                <ion-card-content>
+                                    <ion-row class="form-margin">
+                                        <ion-col col-2>
+                                            <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/woman.svg"
+                                                style="color:red" />
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <ion-item padding-0>
+                                                <ion-label stacked>Enter Mother's Name</ion-label>
+                                                <ion-input type="text" value="" class="max-33 pregnancy-input" name="Mother's name" [(ngModel)]="pergnancyDetails.PregnancyPlanResponse.Mother"
+                                                    required [disabled]="true"></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row class="form-margin">
+                                        <ion-col col-2>
+                                            <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/man.svg"
+                                                style="color:red" />
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <ion-item padding-0>
+                                                <ion-label stacked>Enter Father's Name</ion-label>
+                                                <ion-input type="text" value="" class="max-33 pregnancy-input" name="Father's name" [(ngModel)]="pergnancyDetails.PregnancyPlanResponse.Father"
+                                                    required [disabled]="true"></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row class="form-margin">
+                                        <ion-col col-2>
+                                            <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/doctor.svg"
+                                                style="color:red" />
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <ion-item padding-0>
+                                                <ion-label stacked>Enter Doctor's Name</ion-label>
+                                                <ion-input type="text" value="" class="max-33 pregnancy-input" name="Doctor's name" [(ngModel)]="pergnancyDetails.PregnancyPlanResponse.Doctor"
+                                                    [disabled]="true" required></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row class="form-margin">
+                                        <ion-col col-2>
+                                            <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/hospital.svg"
+                                                style="color:red" />
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <ion-item padding-0>
+                                                <ion-label stacked>Enter Hospital Name</ion-label>
+                                                <ion-input type="text" value="" class="max-33 pregnancy-input" name="Hospital's name" [(ngModel)]="pergnancyDetails.PregnancyPlanResponse.Hospital"
+                                                    required [disabled]="true"></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <ion-row class="form-margin">
+                                        <ion-col col-2>
+                                            <img class="img-size img-form" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/femenine.svg"
+                                                style="color:red" />
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <ion-item padding-0>
+                                                <ion-label stacked>Enter LMP</ion-label>
+                                                <ion-datetime type="date" min="{{minDate}}" max="{{maxDate}}" value="" class="max-33 pregnancy-input" name="lMP" [disabled]="true"
+                                                    [(ngModel)]="pergnancyDetails.PregnancyPlanResponse.LMP" required></ion-datetime>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-row>
+                        <ion-row>
+                            <p text-center style="width:100%">
+                                Do you have any special conditions ?
+                            </p>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-slides slidesPerView="2.5">
+                                    <ion-slide *ngFor="let item of allSpecialconditions;let i = index" [ngClass]="i != (allSpecialconditions.length-1) ?'display-visible':'display-none'">
+                                        <div class="content-center">
+                                            <p class="chkbox-img">
+                                                <img class="img-size form-icon" [src]="item.Url" />
+                                            </p>
+                                            <ion-checkbox class="form-chkbox checkbox-ios" [(ngModel)]="item.Checked" [ngModelOptions]="{standalone: true}" [disabled]="true"></ion-checkbox>
+                                        </div>
+                                        <p text-center>{{item.SpecialCondition}}</p>
+                                    </ion-slide>
+                                </ion-slides>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row text-center>
+                            <ion-col col-12>
+                                <button class="btn btn-style" ion-button type="submit" >Done</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </form>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-content>

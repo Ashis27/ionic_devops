@@ -1,0 +1,231 @@
+page-diagnosticsearch {
+
+ 
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .active-city-text{
+        font-size: 13px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .toolbar-content-ios >.location-search-header> .title-header-text{
+    text-align: center !important;
+        }
+   .active-location-text{
+       font-size: 14px;
+       margin: 0px 0px 0px 0px;
+           color:white;
+   }
+   .button-small{
+    font-size: 1.1rem !important;
+}
+   .content-ios{
+    //margin-top:-20px;
+}
+.not-center-found{
+    width: 15% !important;
+    margin-top: 45%;
+}
+.item-ios{
+    padding-top:10px;
+  }
+  .img-size{
+    max-width: 50px;
+    background: #f1f1f1;
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50%;
+    border: 3px solid #d2d2d2;
+    padding: 3px;
+    margin-top: 0px !important;
+}
+.cart-add-icon {
+    max-width: 44px !important;
+    background: #ffffff !important;
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 50% !important;
+    padding: 0px 0px 0px 0px !important;
+    float: right;
+  //  margin-top: 15px;
+}
+.add-to-cart{}
+.rupee-icon{
+    width: 13px;
+    vertical-align: sub;
+    margin-right: 0px;
+    float:left;
+}
+.original-price{
+    text-decoration: line-through;
+    color: #9e0000;
+}
+.discount-price{
+    color: #038607;
+}
+    .listHeader{
+        border-bottom: 0.5px solid #bbb7b7;
+        height: 40px;
+        line-height: 3;
+        margin: 0px 12px;
+        padding-left: 2px;
+        color: #39bebc;
+        font-size: 16px;
+        background-color: #f7eded;
+    }
+    .medicine_items{
+     padding-left: 6px;
+     border-radius:5px;
+     margin-bottom:5px;
+     border-left:4px solid #39bebc;
+     min-height:5rem;
+    }
+    ion-icon{
+     color:#39bebc !important;
+    }
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    
+    .medicine-list-header{
+        font-size: 16px !important;
+
+    }
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .filter-icon-upload{
+        width: 30px;
+    }
+    .review-color{
+        color:white;
+        font-size: 12px;
+        margin-left: 10px;
+        // vertical-align: text-top;
+    }
+    #notification-button {            
+        position: relative;
+        width: 42px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+  #notifications-badge {
+        background-color:var(--button-color);
+        position: absolute;
+        top: -1px;
+        right: -5px;
+        border-radius: 100%;
+        padding: 5px 7px 5px 7px;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 3px 0px 3px 0px;
+        color: var(--icon-color);
+        width:100%;
+       }
+       .not-found {
+        width: 44% !important;
+
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .back-button-icon {
+            color: #ffffff !important;
+        }
+
+
+
+
+
+        .menu-header-sec{
+            background-color: var(--primary-color) !important;
+            text-align: center;
+         }
+         .active-back{
+            border: 2px solid var(--button-color);
+           }
+           @keyframes pulse_animation {
+            0% { transform: scale(1); }
+            30% { transform: scale(1); }
+            40% { transform: scale(1.08); }
+            50% { transform: scale(1); }
+            60% { transform: scale(1); }
+            70% { transform: scale(1.05); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation-name: pulse_animation;
+            animation-duration: 6000ms;
+            transform-origin:70% 70%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .horizontal-list-circle-menu-image {
+            max-width: 80px !important;
+            background: white !important;
+            height: 70px !important;
+            width: 70px !important;
+            border-radius: 50%;
+            padding: 2px 0px 3px 0px !important;
+        }
+
+        .para-overflow {
+            text-overflow: ellipsis !important;
+            white-space: nowrap;
+            padding: 0px 0px 0px 13px !important;
+            overflow: hidden !important;
+            margin: 0px;
+            font-size: 15px !important;
+        }
+        .dioLocation{
+            width: 15px;
+            margin-right: 5px;
+            vertical-align: sub;
+            float: left;
+        }
+         .reatingicon {
+            color: #b7ab15 !important;
+            font-size: 14px !important;
+        }
+        .search-list-image-back {
+            max-width: 55px !important;
+            background: #e4e4e4 !important;
+            height: 55px !important;
+            width: 55px !important;
+            border-radius: 50% !important;
+            padding: 10px 0px 9px 0px !important;
+        }
+        .para-margin-3-0 {
+            margin: 3px 0px 0px 0px !important;
+        }
+        .search-dio-footer-btn{
+            width: 26px;
+            margin-bottom: -5px;
+        }
+
+        .footer .toolbar .toolbar-background {
+            background-color: var(--primary-color) !important;
+        }
+        .content-ios > .scroll-content > .search-input-ios{
+            margin: 5px 0px 0px 0px !important;
+        }
+      
+}

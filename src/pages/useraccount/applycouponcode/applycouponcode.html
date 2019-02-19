@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Apply Coupon</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <ion-row>
+        <ion-col class="para-section-style">
+          <p class="para-text-color">
+            <img src="assets/img/premium-badge1.svg" class="premium-badge" />
+          </p>
+          <p class="otp-text">
+            Get a premium membership by using your coupon code or pay to activate HealthPro premium features.
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center>
+      <form #couponCode="ngForm" (ngSubmit)="onVerifyCouponCode(couponCode)" class="login-form">
+        <ion-item class="login-input">
+          <ion-input [(ngModel)]="couponCodeDetails.Code" name="code" type="text" placeholder="Coupon Code"
+            #codeverification="ngModel" spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <div text-center>
+          <button class="login-form-btn" ion-button type="submit">Apply</button>
+        </div>
+      </form>
+    </ion-col>
+    <ion-col col-12 text-center>
+      <p>OR</p>
+    </ion-col>
+    <ion-col col-12 text-center>
+      <button class="apply-coupon" ion-button type="button" (click)="payToActivatePremiumFeatures()">
+        <img src="assets/img/payment_card.svg" class="payment-card"> Pay Now</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

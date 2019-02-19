@@ -1,0 +1,319 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>My Family</ion-title>
+        <ion-buttons end>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="profile-back">
+    <ion-row class="family-back-image">
+        <ion-col col-12>
+            <ion-item class="profile-section default-add ">
+                <ion-row>
+                    <ion-col class="hos-logo">
+                        <img src="assets/img/AddedFamily.png" class="img-height">
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-list *ngIf="userFamilyStatus == 'edit' && consumersFamilyList.length > 0" class="family-list">
+        <ion-row class="login-input-family-details">
+            <ion-col col-4 class="family-back-color" *ngFor="let familyMember of consumersFamilyList" (click)="editFamilyDetails(familyMember)">
+                <div class="family-section">
+                    <ion-item class="member-details">
+                        <ion-row>
+                            <ion-col col-12 class="">
+                                <div>
+                                    <img class="family-list-image" *ngIf="familyMember.Sex == '100'" src="assets/img/men.svg" />
+                                    <img class="family-list-image" *ngIf="familyMember.Sex == '101'" src="assets/img/women.svg" />
+                                    <img class="family-list-image" *ngIf="familyMember.Sex == '102'" src="assets/img/men.svg" />
+                                </div>
+                            </ion-col>
+                            <ion-col col-12 class="family-name-section">
+                                {{familyMember.Name}}
+                            </ion-col>
+                            <ion-col col-12 class="relation-sec">
+                                {{familyMember.Relation}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+    <ion-item class="default-add" *ngIf="userFamilyStatus == 'edit' && consumersFamilyList.length == 0 && familyAvailableStatus">
+        <p class="not-found-text" text-center>No family member found.
+            <br />Please Add your family member!</p>
+    </ion-item>
+    <ion-list *ngIf="userFamilyStatus == 'add' && newFamilyMember.ConsumerID == 0">
+        <form #addfamilyform="ngForm" (ngSubmit)="addNewFamily(addfamilyform)" class="profile-form">
+            <ion-row class="devider-section">
+                <ion-col col-12>
+                    <ion-item class="login-input  padding-10 default-add">
+                        <ion-label class="login-input-label para-margin-0 edit-name-icon">
+                            <img class="form-image dropdown-icon-margin" src="assets/img/register/name_icon.svg" />
+                        </ion-label>
+                        <ion-input [(ngModel)]="newFamilyMember.Name" name="name" type="text" placeholder="Name" #name="ngModel"
+                            spellcheck="false" autocapitalize="off" required>
+                        </ion-input>
+                    </ion-item>
+                    <ion-row class="login-input number-email-field">
+                        <ion-col col-2>
+                            <ion-select interface="popover" [(ngModel)]="newFamilyMember.CountryCode" class="country-code default-add"
+                                name="country_code default-add" style="padding: 10px 10px 0px 0px !important;border-right: 0px;">
+                                <ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+                            </ion-select>
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <ion-item class="contact-number-field contact-padding default-add default-add">
+                                <ion-input [(ngModel)]="newFamilyMember.Contact" id="numberInput" name="mobile_number"
+                                    type="tel" placeholder="Mobile Number" #usercontact="ngModel" spellcheck="false"
+                                    autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+                                </ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-item class="login-input number-email-field default-add">
+                        <ion-label class="login-input-label">
+                            <img class="form-image dropdown-icon-margin" src="assets/img/register/dob_icon.svg" /> DOB
+                        </ion-label>
+                        <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="newFamilyMember.DateOfBirth"
+                        (ionChange)="onSelectedDate()"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="devider-section">
+                <ion-col col-12>
+                    <ion-row>
+                        <ion-col col-2 class="text-center-class">
+                            <img src="assets/img/gender-symbols.svg" class="money-icon-margin">
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <p class="default-address margin-top-10 medical-history-text">Gender</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+
+                <!-- <ion-col col-12>
+                    <ion-item class="login-input-select login-input gender-item number-email-field default-add">
+                        <ion-label class="reg-label-sec login-rem-sec-label">
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 100" src="assets/img/register/male.svg" />
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 101" src="assets/img/register/female.svg" />
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 102" src="assets/img/register/male.svg" /> Gender
+                        </ion-label>
+                        <ion-select interface="popover" [(ngModel)]="newFamilyMember.Sex" name="gender" style="padding: 10px 0px 0px 0px !important; border-right: 0px;">
+                            <ion-option *ngFor="let gender of genderList" value="{{gender.Value}}">{{gender.DisplayText}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col> -->
+
+                <ion-col col-12 class=" margin-bottom-10">
+                    <div class="gender_wrapper">
+                        <ion-row>
+                            <ion-col col-6 *ngFor="let gender of genderList" class="text-center-cls back-white"
+                                [class.activate-gender]="sex.DisplayText ==  gender.DisplayText" (click)="getStyle(gender)">
+                                <p style="margin:0px">{{gender.DisplayText}}</p>
+                                <img [src]="gender.DisplayText =='Male'?'assets/imgs/calculator/male.png':'assets/imgs/calculator/female.png'"
+                                    class="gendercls">
+                            </ion-col>
+                            <!-- <ion-col col-6 class="text-center-cls" [ngClass]="{'activate-female': sex=='female'}" (click)="getStyle('female')">
+                                <p style="margin:0px">Female</p>
+                                <img src="assets/imgs/calculator/female.png" class="gendercls">
+                            </ion-col> -->
+                        </ion-row>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row class="relation-devider">
+                <ion-col col-12>
+                    <ion-row>
+                        <ion-col col-2 class="text-center-class">
+                            <img src="assets/img/network.svg" class="money-icon-margin">
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <p class="default-address margin-top-10 medical-history-text">Relation</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+
+                <ion-col col-12>
+                    <ion-slides slidesPerView="3.3" class="color-white-background align">
+                        <ion-slide *ngFor="let relation of relations;let i = index" [ngClass]="i+1<relations.length?'selectedReletion':''"
+                            (click)="relationButtion(relation.Value,i)" [class.nonSelectedReletion]=" relation.Value === newFamilyMember.Relation">
+                            <p class="margin-0 font-size-14">{{relation.DisplayText}}</p>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+            </ion-row>
+            <ion-row class="list-margin">
+                <button name="square" class="action-btn btn-back-style" type="submit" style="margin-left: 35px; margin-right: 35px;">Add
+                    New Member</button>
+            </ion-row>
+        </form>
+    </ion-list>
+    <ion-list *ngIf="userFamilyStatus == 'add' && newFamilyMember.ConsumerID != 0">
+        <form #editfamilyform="ngForm" (ngSubmit)="updateFamilyMember(editfamilyform)" class="profile-form">
+            <ion-row class="devider-section">
+                <ion-col col-12>
+                    <ion-item class="login-input  padding-10 default-add">
+                        <ion-label class="login-input-label para-margin-0 edit-name-icon">
+                            <img class="form-image dropdown-icon-margin" src="assets/img/register/name_icon.svg" />
+                        </ion-label>
+                        <ion-input [(ngModel)]="newFamilyMember.Name" name="name" type="text" placeholder="Name" #name="ngModel"
+                            spellcheck="false" autocapitalize="off" required>
+                        </ion-input>
+                    </ion-item>
+                    <ion-row class="login-input number-email-field">
+                        <ion-col col-2>
+                            <ion-select interface="popover" [(ngModel)]="newFamilyMember.CountryCode" class="country-code default-add"
+                                name="country_code default-add" style="padding: 10px 10px 0px 0px !important;border-right: 0px;">
+                                <ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+                            </ion-select>
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <ion-item class="contact-number-field contact-padding default-add default-add">
+                                <ion-input [(ngModel)]="newFamilyMember.Contact" id="numberInput" name="mobile_number"
+                                    type="tel" placeholder="Mobile Number" #usercontact="ngModel" spellcheck="false"
+                                    autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+                                </ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-item class="login-input number-email-field default-add">
+                        <ion-label class="login-input-label">
+                            <img class="form-image dropdown-icon-margin" src="assets/img/register/dob_icon.svg" /> DOB
+                        </ion-label>
+                        <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="newFamilyMember.DateOfBirth"
+                    (ionChange)="onSelectedDate()"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="devider-section">
+                <ion-col col-12>
+                    <ion-row>
+                        <ion-col col-2 class="text-center-class">
+                            <img src="assets/img/gender-symbols.svg" class="money-icon-margin">
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <p class="default-address margin-top-10 medical-history-text">Gender</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+
+                <!-- <ion-col col-12>
+                    <ion-item class="login-input-select login-input gender-item number-email-field default-add">
+                        <ion-label class="reg-label-sec login-rem-sec-label">
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 100" src="assets/img/register/male.svg" />
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 101" src="assets/img/register/female.svg" />
+                            <img class="form-image dropdown-icon-margin" *ngIf="newFamilyMember.Sex == 102" src="assets/img/register/male.svg" /> Gender
+                        </ion-label>
+                        <ion-select interface="popover" [(ngModel)]="newFamilyMember.Sex" name="gender" style="padding: 10px 0px 0px 0px !important; border-right: 0px;">
+                            <ion-option *ngFor="let gender of genderList" value="{{gender.Value}}">{{gender.DisplayText}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col> -->
+
+                <ion-col col-12 class=" margin-bottom-10">
+                    <div class="gender_wrapper">
+                        <ion-row>
+                            <ion-col col-6 *ngFor="let gender of genderList" class="text-center-cls back-white"
+                                [class.activate-gender]="gender.Value ==  newFamilyMember.Sex" (click)="getStyle(gender)">
+                                <p style="margin:0px">{{gender.DisplayText}}</p>
+                                <img [src]="gender.DisplayText =='Male'?'assets/imgs/calculator/male.png':'assets/imgs/calculator/female.png'"
+                                    class="gendercls">
+                            </ion-col>
+                            <!-- <ion-col col-6 class="text-center-cls" [ngClass]="{'activate-female': sex=='female'}" (click)="getStyle('female')">
+                                <p style="margin:0px">Female</p>
+                                <img src="assets/imgs/calculator/female.png" class="gendercls">
+                            </ion-col> -->
+                        </ion-row>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row class="relation-devider">
+                <ion-col col-12>
+                    <ion-row>
+                        <ion-col col-2 class="text-center-class">
+                            <img src="assets/img/network.svg" class="money-icon-margin">
+                        </ion-col>
+                        <ion-col col-10 class="input-for-email-mobile">
+                            <p class="default-address margin-top-10 medical-history-text">Relation</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+
+                <ion-col col-12>
+                    <!-- <ion-item class="login-input-select login-input gender-item number-email-field default-add">
+                        <ion-label class="reg-label-sec login-rem-sec-label">
+                            <img class="form-image dropdown-icon-margin" src="assets/img/register/female_icon.svg" /> Relation
+                        </ion-label>
+                        <ion-select interface="popover" [(ngModel)]="newFamilyMember.Relation" name="relation" style="padding: 10px 0px 0px 0px !important; border-right: 0px;">
+                            <ion-option *ngFor="let relation of relations" value="{{relation.Value}}">{{relation.DisplayText}}</ion-option>
+                        </ion-select>
+                    </ion-item> -->
+                    <ion-slides slidesPerView="3.3" class="color-white-background align">
+                        <ion-slide *ngFor="let relation of relations;let i = index" [ngClass]="i+1<relations.length?'selectedReletion':''" (click)="relationButtion(relation.Value)"  [class.nonSelectedReletion]=" relation.Value == newFamilyMember.Relation">
+                          <p class="margin-0 font-size-14" >{{relation.DisplayText}}</p>
+                        </ion-slide>
+                      </ion-slides>
+                    <!-- <ion-col col-12>
+                        <ion-slides slidesPerView="3.1" class="color-white-background align">
+                            <ion-slide *ngFor="let relation of relations;let i = index" class="selectedReletion"
+                                (click)="relationButtion(relation.Value,i)" [class.nonSelectedReletion]=" relation.Value === newFamilyMember.Relation">
+                                <p class="margin-0 font-size-14">{{relation.DisplayText}}</p>
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-col> -->
+                </ion-col>
+            </ion-row>
+            <ion-row class="list-margin">
+                <button name="square" class="action-btn btn-back-style" type="submit" style="margin-left: 35px; margin-right: 35px;">Update</button>
+            </ion-row>
+        </form>
+    </ion-list>
+    <ion-fab bottom right (click)="closeFamily()" *ngIf="userFamilyStatus == 'add'">
+        <button ion-fab mini>
+            <ion-icon name="close"></ion-icon>
+        </button>
+
+    </ion-fab>
+    <ion-fab bottom right (click)="addFamily()" *ngIf="userFamilyStatus == 'edit'">
+        <button ion-fab mini>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+        <ion-item class="footer-sec footer-row-section default-add">
+            <ion-row class="footer-row-section">
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HOME</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">EMERGENCY</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HISTORY</p>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer> -->

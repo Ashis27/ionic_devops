@@ -1,0 +1,161 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>My Address</ion-title>
+		<ion-buttons end>
+		</ion-buttons>
+	</ion-navbar>
+	<!-- <ion-toolbar no-border-top>
+		<ion-segment [(ngModel)]="tabValue">
+			<ion-segment-button *ngFor="let option of tapOption ;  let i = index;" (click)="tabSelection($event,option)" [class]="optionObj == i ? 'active segment-button segment-activated' : 'segment-button'">
+				{{option}}
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar> -->
+</ion-header>
+<ion-content class="">
+	<!-- <ion-list class="login-form-top list-margin" *ngIf="optionObj == 0">
+		<form #addressform="ngForm" (ngSubmit)="addUserShippingAddress(addressform)" class="profile-form">
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Full Name</ion-label>
+				<ion-input [(ngModel)]="userAddress.FullName" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off"
+				 required>
+				</ion-input>
+			</ion-item>
+			<ion-row class="login-input number-email-field address-country-code">
+				<ion-col col-2>
+					<ion-select interface="popover" [(ngModel)]="countryCode" class="country-code" name="country_code" style="padding: 11px 10px 0px 0px !important;">
+						<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-10 class="input-for-email-mobile">
+					<ion-item class="contact-number-field">
+						<ion-input [(ngModel)]="userAddress.Contact" name="Mobile_number" type="tel" maxlength="10" (keypress)="onlyNumber($event)"
+						 #contact="ngModel" placeholder="Mobile Number" spellcheck="false" autocapitalize="off" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Pin Code</ion-label>
+				<ion-input [(ngModel)]="userAddress.PinCode" name="pin_code" type="tel" (keypress)="onlyNumber($event)" #pinCode="ngModel"
+				 spellcheck="false" autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Street Address</ion-label>
+				<ion-input [(ngModel)]="userAddress.StreetAddress" name="shipping_address" type="text" #shippingAddress="ngModel" spellcheck="false"
+				 autocapitalize="off" required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Locality</ion-label>
+				<ion-input [(ngModel)]="userAddress.Locality" name="locality" type="text" #locality="ngModel" spellcheck="false" autocapitalize="off"
+				 required>
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Landmark</ion-label>
+				<ion-input [(ngModel)]="userAddress.LandMark" name="landmark" type="text" #landmark="ngModel" spellcheck="false" autocapitalize="off">
+				</ion-input>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>City</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.City" name="city" style="padding: 0px 0px 15px 0px !important; border-right: 0;">
+					<ion-option *ngFor="let item of activeCity" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>State</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.State" name="state" style="padding: 0px 0px 15px 0px !important;border-right: 0;">
+					<ion-option *ngFor="let item of activeState" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field">
+				<ion-label floating>Country</ion-label>
+				<ion-select interface="popover" [(ngModel)]="userAddress.Country" name="country" style="padding: 0px 0px 15px 0px !important; border-right: 0;">
+					<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">{{item.DemographyName}}</ion-option>
+				</ion-select>
+			</ion-item>
+			<ion-item class="login-input contact-number-field default-add">
+				<ion-label class="default-address">Set my default address</ion-label>
+				<ion-checkbox [(ngModel)]="userAddress.IsAddressSelected" name="default_address"></ion-checkbox>
+			</ion-item>
+			<div text-center class="add-btn-label">
+				<button class="login-form-btn" ion-button type="submit">Add New Address</button>
+			</div>
+		</form>
+	</ion-list> -->
+	<ion-fab bottom right (click)="addUserAddress()" *ngIf="shippingAddressList.length>0 && isAvailable">
+		<button ion-fab mini>
+			<ion-icon name="add"></ion-icon>
+		</button>
+	</ion-fab>
+	<ion-list class="login-form-top list-address-margin" *ngIf="shippingAddressList.length > 0">
+		<ion-row *ngFor="let item of shippingAddressList" class="address-sec address-border-bottom-color">
+			<ion-col col-12>
+				<ion-row>
+					<ion-col col-10>
+						<p class="address-text para-margin-bottom-5 address-title">Name: {{item.FullName}}</p>
+					</ion-col>
+					<ion-col col-2 class="text-aligh-right" *ngIf="item.IsAddressSelected">
+						<img src="assets/img/check.png" class="isSelected" />
+					</ion-col>
+					<ion-col col-12>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Contact:</span> {{item.Contact}}</p>
+					</ion-col>
+					<ion-col col-12>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Street:</span> {{item.StreetAddress}}</p>
+					</ion-col>
+					<ion-col col-12>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Locality:</span> {{item.Locality}}</p>
+					</ion-col>
+					<ion-col col-12 *ngIf="item.LandMark != null && item.LandMark != ''">
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Landmark:</span> {{item.LandMark}}</p>
+					</ion-col>
+					<ion-col col-6>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">City:</span> {{item.CityName}}</p>
+					</ion-col>
+					<ion-col col-6>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">State:</span> {{item.StateName}}</p>
+					</ion-col>
+					<ion-col col-6>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Country:</span> {{item.CountryName}}</p>
+					</ion-col>
+					<ion-col col-6>
+						<p class="address-text para-margin-bottom-5">
+							<span class="address-inner-text">Pin:</span> {{item.PinCode}}</p>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+			<ion-col col-12>
+				<ion-row>
+					<ion-col col-6>
+						<button class="login-form-btn update-style" (click)="deleteAddress(item)" ion-button type="button">Delete</button>
+					</ion-col>
+					<ion-col col-6>
+						<button class="login-form-btn btn-back-style" (click)="updateAddress(item)" ion-button type="button">Edit</button>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+	</ion-list>
+	<ion-row text-center *ngIf="shippingAddressList.length == 0 && !isAvailable">
+		<ion-col col-12>
+			<img src="assets/img/home.png" class="not-found" />
+			<p class="not-found-text">No Address found!</p>
+		</ion-col>
+		<ion-col col-12>
+			<button class="border-form-btn" (click)="addUserAddress()" ion-button type="submit">Add New Address</button>
+		</ion-col>
+	</ion-row>
+</ion-content>

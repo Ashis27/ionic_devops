@@ -1,0 +1,512 @@
+package-list {
+
+    // .time-slot-card-background{
+    //     margin: 0px !important;
+    //     border-radius: 0px !important;
+    //     width: 100% !important;
+    //     box-shadow: none !important;
+    //    background-image:url(../assets/img/header_bg.png);
+    //    padding-bottom: 30px;
+    //    position: fixed;
+    //    z-index: 1;
+    //    left: 50%;
+    //    transform: translate(-50%, -3%);
+    //    height: 28%;
+    // }
+    .time-slot-card-background{
+        // padding-top:25px;
+         margin: 0px !important;
+         border-radius: 0px !important;
+         width: 100% !important;
+         box-shadow: none !important;
+        background-image:url('../assets/img/doctorProfile/profile_back.png');
+        padding-bottom: 45px;
+         //position: fixed;
+         z-index: 1;
+         //left: 50%;
+         //transform: translate(-50%, -3%);
+        // height: 50%;
+     }
+
+    .button-small{
+        font-size: 1.1rem !important;
+    }
+    .time-slot-card-background.card-ios {
+        padding-top: 20px;
+    }
+    .center-title{
+        font-size: 20px !important;
+        color: white !important;
+    }
+    .package-list{
+       // margin-top: 47%;
+    }
+    .rating-sec{
+        float: left;
+    }
+    .not-center-found{
+        margin-top: 15%;
+     }
+    .rating-sec > ul {
+        padding: 0px;
+        margin: 0px;
+        &.rating li {
+          padding: 0px !important;
+          background: none;
+          color: #ffb400;
+      
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+    
+      .user-rating-message{
+        width:100%;
+        height:100px;
+        border: 1px solid whitesmoke;
+      }
+      .review-sec > ul {
+        padding: 0px;
+        text-align: center;
+        margin: 15px;
+        &.rating li {
+            margin-top: 20px;
+          padding: 0px !important;
+          background: none;
+          color: #d8d8d8;
+      
+          ion-icon {
+            font-size: 50px !important;
+          }
+        }
+      }
+    .avtar-margin{
+        margin: 8px 15px 8px 0 !important;
+    }
+    
+    .listHeader{
+        border-bottom: 0.5px solid #bbb7b7;
+        height: 40px;
+        line-height: 3;
+        margin: 0px 12px;
+        padding-left: 2px;
+        color: #39bebc;
+        font-size: 16px;
+        background-color: #f7eded;
+    }
+    .img-size{
+        max-width: 70px;
+        background: #f1f1f1;
+        height: 70px !important;
+        width: 70px !important;
+        border-radius: 50%;
+        border: 3px solid #d2d2d2;
+        padding: 3px;
+        margin-top: 0px !important;
+    }
+    .review-color{
+        color:white;
+        font-size: 12px;
+        margin-left: 10px;
+        // vertical-align: text-top;
+    }
+    #notification-button {            
+        position: relative;
+        width: 42px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+  #notifications-badge {
+        background-color:var(--button-color);
+        position: absolute;
+        top: -1px;
+        right: 10px;
+        border-radius: 100%;
+        padding: 5px 7px 5px 7px;
+    }
+    .medicine_items{
+     padding-left: 6px;
+     border-radius:5px;
+     margin-bottom:5px;
+     border-left:4px solid #39bebc;
+     min-height:5rem;
+    }
+    .diagnostic-profile{
+        background: transparent !important;
+    }
+    .cart-icon{
+        //width: 36px;
+        float: right;
+        margin-right: 15px;
+       // margin-top: -7px;
+    }
+    .medicine-list-border{
+        border-bottom: 0.5px solid #dedede; 
+        margin: 3px 0px 0px 0px;
+        background-color: #ffffff;
+    }
+    .doc-profile-detail-content1{
+        color:#eaeaea !important;
+        font-size: 14px !important;
+        }
+    
+    .medicine-list-header{
+        font-size: 16px !important;
+
+    }
+    .margin-top-8 {
+        margin: 8px 0px 0px 0px !important;
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+       .not-found {
+        width: 44% !important;
+
+    }
+    .medicine-sub-content{
+        color: #777272;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .back-button-icon {
+            color: #ffffff !important;
+        }
+
+
+
+
+
+        .menu-header-sec{
+            background-color: var(--primary-color) !important;
+            text-align: center;
+         }
+         .active-back{
+            border: 2px solid var(--button-color);
+           }
+           @keyframes pulse_animation {
+            0% { transform: scale(1); }
+            30% { transform: scale(1); }
+            40% { transform: scale(1.08); }
+            50% { transform: scale(1); }
+            60% { transform: scale(1); }
+            70% { transform: scale(1.05); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation-name: pulse_animation;
+            animation-duration: 6000ms;
+            transform-origin:70% 70%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .horizontal-list-circle-menu-image {
+            max-width: 80px !important;
+            background: white !important;
+            height: 70px !important;
+            width: 70px !important;
+            border-radius: 50%;
+            padding: 2px 0px 3px 0px !important;
+        }
+
+        .para-overflow {
+            text-overflow: ellipsis !important;
+            white-space: nowrap;
+            padding: 0px 0px 0px 13px !important;
+            overflow: hidden !important;
+            margin: 0px;
+            font-size: 15px !important;
+        }
+        .dioLocation{
+            width: 12px;
+            margin-right: 5px;
+            vertical-align: initial;
+            float: left;
+        }
+         .reatingicon {
+            color: #b7ab15 !important;
+            font-size: 14px !important;
+        }
+        .search-list-image-back {
+            max-width: 55px !important;
+            background: #e4e4e4 !important;
+            height: 55px !important;
+            width: 55px !important;
+            border-radius: 50% !important;
+            padding: 10px 0px 9px 0px !important;
+        }
+        .para-margin-3-0 {
+            margin: 3px 0px 0px 0px !important;
+        }
+        .search-dio-footer-btn{
+            width: 26px;
+            margin-bottom: -5px;
+        }
+
+        .footer .toolbar .toolbar-background {
+            background-color: var(--primary-color) !important;
+        }
+
+        .info-back{
+            max-width: 30px !important;
+    background: #39bebc !important;
+    height: 20px !important;
+    width: 20px !important;
+    border-radius: 50% !important;
+    padding: 4px 0px 4px 0px !important;
+    margin-top: 14px;
+        }
+        .alert-title {
+            font-size: 18px !important;
+            padding: 10px 17px 24px !important;
+        }
+        .para-margin-0-1 {
+            margin: 0px 0px 1px 0px !important;
+        }
+
+        .wallete-w-text {
+            font-weight: 500;
+            vertical-align: super;
+            font-size: 16px;
+        }
+
+        .width-28{
+            width: 13px;
+        }
+
+        .rupee-font{
+            font-size: 15px;
+    
+    color: grey;
+        }
+.rupee-icon{
+    width: 13px;
+    vertical-align: sub;
+    margin-right: 0px;
+    float:left;
+}
+.original-price{
+    text-decoration: line-through;
+    color: #9e0000;
+}
+.discount-price{
+    color: #038607;
+}
+.cart-icon{
+    width: 30px;
+}
+
+.pack-col-6-border{
+    border-right: 0.5px solid #e0e0e0;
+    padding: 0px 0px 0px 5px;
+    margin: 5px 0px 5px 0px;
+}
+
+.content-row-seprator{
+    //border-right: 0.5px solid #b9b3b3;
+    margin-right: 5px;
+}
+
+.cart-add-icon {
+    max-width: 44px !important;
+    background: #ffffff !important;
+    height: 22px !important;
+    width: 22px !important;
+    border-radius: 50% !important;
+    padding: 0px 0px 0px 0px !important;
+    float: right;
+    margin-top: 15px;
+}
+.search-header{
+    background: #e8e8e8;
+    padding: 10px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    margin: 3px 0px 3px 0px;
+    color: #464646 !important;
+    width: 100%;
+   }
+   .vertical-align-m{
+    vertical-align: middle;
+}
+.filter-icon-upload{
+    float: right;
+    width: 30px;
+    margin-top: 5px;
+}
+.cart-value{
+    margin: 1px 2px 2px 30px;
+    background-color: #ff7600;
+    color: white;
+    border-radius: 100px;
+    border: 1px solid white;
+    font-size: 10px;
+    padding: 1px;
+}
+//Modal css
+.modal {
+
+    display: none; /* Hidden by default */
+    
+    position: fixed; /* Stay in place */
+    
+    z-index: 1; /* Sit on top */
+    
+    left: 0;
+    
+    top: 0;
+    
+    width: 100%; /* Full width */
+    
+    height: 100%; /* Full height */
+    
+    overflow: auto; /* Enable scroll if needed */
+    
+    background-color: rgb(0,0,0); /* Fallback color */
+    
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    
+    -webkit-animation-duration: 0.4s;
+    
+    animation-name: fadeIn;
+    
+    animation-duration: 0.4s
+    
+    }
+    
+    
+    
+    /* Modal Content */
+    
+    .modal-content {
+    
+    // width: 40% !important;
+    
+    // margin-top: 44% !important;
+    
+    // margin-left: 18% ;
+    
+    
+    
+    // background-color: #fefefe;
+    
+    
+    
+    // -webkit-animation-name: slideIn;
+    
+    // -webkit-animation-duration: 0.4s;
+    
+    // animation-name: slideIn;
+    
+    // animation-duration: 0.4s
+    
+    //height: 100%;
+    
+    width: 100% !important;
+    
+    margin-top: 20% !important;
+    
+    margin-left: 0%;
+    padding: 50px;
+    //background-color: #fefefe;
+    
+    -webkit-animation-name: slideIn;
+    
+    -webkit-animation-duration: 0.4s;
+    
+    animation-name: slideIn;
+    
+    animation-duration: 0.4s;
+    
+    border-radius: 16px;
+    
+    }
+
+    
+    /* The Close Button */
+    
+    .close {
+    
+    color: white;
+    
+    float: right;
+    
+    font-size: 28px;
+    
+    font-weight: bold;
+    
+    }
+    
+    
+    
+    .close:hover,
+    
+    .close:focus {
+    
+    color: #000;
+    
+    text-decoration: none;
+    
+    cursor: pointer;
+    }
+    .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+    }
+    
+    
+    
+    .modal-body {padding: 2px 16px;}
+    .modal-footer {
+    padding: 2px 16px;
+background-color: #5cb85c;
+    color: white;
+    }
+    
+    /* Add Animation */
+    
+    @-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+    }
+    
+    @keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+    }
+    
+    @-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+    }
+    
+    
+    
+    @keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+    }
+
+}
+.popover-content {
+    width: auto !important;
+   
+}

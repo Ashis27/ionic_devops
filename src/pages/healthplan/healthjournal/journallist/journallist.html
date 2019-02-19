@@ -1,0 +1,225 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Health Journal</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="back-color">
+
+    <ion-slides #slides *ngIf="sliderImageList && sliderImageList.length > 0 && isJournalAvailable" (ionSlideWillChange)="onSlideChangeStart($event)" class="slideroption" pager="true" autoplay="4000" loop="true" speed="2000">
+        <ion-slide *ngFor="let item of sliderImageList" [style.background]="'url(' + item.imgPath + ')'">
+        </ion-slide>
+    </ion-slides>
+    <ion-row *ngIf="testhealthJournal && isJournalAvailable">
+        <ion-col class="top-button">
+            <button ion-button color="light" (click)="prevJournal()">
+                            <ion-icon class="top-button-icon" name="ios-arrow-back"> </ion-icon>
+                          </button>
+        </ion-col>
+        <ion-col class="top-button">
+            <button ion-button color="light" style="color: #39bebc;" (click)="selectedHealthJournal(testhealthJournal.Id)">
+                        <ion-icon class="top-button-icon" name="md-create"></ion-icon>
+                    </button>
+        </ion-col>
+        <ion-col class="top-button">
+            <button ion-button color="light" (click)="updateFavoutite(testhealthJournal)">
+                    <ion-icon  *ngIf="testhealthJournal.Favourite" class="top-button-icon  " name="ios-heart" style="color: #fc7176;"></ion-icon>        
+                    <ion-icon *ngIf="!testhealthJournal.Favourite" class="top-button-icon " name="ios-heart" style="color: #c9bebe;"></ion-icon>        
+
+                   </button>
+        </ion-col>
+        <ion-col class="top-button">
+            <button ion-button color="light" (click)="nextJournal()">
+                            <ion-icon class="top-button-icon" name="ios-arrow-forward"></ion-icon>
+                       </button>
+        </ion-col>
+    </ion-row>
+    <ion-item *ngIf=" healthJournalList && healthjournaldates.length > 1">
+        <ion-range [(ngModel)]="date" min="2" [max]="healthjournaldates.length" snaps="true" pin="true" (ionChange)="onDateSelection(date)" debounce="500">
+            <ion-label range-left class="journal-date date-left">{{healthjournaldates[0]}}</ion-label>
+            <ion-label range-right class="journal-date date-right">{{healthjournaldates[healthjournaldates.length -1]}}</ion-label>
+        </ion-range>
+    </ion-item>
+
+
+    <div *ngIf="testhealthJournal && isJournalAvailable">
+        <ion-row class="journal-card">
+            <p class="date">
+                {{testhealthJournal.EntryDate}}
+                <!-- <span (click)="updateFavoutite(testhealthJournal)">
+                        <ion-icon  *ngIf="testhealthJournal.Favourite" class="top-button-icon pulse " name="ios-heart" style="color: #fc7176;font-size: 18px;"></ion-icon>        
+                        <ion-icon *ngIf="!testhealthJournal.Favourite" class="top-button-icon " name="ios-heart" style="color: #c9bebe;font-size: 18px;"></ion-icon>        
+
+                    </span> -->
+
+            </p>
+            <!-- <ion-fab right>
+                <button ion-fab mini style="color: var(--primary-color); background: white;" (click)="selectedHealthJournal(testhealthJournal.Id)">
+                        <ion-icon class="" name="md-create" style="font-size: 18px;"></ion-icon> 
+              </button>
+            </ion-fab> -->
+
+            <ion-col col-12 *ngIf="testhealthJournal.Note">
+                <p class="test-journal-header"> My Entries:</p>
+                <p class="test-journal-body"> {{testhealthJournal.Note}}</p>
+                <div *ngIf="testhealthJournal.DoctorQuery" style="margin-top:1rem">
+                    <p class="test-journal-header">Remind Me To Ask Doctor:</p>
+                    <p class="test-journal-body"> {{testhealthJournal.DoctorQuery}}</p>
+                </div>
+
+            </ion-col>
+        </ion-row>
+    </div>
+    <!-- the extsting code to be modified -->
+    <!-- <div *ngIf="healthJournalList.length > 0">
+        <ion-row *ngFor="let item of healthJournalList" class="journal-card">
+            <ion-col col-12 class="padding-0">
+                <ion-row class="border-bottom-color list-back" (click)="selectedHealthJournal(item)">
+                    <ion-col col-2 text-center class="upload-date-font margin-auto" (click)="selectedRecord(item)">
+                        <p class="display-grid date-background">
+                            <span>{{item.currentMonth}}</span>
+                            <span class="upload-date1-font default-color">{{item.currentDate}}</span>
+                            <span>{{item.currentYear}}</span>
+                        </p>
+                    </ion-col>
+                    <ion-col col-8 class="">
+                        <ion-row style="margin-top: -10px;">
+                            <ion-col col-12 class="padding-top-btm-5">
+                                <h4 class="profile-user-name file-name-margin font-weight-400 margin-top-10" *ngIf="item.Name !=''">
+                                    <span class="font-weight-500">{{item.Name}}</span>
+                                </h4>
+                                <p class="margin-top-5">Category:
+                                    <span class="font-weight-500 default-color"> {{item.CategoryDesc}}</span>
+                                </p>
+                                <p class="margin-top-5" *ngIf="item.Document.length > 0">Uploaded Document
+                                    <span class="font-weight-500 default-color"> {{item.Document.length}}</span>
+                                </p>
+                                <p class="margin-top-5 para-overflow-hidden">Added Note:
+                                    <span class="font-weight-500 default-color"> {{item.Note}}</span>
+                                </p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </div> -->
+
+    <!-- existing code  -->
+
+    <div *ngIf="healthJournalList.length == 0 && !isJournalAvailable">
+
+        <ion-row style="padding-top:12rem">
+            <ion-col col-12>
+                <p text-center class="not-found-journal">!!OOPS</p>
+                <p text-center class="not-found-text">
+                    No Journal Found
+                </p>
+            </ion-col>
+        </ion-row>
+        <ion-fab bottom right class="pulse" (click)="uploadNewJournal()">
+            <span style="position: absolute;width: 166px;right: 40px;bottom: 19px;color: gray;">please upload one here</span>
+            <button ion-fab mini>             
+                  <ion-icon name="add"></ion-icon>
+                </button>
+        </ion-fab>
+    </div>
+
+
+
+
+
+    <ion-fab bottom right (click)="uploadNewJournal()">
+        <button ion-fab mini>           
+      <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-fab>
+</ion-content>
+<ion-footer style="background: white;">
+    <div>
+        <ion-row class="">
+            <ion-col col-4 text-center *ngFor="let option of tapOption;  let i = index;" class="trimester-{{i}}" (click)="changeTrimeester(i,option)">
+                <button class="trimester-btn trimester-btn-style trimester-btn-{{i}}" ion-button type="button">
+          <img class="trimester-img-sec trimester-img trimester-img-{{i}}" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnancy/pregnancy.svg" />
+        </button>
+                <span class="trimester-text trimester-text-{{i}}">{{option}}</span>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-footer>
+
+
+
+
+
+
+
+
+<!-- <ion-footer>
+    <ion-segment [(ngModel)]="tabValue">
+            <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" class="text-center-cls segBordder" [ngClass]="i == 0?'border-right':''"
+              (click)="tabSelection($event,option)">
+              <p class="margin-5 tab-heading-color font-size-16">{{option}}</p>
+            </ion-segment-button>
+          </ion-segment>
+  </ion-footer> -->
+<!-- <ion-content class="back-image">
+  <ion-row *ngIf="healthJournalList.length > 0">
+    <ion-col col-12 class="padding-0" *ngFor="let item of healthJournalList">
+      <ion-row class="border-bottom-color list-back" (click)="selectedHealthJournal(item)">
+        <ion-col col-2 text-center class="upload-date-font" (click)="selectedRecord(item)">
+          <p class="display-grid date-background">
+            <span>{{item.currentMonth}}</span>
+            <span class="upload-date1-font default-color">{{item.currentDate}}</span>
+            <span>{{item.currentYear}}</span>
+          </p>
+        </ion-col>
+        <ion-col col-8 class="">
+          <ion-row>
+            <ion-col col-12 class="padding-top-btm-5">
+              <h4 class="profile-user-name file-name-margin font-weight-400 margin-top-10">Name
+                <span class="font-weight-500">{{item.Name}}</span>
+              </h4>
+              <p class="margin-top-5">Category
+                <span class="font-weight-500 default-color"> {{item.Category}}</span>
+              </p>
+              <p class="margin-top-5">Uploaded Document
+                <span class="font-weight-500 default-color"> {{item.Document.length}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-2 class="text-aligh-right margin-auto">
+          <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="healthJournalList.length == 0 && !isAvailable">
+    <ion-col col-12 text-center>
+      <img class="not-found" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/newspaper.svg">
+      <p class="not-found-text margin-6 margin-top-10">Empty health journal!</p>
+      <!-- <div text-center style="margin-top: 10%;">
+        <button class="border-form-btn" (click)="uploadNewJournal()" ion-button type="button">Add New Journal</button>
+      </div> --
+    </ion-col>
+  </ion-row>
+</ion-content>-->
+<!-- <ion-footer>
+  <div>
+    <ion-segment [(ngModel)]="tabValue">
+      <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" class="text-center-cls segBordder" [ngClass]="i == 0?'border-right':''"
+        value="appo-{{i}}" (click)="tabSelection($event,option)">
+        <p class="margin-5 tab-heading-color font-size-16">
+          {{option}}
+        </p>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-footer> -->

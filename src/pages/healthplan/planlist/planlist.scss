@@ -1,0 +1,23 @@
+page-planlist {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .card-img {
+        width: 20px;
+    }
+    .plan-list {
+        background-color: rgba(255, 255, 255, 0.611764705882353);
+        margin: 3px 0 3px 5px;
+        box-shadow: -4px 5px 15px -4px #0a0000;
+    }
+    .planlist-back {
+        background-size: auto 100%;
+    }
+    .para-list-header {
+        color: #6d6d6d !important;
+    }
+}

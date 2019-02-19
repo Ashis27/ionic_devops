@@ -1,0 +1,114 @@
+page-days-selection {
+    .weeks.interval_days_sub{
+        width:100%;
+        margin:10px;
+    }
+    .interval_days_sub{
+        width:90%;
+        margin:10px;
+        text-align: center;
+    }
+    .daysVals{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 92px;
+        text-align: center; 
+        height: 30px;
+    }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+  .maths > span:nth-child(1) {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     margin: auto;
+     right: 40px;
+    }
+ .maths > span:nth-child(2) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    left: 40px;
+  }
+ .maths {
+    position: relative;
+    margin:0  auto;
+    width: 90%;
+    display: block;
+    height: 50px;
+    line-height: 30px;
+    font-weight: bold;
+}
+    .dayActive {
+        background-color: var(--button-color) !important;
+        color: white !important;
+    }
+
+    .footer .toolbar .toolbar-background{
+        background-color: var(--primary-color) !important;
+      }
+    .book-appo-footer-btn{
+        width: 20px;
+        margin-bottom: -5px;
+    }
+    .ion-md-close{
+        color:white !important;
+    }
+    .bar-button-default {
+        margin: 0px 0px 0px 0px !important;
+    }
+    .item {
+        padding-left: 5px !important;
+    }
+
+    .select-day{
+        font-weight: 400 !important;
+        color: var(--button-color);
+        text-align: center;
+        border: 1px solid var(--button-color);
+        padding: 7px;
+        margin: 1px;
+        border-radius: 5px;
+    }
+.day-selection-background{
+    background-color: #ffffff;
+    margin-bottom: 2px;
+    border-bottom: 0.2px solid #f1f1f1;
+}
+.transparent-back{
+    background-color: #fff0;
+}
+.list {
+    margin: 0px 0 0px !important;
+}
+
+.label-color{
+    font-size: 15px !important;
+    margin-left: 5px !important;
+    color: black !important;
+}
+.datetime-text{
+    margin-left: 5px !important;
+}
+.calender-icon{
+    width: 23px;
+    float: right;
+    margin-right: 4px;
+    margin-top: -5px;
+}
+.color-white{
+    color:white;
+}
+}

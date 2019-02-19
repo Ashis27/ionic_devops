@@ -1,0 +1,468 @@
+page-vaccine-status {
+  ion-navbar{
+    background-color: var(--primary-color) !important;
+}
+.bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+}
+    .nav-wrapper{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-image: url(../assets/img/vaccination/vac.svg);
+      background-size: 100%;
+      height: 37%;
+      background-position: bottom;
+      //  -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 78%, 74% 83%, 46% 93%, 13% 100%, 0 100%, 0% 35%, 0 0);
+      //  clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 78%, 74% 83%, 46% 93%, 13% 100%, 0 100%, 0% 35%, 0 0);
+    }
+
+    .item_header_bg{
+        background-color: transparent !important;
+        border:1px solid #fff;
+        border-radius: 25px;
+    }
+    .item-inner{
+        border-bottom: none !important;
+    }
+    .childProfImg{
+        position: relative;
+        width: 50%;
+        text-align: right;
+        width:50%;
+    }
+    .date_txt{
+      position: relative;
+      width: 50%;
+      margin:0px 0px 0px 5px;
+      color:#fff;
+    }
+    .date{
+      font-size:32px;
+      color:#fff;
+    }
+    .prof-date-wrapper{
+      width:100%;
+      margin-top:40%;
+      padding: 5px 0px;
+      display:flex;
+    }
+    .childImg{
+        border-radius: 50%;
+        padding: 5px;
+        background-color: white;
+        margin: 0% 9% -5% 0%;
+        max-width: 70px;
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+    }
+    .select,.select-ios{
+        color:#fff;
+        font-size:18px;
+        width:100% !important;
+    }
+    .select-icon-inner{
+        color:#fff !important;
+    }
+    .age-text{
+        color:#fff;
+        font-weight:bold;
+        font-size:16px;
+        margin:5px 0px;
+    }
+    .status_wrapper{
+        margin-top: 12px;
+        width: 100%;
+        background-color: #f4f4f442;
+        position: relative;
+    }
+    .tab{
+      padding-left:10px;
+      margin:auto;
+        img{
+            max-width:25px;
+            width: 25px;
+            height:25px;
+        }
+    }
+    .sts-btn-wrapper {
+      margin-top:-12px !important;
+    }
+    .status_wrapper ion-item{
+        padding:0px !important;
+        background-color: transparent !important;
+        font-size:17px !important;
+    }
+    .para-overflow-hidden{
+      white-space: pre-wrap !important;
+      font-weight:400;
+    }
+
+    .active{
+        border-bottom:2px solid var(--primary-color);
+        color:var(--primary-color) !important;
+    }
+  
+  //pulsation effect
+    .pulse {
+      transform: scale(0.9);
+      animation: pulse 2s infinite;
+    }
+    
+    @-webkit-keyframes pulse {
+      0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+      }
+      70% {
+          -webkit-box-shadow: 0 0 0 10px rgba(44, 119, 204, 0.4);
+      }
+      100% {
+          -webkit-box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+      }
+    }
+    @keyframes pulse {
+      0% {
+        -moz-box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+        box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+      }
+      70% {
+          -moz-box-shadow: 0 0 0 10px rgba(44, 119, 204, 0.4);
+          box-shadow: 0 0 0 10px rgba(44, 119, 204, 0.4);
+      }
+      100% {
+          -moz-box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+          box-shadow: 0 0 0 0 rgba(44, 119, 204, 0.4);
+      }
+    }
+
+    
+    .fab {
+      background-color:var(--button-color) !important;
+    }
+    .sts-btn-wrapper .item-md.item-block .item-inner{
+      padding-right:0px !important;
+    }
+
+
+/*===== Vertical Timeline =====*/
+#conference-timeline {
+    position: relative;
+    max-width: 920px;
+    width: 100%;
+    margin: 17px 0px 0px 0px;
+  }
+  
+  #conference-timeline .conference-center-line {
+    position: absolute;
+    width: 2px;
+    height: 98%;
+    top: 10px;
+    left: 16px;
+    /* margin-left: -2px; */
+    background: #00b0bd;
+    z-index: -1;
+  }
+  #conference-timeline .conference-timeline-content {
+    //padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .timeline-article {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    height:auto;
+    margin: 0px 0px 15px 0px;
+  }
+  .timeline-article .content-left-container{
+    width: 90%;
+    margin-left:10%;
+    border-bottom: 1px solid rgba(128,128,128,0.35);
+  }
+  
+  
+  .sts-btn-wrapper img{
+    width:16px;
+    height:16px;
+  }
+  
+  
+  .timeline-article .timeline-author {
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #242424;
+    text-align: right;
+  }
+  .timeline-article .content-left,
+  .timeline-article .content-right {
+    position: relative;
+    width: auto;
+    padding: 0px 5px;
+  }
+  .timeline-article .content-left{
+    //margin-top:10px;
+    text-align: left;
+  }
+  .timeline-article .content-right{
+    text-align: left;
+  }
+  .timeline-article p {
+    padding: 0;
+    //font-weight: 400;
+    color: #242424;
+    font-size: 18px;
+    line-height: 24px;
+    position: relative;
+  }
+  .content-right-btn{
+    height: 3.5em !important;
+    font-size: 0.7em !important;
+    width: 60px;
+    max-width: 60px !important;
+    text-transform: none !important;
+    background-color: var(--button-color) !important;
+    border-radius: 4px;
+  }
+  .vaccines_div > .para-text-color{
+    font-weight:350;
+  }  
+  
+  .padding-40{
+    padding-top:40% !important;
+  }
+
+//   .timeline-article .content-right-container {
+//     float: right;
+//   }
+  .timeline-article .content-left:before,
+  .timeline-article .content-right:before{
+    position: absolute;
+    top: 20px;
+    font-size: 23px;
+    font-family: "FontAwesome";
+    color: #fff;
+  }
+
+  .timeline-article .meta-date {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 7px;
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+    padding: 5px;
+    color: #fff;
+    border-radius: 50%;
+  }
+  .timeline-article .meta-date .date,
+  .timeline-article .meta-date .month {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+  }
+  .timeline-article .meta-date .date {
+    font-size: 15px;
+    line-height: 27px;
+  }
+  .timeline-article .meta-date .month {
+    font-size: 16px;
+    line-height: 10px;
+  }
+ 
+  .sts-btn-wrapper .label, .label-ios{
+    margin:0px !important;
+  }
+  .sts-btn-wrapper .item-button{
+    font-size:0.8em !important;
+    text-transform: none !important;
+    //border: 1px solid red;
+    //border-radius: 25px 25px 25px 25px;
+    padding: 5px 1.6em;
+    height: 30px;
+    width: 100px;
+  }
+  .vaccine-txt-complete{
+    color:var(--primary-color) !important;
+    padding-left:5px;
+  }
+  .vaccine-txt-skip{
+    color:var(--button-color) !important;
+    padding-left:5px;
+  }
+  .vaccine-txt-undo{
+    color:var(--success-color) !important;
+    padding-left:5px;
+  }
+
+  .bgcolor{
+    background: red;
+  }
+// popup styles
+  .popTitle{
+    background: #39bebc;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    color: #fff;
+  }
+  .bottom{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    color: #39bebc;
+  }
+  .margin-top-right-10{
+    margin:10px 10px 0px 10px !important;
+  }
+  //custom popup css starts here
+  .customPopUp{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999999999;
+}
+.customPopUp1{
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999999999;
+}
+
+.mainPopUp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 90%;
+    height: 55%;
+    background: #fff;
+    font-size: 14px;
+    text-align: justify;
+    transform: scale(0);
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s;
+}
+.medicine_form{
+  padding:1%;
+}
+.doc-hos-dets-label{
+  margin: 0px !important;
+  font-size:13px;
+}
+.doc-hos-dets-input{
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5607843137254902);;
+  margin-top: 10px;
+}
+
+.form-image {
+  width:26px;
+  height:26px;
+  max-width: 26px !important;
+  margin:0px 12px 0px 0px !important;
+}
+.margin-top-25{
+  margin-top:25px;
+}
+.add-medication-modal-btn{
+  background:var(--button-color)!important;
+  color:#fff;
+  border-radius: 25px;
+  width:100px;
+}
+.popup_title{
+  height: 40px;
+  text-align: center;
+  padding: 10px 0px;
+  font-size: large;
+  color:#fff;
+  background: var(--primary-color);
+}
+.popup_close{
+  font-size:1.3em !important;
+  color:#fff;
+  float: right;
+  margin-right: 16px;
+}
+
+.novaccination{
+  position: fixed;
+  top:55%;
+  width:100%;
+  margin:auto;
+  text-align: center;
+}
+.novaccination .vaccine-submit-btton{
+  background-color: var(--button-color) !important;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  text-transform: capitalize !important;
+  margin: auto;
+  padding: 10px;
+  border: 2px solid #fff;
+}
+.novaccination ion-icon{
+  font-size:2.2em !important;
+}
+.past_provider_img{
+  width:30px;
+  height:30px;
+  max-width:30px;
+  margin-left:-5px;
+}
+.visibility{
+  display: none;
+}
+.action-sheet-group-cancel > .action-sheet-cancel{
+  background: #ba4848 !important;
+}
+.popover-content {
+  width: 85% !important;
+
+}
+
+.customPopUp1 .mainPopUp {
+
+  height: 250px !important;
+
+}
+
+@media only screen and (max-width: 340px) {
+  .nav-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: url(../assets/img/vaccination/vac.svg);
+    background-size: 100%;
+    height: 37%;
+    background-position: bottom;
+   
+  }
+} 
+}

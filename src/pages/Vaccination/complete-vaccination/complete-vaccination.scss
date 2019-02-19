@@ -1,0 +1,32 @@
+page-complete-vaccination {
+    .scroll-content{
+        padding:0px !important;
+    }
+      .vaccine-input-label{
+        margin: 0px !important;
+        font-size:13px;
+      }
+      .form-image {
+        width:26px;
+        height:26px;
+        max-width: 26px !important;
+        margin:0px 12px 0px 0px !important;
+      }
+      .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 3px 0px 3px 0px;
+        color: var(--icon-color);
+       }
+       .vaccine-submit-btton{
+         width:100%;
+         border-radius: 25px;
+         color:#fff;
+         background: var(--button-color);
+       }
+       .padding-10{
+         padding:10px !important;
+       }
+}

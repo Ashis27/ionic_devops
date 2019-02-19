@@ -1,0 +1,120 @@
+<ion-header no-border>
+  <ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Share Record</ion-title>
+    </ion-navbar>
+  </ion-header>
+</ion-header>
+
+<ion-content>
+  <ion-row class="refrral-header-sec">
+    <ion-col col-3 *ngFor="let item of record; let i = index">
+      <p text-center class="para-margin-0" (click)="openSeletedFile(item,i)">
+        <span class="clinic-gallery-li">
+          <img [src]="(item.FileExtenssion =='.pdf' || item.FileExtenssion == 'application/pdf')?'assets/img/prescription.jpg':item.fileUrlPath" class="glry-border-rds">
+        </span>
+        <!-- <span class="clinic-gallery-li" *ngIf="item.DocumentType == report">
+          <img src="assets/img/prescription.jpg" class="glry-border-rds">
+        </span> -->
+      </p>
+      <p text-center class="">
+        <span *ngIf="!item.isActive" (click)="changeStatus(item,0)">
+          <ion-icon name="ios-radio-button-off-outline" class="in-active-record"></ion-icon>
+        </span>
+        <span *ngIf="item.isActive" (click)="changeStatus(item,1)">
+          <ion-icon name="ios-checkmark-circle-outline" class="active-record"></ion-icon>
+        </span>
+      </p>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
+    <ion-col col-12>
+      <ion-row class="indivisual-sec-border" *ngIf="countProgress > 0 && countProgress <= 100 && downloadStatus">
+        <div class="progress-outer">
+          <p text-center class="downloading-text">Downloading...</p>
+          <div class="progress-inner" [style.width.%]="countProgress"></div>
+          <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div>
+        </div>
+      </ion-row>
+      <ion-row class="indivisual-sec-border para-margin-bottom-5" *ngIf="pre_download_status">
+        <ion-col col-12 text-center class="padding-0">
+          <img style="height: 10px;" src="assets/img/progress.gif" />
+          <p text-center class="progress-text">Please Wait...</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+  <ion-row class="margin-top-10">
+    <ion-col col-2 text-center>
+      <img src="assets/img/chat.svg" class="chat-icon-margin">
+    </ion-col>
+    <ion-col col-10 class="border-bottom-color padding-0">
+      <p>Your Comment</p>
+      <p class="text-align-justify">
+        <ion-textarea class="" [(ngModel)]="message" rows="2" placeholder=" Leave a message (Optional)"></ion-textarea>
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="refrral-header-sec">
+    <ion-col>
+      <div text-center class="btn-margin">
+        <button class="btn-back-style" [disabled]="isReadyToShare" ion-button type="button" (click)="shareRecord()"><span><img src="assets/img/doctorProfile/share_icon.svg" class="book-appo-footer-btn"></span> Share</button>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div id="opensharedImage" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content openImage">
+      <ion-grid *ngIf="openImagePath!=null && openImagePath !=''"class="padding-0">
+        <ion-row text-right class="header-back modal-position-fixed">
+          <ion-col col-8 class="document-name margin-auto">
+            <p class="color-white" style="font-size: 15px;">{{openImagePath.DocumentTypeName}}</p>
+          </ion-col>
+          <ion-col col-4 class="color-white margin-auto">
+            <ion-icon name="ios-download-outline" class="download-icon" *ngIf="isAndroidPlatform" (click)="downloadDocument(openImagePath.fileUrlPath,openImagePath,false)"></ion-icon>
+            <ion-icon name="ios-close-circle-outline" class="close-icon" (click)="closeModal()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <img class="view-image" [src]="openImagePath.fileUrlPath" />
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div id="downloadProgressBar" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content download-progress">
+      <ion-row class="indivisual-sec-border para-margin-bottom-5">
+        <ion-col col-6 text-left class="padding-0">
+          <p>
+            <span text-left>Downloading..</span>
+          </p>
+        </ion-col>
+        <ion-col col-6 text-right class="padding-0">
+          <p>
+            <span text-right class="download-percentage">{{countProgress}}% Completed</span>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="indivisual-sec-border" *ngIf="countProgress > 0 && countProgress <= 100 && downloadStatus">
+        <div class="progress-outer">
+          <div class="progress-inner" [style.width.%]="countProgress"></div>
+          <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+        </div>
+      </ion-row>
+      <ion-row class="indivisual-sec-border para-margin-bottom-5" *ngIf="pre_download_status">
+        <ion-col col-12 text-center class="padding-0">
+          <img style="height: 10px;" src="assets/img/progress.gif" />
+        </ion-col>
+      </ion-row>
+      <!-- <p text-right class="cancel-text">
+        <span (click)="cancelDownload()" class="download-percentage">CANCEL</span>
+      </p> -->
+      <!-- <div class="progress_count" [style.margin-left.%]="countProgress > 90 ? 90 : countProgress">{{countProgress}}%</div> -->
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,271 @@
+page-bloodpressure {
+    
+    .background_image{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        height: 100%;
+        background-position: center !important;
+        background-size: cover;
+        opacity: 0.4;
+        filter: alpha(opacity=40);
+        background-image: url('../assets/imgs/calculator/blood-pressure.jpg') ;
+        z-index:-1;
+      }
+    .scroll-content{
+        padding:0px !important;
+        z-index:1;
+    }
+    
+    .list{
+        margin:5px 5px 16px;
+    }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+
+        .label {
+            margin: 6px 0px 0px 0px !important;
+            font-weight: 500
+        }
+        .item, .item-md {
+            border-bottom:none !important; 
+            padding: 0px !important;
+        }
+        ion-navbar{
+            background-color: var(--primary-color) !important;
+        }
+        .bar-button-default {
+            margin: 0px !important;
+            color: var(--white-color) !important;
+        }
+        .item-inner {
+            padding: 0px !important;
+        }
+        .input-wrapper{
+            padding: 0px !important;
+        }
+        .input-cover{
+            margin-top: -3px;
+        }
+        img{
+            
+            margin-top: 13px;        
+        }
+        .toolbar-title {
+            color: #ffffff !important;
+        }
+        .toolbar-background{
+           
+            background: #39bebc !important;
+           
+        }
+        ion-label{
+            color:#fff !important;
+        }
+
+
+
+
+        //.............
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    
+    height: 200px;
+    width: 90% !important;
+    margin-top: 49% !important;
+    margin-left: 4%;
+    background-color: #fefefe;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: 16px;
+    text-align: center;
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.btn{
+    width:100%;
+    // margin-left:1%;
+    background-color:#f15c23;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+
+.ribbon{
+    font-size: 100px;
+    color:  rgb(148, 13, 13);
+}
+.red{
+    color: rgb(212, 9, 9);
+}
+.green{
+    color: rgb(16, 173, 16);
+}
+.darkred{
+    color: rgb(184, 2, 2);
+}
+.brown{
+   color: rgb(148, 13, 13);
+}
+.orange{
+    color: orange;
+}
+// p{
+// //    font-size: 25px;
+//     text-align: center;
+//     color: #34bdbc;
+// }
+
+// vinod styles starts here
+
+.margin-bottom-5{
+    margin-bottom:5px;
+}
+.col-padding-0{
+   padding: 0px !important;
+}
+.padding-top-20{
+    padding:20px 0px 0px 0px;
+    font-weight:300;
+ }
+ .text-input{
+    margin: 13px 0px !important;
+ }
+
+
+ 
+ .disclaimer_header,.Cal_header{
+    text-align: left;
+    font-size: 15px !important; 
+    // background-color:#39bebc;
+    color: #39bebc;
+    padding: 5px 0px;
+    margin: 0px;
+    text-decoration: underline;
+ }
+ .cal_des{
+    //font-size: 12px !important; 
+    text-align: left;
+    color: #222;
+    margin: 0px;
+ }
+ .disclaimer_des{
+    font-size: 10px !important; 
+    text-align: left;
+    color: #222;
+    margin:0px;
+ }
+ .disclaimer_wrapper{
+     margin-top:30px;
+ }
+
+.result{
+    margin: 5px;
+    font-size: 7px;
+}
+.input{
+    background-color: rgba(83, 79, 79, 0.1803921568627451);
+    color:#222;
+    border-radius:4px;
+  }
+.text-input{
+    text-align:center;
+    font-size:18px;
+}
+
+.progress_smiley{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width:50%;
+    font-size:8px;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.text_col{
+    // color:var(--icon-color);
+    color:#222;
+    text-align:center;
+} 
+
+ .Cal_Des{
+
+ }
+ .bloodpressure_ranges{
+    width:100%;
+    
+ }
+ .ranges{
+     font-size:10px;
+ }
+}

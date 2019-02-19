@@ -1,0 +1,276 @@
+<ion-header>
+		<ion-navbar>
+			<button ion-button menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+			<ion-title>My Profile</ion-title>
+			<ion-buttons end>
+			</ion-buttons>
+		</ion-navbar>
+		<ion-toolbar no-border-top>
+			<ion-segment [(ngModel)]="tabValue">
+				<ion-segment-button *ngFor="let option of tapOption ;  let i = index;" value="profile-{{i}}" (click)="tabSelection($event,option)">
+					{{option}}
+				</ion-segment-button>
+			</ion-segment>
+		</ion-toolbar>
+	</ion-header>
+	
+	<ion-content class="">
+		<ion-list class="login-form-top" *ngIf="optionObj==0">
+			<form #profileform="ngForm" (ngSubmit)="updateUserProfile(profileform)" class="profile-form">
+				<ion-item class="login-input contact-number-field padding-10 input-section">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/name_icon.svg" />
+					</ion-label>
+					<ion-input class="user-input-field-margin-left-15" [(ngModel)]="userProfile.FirstName" name="name" type="text" placeholder="Name"
+					 #name="ngModel" spellcheck="false" autocapitalize="off" required>
+					</ion-input>
+				</ion-item>
+				<ion-row class="login-input number-email-field">
+					<ion-col col-2>
+						<ion-label class="login-input-label">
+							<img class="form-image item-field-margin" src="assets/img/register/mail_icon.svg" />
+						</ion-label>
+					</ion-col>
+					<ion-col col-7 class="edit-email-margin">
+						<ion-item class="contact-number-field contact-padding">
+							<ion-input [(ngModel)]="userProfile.UserLogin" [disabled]="!emailStatus" name="emailId" type="text" placeholder="Email"
+							 #email="ngModel" spellcheck="false" autocapitalize="off">
+							</ion-input>
+						</ion-item>
+					</ion-col>
+					<ion-col col-3 class="text-aligh-right">
+						<ion-label class="login-input-label" *ngIf="!emailStatus">
+							<img class="edit-icon" src="assets/img/edit_icon.svg" (click)="editSection('email')" />
+						</ion-label>
+						<ion-label class="update-label" *ngIf="emailStatus">
+							<p class="para-margin-0 profile-update-style" (click)="updateUserEmail()">Update</p>
+						</ion-label>
+					</ion-col>
+				</ion-row>
+				<ion-row class="login-input number-email-field">
+					<ion-col col-2>
+						<ion-select interface="popover" [(ngModel)]="userProfile.CountryCode" class="country-code" name="country_code">
+							<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+						</ion-select>
+					</ion-col>
+					<ion-col col-7 class="input-for-email-mobile">
+						<ion-item class="contact-number-field contact-padding">
+							<ion-input [(ngModel)]="userProfile.Contact" id="numberInput" name="mobile_number" type="tel" placeholder="Mobile Number"
+							 #contact="ngModel" spellcheck="false" [disabled]="!contactUpdate" autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)">
+							</ion-input>
+						</ion-item>
+					</ion-col>
+					<ion-col col-3 class="text-aligh-right">
+						<ion-label class="login-input-label" *ngIf="!contactUpdate">
+							<img class="edit-icon" src="assets/img/edit_icon.svg" (click)="editSection('contact')" />
+						</ion-label>
+						<ion-label class="update-label" *ngIf="contactUpdate">
+							<p class="para-margin-0 profile-update-style" (click)="updateUserContact()">Update</p>
+						</ion-label>
+					</ion-col>
+				</ion-row>
+	
+				<ion-row class="login-input number-email-field">
+					<ion-col col-2>
+						<ion-select interface="popover" [(ngModel)]="countryCodeForEmer" class="country-code" name="country_code" (ionChange)="selectedCountryCode(countryCode)">
+							<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+						</ion-select>
+					</ion-col>
+					<ion-col col-7 class="input-for-email-mobile">
+						<ion-item class="contact-number-field contact-padding default-add">
+							<ion-item class="contact-number-field contact-padding">
+								<ion-input [(ngModel)]="userProfile.EmegencyContact" id="numberInput" name="emegency_contact" type="tel" placeholder="Emergency Contact"
+								 #emegencycontact="ngModel" [disabled]="!emergencyContactUpdate" spellcheck="false" autocapitalize="off" maxlength="10"
+								 (keypress)="onlyNumber($event)">
+								</ion-input>
+							</ion-item>
+						</ion-item>
+					</ion-col>
+					<ion-col col-3 class="text-aligh-right">
+						<ion-label class="login-input-label" *ngIf="!emergencyContactUpdate">
+							<img class="edit-icon" src="assets/img/edit_icon.svg" (click)="editSection('emergency')" />
+						</ion-label>
+						<ion-label class="update-label" *ngIf="emergencyContactUpdate">
+							<p class="para-margin-0 profile-update-style" (click)="updateUserEmergencyContact()">Update</p>
+						</ion-label>
+					</ion-col>
+				</ion-row>
+				<ion-item class="login-input number-email-field input-section">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/dob_icon.svg" /> DOB
+					</ion-label>
+					<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="dob" min="1900-12-31" max="{{maxDate}}" [(ngModel)]="userProfile.DateOfBirth"
+					 (ionChange)="onSelectedDate()"></ion-datetime>
+				</ion-item>
+				<ion-item class="login-input-select login-input gender-item number-email-field input-section">
+					<ion-label class="reg-label-sec login-rem-sec-label">
+						<img class="form-image item-field-margin" *ngIf="userProfile.Sex == '100'" src="assets/img/register/male.svg" />
+						<img class="form-image item-field-margin" *ngIf="userProfile.Sex == '101'" src="assets/img/register/female.svg" />
+						<img class="form-image item-field-margin" *ngIf="userProfile.Sex == '102' || userProfile.Sex == '0'" src="assets/img/register/male.svg"
+						/>
+						<!-- <img class="form-image item-field-margin" src="assets/img/register/female_icon.svg" /> -->
+						<!--<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == ''"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == '100'"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="woman" *ngIf="signup.Sex == '101'"></ion-icon>-->
+						Gender</ion-label>
+					<ion-select interface="popover" [(ngModel)]="userProfile.Sex" name="gender" style="border-right: 0px;">
+						<!--<ion-option>--Choose City--</ion-option>-->
+						<ion-option *ngFor="let gender of genderList" value="{{gender.Value}}">{{gender.DisplayText}}</ion-option>
+					</ion-select>
+				</ion-item>
+				<ion-item class="login-input-select login-input gender-item number-email-field input-section">
+					<ion-label class="reg-label-sec login-rem-sec-label">
+						<img class="form-image item-field-margin" src="assets/img/register/female_icon.svg" />
+						<!--<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == ''"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == '100'"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="woman" *ngIf="signup.Sex == '101'"></ion-icon>-->
+						Blood Group</ion-label>
+					<ion-select interface="popover" [(ngModel)]="userProfile.BloodGroup" name="Blood_group" style="border-right: 0px;">
+						<!--<ion-option>--Choose City--</ion-option>-->
+						<ion-option *ngFor="let status of bloodGroupList" value="{{status.Value}}">{{status.DisplayText}}</ion-option>
+					</ion-select>
+				</ion-item>
+				<ion-item class="login-input-select login-input gender-item number-email-field input-section">
+					<ion-label class="reg-label-sec login-rem-sec-label">
+						<img class="form-image item-field-margin" *ngIf="userProfile.MaritalStatus == '5601' || userProfile.MaritalStatus == '0' "
+						 src="assets/img/employee.png" />
+						<img class="form-image item-field-margin" *ngIf="userProfile.MaritalStatus == '5600'" src="assets/img/married.png" />
+						<!--<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == ''"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="man" *ngIf="signup.Sex == '100'"></ion-icon>
+					<ion-icon item-left class="icon-profile" name="woman" *ngIf="signup.Sex == '101'"></ion-icon>-->
+						Marital Status</ion-label>
+					<ion-select interface="popover" [(ngModel)]="userProfile.MaritalStatus" name="Merital_status" style="border-right: 0px;">
+						<!--<ion-option>--Choose City--</ion-option>-->
+						<ion-option *ngFor="let status of maritalList" value="{{status.Value}}">{{status.DisplayText}}</ion-option>
+					</ion-select>
+				</ion-item>
+				<!-- <ion-item class="login-input contact-number-field">
+					<ion-label class="login-input-label">
+						<ion-icon name="lock" class="mobile-icon-size"></ion-icon>
+					</ion-label>
+					<ion-input [(ngModel)]="userProfile.Height" name="height" type="text" placeholder="Height Ex:5.5" #height="ngModel" spellcheck="false"
+					 autocapitalize="off">
+					</ion-input>
+				</ion-item>
+				<ion-item class="login-input contact-number-field">
+					<ion-label class="login-input-label">
+						<ion-icon name="lock" class="mobile-icon-size"></ion-icon>
+					</ion-label>
+					<ion-input [(ngModel)]="userProfile.Weight" name="weight" type="text" placeholder="Weight Ex:55" #weight="ngModel" spellcheck="false"
+					 autocapitalize="off">
+					</ion-input>
+				</ion-item> -->
+				<!-- <ion-item class="login-input contact-number-field padding-left-5 input-section address-border-bottom-color">
+					<ion-label class="login-input-label ">
+						<img class="form-image item-field-margin" src="assets/img/register/dob_icon.svg" />
+					</ion-label>
+					<ion-input class="user-input-field-margin-left-15" [(ngModel)]="userProfile.ConsumerCity" name="city" type="text" placeholder="City"
+					 #city="ngModel" spellcheck="false" autocapitalize="off">
+					</ion-input>
+				</ion-item> -->
+				<!-- <ion-item class="login-input contact-number-field padding-left-5 input-section address-border-bottom-color">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/dob_icon.svg" />
+					</ion-label>
+					<ion-input class="user-input-field-margin-left-15" [(ngModel)]="userProfile.ConsumerLocality" name="locality" type="text"
+					 placeholder="Locality" #locality="ngModel" spellcheck="false" autocapitalize="off">
+					</ion-input>
+				</ion-item> -->
+	
+				<ion-item class="login-input number-email-field input-section" (click)="getCurrentLocation()">
+					<ion-label class="login-input-label city-locality" *ngIf="(userProfile.ConsumerCity != '' && userProfile.ConsumerCity != null)">
+						<img class="input-box-img city-location-label" src="assets/img/gps.png" /><span>{{userProfile.ConsumerCity}}</span>
+						<span *ngIf="(userProfile.ConsumerLocality!=''&& userProfile.ConsumerLocality != null)">, {{userProfile.ConsumerLocality}}</span>
+					</ion-label>
+					<ion-label class="login-input-label city-locality" *ngIf="(userProfile.ConsumerCity == '' || userProfile.ConsumerCity == null) && (userProfile.ConsumerLocality==''|| userProfile.ConsumerLocality == null)">
+						<img class="input-box-img city-location-label" src="assets/img/gps.png" />Choose City & Locality
+					</ion-label>
+				</ion-item>
+				<div text-center class="btn-margin">
+					<button class="btn-back-style" ion-button type="submit">Update</button>
+				</div>
+			</form>
+		</ion-list>
+		<ion-list class="login-form-top" *ngIf="optionObj == 1">
+			<form #passwordform="ngForm" (ngSubmit)="updateUserPassword(passwordform)" class="profile-form">
+				<ion-item class="login-input contact-number-field input-section">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/lock.svg" />
+					</ion-label>
+					<ion-input [(ngModel)]="oldPassword" name="old_password" type="password" placeholder="Old Password" #oldpassword="ngModel"
+					 spellcheck="false" autocapitalize="off" required>
+					</ion-input>
+				</ion-item>
+				<!-- <ion-item class="login-input contact-number-field input-section">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/lock.svg" />
+					</ion-label>
+					<ion-input [(ngModel)]="userContactInfo.NewPassword" name="password" type="password" placeholder="New Password" #newpassword="ngModel"
+					 spellcheck="false" autocapitalize="off" required>
+					</ion-input>
+				</ion-item> -->
+				<ion-row class="login-input contact-background new-password-sec list-address-margin border-bottom-color">
+					<ion-col col-12>
+						<ion-row>
+							<ion-col col-1>
+								<img class="form-image new-password margin-top-15" src="assets/img/register/lock.svg" />
+							</ion-col>
+							<ion-col col-9 class="">
+								<ion-item class="contact-number-field default-add padding-10 input-section">
+									<ion-input [(ngModel)]="newPassword" name="new_password" [type]="isActive?'text':'password'" placeholder="New Password" #password="ngModel"
+									 spellcheck="false" autocapitalize="off" required>
+									</ion-input>
+								</ion-item>
+							</ion-col>
+							<ion-col col-2 class="text-aligh-right padding-top-bottom-15">
+								<ion-icon [name]="isActive?'eye':'eye-off'" class="eye-icon-style" item-right (click)="isActive=!isActive;" isActive=true>
+								</ion-icon>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-item class="login-input contact-number-field input-section">
+					<ion-label class="login-input-label">
+						<img class="form-image item-field-margin" src="assets/img/register/lock.svg" />
+					</ion-label>
+					<ion-input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" #confirmpassword="ngModel"
+					 spellcheck="false" autocapitalize="off" required>
+					</ion-input>
+				</ion-item> -->
+				<div text-center class="btn-margin">
+					<button class="btn-back-style" ion-button type="submit">Update</button>
+				</div>
+			</form>
+		</ion-list>
+	
+	</ion-content>
+	<!-- <ion-footer>
+		<ion-toolbar>
+			<ion-item class="footer-sec footer-row-section default-add">
+				<ion-row class="footer-row-section">
+					<ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+						<img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+						<br>
+						<p class="footer-name bar-button">HOME</p>
+					</ion-col>
+					<ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+						<img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+						<br>
+						<p class="footer-name bar-button">EMERGENCY</p>
+					</ion-col>
+					<ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+						<img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+						<br>
+						<p class="footer-name bar-button">QUICK APPOINTMENT</p>
+					</ion-col>
+					<ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+						<img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+						<br>
+						<p class="footer-name bar-button">HISTORY</p>
+					</ion-col>
+				</ion-row>
+			</ion-item>
+		</ion-toolbar>
+	</ion-footer> -->

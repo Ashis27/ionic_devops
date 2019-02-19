@@ -1,0 +1,34 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notification Setting</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content class="back-image">
+    <ion-item class="header-background">
+        <ion-row class="location-search-header">
+            <ion-col col-1 class="close-sec" (click)="closeUploadModal()">
+                <ion-icon name="ios-close"></ion-icon>
+            </ion-col>
+            <ion-col col-11 class="header-title margin-top-bottom-5 margin-auto">
+                Notification Setting
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <ion-row class="">
+        <ion-col col-12 *ngIf="notificationConfig.length > 0">
+            <ion-row class="sub-menu-header-sec" *ngFor="let item of notificationConfig">
+                <ion-col col-12 class="sub-menu-header">
+                    <ion-item class="notification-back">
+                        <ion-label>{{item.CategoryDesc}}</ion-label>
+                        <ion-toggle [(ngModel)]="item.Preference" [checked]="item.Preference"></ion-toggle>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

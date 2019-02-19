@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="title-header-text para-overflow-hidden" (click)="closeCurrentSection()">
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword != '' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+      <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword == ''|| searchedKeyword == undefined || searchedKeyword == null">Diagnostic Centers</p>
+    </div>
+    <ion-buttons end class="nav-button-width">
+      <!-- <button ion-button icon-only> -->
+      <div (click)="getLocation()">
+        <p class="active-city-text para-overflow-hidden">Location
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </p>
+        <p class="active-location-text para-overflow-hidden">
+          <span *ngIf="selectedCityAndLocation.activeLocation !=''">{{selectedCityAndLocation.activeLocation}},</span> {{selectedCityAndLocation.activeCity}}
+        </p>
+      </div>
+      <!-- </button> -->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-12 *ngIf="diagnosticCenterList.length > 0" class="">
+      <ion-row class="dc_card_shadow_border padding-left-right-5 para-margin-bottom-5" *ngFor="let center of diagnosticCenterList">
+        <ion-col col-9>
+          <ion-item class="padding-top-bottom-5 default-add" (click)="selectedDiagnosticCenter(center._source)">
+            <ion-avatar item-start class="avtar-margin">
+              <img class="img-size padding-0" [src]="(center._source.ProviderImage != null && center._source.ProviderImage != '') ? center._source.ProviderImage :'assets/img/dc_icon/dc.svg'"
+              />
+            </ion-avatar>
+            <div class="card">
+              <h4 class="profile-user-name para-overflow-hidden">{{center._source.CenterName}}
+                <!-- <span style="float:right;width: 25px;">
+                  <img src="assets/img/doctorProfile/medical_icon.svg">
+                </span> -->
+              </h4>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{center._source.CityAreaName}}
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{center._source.City}}
+              </p>
+            </div>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3 class="">
+          <ion-row *ngIf="center.fields != undefined && center.fields != null" class="margin-top-15">
+            <ion-col col-12 (click)="showMap(center._source.Latlong)">
+              <ion-icon name="ios-pin-outline"></ion-icon>
+              <span class="km-text">{{center.fields.distance[0]}} km</span>
+            </ion-col>
+            <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                <p class="para-overflow-hidden DF_text margin-5">
+                  <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                </p>
+                <p class="para-overflow-hidden DF_text margin-5">
+                  <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                </p>
+              </ion-col> -->
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="diagnosticCenterList.length == 0 && !isAvailable">
+      <img src="assets/img/dc_icon/dc.svg" class="not-found" />
+      <p class="not-found-text">No Diagnostic center(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

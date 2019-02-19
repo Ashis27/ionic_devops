@@ -1,0 +1,29 @@
+page-userfavouritedoctors{
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    // .img-size{
+    //     // background: url(../assets/img/bookAppointment/specialities_icon.svg);
+    //     max-width: 70px;
+    //     background: #e4e4e4;
+    //     height: 70px !important;
+    //     width: 70px !important;
+    //     border-radius: 50%;
+    //     border: 1px solid #e4e4e4;
+    //     padding: 3px;
+    //     margin-top: -35px !important;
+    // }
+    .search-header{
+        background: #e8e8e8;
+        padding: 10px;
+        font-size: 15px;
+        /* font-weight: 500; */
+        margin: 3px 0px 3px 0px;
+        color: #464646 !important;
+        width: 100%;
+       }
+}

@@ -1,0 +1,149 @@
+
+page-tutorial {
+  ion-content{
+        background-color: var(--primary-color) !important;
+        // background-image: url('../assets/img/background.svg');
+  }
+  // .toolbar-background {
+  //   background: transparent;
+  //   border-color: transparent;
+  // }
+
+  .slide-zoom {
+    height: 100%;
+  }
+
+  .slide-title {
+    margin-top: 2.8rem;
+  }
+
+  .slide-image {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: white;
+       text-align: center;
+    margin: 50px 0px 0px 0px;
+    font-size: 1.1em;
+
+    b {
+      color: #000000;
+    }
+  }
+  .login-input{
+    border: 1px solid var(--primary-color);;;
+    border-radius: 25px 25px 25px 25px;
+        margin-bottom: 5%;
+}
+.slider-row{
+      margin: 0px 45px 0px 45px;
+      height:20%;
+}
+.login-input-select{
+  height: 45px;
+}
+.swiper-container{
+ //height: 75% !important;
+}
+ion-slide{
+  background-repeat: no-repeat !important;
+    width: 100% !important;
+    background-position: center !important;
+    background-size: 100% !important;
+}
+.swiper-container{
+  //height: 90% !important;
+}
+.slider-text-bold{
+      font-weight: bold;
+}
+.swiper-pagination-bullet-active {
+    background: white;
+    opacity: 1;
+}
+.tutorial-icon{
+  color: var(--primary-color);
+}
+.login-btn{
+   width: 100%;
+    background: var(--white-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+    color:var(--black-light-color);
+}
+.signup-btn{
+   width: 100%;
+    background-color: var(--button-color);
+    border-radius: 25px 25px 25px 25px;
+    height: 45px;
+}
+.dashboard-text{
+  margin: 5px;
+}
+.login-icon{
+      font-size: 1.8em;
+}
+.slider-login-btn{
+      margin: 0px 20px 0px 20px;
+      font-weight: bold;
+}
+.login-arrow-icon{
+      font-size: 1.2em;
+}
+.signup-arrow-icon{
+      font-size: 1.2em;
+}
+.slider-btn-sec{
+    bottom: 10%;
+    z-index: 1;
+	position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 80%;
+}
+.slider-dashboard-skip-text{
+    bottom: 2%;
+    z-index: 1;
+	position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 80%;
+}
+.skip-to-dashboard-text{
+  color: #000000 !important;
+    font-weight: bold;
+}
+ion-slides{
+height:80% !important;
+}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+  bottom: 13% !important;
+  display: none;
+}
+.active-city-text{
+   //font-size: 13px;
+   font-size: 16px;
+}
+.active-location-text{
+   font-size: 16px;
+}
+.arrow-padding-top{ 
+  padding-top: 15px;
+}
+.location-padding-top{
+  padding: 8px 0px 0px 0px !important;
+}
+.label-ios > ion-row > .location-padding-top {
+    padding:5px 0px 0px 0px !important ;
+  }
+}

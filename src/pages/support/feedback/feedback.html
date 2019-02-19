@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Give Your Feedback</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-row class="refrral-header-sec">
+    <ion-col col-12 class="border-bottom-color">
+      <p class="padding-bottom-rendom">Would you refer this app to your friend?</p>
+      <ion-row class="margin-top--12 margin-left--5">
+        <ion-list radio-group [(ngModel)]="selectedUser" class="width-100">
+          <ion-item class="radio-btn-sec default-add list-item-border">
+            <ion-label class="radio-btn-name">Yes</ion-label>
+            <ion-radio class="family-radio" item-left value="selection1" checked></ion-radio>
+          </ion-item>
+          <ion-item class="radio-btn-sec default-add list-item-border">
+            <ion-label class="radio-btn-name">No</ion-label>
+            <ion-radio class="family-radio" item-left value="selection2"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 class="border-bottom-color">
+      <p class="padding-bottom-rendom">Please give your valuable feedback.</p>
+      <ion-row class="margin-top--12 margin-left--5">
+        <p class="margin-l-7">
+          <rating class="rating-sec" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+        </p>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 class="border-bottom-color">
+      <p class="padding-bottom-rendom">How meny you rate our app?</p>
+      <ion-row class="margin-top--12 margin-left--5">
+        <ion-item class="login-input-select  repo-msg-fild">
+
+          <textarea class="feedback-msg" name="message" placeholder="Leave a message" spellcheck="false" autocapitalize="off" required></textarea>
+        </ion-item>
+
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row class="" *ngIf="feedbackQuestionList.length > 0">
+    <ion-col col-12 class="border-bottom-color-feedback" *ngFor="let question of feedbackQuestionList; let i = index;">
+      <ion-row>
+        <ion-col>
+          <p class="padding-bottom-rendom">{{i+1}}. {{question.FeedbackQuestion}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-item class="margin-top--12 default-add margin-left--5" *ngIf="question.Type == 1">
+        <ion-item>
+          <rating class="rating-sec" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" [(ngModel)]="feedbackAns[i].Value"></rating>
+        </ion-item>
+      </ion-item>
+      <ion-item class="margin-top--12 default-add margin-left--5" *ngIf="question.Type == 2">
+        <ion-textarea placeholder="Leave a Message" [(ngModel)]="feedbackAns[i].Value"></ion-textarea>
+      </ion-item>
+      <ion-list class="width-100" radio-group [(ngModel)]="feedbackAns[i].Value" *ngIf="question.Type == 3">
+        <ion-item class="radio-btn-sec default-add list-item-border">
+          <ion-label class="radio-btn-name">Yes</ion-label>
+          <ion-radio checked="false" [value]="true" class="family-radio"></ion-radio>
+        </ion-item>
+        <ion-item class="radio-btn-sec default-add list-item-border">
+          <ion-label class="radio-btn-name">No</ion-label>
+          <ion-radio checked="false" [value]="false" class="family-radio"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>
+      <div text-center class="btn-margin">
+        <button class="btn-back-style" ion-button type="button" (click)="submitFeedback()">SUBMIT</button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

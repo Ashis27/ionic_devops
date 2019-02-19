@@ -1,0 +1,289 @@
+<ion-content>
+    <ion-navbar class="header-margin-time-slot">
+      <button ion-button menuToggle class="nav-icon-color">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <ion-title>Select a time slot</ion-title>
+    </ion-navbar>
+    <ion-card class="time-slot-card-background margin-5">
+      <ion-item class="">
+        <ion-avatar item-start class="avtar-margin">
+          <!-- <img class="img-size" [src]="(BookingDCInfo.DiagnosticCenter.ProviderImage != null && BookingDCInfo.DiagnosticCenter.ProviderImage != '') ? BookingDCInfo.DiagnosticCenter.ProviderImage :'assets/img/bookAppointment/specialities_icon.svg'"
+          /> -->
+          <img class="img-size" [src]="(BookingDCInfo.DiagnosticCenter.ProviderImage != null && BookingDCInfo.DiagnosticCenter.ProviderImage != '') ? BookingDCInfo.DiagnosticCenter.ProviderImage :'assets/img/dc_icon/dc.svg'"
+          />
+        </ion-avatar>
+        <div class="card margin-top">
+          <h4 class="profile-user-name">{{BookingDCInfo.DiagnosticCenter.CenterName}}
+            <span style="float:right;width: 25px;">
+              <img src="assets/img/medical_icon.svg">
+            </span>
+          </h4>
+          <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+            <span class="content-row-seprator">
+              <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+            </span>
+            {{BookingDCInfo.DiagnosticCenter.CityAreaName}}
+          </p>
+          <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+            <span class="content-row-seprator">
+              <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+            </span>
+            {{BookingDCInfo.DiagnosticCenter.City}}
+          </p>
+          <!-- <p class="margin-top-6 para-overflow-hidden">
+            <span class="display-inline">
+              <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+            </span>
+            <span class="font-weight-doc-loc">{{BookingDCInfo.DiagnosticCenter.CityAreaName}}, {{BookingDCInfo.DiagnosticCenter.City}}</span>
+          </p> -->
+        </div>
+      </ion-item>
+    </ion-card>
+    <ion-row *ngIf="BookingDCInfoStatus">
+      <ion-col>
+        <ion-row class="appo-dtl-date-header">
+          <ion-col col-7>
+            <p class="select-time-text padding-10">
+              Select Date</p>
+          </ion-col>
+          <ion-col col-5>
+            <img src="assets/img/appointment1.svg" class="calander-icon-margin">
+            <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD-MMM-YYYY" name="appo-calendar" min="{{minDate}}" max="{{maxDate}}"
+              [(ngModel)]="showSelectedDate" (ionChange)="onSelectedDate(true)"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row class="margin-top-bottom-10" *ngIf="scheduleDetails.length > 0">
+          <ion-col col-12>
+            <div class="li-time-selector" *ngFor="let schedule of scheduleDetails" (press)="slotSelectedToBookAppo(schedule,$event)"
+              (click)="slotSelectedToBookAppo(schedule,$event)">{{schedule}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="scheduleDetails.length == 0 && !isEmptySlots && BookingDCInfoStatus" class="margin-top-10">
+      <ion-col col-12 text-center class="">
+        <img src="assets/img/cross-calendar.svg" class="not-found no-package-available" />
+      </ion-col>
+      <ion-col col-12>
+        <p class="not-available margin-top-bottom-5" text-center>No time slot available.
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-5">
+      <ion-col col-12 class="appo-dtl-date-header margin-bottom-10 padding-0">
+        <p class="select-time-text padding-10">
+          Booking Order Details</p>
+      </ion-col>
+      <ion-col col-12 *ngIf="BookingDCInfo != null && BookingDCInfoStatus" class="padding-0">
+        <div class="medicinelist medicine-list-border" no-padding>
+          <ion-row class="package-back" (click)="selectedDiagnosticCenter(BookingDCInfo)">
+            <ion-col col-2 class="margin-auto">
+              <img class="search-list-image-back" style="background: #ffffff !important;" [src]="(BookingDCInfo.DiagnosticCenter.ProviderImage != null && BookingDCInfo.DiagnosticCenter.ProviderImage != '') ? BookingDCInfo.DiagnosticCenter.ProviderImage :'assets/img/dc_icon/dc.svg'"
+              />
+              <!-- <img class="search-list-image-back" src="assets/img/bookAppointment/doctor_icon.svg" /> -->
+            </ion-col>
+            <ion-col col-10 class="margin-auto">
+              <p class="para-list-header font-weight-400 profile-user-name para-overflow-hidden para-margin-3-0 header-bottom color-white para-margin-bottom-5">{{BookingDCInfo.DiagnosticCenter.CenterName}}</p>
+              <p class="margin-top-2 medicine-sub-content address-margin-left color-white">
+                <img class="dioLocation" src="assets/img/doctorProfile/location_icon_white.svg" />{{BookingDCInfo.DiagnosticCenter.City}}, {{BookingDCInfo.DiagnosticCenter.CityAreaName}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="padding008 package-padding border-bottom-price" *ngFor="let pck of BookingDCInfo.Package;let j = index">
+            <!-- <ion-col col-2>
+            <img [ngClass]="(pck.ProviderImage != null && pck.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(pck.ProviderImage != null && pck.ProviderImage != '') ? pck.ProviderImage :'assets/img/dc_icon/package2.svg'"
+            />
+          </ion-col> -->
+            <ion-col col-9 (click)="selectedHealthPackage(pck)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{pck.LabPackageName}}</p>
+              <p class="margin-top-6">
+                <span class="content-row-seprator" *ngIf="pck.Gender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="pck.Gender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="pck.Gender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="margin-top-bottom-5">
+                <span>
+                  <img class="dioLocation" src="assets/img/dc_icon/package2.svg" />
+                </span>
+                <span class="dc-inner-sub-text-size">
+                  Health Package
+                </span>
+              </p>
+              <p class="price-text margin-top-5">
+                <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{pck.PriceAfterDiscount}}</span>
+                <span *ngIf="pck.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{pck.Price}}</span>
+                <span class="para-overflow-hidden DF_text margin-5" *ngIf="pck.GenericDiscount > 0">
+                  <span class="dc-inner-sub-text-size">({{pck.GenericDiscount}}%</span>
+                  <span class="inner-sub-text-size"> Off)</span>
+                </span>
+              </p>
+  
+            </ion-col>
+            <ion-col col-3 text-right (click)="deletePackage(j)" *ngIf="bookingFrom">
+              <p class="margin-10 remove-button-sec">
+                <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                Remove
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="padding008 package-padding border-bottom-price" *ngFor="let test of BookingDCInfo.LabTest;let j = index">
+            <!-- <ion-col col-2>
+            <img [ngClass]="(test.ProviderImage != null &&test.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(test.ProviderImage != null && test.ProviderImage != '') ? test.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+            />
+          </ion-col> -->
+            <ion-col col-9 (click)="selectedLabTest(test)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{test.LabTestName}}</p>
+              <p class="margin-top-bottom-5">
+                <span>
+                  <img class="dioLocation" src="assets/img/dc_icon/labTest.svg" />
+                </span>
+                <span class="dc-inner-sub-text-size">
+                  Lab Test
+                </span>
+              </p>
+              <p class="price-text margin-top-5">
+                <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{test.PriceAfterDiscount}}</span>
+                <span *ngIf="test.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{test.Price}}</span>
+                <span class="para-overflow-hidden DF_text margin-5" *ngIf="test.GenericDiscount > 0">
+                  <span class="dc-inner-sub-text-size">({{test.GenericDiscount}}%</span>
+                  <span class="inner-sub-text-size"> Off)</span>
+                </span>
+              </p>
+  
+            </ion-col>
+            <ion-col col-3 text-right (click)="deleteLabTest(j)" *ngIf="bookingFrom">
+              <p class="margin-10 remove-button-sec">
+                <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                Remove
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="padding008 package-padding border-bottom-price" *ngFor="let scan of BookingDCInfo.LabScan;let j = index">
+            <!-- <ion-col col-2>
+            <img [ngClass]="(scan.ProviderImage != null &&scan.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(scan.ProviderImage != null && scan.ProviderImage != '') ? scan.ProviderImage :'assets/img/dc_icon/scan.svg'"
+            />
+          </ion-col> -->
+            <ion-col col-9 (click)="selectedLabScan(scan)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{scan.LabTestName}}</p>
+              <p class="margin-top-bottom-5">
+                <span>
+                  <img class="dioLocation" src="assets/img/dc_icon/scan.svg" />
+                </span>
+                <span class="dc-inner-sub-text-size">
+                  Radiology
+                </span>
+              </p>
+              <p class="price-text margin-top-6">
+                <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{scan.PriceAfterDiscount}}</span>
+                <span *ngIf="scan.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{scan.Price}}</span>
+                <span class="para-overflow-hidden DF_text margin-5" *ngIf="scan.GenericDiscount > 0">
+                  <span class="dc-inner-sub-text-size">({{scan.GenericDiscount}}%</span>
+                  <span class="inner-sub-text-size"> Off)</span>
+                </span>
+              </p>
+  
+            </ion-col>
+            <ion-col col-3 text-right (click)="deleteLabScan(j)" *ngIf="bookingFrom">
+              <p class="margin-10 remove-button-sec">
+                <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                Remove
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="padding008 package-padding border-bottom-price" *ngFor="let profile of BookingDCInfo.LabProfile;let j = index">
+            <!-- <ion-col col-2>
+              <img [ngClass]="(test.ProviderImage != null &&test.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+                [src]="(test.ProviderImage != null && test.ProviderImage != '') ? test.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+              />
+            </ion-col> -->
+            <ion-col col-9 (click)="selectedLabProfile(profile)">
+              <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{profile.LabProfileName}}</p>
+              <p class="margin-top-bottom-5">
+                <span>
+                  <img class="dioLocation" src="assets/img/dc_icon/labTest.svg" />
+                </span>
+                <span class="dc-inner-sub-text-size">
+                  Lab Profile
+                </span>
+              </p>
+              <p class="price-text margin-top-5">
+                <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{profile.PriceAfterDiscount}}</span>
+                <span *ngIf="profile.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{profile.Price}}</span>
+                <span class="para-overflow-hidden DF_text margin-5" *ngIf="profile.GenericDiscount > 0">
+                  <span class="dc-inner-sub-text-size">({{profile.GenericDiscount}}%</span>
+                  <span class="inner-sub-text-size"> Off)</span>
+                </span>
+              </p>
+  
+            </ion-col>
+            <ion-col col-3 text-right (click)="deleteLabProfile(i,j)" *ngIf="bookingFrom">
+              <p class="margin-10 remove-button-sec">
+                <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                Remove
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="">
+            <ion-col col-8 class="margin-auto">
+              <p class="total-price">Total Price</p>
+            </ion-col>
+            <ion-col col-4 class="margin-auto" text-right>
+              <img src="assets/img/doctorProfile/rupee_icon.svg" class="rupee3 total-rupee-icon margin1315">
+              <span class="margin123 total-price-text">{{totalPrice}}</span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col text-center *ngIf="!BookingDCInfoStatus">
+        <img src="assets/img/emptyCart.svg" class="not-found" />
+        <p class="not-found-text">No Item Available!</p>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col col-12 class="appo-dtl-date-header">
+        <p class="select-time-text padding-10">
+          Added Package List</p>
+      </ion-col>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col col-12 *ngFor="let pck of BookingDCInfo.Package" class="package-back">
+            <ion-row class="medicine-list-border">
+              <ion-col col-2 class="margin-auto">
+                <img class="search-list-image-back" [src]="(pck.ImageUrl != null && pck.ImageUrl != '') ? pck.ImageUrl :'assets/img/package2.svg'"
+                />
+              </ion-col>
+              <ion-col col-10 class="margin-auto">
+                <p class="para-list-header font-weight-500 para-overflow-hidden para-margin-0 medicine-list-header">{{pck.PackageName}}</p>
+                <p class="margin-top-6 medicine-sub-content">
+                  <span class="content-row-seprator" *ngIf="pck.PackageGender == 1">
+                    <img class="dioLocation" src="assets/img/male.svg" /> Male
+                  </span>
+                  <span class="content-row-seprator" *ngIf="pck.PackageGender == 2">
+                    <img class="dioLocation" src="assets/img/female.svg" /> Female
+                  </span>
+                  <span class="content-row-seprator" *ngIf="pck.PackageGender == 3">
+                    <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                  </span>
+                </p>
+                <p class="margin-top-6">
+                  <span class="">
+                    <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+                  <span class="original-price">{{pck.OriginalPrice}}</span> /
+                  <span class="discount-price">{{pck.PriceAfterDiscount}}</span>
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row> -->
+  
+  </ion-content>

@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!-- <ion-buttons left class="nav-button-width">
+      <button ion-button (click)="closeCurrentSection()">
+        <ion-icon name="close" class="nav-close-icon"></ion-icon>
+      </button>
+    </ion-buttons> -->
+    <ion-title (click)="closeCurrentSection()">{{searchedKeyword}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-content>
+    <!-- <ion-row>
+    <ion-col class="padding-0">
+      <ion-item class="header-background">
+        <ion-row class="location-search-header" (click)="closeCurrentSection()">
+          <ion-col col-1 class="close-sec margin-auto">
+            <img src="assets/img/back-arrow.png" class="back-arrow" />
+          </ion-col>
+          <ion-col col-11 class="header-title margin-top-bottom-5 margin-auto">
+            {{searchedKeyword}}
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
+    <ion-row>
+      <ion-col col-12 *ngIf="hospitals.length > 0">
+        <ion-card class="card-box-shadow" *ngFor="let hospital of hospitals">
+          <ion-row>
+            <ion-col col-9>
+              <ion-item class="padding-0" (click)="redirectTo('HospitalProfile',hospital._source)">
+                <ion-avatar item-start class="avtar-margin">
+                  <img class="img-size" [src]="(hospital.ProviderImage != null && hospital.ProviderImage != '') ? hospital.ProviderImage :'assets/img/bookAppointment/hospital_icon.svg'"
+                  />
+                </ion-avatar>
+                <div class="card">
+                  <h4 class="profile-user-name para-overflow-hidden">{{hospital._source.ProviderName}}
+                    <!-- <span style="float:right;width: 25px;">
+                      <img src="assets/img/doctorProfile/medical_icon.svg">
+                    </span> -->
+                  </h4>
+                  <p class="margin-top-6 para-overflow-hidden" *ngIf="hospital._source.HospitalName!='' && hospital._source.HospitalName!=null">
+                    <span class="display-inline">
+                      <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+                    </span>
+                    <span class="para-overflow-hidden">{{hospital._source.City}}</span>
+                  </p>
+                  <p class="margin-top-3">
+                    <span class="display-inline">
+                      <img src="assets/img/doctorProfile/location_icon.svg" class="doc-detail-location-icon">
+                    </span>
+                    <span class="para-overflow-hidden">{{hospital._source.CityAreaName}}</span>
+                  </p>
+                  <!-- <p class="margin-top-3" *ngIf="hospital._source.ProviderAverageRating != null && hospital._source.ProviderAverageRating!='' ">
+                <rating class="rating-sec" [(ngModel)]="hospital._source.ProviderAverageRating" readOnly="true" max="5" emptyStarIconName="star-outline"
+                  halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                <span class="review-color" (click)="getReview()">{{hospital._source.ProviderTotalRatingCount}} Review(s)</span>
+              </p> -->
+                </div>
+              </ion-item>
+              <!-- <ion-item class="">
+          <ion-avatar item-start class="avtar-margin">
+            <div class="doc-detail-w-h"></div>
+          </ion-avatar>
+          <div class="card">
+            <p class="total-amount-margin">
+              <span>
+                <img src="assets/img/doctorProfile/rupee_icon.svg" class="ruppy-icon-size">
+              </span>
+              <span class="ruppy-amt-size">500.00</span>
+              <span class="availability-dtl-alignment"> Next Availability: Fri, March 28</span>
+            </p>
+          </div>
+        </ion-item> -->
+              <!-- <ion-row class="text-center-appobtn border-top-color padding-5">
+            <ion-col col-4 class="">
+            </ion-col>
+            <ion-col col-4 class="" (click)="_callDoctor(hospital._source.Contact)">
+              <button ion-button small outline class="transparent-btn-style">Call Now</button>
+            </ion-col>
+            <ion-col col-4 class="">
+              <button ion-button small class="button-primary solid-btn-style " (click)="redirectTo('HospitalProfile',hospital._source)">View Profile</button>
+            </ion-col>
+          </ion-row> -->
+            </ion-col>
+            <ion-col col-3 class="margin-auto">
+              <div (click)="showMap(hospital._source.Latlong)" *ngIf="hospital.fields != undefined && hospital.fields != null">
+              <p class="para-margin-0">
+                <!-- <span class="distance-text">Distance</span> -->
+                <span class="location-img-sec">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="location-img">
+                </span>
+              </p>
+              <p class="km-text" (click)="showMap(hospital._source.Latlong)">{{hospital.fields.distance[0]}} km</p>
+            </div>
+              <p>
+                  <button ion-button small class="button-primary solid-btn-style " (click)="redirectTo('HospitalProfile',hospital._source)">Profile</button>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 text-center *ngIf="hospitals.length == 0 && !isAvailable">
+        <img src="assets/img/bookAppointment/hospital_icon.svg" class="not-found" />
+        <p class="not-found-text">No Hospital(s) found!</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+    <ion-col col-12 *ngIf="hospitals.length > 0">
+      <ion-row class="book-appo-border-bottom-color" *ngFor="let hospital of hospitals">
+        <ion-col col-2>
+          <img class="search-list-image-back" src="assets/img/bookAppointment/hospital_icon.svg" />
+        </ion-col>
+        <ion-col col-10>
+          <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6">{{hospital._source.ProviderName}}</p>
+          <p class="inner-sub-text-size para-overflow-hidden margin-top-6">
+            {{hospital._source.CityAreaName}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>

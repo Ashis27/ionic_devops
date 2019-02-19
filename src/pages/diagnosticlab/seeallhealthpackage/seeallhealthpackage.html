@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="location-search-header">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 margin-auto para-overflow-hidden">
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword !='' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword =='' || searchedKeyword == undefined || searchedKeyword == null">Health Packages</p>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+      <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" (click)="goToFilter()">
+        <img class="menu-search-img filter-icon-upload filter_icon" src="assets/img/dc_icon/filter.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-12 *ngIf="packageList.length > 0" class="">
+      <ion-row class="dc_card_shadow_border padding-left-right-5 para-margin-bottom-5" *ngFor="let package of packageList">
+        <ion-col col-9>
+          <ion-item class="padding-0 default-add" (click)="selectedHealthPackage(package._source)">
+            <ion-avatar item-start class="avtar-margin">
+              <img class="img-size padding-0" [src]="(package._source.ImageUrl != null && package._source.ImageUrl != '') ? package._source.ImageUrl :'assets/img/dc_icon/package2.svg'"
+              />
+            </ion-avatar>
+            <div class="card">
+              <ion-row>
+                <ion-col col-12>
+                  <h4 class="profile-user-name para-overflow-hidden">{{package._source.LabPackageName}}
+                  </h4>
+                </ion-col>
+              </ion-row>
+              <p class="">
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 1">
+                  <img class="dioLocation" src="assets/img/male.svg" /> Male
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 2">
+                  <img class="dioLocation" src="assets/img/female.svg" /> Female
+                </span>
+                <span class="content-row-seprator" *ngIf="package._source.Gender == 3">
+                  <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                </span>
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CenterName}}
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{package._source.CityAreaName}}, {{package._source.City}}
+              </p>
+              <!-- <p class="para-overflow-hidden DF_text margin-5" *ngIf="package._source.TestCount > 0">
+                <span class="dc-inner-sub-text-size">{{package._source.TestCount}}</span>
+                <span class="inner-sub-text-size"> Test(s) Available</span>
+              </p>
+              <p class="age-group-section">
+                <span class="content-row-seprator">
+                  Age:
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 4">Only for child</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 3">Above 60 Years</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 2">Between 25 and 60 Years</span>
+                  <span class="age_grp_color" *ngIf="package._source.AgeGroup == 1">Below 25 Years</span>
+                </span>
+              </p> -->
+              <!-- <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+              <span class="content-row-seprator">
+                <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+              </span>
+              {{package._source.City}}
+            </p> -->
+              <!-- <p class="margin-6">
+              <span class="">
+                <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+              <span class="original-price" *ngIf="package._source.GenericDiscount > 0">{{package._source.OriginalPrice}}</span>
+              <span *ngIf="package._source.GenericDiscount > 0"> / </span>
+              <span class="discount-price">{{package._source.PriceAfterDiscount}}</span>
+            </p> -->
+            </div>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3 class="">
+          <ion-row *ngIf="package.fields != undefined && package.fields != null" class="margin-top-15">
+            <ion-col col-12 (click)="showMap(package._source.Latlong)">
+              <ion-icon name="ios-pin-outline"></ion-icon>
+              <span class="km-text">{{package.fields.distance[0]}} km</span>
+            </ion-col>
+            <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                  <p class="para-overflow-hidden DF_text margin-5">
+                    <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                  </p>
+                  <p class="para-overflow-hidden DF_text margin-5">
+                    <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                  </p>
+                </ion-col> -->
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 class="border-top-color">
+          <ion-row class="text-center-appobtn padding-left-right-5 width-100">
+            <ion-col col-4 class="padding-left-0 margin-auto">
+              <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{package._source.PriceAfterDiscount}}</p>
+              <p *ngIf="package._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{package._source.Price}}</p>
+              <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="package._source.GenericDiscount > 0">
+                <span class="dc-inner-sub-text-size">{{package._source.GenericDiscount}}%</span>
+                <span class="inner-sub-text-size"> Off</span>
+              </p>
+            </ion-col>
+            <ion-col col-4 class="margin-auto" (click)="addToCart(package._source,'Package')">
+              <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+            </ion-col>
+            <ion-col col-4 class="margin-auto">
+              <button ion-button small class="button-primary solid-btn-style " (click)="bookHealthPackage(package._source)">Book Package</button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="packageList.length == 0 && !isAvailable">
+      <img src="assets/img/dc_icon/package2.svg" class="not-found" />
+      <p class="not-found-text">No health package(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

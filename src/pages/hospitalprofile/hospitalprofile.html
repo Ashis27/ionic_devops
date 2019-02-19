@@ -1,0 +1,183 @@
+<ion-content>
+  <ion-row>
+    <ion-col class="padding-0">
+      <ion-card class="time-slot-card-background">
+        <ion-row class="profile-back-sec margin-10">
+          <ion-col col-1 (click)="closeCurrentPage()" class="close-sec">
+            <!-- <img src="assets/img/back-arrow.png" class="back-arrow" /> -->
+            <ion-icon name="md-arrow-back" class="nav-back-arrow-icon"></ion-icon>
+          </ion-col>
+          <ion-col col-9 class="back-sec">
+            <p class="para-margin-0 header-title para-overflow-hidden">
+              <!-- {{hospitalInfo.ProviderName}} -->
+              Hospital Profile
+            </p>
+          </ion-col>
+          <!-- <ion-col col-2 class="text-aligh-right setting-icon padding-0" (click)="shareHospitalDetails()">
+            <img src="assets/img/doctorProfile/share_icon.svg" class="margin-top-10 search-location-alignment">
+          </ion-col> -->
+        </ion-row>
+        <ion-item class="">
+          <ion-avatar item-start class="avtar-margin" *ngIf="hospitalDetails != null">
+            <img class="img-size" [src]="(hospitalDetails.providerImage != null && hospitalDetails.providerImage != '') ? hospitalDetails.providerImage.ProviderImagePath :'assets/img/bookAppointment/hospital_icon.svg'"
+            />
+          </ion-avatar>
+          <div class="card">
+            <h4 class="profile-user-name para-overflow-hidden">{{hospitalInfo.ProviderName}}
+            </h4>
+            <p class="doc-profile-detail-content1" *ngIf="hospitalDetails != null">{{hospitalDetails.City}}</p>
+            <p *ngIf="hospitalInfo.ProviderAverageRating != null && hospitalInfo.ProviderAverageRating!='' ">
+              <rating class="rating-sec" [(ngModel)]="hospitalInfo.ProviderAverageRating" readOnly="true" max="5" emptyStarIconName="star-outline"
+                halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+              <!-- <ion-icon name="star"></ion-icon> &nbsp; -->
+              <span class="review-color" (click)="getReview()">{{hospitalInfo.ProviderTotalRatingCount}} Reviews</span>
+            </p>
+            <!-- <p *ngIf="hospitalDetails.ProviderOverAllRating == null && hospitalDetails.ProviderOverAllRating=='' ">
+                <rating class="rating-sec" (ngModel)="0" readOnly="true" max="5" emptyStarIconName="star-outline"
+                  halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+          
+                <span class="review-color" (click)="getReview()">{{hospitalDetails.ProviderOverAllRating.TotalCount}} Reviews</span>
+              </p> -->
+          </div>
+        </ion-item>
+      </ion-card>
+      <ion-row class="text-center-class quick-link-fix-body">
+        <ion-col col-3 class="quick-link-div-devider" (click)="_callAmbulance()">
+          <img src="assets/img/doctorProfile/ambulencee.svg" class="quick-link-icon-width1">
+          <p class="quick-link-font">AMBULANCE</p>
+        </ion-col>
+        <ion-col col-3 class="quick-link-div-devider" (click)="getAllDoctors()">
+          <img src="assets/img/doctorProfile/doc.svg" class="quick-link-icon-width3">
+          <p class="quick-link-font1">DOCTORS</p>
+        </ion-col>
+        <ion-col col-3 class="quick-link-div-devider" (click)="_call(hospitalDetails.Phone1)">
+          <img src="assets/img/doctorProfile/call1.svg" class="quick-link-icon-width1">
+          <p class="quick-link-font">CALL</p>
+        </ion-col>
+        <ion-col col-3 class="quick-link-div-padding" (click)="getReview()">
+          <img src="assets/img/doctorProfile/rev1.svg" class="quick-link-icon-width1">
+          <p class="quick-link-font">REVIEW</p>
+        </ion-col>
+      </ion-row>
+      <div class="price-list-section-margin">
+        <!-- <ion-row class="" *ngIf="hospitalDetails.ProfileDetails != null">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/stethescope_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-10 class=" doc-detail-section-devider">
+            <p class="profile-detail-font-color">
+              {{hospitalDetails.ProfileDetails}}
+            </p>
+          </ion-col>
+        </ion-row> -->
+        <div *ngIf="isSelectedReview" class="price-list-section-margin">
+          <ion-row>
+            <ion-col col-12>
+              <rating class="review-sec" [(ngModel)]="userRating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half"
+                starIconName="star" nullable="false"></rating>
+            </ion-col>
+            <ion-col col-12>
+              <ion-textarea placeholder="Leave a Message" class="user-rating-message" [(ngModel)]="userMessage"></ion-textarea>
+            </ion-col>
+            <ion-col col-6>
+              <button class="btn-back-style" ion-button type="button" (click)="hideFeedback()">Not Now</button>
+            </ion-col>
+            <ion-col col-6>
+              <button class="btn-back-style" ion-button type="button" (click)="submitFeedback()">Submit</button>
+            </ion-col>
+          </ion-row>
+          <ion-row class="" *ngIf="submittedFeedbackList.length > 0">
+            <p class="search-header">Feedback From User</p>
+            <ion-col col-12 class="border-bottom-color" *ngFor="let item of submittedFeedbackList; let i = index;">
+              <ion-row class="">
+                <ion-col col-1>
+                  <img class="money-icon-margin" src="assets/img/register/name_icon.svg" />
+                </ion-col>
+                <ion-col col-11>
+                  <p class="user-name">
+                    <span class="para-overflow-hidden">{{item.Name}}</span>
+                    <span class="float-right calender-font-size">
+                      <img class="calendar-icon-margin" src="assets/img/register/dob_icon.svg" /> {{item.CreatedDate}}
+                    </span>
+                  </p>
+                  <p class="user-message">{{item.Value}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row class="">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/chamber_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-10 class="doc-detail-section-devider">
+            <p class="p-margin-bottom">
+              <span class="doc-profile-sub-heading">{{hospitalInfo.ProviderName}}</span>
+            </p>
+            <!-- <p class="clinic-detail-sub p-margin-bottom p-margin-top">Normal Vaginal Delyvery(NVD) : Caesacean Section</p> -->
+            <p class="profile-detail-font-color p-margin-bottom p-margin-top" *ngIf="hospitalDetails != null">
+              <span *ngIf="hospitalDetails.Address !='' && hospitalDetails.Address!=null">{{hospitalDetails.Address}},</span>
+              <span *ngIf="hospitalDetails.City !='' && hospitalDetails.City!=null">{{hospitalDetails.City}},</span>
+              <br/>
+              <span *ngIf="hospitalDetails.State !='' && hospitalDetails.State!=null">{{hospitalDetails.State}}</span>
+              <span *ngIf="hospitalDetails.Zip !='' && hospitalDetails.Zip!=null">{{hospitalDetails.Zip}},</span>
+              <span *ngIf="hospitalDetails.Phone1 !='' && hospitalDetails.Phone1!=null">Phone: {{hospitalDetails.Phone1}}</span>
+            </p>
+            <div style="height: 100%; width: 100%" #mapCanvas id="map_canvas"></div>
+            <!-- <p>
+              <img src="assets/img/googlemap.jpg" class="map-image" (click)="getDirection()"> -->
+            <!-- <iframe [src]="url" width="100%" height="130" frameborder="0" style="border:0" allowfullscreen></frame> -->
+            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59882.61535194121!2d85.80313267587808!3d20.272787486717434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909c30a470d79%3A0x7c479906b430736!2sApollo+Hospital!5e0!3m2!1sen!2sin!4v1523601846808" id="google_map" width="100%" height="130" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+            <!-- <iframe src="https://maps.google.com/maps?q='+lat+','+lng+'&hl=en&z=14&amp;output=embed" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+            <!-- <iframe src="http://maps.google.com/maps?q='+lat+', '+lng+'&z=15&output=embed" width="100%" height="130" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+            <!-- </p> -->
+            <p class="get-dir-color" (click)="getDirection()">
+              <img src="assets/img/direction.svg" class="get-dir-icon"> Get Direction</p>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row class="">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/stethescope_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-10 class=" doc-detail-section-devider">
+            <p class="p-margin-bottom">
+              <span class="doc-profile-sub-heading">Services</span>
+            </p>
+            <p class="profile-detail-font-color p-margin-bottom p-margin-top">Normal Vaginal Delyvery</p>
+            <p class="profile-detail-font-color p-margin-bottom p-margin-top">Normal Vaginal Delyvery</p>
+          </ion-col>
+        </ion-row> -->
+        <!-- <ion-row class="">
+          <ion-col col-2 class="text-center-class">
+            <img src="assets/img/doctorProfile/gallery_icon.svg" class="money-icon-margin">
+          </ion-col>
+          <ion-col col-10 class=" doc-detail-section-devider">
+            <p class="p-margin-bottom">
+              <span class="doc-profile-sub-heading">Gallery</span>
+            </p>
+            <p class="clinic-gallery-ul">
+              <span class="clinic-gallery-li">
+                <img src="assets/img/header_bg.png" class="glry-border-rds">
+              </span>
+              <span class="clinic-gallery-li">
+                <img src="assets/img/header_bg.png" class="glry-border-rds">
+              </span>
+              <span class="clinic-gallery-li">
+                <img src="assets/img/header_bg.png" class="glry-border-rds">
+              </span>
+            </p>
+          </ion-col>
+        </ion-row> -->
+      </div>
+
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar (click)="getAllDoctors()">
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/calendar_icon.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Book Appointment</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

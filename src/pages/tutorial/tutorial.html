@@ -1,0 +1,63 @@
+<!--<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>-->
+
+<ion-content no-bounce>
+  <ion-row class="slider-row">
+    <ion-col col-12>
+      <!-- <p>
+        Choose Your Location
+      </p> -->
+    </ion-col>
+    <ion-col col-12 (click)="getActiveCityAndLocation()">
+      <ion-item class="login-input-select login-input">
+        <ion-row>
+          <ion-col col-2 class="text-aligh-left">
+            <ion-icon item-left class="tutorial-icon" name="ios-pin"></ion-icon>
+          </ion-col>
+          <ion-col col-8 text-center class="margin-auto">
+              <!-- class="location-padding-top" -->
+            <p class="active-city-text para-overflow-hidden">{{selectedCityAndLocation.activeCity}}</p>
+            <!-- <p class="active-location-text para-overflow-hidden">
+              {{selectedCityAndLocation.activeLocation}}
+            </p> -->
+          </ion-col>
+          <ion-col col-2 class="text-aligh-right arrow-padding-top">
+            <ion-icon name="ios-arrow-forward" class="login-arrow-icon tutorial-icon"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <!--<ion-select [(ngModel)]="location" name="location">
+          <ion-option *ngFor="let location of cityLocation" value="{{location.Key }}">{{location.DisplayText}}</ion-option>
+        </ion-select>-->
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+    <!--'url(/assets/img/' + item.img + '-->
+    <ion-slide *ngFor="let item of sliderConfig" [style.background]="'url(' + item.Image + ')'">
+      <p>
+        {{item.Content}}
+        <!--{{}} <span class="slider-text-bold">Guranteed</span>-->
+      </p>
+    </ion-slide>
+  </ion-slides>
+  <ion-row class="slider-btn-sec">
+    <ion-col col-6 class="">
+      <button class="login-btn" ion-button type="button" (click)="onLogin()"><ion-icon name="ios-lock" class="tutorial-icon login-icon"></ion-icon> <span class="slider-login-btn">Log in</span> <ion-icon name="ios-arrow-forward" class="login-arrow-icon tutorial-icon"></ion-icon></button>
+    </ion-col>
+    <ion-col col-6 class="">
+      <button class="signup-btn" ion-button type="button" (click)="onSingnUp()"><span class="slider-login-btn">Sign Up</span> <ion-icon name="ios-arrow-forward" class="signup-arrow-icon"></ion-icon></button>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row class="slider-dashboard-skip-text">
+    <ion-col col-12 class="">
+      <p class="dashboard-text skip-to-dashboard-text" (click)="skipToDashboard()">
+        Skip To Dashboard
+      </p>
+    </ion-col>
+  </ion-row> -->
+</ion-content>

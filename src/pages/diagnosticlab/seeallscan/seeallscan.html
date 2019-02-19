@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title></ion-title>
+    <ion-row class="location-search-header">
+      <ion-col col-9 class="title-header-text header-title margin-top-bottom-5 margin-auto para-overflow-hidden">
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword !='' && searchedKeyword != undefined && searchedKeyword != null">{{searchedKeyword}}</p>
+        <p class="para-margin-0 header-title para-overflow-hidden" *ngIf="searchedKeyword =='' || searchedKeyword == undefined || searchedKeyword == null">Health Packages</p>
+      </ion-col>
+      <ion-col text-center col-2 class="notification-icon-sec padding-0 margin-auto" (click)="goToCart()">
+        <ion-badge *ngIf="showAddedPackageCount > 0" id="notifications-badge" color="danger">{{showAddedPackageCount}}</ion-badge>
+        <img class="cart-icon" src="assets/img/cartWhite.svg" />
+      </ion-col>
+      <ion-col text-center col-1 class="notification-icon-sec padding-0 margin-auto" (click)="goToFilter()">
+        <img class="menu-search-img filter-icon-upload filter_icon" src="assets/img/dc_icon/filter.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-12 *ngIf="labScanList.length > 0">
+      <ion-row class="dc_card_shadow_border padding-left-right-5" *ngFor="let scan of labScanList">
+        <ion-col col-9>
+          <ion-item class="padding-0 default-add" (click)="selectedLabScan(scan._source)">
+            <ion-avatar item-start class="avtar-margin">
+              <img class="img-size padding-0" [src]="(scan._source.ImageUrl != null && scan._source.ImageUrl != '') ? scan._source.ImageUrl :'assets/img/dc_icon/scan.svg'"
+              />
+            </ion-avatar>
+            <div class="card">
+              <ion-row>
+                <ion-col col-12>
+                  <h4 class="profile-user-name para-overflow-hidden">{{scan._source.LabTestName}}
+                  </h4>
+                </ion-col>
+              </ion-row>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/bookAppointment/hospital_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CenterName}}
+              </p>
+              <p class="para-overflow-hidden inner-sub-text-size margin-top-5">
+                <span class="content-row-seprator">
+                  <img src="assets/img/doctorProfile/location_icon.svg" class="dioLocation">
+                </span>
+                {{scan._source.CityAreaName}}, {{scan._source.City}}
+              </p>
+              <!-- <p class="margin-6">
+                <span class="">
+                  <img class="width-28 rupee-icon" src="assets/img/doctorProfile/rupee_icon.svg" /> </span>
+                <span class="original-price" *ngIf="scan._source.GenericDiscount > 0">{{scan._source.OriginalPrice}}</span>
+                <span *ngIf="scan._source.GenericDiscount > 0"> / </span>
+                <span class="discount-price">{{scan._source.PriceAfterDiscount}}</span>
+              </p> -->
+            </div>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3 class="">
+          <ion-row *ngIf="scan.fields != undefined && scan.fields != null" class="margin-top-15">
+            <ion-col col-12 (click)="showMap(scan._source.Latlong)">
+              <ion-icon name="ios-pin-outline"></ion-icon>
+              <span class="km-text">{{scan.fields.distance[0]}} km</span>
+            </ion-col>
+            <!-- <ion-col col-12 *ngIf="provider._source.PackageCount > 0 || provider._source.TestCount > 0">
+                    <p class="para-overflow-hidden DF_text margin-5">
+                      <span class="dc-inner-sub-text-size" *ngIf="provider._source.PackageCount > 0">{{provider._source.PackageCount}}</span> <span>Package(s)</span>
+                    </p>
+                    <p class="para-overflow-hidden DF_text margin-5">
+                      <span class="dc-inner-sub-text-size" *ngIf="provider._source.TestCount > 0">{{provider._source.TestCount}}</span> <span>Test(s)</span>
+                    </p>
+                  </ion-col> -->
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 class="border-top-color">
+          <ion-row class="text-center-appobtn padding-left-right-5 width-100">
+            <ion-col col-4 class="padding-left-0 margin-auto">
+              <p class="font-weight-800 para-overflow-hidden margin-top-bottom-5 price-font-style">₹ {{scan._source.PriceAfterDiscount}}</p>
+              <p *ngIf="scan._source.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{scan._source.Price}}</p>
+              <p class="para-overflow-hidden DF_text margin-5 discount-value-show" *ngIf="scan._source.GenericDiscount > 0">
+                <span class="dc-inner-sub-text-size">{{scan._source.GenericDiscount}}</span>
+                <span class="inner-sub-text-size">% Off</span>
+              </p>
+            </ion-col>
+            <ion-col col-4 class="margin-auto" (click)="addToCart(scan._source,'Scan')">
+              <button ion-button small outline class="transparent-btn-style add-to-cart">Add To Cart</button>
+            </ion-col>
+            <ion-col col-4 class="margin-auto">
+              <button ion-button small class="button-primary solid-btn-style " (click)="bookLabScan(scan._source)">Book Test</button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 text-center *ngIf="labScanList.length == 0 && !isAvailable">
+      <img src="assets/img/dc_icon/scan.svg" class="not-found" />
+      <p class="not-found-text">No radiology scan(s) found!</p>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

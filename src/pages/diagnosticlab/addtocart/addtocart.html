@@ -1,0 +1,246 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> My Cart</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="addedPackageAndTestInCart.length > 0" (click)="removeAllPackages()">
+        <p class="margin-right-15">CLEAR</p>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="cart-ios">
+    <ion-col *ngIf="addedPackageAndTestInCart.length > 0 && showAddedPackageCount > 0">
+      <div class="medicinelist medicine-list-border" no-padding *ngFor="let item of addedPackageAndTestInCart; let i = index">
+        <div *ngIf="item.totalPrice > 0">
+          <ion-row class="border-bottom-color package-back" (click)="selectedDiagnosticCenter(item)">
+            <ion-col col-2 class="margin-auto">
+              <img class="search-list-image-back" style="background: #ffffff !important;" [src]="(item.DiagnosticCenter.ProviderImage != null && item.DiagnosticCenter.ProviderImage != '') ? item.DiagnosticCenter.ProviderImage :'assets/img/dc_icon/dc.svg'"
+              />
+              <!-- <img class="search-list-image-back" src="assets/img/bookAppointment/doctor_icon.svg" /> -->
+            </ion-col>
+            <ion-col col-9 class="margin-auto padding-0">
+              <p class="para-list-header font-weight-400 profile-user-name para-overflow-hidden para-margin-3-0 header-bottom color-white">{{item.DiagnosticCenter.CenterName}}</p>
+              <p class="margin-top-2 medicine-sub-content address-margin-left color-white">
+                <img class="dioLocation" src="assets/img/doctorProfile/location_icon_white.svg" />{{item.DiagnosticCenter.City}}, {{item.DiagnosticCenter.CityAreaName}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let pck of item.Package;let j = index">
+
+            <ion-col col-12>
+              <ion-row class="padding008 border-bottom-price package-padding">
+                <ion-col col-11 class="NotAviblMsg" *ngIf="pck.isActive == 0">
+                  <p class="NotAviblMagMargin">Sorry! Package is not available</p>
+                </ion-col>
+              </ion-row>
+              <ion-row class="padding008 border-bottom-price package-padding" [ngClass]="{'testMar':pck.isActive == 0}">
+                <!-- <ion-col col-2>
+            <img [ngClass]="(pck.ProviderImage != null && pck.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(pck.ProviderImage != null && pck.ProviderImage != '') ? pck.ProviderImage :'assets/img/dc_icon/package2.svg'"
+            />
+          </ion-col> -->
+                <ion-col col-9 (click)="selectedHealthPackage(item.DiagnosticCenter,pck)">
+                  <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{pck.LabPackageName}}</p>
+                  <p class="margin-top-6">
+                    <span class="content-row-seprator" *ngIf="pck.Gender == 1">
+                      <img class="dioLocation" src="assets/img/male.svg" /> Male
+                    </span>
+                    <span class="content-row-seprator" *ngIf="pck.Gender == 2">
+                      <img class="dioLocation" src="assets/img/female.svg" /> Female
+                    </span>
+                    <span class="content-row-seprator" *ngIf="pck.Gender == 3">
+                      <img class="dioLocation" src="assets/img/meAndFamily.svg" /> All
+                    </span>
+                  </p>
+                  <p class="margin-top-bottom-5">
+                    <span>
+                      <img class="dioLocation" src="assets/img/dc_icon/package2.svg" />
+                    </span>
+                    <span class="dc-inner-sub-text-size">
+                      Health Package
+                    </span>
+                  </p>
+                  <p class="price-text margin-top-5">
+                    <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{pck.PriceAfterDiscount}}</span>
+                    <span *ngIf="pck.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{pck.Price}}</span>
+                    <span class="para-overflow-hidden DF_text margin-5" *ngIf="pck.GenericDiscount > 0">
+                      <span class="dc-inner-sub-text-size">({{pck.GenericDiscount}}%</span>
+                      <span class="inner-sub-text-size"> Off)</span>
+                    </span>
+                  </p>
+
+                </ion-col>
+                <ion-col col-3 text-right (click)="deletePackage(i,j)">
+                  <p class="margin-10 remove-button-sec">
+                    <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                    Remove
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let test of item.LabTest;let j = index">
+            <ion-col col-12>
+              <ion-row class="padding008 border-bottom-price package-padding">
+                <ion-col col-11 class="NotAviblMsg" *ngIf="test.isActive == 0">
+                  <p class="NotAviblMagMargin">Sorry! Test is not available</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="padding008 border-bottom-price package-padding" [ngClass]="{'testMar':test.isActive == 0}">
+                <!-- <ion-col col-2>
+            <img [ngClass]="(test.ProviderImage != null &&test.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(test.ProviderImage != null && test.ProviderImage != '') ? test.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+            />
+          </ion-col> -->
+                <ion-col col-9 (click)="selectedLabTest(item.DiagnosticCenter,test)">
+                  <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{test.LabTestName}}</p>
+                  <p class="margin-top-bottom-5">
+                    <span>
+                      <img class="dioLocation" src="assets/img/dc_icon/labTest.svg" />
+                    </span>
+                    <span class="dc-inner-sub-text-size">
+                      Lab Test
+                    </span>
+                  </p>
+                  <p class="price-text margin-top-5">
+                    <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{test.PriceAfterDiscount}}</span>
+                    <span *ngIf="test.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{test.Price}}</span>
+                    <span class="para-overflow-hidden DF_text margin-5" *ngIf="test.GenericDiscount > 0">
+                      <span class="dc-inner-sub-text-size">({{test.GenericDiscount}}%</span>
+                      <span class="inner-sub-text-size"> Off)</span>
+                    </span>
+                  </p>
+
+                </ion-col>
+                <ion-col col-3 text-right (click)="deleteLabTest(i,j)">
+                  <p class="margin-10 remove-button-sec">
+                    <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                    Remove
+                  </p>
+                </ion-col>
+              </ion-row>
+
+
+            </ion-col>
+          </ion-row>
+          <ion-row class="padding008 border-bottom-price package-padding" *ngFor="let scan of item.LabScan;let j = index">
+
+            <ion-col col-12>
+              <ion-row class="padding008 border-bottom-price package-padding">
+                <ion-col col-11 class="NotAviblMsg" *ngIf="scan.isActive == 0">
+                  <p class="NotAviblMagMargin">Sorry! Scan is not available</p>
+                </ion-col>
+              </ion-row>
+              <ion-row class="padding008 border-bottom-price package-padding" [ngClass]="{'testMar':scan.isActive == 0}">
+                <!-- <ion-col col-2>
+            <img [ngClass]="(scan.ProviderImage != null &&scan.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(scan.ProviderImage != null && scan.ProviderImage != '') ? scan.ProviderImage :'assets/img/dc_icon/scan.svg'"
+            />
+          </ion-col> -->
+                <ion-col col-9 (click)="selectedLabScan(item.DiagnosticCenter,scan)">
+                  <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{scan.LabTestName}}</p>
+                  <p class="margin-top-bottom-5">
+                    <span>
+                      <img class="dioLocation" src="assets/img/dc_icon/scan.svg" />
+                    </span>
+                    <span class="dc-inner-sub-text-size">
+                      Radiology
+                    </span>
+                  </p>
+                  <p class="price-text margin-top-5">
+                    <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{scan.PriceAfterDiscount}}</span>
+                    <span *ngIf="scan.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{scan.Price}}</span>
+                    <span class="para-overflow-hidden DF_text margin-5" *ngIf="scan.GenericDiscount > 0">
+                      <span class="dc-inner-sub-text-size">({{scan.GenericDiscount}}%</span>
+                      <span class="inner-sub-text-size"> Off)</span>
+                    </span>
+                  </p>
+
+                </ion-col>
+                <ion-col col-3 text-right (click)="deleteLabScan(i,j)">
+                  <p class="margin-10 remove-button-sec">
+                    <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                    Remove
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+          <ion-row class="padding008 border-bottom-price package-padding" *ngFor="let profile of item.LabProfile;let j = index">
+
+
+            <ion-col col-12>
+              <ion-row class="padding008 border-bottom-price package-padding">
+                <ion-col col-11 class="NotAviblMsg" *ngIf="profile.isActive == 0">
+                  <p class="NotAviblMagMargin">Sorry! Profile is not available</p>
+                </ion-col>
+              </ion-row>
+              <ion-row class="padding008 border-bottom-price package-padding" [ngClass]="{'testMar':profile.isActive == 0}">
+                <!-- <ion-col col-2>
+            <img [ngClass]="(test.ProviderImage != null &&test.ProviderImage != '') ? 'search-list-image-back padding-0':'search-list-image-back'"
+              [src]="(test.ProviderImage != null && test.ProviderImage != '') ? test.ProviderImage :'assets/img/dc_icon/labTest.svg'"
+            />
+          </ion-col> -->
+                <ion-col col-9 (click)="selectedLabProfile(item.DiagnosticCenter,profile)">
+                  <p class="para-list-header font-weight-500 para-overflow-hidden margin-top-6 pack-list-header">{{profile.LabProfileName}}</p>
+                  <p class="margin-top-bottom-5">
+                    <span>
+                      <img class="dioLocation" src="assets/img/dc_icon/labTest.svg" />
+                    </span>
+                    <span class="dc-inner-sub-text-size">
+                      Lab Profile
+                    </span>
+                  </p>
+                  <p class="price-text margin-top-5">
+                    <span class="font-weight-800 para-overflow-hidden profile-price-font-style" style="margin: 0px 10px 0px 0px !important;">₹ {{profile.PriceAfterDiscount}}</span>
+                    <span *ngIf="profile.GenericDiscount > 0" class="font-weight-800 para-overflow-hidden margin-top-6 original-price-font-style">₹ {{profile.Price}}</span>
+                    <span class="para-overflow-hidden DF_text margin-5" *ngIf="profile.GenericDiscount > 0">
+                      <span class="dc-inner-sub-text-size">({{profile.GenericDiscount}}%</span>
+                      <span class="inner-sub-text-size"> Off)</span>
+                    </span>
+                  </p>
+
+                </ion-col>
+                <ion-col col-3 text-right (click)="deleteLabProfile(i,j)">
+                  <p class="margin-10 remove-button-sec">
+                    <!-- <img class="delete-image-back" src="assets/img/delete.svg" /> -->
+                    Remove
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="">
+            <ion-col col-6 class="margin-auto">
+              <img src="assets/img/doctorProfile/rupee_icon.svg" class="rupee3 total-rupee-icon margin1315">
+              <span class="float-left margin123 total-price-text">{{item.totalPrice}}</span>
+            </ion-col>
+            <ion-col col-6>
+              <button name="square" type="button" class="btn-back-style float-right popup-btn" (click)="bookSelectedOrder(item)">Proceed</button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col text-center *ngIf="(addedPackageAndTestInCart.length == 0 || showAddedPackageCount == 0) && !isAvailable">
+      <img src="assets/img/emptyCart.svg" class="not-found" />
+      <p class="not-found-text">No Item Available!</p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/rupee_icon _white.svg" class="rupee3 margin1315">
+      <span class="float-left margin123">455</span>
+      <span>
+        <button ion-button button-small class="float-right margin-r-15 cart-continue-btn">Continue</button>
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

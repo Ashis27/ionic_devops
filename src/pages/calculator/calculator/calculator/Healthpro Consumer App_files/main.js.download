@@ -1,0 +1,3392 @@
+webpackJsonp([82],{
+
+/***/ 158:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConferenceData; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_service__ = __webpack_require__(48);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ConferenceData = /** @class */ (function () {
+    function ConferenceData(http, commonService) {
+        this.http = http;
+        this.commonService = commonService;
+    }
+    ConferenceData.prototype.load = function () {
+        if (this.data) {
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].of(this.data);
+        }
+        else {
+            return this.http.get('assets/data/data.json')
+                .map(this.processData, this);
+        }
+    };
+    ConferenceData.prototype.processData = function (data) {
+        var _this = this;
+        // just some good 'ol JS fun with objects and arrays
+        // build up the data by linking speakers to sessions
+        this.data = data.json();
+        this.data.tracks = [];
+        // loop through each day in the schedule
+        this.data.schedule.forEach(function (day) {
+            // loop through each timeline group in the day
+            day.groups.forEach(function (group) {
+                // loop through each session in the timeline group
+                group.sessions.forEach(function (session) {
+                    session.speakers = [];
+                    if (session.speakerNames) {
+                        session.speakerNames.forEach(function (speakerName) {
+                            var speaker = _this.data.speakers.find(function (s) { return s.name === speakerName; });
+                            if (speaker) {
+                                session.speakers.push(speaker);
+                                speaker.sessions = speaker.sessions || [];
+                                speaker.sessions.push(session);
+                            }
+                        });
+                    }
+                    if (session.tracks) {
+                        session.tracks.forEach(function (track) {
+                            if (_this.data.tracks.indexOf(track) < 0) {
+                                _this.data.tracks.push(track);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        return this.data;
+    };
+    // getTimeline(dayIndex: number, queryText = '', excludeTracks: any[] = [], segment = 'all') {
+    //   return this.load().map((data: any) => {
+    //     let day = data.schedule[dayIndex];
+    //     day.shownSessions = 0;
+    //     queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
+    //     let queryWords = queryText.split(' ').filter(w => !!w.trim().length);
+    //     day.groups.forEach((group: any) => {
+    //       group.hide = true;
+    //       group.sessions.forEach((session: any) => {
+    //         // check if this session should show or not
+    //       //  this.filterSession(session, queryWords, excludeTracks, segment);
+    //         if (!session.hide) {
+    //           // if this session is not hidden then this group should show
+    //           group.hide = false;
+    //           day.shownSessions++;
+    //         }
+    //       });
+    //     });
+    //     return day;
+    //   });
+    // }
+    //filterSession(session: any, queryWords: string[], excludeTracks: any[], segment: string) {
+    // let matchesQueryText = false;
+    // if (queryWords.length) {
+    //   // of any query word is in the session name than it passes the query test
+    //   queryWords.forEach((queryWord: string) => {
+    //     if (session.name.toLowerCase().indexOf(queryWord) > -1) {
+    //       matchesQueryText = true;
+    //     }
+    //   });
+    // } else {
+    //   // if there are no query words then this session passes the query test
+    //   matchesQueryText = true;
+    // }
+    // // if any of the sessions tracks are not in the
+    // // exclude tracks then this session passes the track test
+    // let matchesTracks = false;
+    // session.tracks.forEach((trackName: string) => {
+    //   if (excludeTracks.indexOf(trackName) === -1) {
+    //     matchesTracks = true;
+    //   }
+    // });
+    // // if the segement is 'favorites', but session is not a user favorite
+    // // then this session does not pass the segment test
+    // let matchesSegment = false;
+    // if (segment === 'favorites') {
+    //   if (this.commonService.hasFavorite(session.name)) {
+    //     matchesSegment = true;
+    //   }
+    // } else {
+    //   matchesSegment = true;
+    // }
+    // // all tests must be true if it should not be hidden
+    // session.hide = !(matchesQueryText && matchesTracks && matchesSegment);
+    // }
+    ConferenceData.prototype.getSpeakers = function () {
+        return this.load().map(function (data) {
+            return data.speakers.sort(function (a, b) {
+                var aName = a.name.split(' ').pop();
+                var bName = b.name.split(' ').pop();
+                return aName.localeCompare(bName);
+            });
+        });
+    };
+    ConferenceData.prototype.getTracks = function () {
+        return this.load().map(function (data) {
+            return data.tracks.sort();
+        });
+    };
+    ConferenceData.prototype.getMap = function () {
+        return this.load().map(function (data) {
+            return data.map;
+        });
+    };
+    ConferenceData = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"], __WEBPACK_IMPORTED_MODULE_5__common_service__["a" /* CommonServices */]])
+    ], ConferenceData);
+    return ConferenceData;
+}());
+
+//# sourceMappingURL=conference-data.js.map
+
+/***/ }),
+
+/***/ 169:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 169;
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/MedicineReminder/add-reminder/add-reminder.module": [
+		737,
+		80
+	],
+	"../pages/MedicineReminder/addremider-form/addremider-form.module": [
+		738,
+		24
+	],
+	"../pages/MedicineReminder/days-selection/days-selection.module": [
+		739,
+		79
+	],
+	"../pages/MedicineReminder/medicine-list/medicine-list.module": [
+		755,
+		23
+	],
+	"../pages/MedicineReminder/timing-selection/timing-selection.module": [
+		745,
+		78
+	],
+	"../pages/applicationstartuppage/applicationstartuppage.module": [
+		688,
+		77
+	],
+	"../pages/blog/videomenueslisting.module": [
+		690,
+		13
+	],
+	"../pages/bookappointment/addnewmember/addnewmember.module": [
+		691,
+		76
+	],
+	"../pages/bookappointment/appointment/appointment.module": [
+		695,
+		8
+	],
+	"../pages/bookappointment/appointmentpostconfirmation/appointmentpostconfirmation.module": [
+		693,
+		1
+	],
+	"../pages/bookappointment/appointmentpreconfirmation/appointmentpreconfirmation.module": [
+		692,
+		4
+	],
+	"../pages/bookappointment/bookappointment.module": [
+		694,
+		39
+	],
+	"../pages/bookappointment/rateus/rateus.module": [
+		696,
+		75
+	],
+	"../pages/bookappointment/seealldoctors/seealldoctors.module": [
+		703,
+		33
+	],
+	"../pages/bookappointment/seeallhospitals/seeallhospitals.module": [
+		697,
+		32
+	],
+	"../pages/calculator/bloodalcohol-level/bloodalcohol-level.module": [
+		705,
+		74
+	],
+	"../pages/calculator/blooddonationduedate/blooddonationduedate.module": [
+		700,
+		22
+	],
+	"../pages/calculator/bloodglucoseconversion/bloodglucoseconversion.module": [
+		698,
+		44
+	],
+	"../pages/calculator/bloodpressure/bloodpressure.module": [
+		699,
+		43
+	],
+	"../pages/calculator/bloodsugarconversion/bloodsugarconversion.module": [
+		701,
+		42
+	],
+	"../pages/calculator/bmicalculator/bmicalculator.module": [
+		708,
+		26
+	],
+	"../pages/calculator/bodyfat/bodyfat.module": [
+		702,
+		73
+	],
+	"../pages/calculator/bodysurfacearea/bodysurfacearea.module": [
+		704,
+		72
+	],
+	"../pages/calculator/breathe/breathe.module": [
+		710,
+		21
+	],
+	"../pages/calculator/calculatorlist.module": [
+		712,
+		71
+	],
+	"../pages/calculator/caloriecalculation/caloriecalculation.module": [
+		706,
+		70
+	],
+	"../pages/calculator/cholesterol/cholesterol.module": [
+		707,
+		69
+	],
+	"../pages/calculator/correctedsodium/correctedsodium.module": [
+		709,
+		68
+	],
+	"../pages/calculator/creatinineclearence/creatinineclearence.module": [
+		713,
+		67
+	],
+	"../pages/calculator/dailywater/dailywater.module": [
+		711,
+		41
+	],
+	"../pages/calculator/framesize/framesize.module": [
+		715,
+		66
+	],
+	"../pages/calculator/heartbeat/heartbeat.module": [
+		718,
+		20
+	],
+	"../pages/calculator/heightweight/heightweight.module": [
+		716,
+		65
+	],
+	"../pages/calculator/idealweight/idealweight.module": [
+		714,
+		64
+	],
+	"../pages/calculator/leanbodymass/leanbodymass.module": [
+		720,
+		63
+	],
+	"../pages/calculator/ovulation/ovulation.module": [
+		717,
+		19
+	],
+	"../pages/calculator/pregnancyduedate/pregnancyduedate.module": [
+		729,
+		18
+	],
+	"../pages/calculator/smokingrisk/smokingrisk.module": [
+		721,
+		17
+	],
+	"../pages/calculator/waisttohip/waisttohip.module": [
+		719,
+		40
+	],
+	"../pages/citylocation/citylocation.module": [
+		722,
+		62
+	],
+	"../pages/dashboard/dashboard.module": [
+		726,
+		61
+	],
+	"../pages/diagnostic/appointment/diagnosticappointment.module": [
+		723,
+		7
+	],
+	"../pages/diagnostic/appointmentpreconfirmation/diagnosticappointmentpreconfirmation.module": [
+		725,
+		3
+	],
+	"../pages/diagnostic/cartlist/cartlist.module": [
+		724,
+		60
+	],
+	"../pages/diagnostic/diagnosticsearch/diagnosticsearch.module": [
+		727,
+		35
+	],
+	"../pages/diagnostic/packagedetail/packagedetail.module": [
+		728,
+		59
+	],
+	"../pages/diagnostic/packagelist/packagelist.module": [
+		741,
+		34
+	],
+	"../pages/diagnostic/seealldignosticcenter/seealldignosticcenter.module": [
+		734,
+		31
+	],
+	"../pages/diagnostic/seeallpackage/seeallpackage.module": [
+		732,
+		30
+	],
+	"../pages/doctor/doctorlist/doctorlist.module": [
+		730,
+		27
+	],
+	"../pages/doctor/profile/doctorprofile.module": [
+		736,
+		5
+	],
+	"../pages/emergency/emergency.module": [
+		731,
+		29
+	],
+	"../pages/history/history.module": [
+		733,
+		58
+	],
+	"../pages/history/myappointment/appointmenthistory.module": [
+		740,
+		9
+	],
+	"../pages/hospitalprofile/hospitalprofile.module": [
+		735,
+		6
+	],
+	"../pages/notification/notification.module": [
+		753,
+		16
+	],
+	"../pages/popover/popover.module": [
+		742,
+		57
+	],
+	"../pages/tabs-page/tabs-page.module": [
+		743,
+		36
+	],
+	"../pages/tutorial/tutorial.module": [
+		744,
+		56
+	],
+	"../pages/useraccount/askcontactforotp/askcontactforotp.module": [
+		746,
+		55
+	],
+	"../pages/useraccount/healthrecord/addnewrecord.module": [
+		747,
+		2
+	],
+	"../pages/useraccount/healthrecord/healthrecordlist.module": [
+		748,
+		12
+	],
+	"../pages/useraccount/healthrecord/sharerecord.module": [
+		750,
+		25
+	],
+	"../pages/useraccount/login/login.module": [
+		749,
+		11
+	],
+	"../pages/useraccount/medicalhistory/addmedicalinfo.module": [
+		751,
+		38
+	],
+	"../pages/useraccount/medicalhistory/medicalhistory.module": [
+		752,
+		54
+	],
+	"../pages/useraccount/otpverification/otpverification.module": [
+		760,
+		53
+	],
+	"../pages/useraccount/resetpassword/resetpassword.module": [
+		754,
+		45
+	],
+	"../pages/useraccount/signup/signup.module": [
+		759,
+		10
+	],
+	"../pages/useraccount/useraccount/useraccount.module": [
+		756,
+		37
+	],
+	"../pages/useraccount/useraddress/edituseraddress.module": [
+		762,
+		52
+	],
+	"../pages/useraccount/useraddress/useraddress.module": [
+		757,
+		51
+	],
+	"../pages/useraccount/userfamily/myfamily.module": [
+		758,
+		15
+	],
+	"../pages/useraccount/userfavouritedoctors/userfavouritedoctors.module": [
+		761,
+		50
+	],
+	"../pages/useraccount/userhealthrecord/myfamilylist.module": [
+		764,
+		49
+	],
+	"../pages/useraccount/userhealthrecord/myhealthrecord.module": [
+		765,
+		0
+	],
+	"../pages/useraccount/userhealthrecord/uploadnewrecord.module": [
+		763,
+		28
+	],
+	"../pages/useraccount/userprofile/userprofile.module": [
+		768,
+		14
+	],
+	"../pages/useraccount/userreferral/userreferral.module": [
+		769,
+		48
+	],
+	"../pages/useraccount/usersetting/usersetting.module": [
+		767,
+		46
+	],
+	"../pages/userwallet/userwallet.module": [
+		766,
+		47
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 213;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 220:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_toPromise__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_toPromise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_do__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_do__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_catch__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_service__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+var HttpService = /** @class */ (function () {
+    function HttpService(events, storage, _http, 
+        //  private loadingCtrl: LoadingController,
+        toastCtrl, commonService, loadingCtrl) {
+        this.events = events;
+        this.storage = storage;
+        this._http = _http;
+        this.toastCtrl = toastCtrl;
+        this.commonService = commonService;
+        this.loadingCtrl = loadingCtrl;
+        this.pendingRequests = 0;
+        this.interval_time = 30;
+        this.offline_message = "You are OFFLINE. Please check your network connection!";
+    }
+    HttpService.prototype.get = function (url, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            if (this.pendingRequests < 1) {
+                this.startLoading();
+            }
+            this.pendingRequests++;
+            options = this.prepareOptions(options);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.get(_this.commonService.getApiServiceUrl() + url, options)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    _this.pendingRequests--;
+                    if (_this.pendingRequests <= 0) {
+                        _this.loading.dismiss().catch(function () { });
+                    }
+                    observer.next(res);
+                }, function (error) {
+                    _this.pendingRequests--;
+                    if (_this.pendingRequests <= 0) {
+                        _this.loading.dismiss().catch(function () { });
+                    }
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('offline');
+        }
+    };
+    HttpService.prototype.getOffline = function (url, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            options = this.prepareOptions(options);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.get(_this.commonService.getApiServiceUrl() + url, options)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    observer.next(res);
+                }, function (error) {
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('offline');
+        }
+    };
+    HttpService.prototype.postOffline = function (url, model, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            var body_1 = model;
+            options = this.prepareOptions(options);
+            if (url == "token") {
+                return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                    _this._http.post(_this.commonService.getApiServiceUrl() + url, body_1, options)
+                        .map(function (response) { return response; })
+                        .subscribe(function (res) {
+                        observer.next(res);
+                    }, function (error) {
+                        observer.error(error);
+                    }, function () {
+                        observer.complete();
+                    });
+                });
+            }
+            else {
+                return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                    _this._http.post(_this.commonService.getApiServiceUrl() + url, body_1, options)
+                        .map(function (response) { return response; })
+                        .subscribe(function (res) {
+                        observer.next(res);
+                    }, function (error) {
+                        observer.error(error);
+                    }, function () {
+                        observer.complete();
+                    });
+                });
+            }
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.post = function (url, model, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            if (this.pendingRequests < 1) {
+                this.startLoading();
+            }
+            this.pendingRequests++;
+            var body_2 = model;
+            options = this.prepareOptions(options);
+            if (url == "token") {
+                return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                    _this._http.post(_this.commonService.getApiServiceUrl() + url, body_2, options)
+                        .map(function (response) { return response; })
+                        .subscribe(function (res) {
+                        _this.pendingRequests--;
+                        if (_this.pendingRequests <= 0) {
+                            _this.loading.dismiss().catch(function () { });
+                        }
+                        observer.next(res);
+                    }, function (error) {
+                        observer.error(error);
+                        _this.pendingRequests--;
+                        if (_this.pendingRequests <= 0) {
+                            _this.loading.dismiss().catch(function () { });
+                        }
+                    }, function () {
+                        observer.complete();
+                    });
+                });
+            }
+            else {
+                return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                    _this._http.post(_this.commonService.getApiServiceUrl() + url, body_2, options)
+                        .map(function (response) { return response; })
+                        .subscribe(function (res) {
+                        _this.pendingRequests--;
+                        if (_this.pendingRequests <= 0) {
+                            _this.loading.dismiss().catch(function () { });
+                        }
+                        observer.next(res);
+                    }, function (error) {
+                        _this.pendingRequests--;
+                        if (_this.pendingRequests <= 0) {
+                            _this.loading.dismiss().catch(function () { });
+                        }
+                        observer.error(error);
+                    }, function () {
+                        observer.complete();
+                    });
+                });
+            }
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.put = function (url, model, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            var body_3 = JSON.stringify(model);
+            options = this.prepareOptions(options);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.put(_this.commonService.getApiServiceUrl() + url, body_3, options)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    observer.next(res);
+                }, function (error) {
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.delete = function (url, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            options = this.prepareOptions(options);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.put(_this.commonService.getApiServiceUrl() + url, options)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    observer.next(res);
+                }, function (error) {
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.getLocation = function (url) {
+        var _this = this;
+        if (navigator.onLine) {
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.get(url)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    observer.next(res);
+                }, function (error) {
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.postSearchedData = function (url, model, options) {
+        var _this = this;
+        if (navigator.onLine) {
+            // if (this.pendingRequests < 1) {
+            //     this.startLoading();
+            // }
+            // this.pendingRequests++;
+            var body_4 = model;
+            options = this.prepareOptions(options);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.post(url, body_4)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    // this.pendingRequests--;
+                    // if (this.pendingRequests <= 0) {
+                    //     this.loading.dismiss().catch(() => { });
+                    // }
+                    observer.next(res);
+                }, function (error) {
+                    // this.pendingRequests--;
+                    // if (this.pendingRequests <= 0) {
+                    //     this.loading.dismiss().catch(() => { });
+                    // }
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('Failed');
+        }
+    };
+    HttpService.prototype.getSearchedData = function (url) {
+        var _this = this;
+        if (navigator.onLine) {
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].create(function (observer) {
+                _this._http.get(url)
+                    .map(function (response) { return response; })
+                    .subscribe(function (res) {
+                    // this.pendingRequests--;
+                    // if (this.pendingRequests <= 0) {
+                    //     this.loading.dismiss().catch(() => { });
+                    // }
+                    observer.next(res);
+                }, function (error) {
+                    // this.pendingRequests--;
+                    // if (this.pendingRequests <= 0) {
+                    //     this.loading.dismiss().catch(() => { });
+                    // }
+                    observer.error(error);
+                }, function () {
+                    observer.complete();
+                });
+            });
+        }
+        else {
+            this.commonService.onMessageHandler(this.offline_message, 0);
+            return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw('offline');
+        }
+    };
+    HttpService.prototype.handleError = function (error) {
+        console.error(error);
+        return __WEBPACK_IMPORTED_MODULE_9_rxjs_Rx__["Observable"].throw(error.json().error || 'Server error');
+    };
+    HttpService.prototype.prepareOptions = function (options) {
+        var token = localStorage.getItem('user_auth_token');
+        options = options || {};
+        if (!options.headers) {
+            options.headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["Headers"]();
+        }
+        if (token) {
+            options.headers.append('Authorization', 'Bearer ' + token);
+        }
+        options.headers.append('Access-Control-Allow-Origin', '*');
+        options.headers.append('Content-Type', 'application/json');
+        options.headers.append('Accept', 'application/json');
+        return options;
+    };
+    HttpService.prototype.startLoading = function () {
+        // let loader = this.loadingCtrl.create({
+        //     spinner: 'show',
+        //     cssClass: 'loader-change'
+        // });
+        // loader.present();
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.loading.present();
+    };
+    HttpService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["Http"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_8__common_service__["a" /* CommonServices */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */]])
+    ], HttpService);
+    return HttpService;
+}());
+
+//# sourceMappingURL=http.service.js.map
+
+/***/ }),
+
+/***/ 354:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataContext; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_service__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_service__ = __webpack_require__(48);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var DataContext = /** @class */ (function () {
+    function DataContext(events, storage, _http, commonService) {
+        var _this = this;
+        this.events = events;
+        this.storage = storage;
+        this._http = _http;
+        this.commonService = commonService;
+        //Login
+        this.UserLogin = function (userData) {
+            var loginData = 'grant_type=password&username=' + userData.UserLogin + '&password=' + userData.Password + '&userType=Consumer&parentGroupEntityId=' + _this.commonService.getGroupEntityId() + '&contactNumber=' + userData.Contact.toString();
+            return _this._http.post(_this.commonService.getApiControllerName("userLogin").toString(), loginData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Social Login
+        this.onSocialLogin = function (value, email) {
+            //userData.Password = this.commonService.getUserDefaultPassword();
+            var loginData = 'grant_type=password&username=' + email + '&loginType=social&userType=Consumer&tokenId=' + value + '&parentGroupEntityId=' + _this.commonService.getGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("userLogin").toString(), loginData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Register
+        this.UserRegister = function (userData) {
+            //userData.Password = this.commonService.getUserDefaultPassword();
+            userData.GroupEntityId = _this.commonService.getGroupEntityId();
+            userData.ParentGroupEntityId = _this.commonService.getParentGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("userRegister").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Gender
+        this.GetGenderList = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getDropdownValue").toString() + "Sex")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getDropdownValue").toString() + "Sex")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Slider config userDetails
+        this.GetSliderConfig = function (moduleName, status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getSliderConfig").toString() + moduleName)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getSliderConfig").toString() + moduleName)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get All city
+        this.GetActiveCity = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getCityList").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getCityList").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Location based on the city
+        this.GetActiveLocation = function (cityId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getLocation").toString() + cityId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //OTP verification
+        this.GetOTPVerify = function (contact, otp) {
+            return _this._http.get(_this.commonService.getApiControllerName("getVerifyOTP").toString() + "?contactNum=" + contact + "&otp=" + otp + "&groupEntityId=" + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //SendOTP
+        this.GetOTP = function (number) {
+            return _this._http.get(_this.commonService.getApiControllerName("getOTP").toString() + "?mobileNumber=" + number + "&groupEntityId=" + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Facebook signup
+        this.FacebookSignUp = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("fbResigtration").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Google plus signup
+        this.GooglePlusSignUp = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("gpResigtration").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Reset password
+        this.ResetPssword = function (userData) {
+            userData.GroupEntityId = _this.commonService.getGroupEntityId();
+            userData.ParentGroupEntityId = _this.commonService.getParentGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("resetPassword").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Address from lat and lng
+        this.GetAddress = function (lat, lng) {
+            return _this._http.getLocation(_this.commonService.getApiControllerName("getAddress").toString() + "?latlng=" + lat + "," + lng + "&key=" + _this.commonService.getGoogleApiKey())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Update User Contact Info
+        this.UpdateUserContactInfo = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("updateUserContactInfo").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Mertital Status
+        this.GetMeritalStatus = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getDropdownValue").toString() + "MaritalStatus")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getDropdownValue").toString() + "MaritalStatus")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Blood Group
+        this.GetBloodGroup = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getDropdownValue").toString() + "BloodGroup")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getDropdownValue").toString() + "BloodGroup")
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Looged in user details
+        this.GetLoggedOnUserProfile = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getLoggedInUserProfile").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getLoggedInUserProfile").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Update user profile 
+        this.UpdateUserProfile = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("updateUserProfile").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Update user profile picture
+        this.UpdateUserProfilePic = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("updateUserProfilePic").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Logout
+        this.UserLogOut = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("userLogOut").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Active Country and State List
+        this.GetActiveCountryAndState = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getActiveCountryAndState").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getActiveCountryAndState").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Add user new shipping address 
+        this.AddUserShippingAddress = function (userData) {
+            userData.GroupEntityId = _this.commonService.getGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("addUserShippingAddress").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get User shipping address list
+        this.GetUserShippingAddress = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("getUserShippingAddress").toString() + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //delete user shipping Address 
+        this.DeleteShippingAddress = function (userData) {
+            userData.GroupEntityId = _this.commonService.getGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("deleteAddress").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Update user shipping Address 
+        this.UpdateShippingAddress = function (userData) {
+            //userData.GroupEntityId = this.commonService.getGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("updateAddress").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Relation List 
+        this.GetRelation = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getDropdownValue").toString() + 'Family')
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getDropdownValue").toString() + 'Family')
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Family member List 
+        this.GetFamilyList = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("getFamily").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Family member List for dropdown
+        this.GetFamilyListForDropDown = function () {
+            // if (status) {
+            return _this._http.get(_this.commonService.getApiControllerName("getFamilyListForDropDown").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+            // }
+            // else {
+            //     return this._http.getOffline(this.commonService.getApiControllerName("getFamilyListForDropDown").toString())
+            //         .map((response: Response) => response.json())
+            //         .catch(this._http.handleError);
+            // }
+        };
+        //Update Family Member 
+        this.UpdateFamilyMember = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("updateFamilyMember").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Add New family member
+        this.AddFamilyMember = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("addFamilyMember").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Allergies
+        this.GetAllergies = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("getDropdownValue").toString() + 'Allergy')
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Medications
+        this.GetMedications = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getMedication").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Diases
+        this.GetDiases = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getDiases").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Diases
+        this.GetSurgeries = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getSurgeries").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Current App Version
+        this.GetAppVersion = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getAppVersion").toString() + "?appType=" + _this.commonService.getAppType())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getAppVersion").toString() + "?appType=" + _this.commonService.getAppType())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Validate Email and Mobile 
+        this.getValidateEmailAndMobile = function (userData) {
+            return _this._http.get(_this.commonService.getApiControllerName("getValidateEmailAndMobile").toString() + "?email=" + userData.UserLogin + "&mobile=" + userData.Contact + "&groupEntityId=" + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get user health records
+        this.GetConsumerDigitalDocuments = function (status, pageNum, itemsPerPage, tagging, relationId) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getConsumerDigitalDocuments").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&tagging=' + tagging + '&relationId=' + relationId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getConsumerDigitalDocuments").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&tagging=' + tagging + '&relationId=' + relationId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get user health records uploaded by doc
+        this.GetConsumerDigitalDocumentsUploadedByDoc = function (status, pageNum, itemsPerPage, tagging, relationId) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getConsumerDigitalDocuments").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&tagging=' + tagging + '&relationId=' + relationId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getConsumerDigitalDocuments").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&tagging=' + tagging + '&relationId=' + relationId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //User All uploaded doc Size
+        this.GetCurrentFolderSize = function (status, consumerId) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getConsumerUploadedDocSize").toString() + '?consumerId=' + consumerId + "&geId=" + _this.commonService.getGroupEntityId())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getConsumerUploadedDocSize").toString() + '?consumerId=' + consumerId + "&geId=" + _this.commonService.getGroupEntityId())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Delete Health record by consumer
+        this.DeleteHealthRecordUploadedByConsumer = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("deleteHealthRecordUploadedByConsumer").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Delete Health record uploaded by Provider
+        this.DeleteHealthRecordUploadedByProvider = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("deleteHealthRecordUploadedByProvider").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Download Health record from AWS using Pre-signed URL
+        this.DownloadHealthRecord = function (consumerId, fileName) {
+            return _this._http.get(_this.commonService.getApiControllerName("downloadHealthRecord").toString() + '?consumerId=' + consumerId + '&fileName=' + fileName + "&geId=" + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get result by search keyword
+        this.GetAutoCompleteSearch = function (term, cityId, localityID) {
+            return _this._http.get(_this.commonService.getApiControllerName("getAutoCompleteSearch").toString() + '?term=' + term + '&cityID=' + cityId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get user upcoming appointments
+        this.GetUserUpcomigAppointments = function (status, pageNum, itemsPerPage, consumerId) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getUserUpcomingAppo").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&platformGroupEntityID=' + _this.commonService.getGroupEntityId() + "&consumerId=" + consumerId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getUserUpcomingAppo").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&platformGroupEntityID=' + _this.commonService.getGroupEntityId() + "&consumerId=" + consumerId)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get user past appointments
+        this.GetUserPastAppointments = function (status, pageNum, itemsPerPage) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getUserPastAppo").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&platformGroupEntityID=' + _this.commonService.getGroupEntityId())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getUserPastAppo").toString() + '?page=' + pageNum + '&pageSize=' + itemsPerPage + '&platformGroupEntityID=' + _this.commonService.getGroupEntityId())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get all doctors by search keyword
+        this.GetDoctorsByKeyword = function (term, cityId, localityID, page, itemsPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getDoctorsByKeyword").toString() + '?term=' + term + '&cityID=' + cityId + '&localityID' + localityID + '&page=' + page + '&itemPerPage=' + itemsPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get all hospitals by search keyword
+        this.GetHospitalsByKeyword = function (term, cityId, localityID, page, itemsPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getHospitalsByKeyword").toString() + '?term=' + term + '&cityID=' + cityId + '&localityID' + localityID + '&page=' + page + '&itemPerPage=' + itemsPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get all Popular Specializations
+        this.GetSpecializationList = function (page, itemPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getSpecializations").toString() + '?page=' + page + '&pageSize=' + itemPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get all Popular Doctors
+        this.GetDoctorList = function (cityId, cityAreaId, cityName, cityAreaName, page, itemPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getDoctors").toString() + "?cityId=" + cityId + "&cityAreaId=" + cityAreaId + "&cityName=" + cityName + "&cityAreaName=" + cityAreaName + '&page=' + page + '&pageSize=' + itemPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get indivisula doctor details
+        this.GetDoctorDetails = function (userData) {
+            userData.GroupEntityID = _this.commonService.getGroupEntityId();
+            return _this._http.get(_this.commonService.getApiControllerName("getDoctorDetails").toString() + '?providerID=' + userData.ProviderID)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get unique token to upload file in S3  
+        this.GetUniqueToken = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("getUniqueToken").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Upload user health record in S3  
+        this.UploadUserHealthRecord = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("uploadUserRecord").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Update user health record in S3  
+        this.UpdateDigitalDocuments = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("updateDigitalDocuments").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get feedback questions for doctor
+        this.GetFeedbackQuestionsForDoctor = function (feedbackModuleType) {
+            return _this._http.getOffline(_this.commonService.getApiControllerName("getFeedbackQuestionsForDoctor").toString() + '?feedbackModuleType=' + feedbackModuleType + '&platformGroupEntityID=' + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        this.SubmitConsumerFeedbackForDoctor = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("submitConsumerFeedbackForDoctor").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Provider Feedback submitted by user
+        this.GetProviderFeedback = function (providerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getProviderFeedback").toString() + '?providerId=' + providerId + '&groupEntityId=' + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Favourite Doctors selected by user
+        this.GetMyFavouriteDoctors = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getMyFavDoctors").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getMyFavDoctors").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Set selected doctor as favourite
+        this.SetMyFavouriteDoctors = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("setMyFavDoctors").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Remove Favourite doctor.
+        this.RemoveFavouriteDoctor = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("removeMyFavDoctors").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Save user rating for selected doctor.
+        this.SaveMyRating = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("saveUserRating").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get seven days availibility for indivisual doctor.
+        this.GetSevenDaysAvailability = function (providerID) {
+            return _this._http.get(_this.commonService.getApiControllerName("getSevenDaysAvailability").toString() + '?ProviderID=' + providerID)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get all schedule for selected date
+        this.GetFreeScheduleForDayForSelectedDate = function (providerId, selectedDate, groupEntityId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getFreeScheduleForDayForSelectedDate").toString() + '?providerID=' + providerId + '&date=' + selectedDate + '&groupEntityID=' + groupEntityId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Book appointment with out payment for self
+        this.ScheduleAppointmentForUser = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("scheduleAppointmentForUser").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Book appointment with out payment for Family
+        this.ScheduleAppointmentForFamily = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("scheduleAppointmentForFamily").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Cancel selected appointment.
+        this.CancelAppointment = function (consumerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("cancelAppointment").toString() + '?id=' + consumerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //This is used to check whethere the contact number is exist or not.
+        this.CheckContactExistOrNot = function (mobileNum) {
+            return _this._http.get(_this.commonService.getApiControllerName("checkContactExistOrNot").toString() + '?mobileNumber=' + mobileNum + '&groupEntityId=' + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Sending email to user through SNS
+        this.SendEmailThroughSNS = function (emailData) {
+            return _this._http.post(_this.commonService.getApiControllerName("sendEmailThroughSNS").toString(), JSON.stringify(emailData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Sending SMS to user through SNS
+        this.SendSMSThroughSNS = function (smsData) {
+            return _this._http.post(_this.commonService.getApiControllerName("sendSMSThroughSNS").toString(), JSON.stringify(smsData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //This is used to get provider rating.
+        this.GetProviderRating = function (providerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getProviderRating").toString() + '?providerId=' + providerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get hosptal list for indivisual doctors.
+        this.GetHospitals = function (providerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getHospitals").toString() + '?providerId=' + providerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get recent user appointment details.
+        this.GetRecentAppointmentList = function (pageSize) {
+            return _this._http.get(_this.commonService.getApiControllerName("getRecentAppointmentList").toString() + '?groupEntityId=' + _this.commonService.getGroupEntityId() + '&pageSize=' + pageSize)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get provider details
+        this.GetSpecificProviderProfile = function (providerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getSpecificProviderProfile").toString() + '?groupEntityId=' + _this.commonService.getGroupEntityId() + '&providerId=' + providerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get search result from elastic search.
+        this.GetAutocompleteSearchedData = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getElasticSearchQuery").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get all the doctors and specializations based on group entity id.
+        this.GetDoctorsAndSpecsForHospital = function (groupEntityId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getDoctorsAndSpecsForHospital").toString() + '?groupEntityId=' + groupEntityId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //This is used to get all symptoms from solr
+        this.GetListOfSymptoms = function (start, rows) {
+            return _this._http.get(_this.commonService.getApiControllerName("getListOfSymptoms").toString() + '?start=' + start + "&rows=" + rows)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get hospital details
+        this.GetHospitalDetails = function (hospitalID) {
+            return _this._http.get(_this.commonService.getApiControllerName("getHospitalDetails").toString() + '?hospitalID=' + hospitalID)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Save uiser EHR History
+        this.SavaEHRHistory = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getUserEhrHistory").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get user health record uploaded by user
+        this.GetConsumerDigitalDocumentList = function (page, itemPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getConsumerDigitalDocumentList").toString() + '?page=' + page + '&pageSize=' + itemPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get health record uploaded by doc/lab
+        this.GetConsumerDigitalDocumentListUploadedByDoc = function (page, itemPerPage) {
+            return _this._http.get(_this.commonService.getApiControllerName("getConsumerDigitalDocumentListByDoc").toString() + '?page=' + page + '&pageSize=' + itemPerPage)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get user details by contact number
+        this.GetUserDetailsByContactNumber = function (contact) {
+            return _this._http.get(_this.commonService.getApiControllerName("getUserDetailsByContactNumber").toString() + '?contact=' + contact + '&groupEntityId=' + _this.commonService.getGroupEntityId())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Generate temp otp before registration
+        this.GenerateTempOTPForMobile = function (contact) {
+            return _this._http.get(_this.commonService.getApiControllerName("generateTempOTPForMobile").toString() + '?mobileNumber=' + contact)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Verify otp
+        this.GetVarifyTempOTPForMobile = function (contact, otp) {
+            return _this._http.get(_this.commonService.getApiControllerName("getVarifyTempOTPForMobile").toString() + '?contactNum=' + contact + '&otp=' + otp)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Update OTP
+        this.UpdateConsumerOTP = function (contact) {
+            return _this._http.get(_this.commonService.getApiControllerName("updateConsumerOTP").toString() + '?contactNum=' + contact)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Notification
+        this.GetNotificationCofiguration = function (moduleName) {
+            return _this._http.getOffline(_this.commonService.getApiControllerName("getNotifications").toString() + '?module=' + moduleName)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Save notification
+        this.SaveNotification = function (userData) {
+            userData.GroupEntityId = _this.commonService.getGroupEntityId();
+            return _this._http.post(_this.commonService.getApiControllerName("saveNotification").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get User Notification
+        this.GetUserNotifications = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getUserNotification").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getUserNotification").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Remove user notification.
+        this.RemoveUserNotifications = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("removeUserNotification").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Notification
+        this.ResendOTP = function (contact) {
+            return _this._http.get(_this.commonService.getApiControllerName("resendOTP").toString() + '?contactNum=' + contact)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Notification
+        this.ResendTempOTP = function (contact) {
+            return _this._http.get(_this.commonService.getApiControllerName("resendTempOTP").toString() + '?contactNum=' + contact)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get symptoms list by searched key word.
+        this.GetSymptomsByKeyword = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getSymptomsByKeyword").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Popular Search
+        this.GetPopularSearch = function (status, type) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getPopularSearch").toString() + '?searchType=' + type)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getPopularSearch").toString() + '?searchType=' + type)
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Specialization By Symptoms id
+        this.GetSpecializationBySymptomsId = function (id) {
+            return _this._http.getSearchedData(_this.commonService.getApiControllerName("getSpecializationBySymptomId").toString() + id)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Diagnostics center by search keywords
+        this.GetDiagnosticsByKeyword = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getDiagnostics").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get packages by search keywords
+        this.GetPackagesByKeyword = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getPackage").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get hospital emergency contact
+        this.GetHospitalEmergencyContact = function (userData) {
+            return _this._http.postSearchedData(_this.commonService.getApiControllerName("getHospitalEmergencyContact").toString(), JSON.stringify(userData))
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get Specialization By Symptoms id
+        this.GetUserMedicalHistory = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getMedicaHistory").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getMedicaHistory").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get Provider Appointment Charges
+        this.GetProviderAppointmentFees = function (groupEntityId, providerId) {
+            return _this._http.getSearchedData(_this.commonService.getApiControllerName("getProviderAppointmentFees").toString() + "?groupEntityId=" + groupEntityId + "&providerId=" + providerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Add Patient Allergies
+        this.SavePatientAllergies = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("addPatientAllergies").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Add Patient Medicines
+        this.SavePatientMedication = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("addPatientMedication").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Add Patient Chronic Disease
+        this.SavePatientChronicDisease = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("addPatientChronicDisease").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get health package age group
+        this.GetPackageAgeGroups = function (status) {
+            if (status) {
+                return _this._http.get(_this.commonService.getApiControllerName("getPackageAgeGroups").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+            else {
+                return _this._http.getOffline(_this.commonService.getApiControllerName("getPackageAgeGroups").toString())
+                    .map(function (response) { return response.json(); })
+                    .catch(_this._http.handleError);
+            }
+        };
+        //Get health packages based on diagnostic center
+        this.GetHealthPackages = function (searchData) {
+            return _this._http.post(_this.commonService.getApiControllerName("getHealthPackageList").toString(), searchData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get medicine reminder
+        this.GetMedicineReminder = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("getMedicineReminder").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get medicine reminder
+        this.AddMedicineReminder = function (userData) {
+            return _this._http.post(_this.commonService.getApiControllerName("addMedicineReminder").toString(), userData)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Delete indivisual reminder
+        this.DeleteReminder = function (id) {
+            return _this._http.get(_this.commonService.getApiControllerName("deleteReminder").toString() + "?id=" + id)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Delete indivisual reminder
+        this.DeleteAllReminder = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("deleteAllReminder").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get uploaded video blog by doctors
+        this.GetVideoBlogs = function () {
+            return _this._http.get(_this.commonService.getApiControllerName("getVideoBlog").toString())
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //Get uploaded video blog by doctors
+        this.GetLabSettingsForGroupEntity = function (centerId) {
+            return _this._http.get(_this.commonService.getApiControllerName("getLabSettingsForGroupEntity").toString() + "?groupEntityId=" + centerId)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        //This is used to update mobile device token for each login.
+        this.UpdateUserDeviceTokenId = function (deviceType, deviceToken) {
+            return _this._http.get(_this.commonService.getApiControllerName("updateUserDeviceToken").toString() + "?deviceType=" + deviceType + "&deviceToken=" + deviceToken)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+        this.DownloadUniqueTokenForProviderUploadedFile = function (filePath) {
+            return _this._http.get(_this.commonService.getApiControllerName("downloadUniqueTokenForProviderUploadedFile").toString() + "?fileName=" + filePath)
+                .map(function (response) { return response.json(); })
+                .catch(_this._http.handleError);
+        };
+    }
+    //Change user notification status.
+    DataContext.prototype.ChangeNotificationSeenStatus = function () {
+        return this._http.getOffline(this.commonService.getApiControllerName("getNotificationStatus").toString())
+            .map(function (response) { return response.json(); })
+            .catch(this._http.handleError);
+    };
+    DataContext = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_3__http_service__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_4__common_service__["a" /* CommonServices */]])
+    ], DataContext);
+    return DataContext;
+}());
+
+//# sourceMappingURL=dataContext.service.js.map
+
+/***/ }),
+
+/***/ 358:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(363);
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 363:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(685);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_conference_data__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_common_service__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_dataContext_service__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_http_service__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic_cache__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_social_sharing__ = __webpack_require__(356);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_device__ = __webpack_require__(357);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+
+
+
+
+
+
+
+
+
+
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* HealthProApp */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
+                __WEBPACK_IMPORTED_MODULE_1__angular_http__["HttpModule"],
+                __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* HealthProApp */], {}, {
+                    links: [
+                        { loadChildren: '../pages/applicationstartuppage/applicationstartuppage.module#ApplicationStartUpPageModule', name: 'ApplicationStartUpPage', segment: 'applicationstartuppage', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/blog/videomenueslisting.module#VideomenueslistingPageModule', name: 'VideomenueslistingPage', segment: 'videomenueslisting', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/addnewmember/addnewmember.module#AddNewMemberModule', name: 'AddNewMember', segment: 'addnewmember', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/appointmentpreconfirmation/appointmentpreconfirmation.module#AppointmentPreConfirmationModule', name: 'AppointmentPreConfirmation', segment: 'appointmentpreconfirmation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/appointmentpostconfirmation/appointmentpostconfirmation.module#AppointmentPostConfirmationModule', name: 'AppointmentPostConfirmation', segment: 'appointmentpostconfirmation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/bookappointment.module#BookAppointmentModule', name: 'BookAppointment', segment: 'bookappointment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/appointment/appointment.module#AppointmentModule', name: 'Appointment', segment: 'appointment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/rateus/rateus.module#RateUsModule', name: 'RateUs', segment: 'rateus', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/seeallhospitals/seeallhospitals.module#SeeAllHospitalsModule', name: 'SeeAllHospitals', segment: 'seeallhospitals', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bloodglucoseconversion/bloodglucoseconversion.module#BloodglucoseconversionPageModule', name: 'BloodglucoseconversionPage', segment: 'bloodglucoseconversion', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bloodpressure/bloodpressure.module#BloodpressurePageModule', name: 'BloodpressurePage', segment: 'bloodpressure', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/blooddonationduedate/blooddonationduedate.module#BlooddonationduedatePageModule', name: 'BlooddonationduedatePage', segment: 'blooddonationduedate', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bloodsugarconversion/bloodsugarconversion.module#BloodsularconversionPageModule', name: 'BloodsugarconversionPage', segment: 'bloodsugarconversion', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bodyfat/bodyfat.module#BodyfatPageModule', name: 'BodyfatPage', segment: 'bodyfat', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookappointment/seealldoctors/seealldoctors.module#SeeAllDoctorsModule', name: 'SeeAllDoctors', segment: 'seealldoctors', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bodysurfacearea/bodysurfacearea.module#BodysurfaceareaPageModule', name: 'BodysurfaceareaPage', segment: 'bodysurfacearea', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bloodalcohol-level/bloodalcohol-level.module#BloodalcoholLevelPageModule', name: 'BloodalcoholLevelPage', segment: 'bloodalcohol-level', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/caloriecalculation/caloriecalculation.module#CaloriecalculationPageModule', name: 'CaloriecalculationPage', segment: 'caloriecalculation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/cholesterol/cholesterol.module#CholesterolPageModule', name: 'CholesterolPage', segment: 'cholesterol', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/bmicalculator/bmicalculator.module#BmicalculatorPageModule', name: 'BmicalculatorPage', segment: 'bmicalculator', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/correctedsodium/correctedsodium.module#CorrectedsodiumPageModule', name: 'CorrectedsodiumPage', segment: 'correctedsodium', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/breathe/breathe.module#BreathePageModule', name: 'BreathePage', segment: 'breathe', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/dailywater/dailywater.module#DailywaterPageModule', name: 'DailywaterPage', segment: 'dailywater', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/calculatorlist.module#CalculatorListModule', name: 'CalculatorList', segment: 'calculatorlist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/creatinineclearence/creatinineclearence.module#CreatinineclearencePageModule', name: 'CreatinineclearencePage', segment: 'creatinineclearence', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/idealweight/idealweight.module#IdealweightPageModule', name: 'IdealweightPage', segment: 'idealweight', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/framesize/framesize.module#FramesizePageModule', name: 'FramesizePage', segment: 'framesize', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/heightweight/heightweight.module#HeightweightPageModule', name: 'HeightweightPage', segment: 'heightweight', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/ovulation/ovulation.module#OvulationPageModule', name: 'OvulationPage', segment: 'ovulation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/heartbeat/heartbeat.module#HeartbeatPageModule', name: 'HeartbeatPage', segment: 'heartbeat', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/waisttohip/waisttohip.module#WaisttohipPageModule', name: 'WaisttohipPage', segment: 'waisttohip', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/leanbodymass/leanbodymass.module#LeanbodymassPageModule', name: 'LeanbodymassPage', segment: 'leanbodymass', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/smokingrisk/smokingrisk.module#SmokingriskPageModule', name: 'SmokingriskPage', segment: 'smokingrisk', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/citylocation/citylocation.module#CityLocationModule', name: 'CityLocation', segment: 'citylocation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/appointment/diagnosticappointment.module#DiagnosticAppointmentModule', name: 'DiagnosticAppointment', segment: 'diagnosticappointment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/cartlist/cartlist.module#CartListModule', name: 'CartList', segment: 'cartlist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/appointmentpreconfirmation/diagnosticappointmentpreconfirmation.module#DiagnosticAppointmentPreConfirmationModule', name: 'DiagnosticAppointmentPreConfirmation', segment: 'diagnosticappointmentpreconfirmation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/dashboard/dashboard.module#DashBoardModule', name: 'DashBoard', segment: 'dashboard', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/diagnosticsearch/diagnosticsearch.module#DiagnosticSearchModule', name: 'DiagnosticSearch', segment: 'diagnosticsearch', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/packagedetail/packagedetail.module#PackageDetailModule', name: 'PackageDetail', segment: 'packagedetail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/calculator/pregnancyduedate/pregnancyduedate.module#PregnancyduedatePageModule', name: 'PregnancyduedatePage', segment: 'pregnancyduedate', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/doctor/doctorlist/doctorlist.module#DoctorListModule', name: 'DoctorList', segment: 'doctorlist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/emergency/emergency.module#HospitalForEmergencyModule', name: 'HospitalForEmergency', segment: 'emergency', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/seeallpackage/seeallpackage.module#SeeAllPackagesModule', name: 'SeeAllPackages', segment: 'seeallpackage', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/history/history.module#UserHistoryModule', name: 'UserHistory', segment: 'history', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/seealldignosticcenter/seealldignosticcenter.module#SeeAllDiagnosticCentersModule', name: 'SeeAllDiagnosticCenters', segment: 'seealldignosticcenter', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hospitalprofile/hospitalprofile.module#HospitalProfileModule', name: 'HospitalProfile', segment: 'hospitalprofile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/doctor/profile/doctorprofile.module#DoctorProfileModule', name: 'DoctorProfile', segment: 'doctorprofile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/MedicineReminder/add-reminder/add-reminder.module#AddReminderPageModule', name: 'AddReminderPage', segment: 'add-reminder', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/MedicineReminder/addremider-form/addremider-form.module#AddremiderFormPageModule', name: 'AddremiderFormPage', segment: 'addremider-form', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/MedicineReminder/days-selection/days-selection.module#DaysSelectionPageModule', name: 'DaysSelectionPage', segment: 'days-selection', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/history/myappointment/appointmenthistory.module#AppointmentHistoryModule', name: 'AppointmentHistory', segment: 'appointmenthistory', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/diagnostic/packagelist/packagelist.module#PackageListModule', name: 'PackageList', segment: 'packagelist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/popover/popover.module#PopoverPageModule', name: 'PopoverPage', segment: 'popover', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/tabs-page/tabs-page.module#TabsPageModule', name: 'TabsPage', segment: 'tabs-page', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/tutorial/tutorial.module#TutorialPageModule', name: 'TutorialPage', segment: 'tutorial', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/MedicineReminder/timing-selection/timing-selection.module#TimingSelectionPageModule', name: 'TimingSelectionPage', segment: 'timing-selection', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/askcontactforotp/askcontactforotp.module#AskContactForOTPModule', name: 'AskContactForOTP', segment: 'askcontactforotp', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/healthrecord/addnewrecord.module#AddNewRecordModule', name: 'AddNewRecord', segment: 'addnewrecord', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/healthrecord/healthrecordlist.module#HealthRecordListModule', name: 'HealthRecordList', segment: 'healthrecordlist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/healthrecord/sharerecord.module#ShareHealthRecordModule', name: 'ShareHealthRecord', segment: 'sharerecord', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/medicalhistory/addmedicalinfo.module#AddMedicalInfoModule', name: 'AddMedicalInfo', segment: 'addmedicalinfo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/medicalhistory/medicalhistory.module#MedicalHistoryModule', name: 'MedicalHistory', segment: 'medicalhistory', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/notification/notification.module#UserNotificationModule', name: 'UserNotification', segment: 'notification', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/resetpassword/resetpassword.module#ResetPasswordModule', name: 'ResetPassword', segment: 'resetpassword', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/MedicineReminder/medicine-list/medicine-list.module#MedicineListPageModule', name: 'MedicineList', segment: 'medicine-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/useraccount/useraccount.module#UserAccountModule', name: 'UserAccount', segment: 'useraccount', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/useraddress/useraddress.module#UserAddressModule', name: 'UserAddress', segment: 'useraddress', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userfamily/myfamily.module#MyFamilyModule', name: 'MyFamily', segment: 'myfamily', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/otpverification/otpverification.module#OTPVerificationModule', name: 'OTPVerification', segment: 'otpverification', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userfavouritedoctors/userfavouritedoctors.module#UserFavouriteDoctorsModule', name: 'UserFavouriteDoctors', segment: 'userfavouritedoctors', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/useraddress/edituseraddress.module#EditUserAddressModule', name: 'EditUserAddress', segment: 'edituseraddress', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userhealthrecord/uploadnewrecord.module#UploadNewRecordModule', name: 'UploadNewRecord', segment: 'uploadnewrecord', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userhealthrecord/myfamilylist.module#MyHealthRecordModule', name: 'MyFamilyList', segment: 'myfamilylist', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userhealthrecord/myhealthrecord.module#MyHealthRecordModule', name: 'MyHealthRecord', segment: 'myhealthrecord', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/userwallet/userwallet.module#UserWalletModule', name: 'UserWallet', segment: 'userwallet', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/usersetting/usersetting.module#UserWalletModule', name: 'UserSetting', segment: 'usersetting', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userprofile/userprofile.module#UserProfileModule', name: 'UserProfile', segment: 'userprofile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/useraccount/userreferral/userreferral.module#ReferralCodeModule', name: 'ReferralCode', segment: 'userreferral', priority: 'low', defaultHistory: [] }
+                    ]
+                }),
+                __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_12_ionic_cache__["a" /* CacheModule */].forRoot()
+            ],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* IonicApp */]],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* HealthProApp */],
+            ],
+            providers: [
+                { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* IonicErrorHandler */] },
+                __WEBPACK_IMPORTED_MODULE_7__providers_conference_data__["a" /* ConferenceData */],
+                __WEBPACK_IMPORTED_MODULE_8__providers_common_service__["a" /* CommonServices */],
+                __WEBPACK_IMPORTED_MODULE_9__providers_dataContext_service__["a" /* DataContext */],
+                // InAppBrowser,
+                __WEBPACK_IMPORTED_MODULE_10__providers_http_service__["a" /* HttpService */],
+                __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_social_sharing__["a" /* SocialSharing */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_device__["a" /* Device */]
+            ]
+        })
+    ], AppModule);
+    return AppModule;
+}());
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 48:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommonServices; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_cache__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var CommonServices = /** @class */ (function () {
+    function CommonServices(events, storage, _toastCtrl, geolocation, cache, appCtrl) {
+        this.events = events;
+        this.storage = storage;
+        this._toastCtrl = _toastCtrl;
+        this.geolocation = geolocation;
+        this.cache = cache;
+        this.appCtrl = appCtrl;
+        this.HAS_LOGGED_IN = 'hasVisitRegisterPage';
+        this.HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+        this._apiList = [];
+        this._cacheKeyList = [];
+        this.awsSMSJsonFormat = {};
+        this.awsEmailJsonFormat = {};
+        this.getAllSearcheddata = {};
+        this.getSearchedHospitals = {};
+        this.getSearchedDoctors = {};
+        this.getHospitalList = {};
+        this.getSpecializationList = {};
+        this.getDoctorsBySpecId = {};
+        this.getDoctorsByHospitalId = {};
+        this.getDrugList = {};
+        this.getDiasesList = {};
+        this.getEmergencyHospitals = {};
+        this.getSurgeries = {};
+        this.surgeryList = {};
+        this.doctorsBySurgeryName = {};
+        this.getAllSearchedSymptomsdata = {};
+        this.getAllSearchedSurgerydata = {};
+        this.getDrugListBySearchedKeyword = {};
+        this.getAllDiasesByKeyword = {};
+        this.getSearchedEmergencyHospitals = {};
+        this.getDiagnosticCenterList = {};
+        this.getDiagnosticCenters = {};
+        this.getDiagnosticPackages = {};
+        this.getDefaultPackages = {};
+        this.getDefaultCenters = {};
+        this.getEmergencyContact = {};
+        this.getEmergencyContactList = {};
+        this.groupEnitityId = 0;
+        this.parentGroupEntityId = 0;
+        this.defaulPassword = "K@re1234";
+        this.apiServiceUrl = "http://54.84.255.41:8120/";
+        this.termsAnsConditions = "http://www.kare4u.in/termsconditions";
+        this.appType = "Consumer";
+        //http://localhost:1873/
+        //http://54.84.255.41:8120/
+        //////AWS SMS Json format///////////
+        this.awsSMSJsonFormat = {
+            "header": {
+                "config_source": "inline",
+                "tenantID": "healthpro",
+            },
+            "sms": [
+                {
+                    "to_phone": "",
+                    "msg_body": ""
+                }
+            ]
+        };
+        ////////AWS Email json format////////////
+        this.awsEmailJsonFormat = {
+            "header": {
+                "config_source": "db",
+                "tenantID": "healthpro",
+            },
+            "email": [
+                {
+                    "to_email": "",
+                    "from_email": "ashis.mahapatra@kare4u.in",
+                    "subject": "hello",
+                    "email_body": "hello",
+                    "from_name": "",
+                    "cc_emails": "",
+                    "attachments": []
+                }
+            ]
+        };
+        //Get all the hospitals and doctors by  searched keywords.
+        this.getAllSearcheddata = {
+            "size": 0,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "ProviderType" },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 5
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        // List Hospital
+        this.getHospitalList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 11 } }
+                    ]
+                }
+            }
+        };
+        // List Hospital
+        this.getDrugList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            }
+        };
+        //Get diases list
+        this.getDiasesList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            }
+        };
+        // Get doctors based on specialization id 
+        this.getDoctorsBySpecId = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 10 } },
+                    ]
+                }
+            }
+        };
+        // Get doctors based on hospital id 
+        this.getDoctorsByHospitalId = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 10 } },
+                    ]
+                }
+            }
+        };
+        //Get all the docotrs list based on city and locality
+        this.getSearchedDoctors = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "ProviderType": 10 } }
+                    ]
+                }
+            }
+        };
+        //Get all the hospitals list based on city and locality
+        this.getSearchedHospitals = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "ProviderType": 11 } }
+                    ]
+                }
+            }
+        };
+        //Get all specializations 
+        this.getSpecializationList = {
+            "size": 1000,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "SpecialisationDesc", "size": 1000, },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 1,
+                                "_source": {
+                                    "includes": ["SpecialisationCode", "SpecialisationDesc"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        this.getSurgeries = {
+            "size": 4,
+            "_source": ["SurgeryProviderID"],
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "_type": "Surgery" } }
+                    ]
+                }
+            },
+        };
+        this.surgeryList =
+            {
+                "size": 0,
+                "aggs": {
+                    "by_type": {
+                        "terms": { "field": "Surgery", "size": 1000 },
+                        "aggs": {
+                            "tops": {
+                                "top_hits": {
+                                    "size": 1,
+                                    "_source": {
+                                        "includes": [""]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+        this.doctorsBySurgeryName = {
+            "query": {
+                "bool": {
+                    "filter": {
+                        "terms": {
+                            "ProviderID": []
+                        }
+                    }
+                }
+            }
+        };
+        this.getAllSearchedSymptomsdata = {
+            "size": 0,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "PrimarySymptom" },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 4
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        this.appTtitle = "HealthPro";
+        this.websiteURL = "http://www.kare4u.in/";
+        this._appVersion = "0.0.1";
+        this.google_api_key = "AIzaSyCgElKETWoeCacEAcEqqQRxiVO-QNDniHg";
+        //Cache Key URL. This is used to maintain all cach  e data using cache key url.
+        this._cacheKeyList["getCities"] = this.apiServiceUrl + "cities";
+        this._cacheKeyList["getCountries"] = this.apiServiceUrl + "countries";
+        this._cacheKeyList["getStates"] = this.apiServiceUrl + "states";
+        this._cacheKeyList["getCountryCode"] = this.apiServiceUrl + "countryCode";
+        this._cacheKeyList["getGender"] = this.apiServiceUrl + "gender";
+        this._cacheKeyList["getBloodGroup"] = this.apiServiceUrl + "bloodGroup";
+        this._cacheKeyList["getDashboardSlider"] = this.apiServiceUrl + "dashboardSlider";
+        this._cacheKeyList["getRelation"] = this.apiServiceUrl + "relation";
+        this._cacheKeyList["getMaritalStatus"] = this.apiServiceUrl + "maritalStatus";
+        this._cacheKeyList["getLoggedInUserDetails"] = this.apiServiceUrl + "userLoggrdInStatus";
+        this._cacheKeyList["getActiveLocation"] = this.apiServiceUrl + "activeLocation";
+        this._cacheKeyList["getActiveCountryAndState"] = this.apiServiceUrl + "activeCountryAndState";
+        this._cacheKeyList["getAppVersion"] = this.apiServiceUrl + "isSkipped";
+        this._cacheKeyList["getAppVersionConfig"] = this.apiServiceUrl + "appVersionConfig";
+        this._cacheKeyList["getReferralCode"] = this.apiServiceUrl + "userReferralCode";
+        this._cacheKeyList["getDashboardSliders"] = this.apiServiceUrl + "dashBoardSliders";
+        this._cacheKeyList["getProficPic"] = this.apiServiceUrl + "userProfilePic";
+        this._cacheKeyList["getAppoConfig"] = this.apiServiceUrl + "appointmentConfiguration";
+        this._cacheKeyList["getCurrentLanLng"] = this.apiServiceUrl + "userLocationLatLng";
+        this._cacheKeyList["getHealthRecAnimationStatus"] = this.apiServiceUrl + "animationStatusForHealthRec";
+        this._cacheKeyList["getAppoAnimationStatus"] = this.apiServiceUrl + "userAppoAnimationStatus";
+        this._cacheKeyList["getConsumerUploadedDocSize"] = this.apiServiceUrl + "userDocSize";
+        this._cacheKeyList["getFavDoctors"] = this.apiServiceUrl + "userFavDoctors";
+        this._cacheKeyList["rateUs"] = this.apiServiceUrl + "rateUs";
+        this._cacheKeyList["getUserNotificationCount"] = this.apiServiceUrl + "getUserNotificationCount";
+        this._cacheKeyList["getUserAddedMedicalStatus"] = this.apiServiceUrl + "userAddedMedicalStatus";
+        this._cacheKeyList["getUserDeviceToken"] = this.apiServiceUrl + "userDeviceToken";
+        this._cacheKeyList["getChronicDisease"] = this.apiServiceUrl + "chronicDisease";
+        this._cacheKeyList["getAllergies"] = this.apiServiceUrl + "allergies";
+        this._cacheKeyList["getMedications"] = this.apiServiceUrl + "medications";
+        //TODO This all caching service should move to SQLDb.
+        this._cacheKeyList["getUploadedHealthRecordByUser"] = this.apiServiceUrl + "userHealthRecord";
+        this._cacheKeyList["getUploadedHealthRecordByDoc"] = this.apiServiceUrl + "docHealthRecord";
+        this._cacheKeyList["getUserInfo"] = this.apiServiceUrl + "userInformation";
+        this._cacheKeyList["getUpcomingAppo"] = this.apiServiceUrl + "userUpcomingAppo";
+        this._cacheKeyList["getPastAppo"] = this.apiServiceUrl + "userUPastAppo";
+        this._cacheKeyList["getUserMedicalStatus"] = this.apiServiceUrl + "UserMedicalStatus";
+        this._cacheKeyList["getUserFamily"] = this.apiServiceUrl + "userFamily";
+        this._cacheKeyList["getNotification"] = this.apiServiceUrl + "appNotification";
+        this._cacheKeyList["getUserNotification"] = this.apiServiceUrl + "userNotification";
+        this._cacheKeyList["getPopularSymptomsSearch"] = this.apiServiceUrl + "popularSymptoms";
+        this._cacheKeyList["getPopularSymptomsSurgery"] = this.apiServiceUrl + "popularSurgeries";
+        this._cacheKeyList["getAddedReminderMedicineList"] = this.apiServiceUrl + "userReminderList";
+        this._cacheKeyList["getAgeGroup"] = this.apiServiceUrl + "ageGroup";
+        this._cacheKeyList["getHealthPackages"] = this.apiServiceUrl + "userHealthPackages";
+        this._cacheKeyList["getPackageFromCart"] = this.apiServiceUrl + "addedPackage";
+        //These API are used to get response from Elastic serach.
+        this._apiList["getMedication"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Drugs/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Drugs/_search/" };
+        this._apiList["getDiases"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diseases/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diseases/_search/" };
+        this._apiList["getSurgeries"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diseases/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Surgery/_search/" };
+        this._apiList["getDoctorsBySugeryName"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diseases/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Surgery/_search/" };
+        this._apiList["getElasticSearchQuery"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Doctors/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Doctors/_search/" };
+        this._apiList["getSymptomsByKeyword"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Symptoms/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Symptoms/_search/" };
+        this._apiList["getSpecializationBySymptomId"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Symptoms/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Symptoms/" };
+        this._apiList["getDiagnostics"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diagnostic/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diagnostic/_search/" };
+        this._apiList["getPackage"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diagnostic/_search/", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/Diagnostic/_search/" };
+        this._apiList["getHospitalEmergencyContact"] = { controller: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/EmergencyContact/_search", method: "Elastic", api: "http://search-hkare-qqwadaq7jass4dxflai2aqjlwe.us-east-1.es.amazonaws.com/docdb/EmergencyContact/_search" };
+        /////////////////////////////
+        this._apiList["userLogin"] = { controller: "Kare4uRCWidget", method: "token", api: "token" };
+        this._apiList["userRegister"] = { controller: "Kare4uRCWidget", method: "RegisterConsumer", api: "api/Kare4uRCWidget/RegisterConsumer" };
+        this._apiList["getDropdownValue"] = { controller: "Kare4uRCWidget", method: "GetDropDownValuesFor", api: "api/Kare4uRCWidget/GetDropDownValuesFor?standardCode=" };
+        this._apiList["getSliderConfig"] = { controller: "Kare4uRCWidget", method: "GetMobileAppConfiguration", api: "api/Kare4uRCWidget/GetMobileAppConfiguration?module=" };
+        this._apiList["getCityList"] = { controller: "Kare4uRCWidget", method: "GetActiveCity", api: "api/Kare4uRCWidget/GetActiveCity" };
+        this._apiList["getLocation"] = { controller: "Kare4uRCWidget", method: "GetActiveLocation", api: "api/Kare4uRCWidget/GetActiveLocation?cityId=" };
+        this._apiList["getVerifyOTP"] = { controller: "Kare4uRCWidget", method: "GetVerifyOTPForMobile", api: "api/Kare4uRCWidget/GetVerifyOTPForMobile" };
+        this._apiList["getOTP"] = { controller: "Kare4uRCWidget", method: "GenerateOTPForMobile", api: "api/Kare4uRCWidget/GenerateOTPForMobile" };
+        this._apiList["fbResigtration"] = { controller: "Kare4uRCWidget", method: "RegisterConsumerWithFBCredential", api: "api/Kare4uRCWidget/RegisterConsumerWithFBCredential" };
+        this._apiList["gpResigtration"] = { controller: "Kare4uRCWidget", method: "RegisterConsumerWithGooglePlusCredential", api: "api/Kare4uRCWidget/RegisterConsumerWithGooglePlusCredential" };
+        this._apiList["resetPassword"] = { controller: "Kare4uRCWidget", method: "ResetUserPassword", api: "api/Kare4uRCWidget/ResetUserPassword" };
+        this._apiList["getAddress"] = { controller: "https://maps.googleapis.com/maps/api", method: "geocode", api: "https://maps.googleapis.com/maps/api/geocode/json" };
+        this._apiList["updateUserContactInfo"] = { controller: "Kare4uRCWidget", method: "UpdateUserIDOrPassword", api: "api/Kare4uRCWidget/UpdateUserIDOrPassword" };
+        this._apiList["getLoggedInUserProfile"] = { controller: "Kare4uRCWidget", method: "GetLoggedOnConsumerDetails", api: "api/Kare4uRCWidget/GetLoggedOnConsumerDetails" };
+        this._apiList["updateUserProfile"] = { controller: "Kare4uRCWidget", method: "UpdateConsumerBasicProfileForMobile", api: "api/Kare4uRCWidget/UpdateConsumerBasicProfileForMobile" };
+        this._apiList["updateUserProfilePic"] = { controller: "Kare4uRCWidget", method: "UploadProfilePicture", api: "api/Kare4uRCWidget/UploadProfilePicture" };
+        this._apiList["userLogOut"] = { controller: "Kare4uRCWidget", method: "Logout", api: "api/Kare4uRCWidget/Logout" };
+        this._apiList["getActiveCountryAndState"] = { controller: "Kare4uRCWidget", method: "GetActiveCountryAndState", api: "api/Kare4uRCWidget/GetActiveCountryAndState" };
+        this._apiList["addUserShippingAddress"] = { controller: "Kare4uRCWidget", method: "StoreConsumerShippingAddress", api: "api/Kare4uRCWidget/StoreConsumerShippingAddress" };
+        this._apiList["getUserShippingAddress"] = { controller: "Kare4uRCWidget", method: "GetConsumerShippingAddress", api: "api/Kare4uRCWidget/GetConsumerShippingAddress?groupEntityId=" };
+        this._apiList["deleteAddress"] = { controller: "Kare4uRCWidget", method: "DeleteConsumerShippingAddress", api: "api/Kare4uRCWidget/DeleteConsumerShippingAddress" };
+        this._apiList["updateAddress"] = { controller: "Kare4uRCWidget", method: "UpdateConsumerShippingAddress", api: "api/Kare4uRCWidget/UpdateConsumerShippingAddress" };
+        this._apiList["getFamily"] = { controller: "Kare4uRCWidget", method: "GetFamilyList", api: "api/Kare4uRCWidget/GetFamilyList" };
+        this._apiList["updateFamilyMember"] = { controller: "Kare4uRCWidget", method: "UpdateFamilyMember", api: "api/Kare4uRCWidget/UpdateFamilyMember" };
+        this._apiList["addFamilyMember"] = { controller: "Kare4uRCWidget", method: "RegisterFamilyMember", api: "api/Kare4uRCWidget/RegisterFamilyMember" };
+        //this._apiList["getMedication"] = { controller: "Kare4uRCWidget", method: "ListOfDrugsForAutocomplete", api: "api/Kare4uRCWidget/ListOfDrugsForAutocomplete?term=" };
+        this._apiList["getAppVersion"] = { controller: "Kare4uRCWidget", method: "GetCurrentVersionOfApp", api: "api/Kare4uRCWidget/GetCurrentVersionOfApp" };
+        this._apiList["getValidateEmailAndMobile"] = { controller: "Kare4uRCWidget", method: "ValidateEmailAndMobile", api: "api/Kare4uRCWidget/ValidateEmailAndMobile" };
+        this._apiList["getConsumerDigitalDocuments"] = { controller: "Kare4uRCWidget", method: "RetriveConsumerDigitalDocumentsForMobile", api: "api/Kare4uRCWidget/RetriveConsumerDigitalDocumentsForMobile" };
+        this._apiList["getConsumerDigitalDocumentsByDoc"] = { controller: "Kare4uRCWidget", method: "RetriveConsumerDigitalDocumentsByDocForMobile", api: "api/Kare4uRCWidget/RetriveConsumerDigitalDocumentsByDocForMobile" };
+        this._apiList["getConsumerUploadedDocSize"] = { controller: "Kare4uRCWidget", method: "RetriveConsumerDigitalDocumentsByDocForMobile", api: "api/Kare4uRCWidget/RetriveConsumerDigitalDocumentsByDocForMobile" };
+        this._apiList["deleteHealthRecordUploadedByConsumer"] = { controller: "Kare4uRCWidget", method: "DeleteConsumerDigitalDocumentsForMob", api: "api/Kare4uRCWidget/DeleteConsumerDigitalDocumentsForMob" };
+        this._apiList["deleteHealthRecordUploadedByProvider"] = { controller: "Kare4uRCWidget", method: "DeleteConsumerDigitalDocumentsUploadedByProvider", api: "api/Kare4uRCWidget/DeleteConsumerDigitalDocumentsUploadedByProvider" };
+        this._apiList["downloadHealthRecord"] = { controller: "Kare4uRCWidget", method: "DownloadFileFromAWSForMobile", api: "api/Kare4uRCWidget/DownloadFileFromAWSForMobile" };
+        this._apiList["getFamilyListForDropDown"] = { controller: "Kare4uRCWidget", method: "GetFamilyListForDropDown", api: "api/Kare4uRCWidget/GetFamilyListForDropDown" };
+        this._apiList["getAutoCompleteSearch"] = { controller: "Kare4uRCWidget", method: "GetAutoCompleteSearch", api: "api/Kare4uRCWidget/GetAutoCompleteSearch" };
+        this._apiList["getUserUpcomingAppo"] = { controller: "Kare4uRCWidget", method: "RetrieveUpcomingAppointments", api: "api/Kare4uRCWidget/RetrieveUpcomingAppointments" };
+        this._apiList["getUserPastAppo"] = { controller: "Kare4uRCWidget", method: "RetrievePastAppointments", api: "api/Kare4uRCWidget/RetrievePastAppointments" };
+        this._apiList["getDoctorsByKeyword"] = { controller: "Kare4uRCWidget", method: "GetAllDoctors", api: "api/Kare4uRCWidget/GetAllDoctors" };
+        this._apiList["getHospitalsByKeyword"] = { controller: "Kare4uRCWidget", method: "GetAllHospitals", api: "api/Kare4uRCWidget/GetAllHospitals" };
+        this._apiList["getSpecializations"] = { controller: "Kare4uRCWidget", method: "GetAllSpecializationByCityId", api: "api/Kare4uRCWidget/GetAllSpecializationByCityId" };
+        this._apiList["getDoctors"] = { controller: "Kare4uRCWidget", method: "GetAllDoctorsByCityId", api: "api/Kare4uRCWidget/GetAllDoctorsByCityId" };
+        this._apiList["getDoctorDetails"] = { controller: "Kare4uRCWidget", method: "GetProviderProfileDetails", api: "api/Kare4uRCWidget/GetProviderProfileDetails" };
+        this._apiList["getUniqueToken"] = { controller: "Kare4uRCWidget", method: "RetriveUniqueToken", api: "api/Kare4uRCWidget/RetriveUniqueToken" };
+        this._apiList["uploadUserRecord"] = { controller: "Kare4uRCWidget", method: "UploadDigitalDocumentsForMobile", api: "api/Kare4uRCWidget/UploadDigitalDocumentsForMobile" };
+        this._apiList["updateDigitalDocuments"] = { controller: "Kare4uRCWidget", method: "UpdateDigitalDocumentsForMobile", api: "api/Kare4uRCWidget/UpdateDigitalDocumentsForMobile" };
+        this._apiList["saveDocRatingByUser"] = { controller: "Kare4uRCWidget", method: "UploadDigitalDocumentsForMobile", api: "api/Kare4uRCWidget/UploadDigitalDocumentsForMobile" };
+        this._apiList["saveDocFavouriteByUser"] = { controller: "Kare4uRCWidget", method: "UploadDigitalDocumentsForMobile", api: "api/Kare4uRCWidget/UploadDigitalDocumentsForMobile" };
+        this._apiList["getFeedbackQuestionsForDoctor"] = { controller: "Kare4uRCWidget", method: "GetFeedbackQuestions", api: "api/Kare4uRCWidget/GetFeedbackQuestions" };
+        this._apiList["submitConsumerFeedbackForDoctor"] = { controller: "Kare4uRCWidget", method: "SubmitConsumerPlatformFeedback", api: "api/Kare4uRCWidget/SubmitConsumerPlatformFeedback" };
+        this._apiList["getProviderFeedback"] = { controller: "Kare4uRCWidget", method: "GetProviderFeedback", api: "api/Kare4uRCWidget/GetProviderFeedback" };
+        this._apiList["getMyFavDoctors"] = { controller: "Kare4uRCWidget", method: "GetMyFavouriteDoctors", api: "api/Kare4uRCWidget/GetMyFavouriteDoctors" };
+        this._apiList["setMyFavDoctors"] = { controller: "Kare4uRCWidget", method: "AddMyFavouriteDoctor", api: "api/Kare4uRCWidget/AddMyFavouriteDoctor" };
+        this._apiList["saveUserRating"] = { controller: "Kare4uRCWidget", method: "RateDoctorByUser", api: "api/Kare4uRCWidget/RateDoctorByUser" };
+        this._apiList["getSevenDaysAvailability"] = { controller: "Kare4uRCWidget", method: "GetSevenDaysAvailability", api: "api/Kare4uRCWidget/GetSevenDaysAvailability" };
+        this._apiList["getFreeScheduleForDayForSelectedDate"] = { controller: "Kare4uRCWidget", method: "GetFreeScheduleForDayForSelectedDate", api: "api/Kare4uRCWidget/GetFreeScheduleForDayForSelectedDate" };
+        this._apiList["scheduleAppointmentForUser"] = { controller: "Kare4uRCWidget", method: "ScheduleAppointmentForMultiBranchHospitalForMobile", api: "api/Kare4uRCWidget/ScheduleAppointmentForMultiBranchHospitalForMobile" };
+        this._apiList["scheduleAppointmentForFamily"] = { controller: "Kare4uRCWidget", method: "ScheduleAppointmentForFamily", api: "api/Kare4uRCWidget/ScheduleAppointmentForFamily" };
+        this._apiList["getUserUpcomingAppointment"] = { controller: "Kare4uRCWidget", method: "GetListOfFutureAppointmentsForConsumer", api: "api/Kare4uRCWidget/GetListOfFutureAppointmentsForConsumer" };
+        this._apiList["cancelAppointment"] = { controller: "Kare4uRCWidget", method: "CancelAppointment", api: "api/Kare4uRCWidget/CancelAppointment" };
+        this._apiList["checkContactExistOrNot"] = { controller: "Kare4uRCWidget", method: "CheckContactExistOrNot", api: "api/Kare4uRCWidget/CheckContactExistOrNot" };
+        this._apiList["sendSMSThroughSNS"] = { controller: "Kare4uRCWidget", method: "SendSMSThroughSNS", api: "api/Kare4uRCWidget/SendSMSThroughSNS" };
+        this._apiList["sendEmailThroughSNS"] = { controller: "Kare4uRCWidget", method: "SendEmailThroughSNS", api: "api/Kare4uRCWidget/SendEmailThroughSNS" };
+        this._apiList["getProviderRating"] = { controller: "Kare4uRCWidget", method: "GetDoctorRating", api: "api/Kare4uRCWidget/GetDoctorRating" };
+        this._apiList["getHospitals"] = { controller: "Kare4uRCWidget", method: "GetHospitalListByProviderId", api: "api/Kare4uRCWidget/GetHospitalListByProviderId" };
+        this._apiList["removeMyFavDoctors"] = { controller: "Kare4uRCWidget", method: "RemoveFavouriteDoctor", api: "api/Kare4uRCWidget/RemoveFavouriteDoctor" };
+        this._apiList["getRecentAppointmentList"] = { controller: "Kare4uRCWidget", method: "GetRecentAppointmentList", api: "api/Kare4uRCWidget/GetRecentAppointmentList" };
+        this._apiList["getSpecificProviderProfile"] = { controller: "Kare4uRCWidget", method: "GetSpecificProviderProfile", api: "api/Kare4uRCWidget/GetSpecificProviderProfile" };
+        this._apiList["getDoctorsAndSpecsForHospital"] = { controller: "Kare4uRCWidget", method: "GetDoctorsAndSpecializationDetails", api: "api/Kare4uRCWidget/GetDoctorsAndSpecializationDetails" };
+        this._apiList["getListOfSymptoms"] = { controller: "Kare4uRCWidget", method: "ListOfSymptoms", api: "api/Kare4uRCWidget/ListOfSymptoms" };
+        this._apiList["getHospitalDetails"] = { controller: "Kare4uRCWidget", method: "GetHospitalDetails", api: "api/Kare4uRCWidget/GetHospitalDetails" };
+        this._apiList["getUserEhrHistory"] = { controller: "Kare4uRCWidget", method: "SavaEHRHistory", api: "api/Kare4uRCWidget/SavaEHRHistory" };
+        this._apiList["getConsumerDigitalDocumentList"] = { controller: "Kare4uRCWidget", method: "RetriveConsumerDigitalDocuments", api: "api/Kare4uRCWidget/RetriveConsumerDigitalDocuments" };
+        this._apiList["getConsumerDigitalDocumentListByDoc"] = { controller: "Kare4uRCWidget", method: "RetriveConsumerDigitalDocumentsByDoctorByLab", api: "api/Kare4uRCWidget/RetriveConsumerDigitalDocumentsByDoctorByLab" };
+        this._apiList["getUserDetailsByContactNumber"] = { controller: "Kare4uRCWidget", method: "GetUserDetailsByContactNumber", api: "api/Kare4uRCWidget/GetUserDetailsByContactNumber" };
+        this._apiList["generateTempOTPForMobile"] = { controller: "Kare4uRCWidget", method: "GenerateTempOTPForMobile", api: "api/Kare4uRCWidget/GenerateTempOTPForMobile" };
+        this._apiList["getVarifyTempOTPForMobile"] = { controller: "Kare4uRCWidget", method: "GetVerifyTempOTPForMobile", api: "api/Kare4uRCWidget/GetVerifyTempOTPForMobile" };
+        this._apiList["updateConsumerOTP"] = { controller: "Kare4uRCWidget", method: "UpdateConsumerOTP", api: "api/Kare4uRCWidget/UpdateConsumerOTP" };
+        this._apiList["getNotifications"] = { controller: "Kare4uRCWidget", method: "GetNotificationCofiguration", api: "api/Kare4uRCWidget/GetNotificationCofiguration" };
+        this._apiList["saveNotification"] = { controller: "Kare4uRCWidget", method: "SaveNotification", api: "api/Kare4uRCWidget/SaveNotification" };
+        this._apiList["getUserNotification"] = { controller: "Kare4uRCWidget", method: "GetUserNotifications", api: "api/Kare4uRCWidget/GetUserNotifications" };
+        this._apiList["removeUserNotification"] = { controller: "Kare4uRCWidget", method: "RemoveUserNotifications", api: "api/Kare4uRCWidget/RemoveUserNotifications" };
+        this._apiList["resendOTP"] = { controller: "Kare4uRCWidget", method: "ResendOTP", api: "api/Kare4uRCWidget/ResendOTP" };
+        this._apiList["resendTempOTP"] = { controller: "Kare4uRCWidget", method: "ResendTempOTP", api: "api/Kare4uRCWidget/ResendTempOTP" };
+        this._apiList["getPopularSearch"] = { controller: "Kare4uRCWidget", method: "GetPopularSearchDetails", api: "api/Kare4uRCWidget/GetPopularSearchDetails" };
+        this._apiList["getProviderAppointmentFees"] = { controller: "Kare4uRCWidget", method: "GetProviderAppointmentFees", api: "api/Kare4uRCWidget/GetProviderAppointmentFees" };
+        this._apiList["addPatientAllergies"] = { controller: "Kare4uRCWidget", method: "AddPatientAllergies", api: "api/Kare4uRCWidget/AddPatientAllergies" };
+        this._apiList["addPatientMedication"] = { controller: "Kare4uRCWidget", method: "AddPatientMedication", api: "api/Kare4uRCWidget/AddPatientMedication" };
+        this._apiList["addPatientChronicDisease"] = { controller: "Kare4uRCWidget", method: "AddPatientChronicDisease", api: "api/Kare4uRCWidget/AddPatientChronicDisease" };
+        this._apiList["getMedicaHistory"] = { controller: "Kare4uRCWidget", method: "GetMedicalInformation", api: "api/Kare4uRCWidget/GetMedicalInformation" };
+        this._apiList["getNotificationStatus"] = { controller: "Kare4uRCWidget", method: "ChangeNotificationSeenStatus", api: "api/Kare4uRCWidget/ChangeNotificationSeenStatus" };
+        this._apiList["getPackageAgeGroups"] = { controller: "HealthPackage", method: "GetPackageAgeGroups", api: "api/HealthPackage/GetPackageAgeGroups" };
+        this._apiList["getHealthPackageList"] = { controller: "HealthPackage", method: "GetHealthPackages", api: "api/HealthPackage/GetHealthPackages" };
+        this._apiList["addMedicineReminder"] = { controller: "Kare4uRCWidget", method: "AddMedicineReminder", api: "api/Kare4uRCWidget/AddMedicineReminder" };
+        this._apiList["getMedicineReminder"] = { controller: "Kare4uRCWidget", method: "GetMedicineReminder", api: "api/Kare4uRCWidget/GetMedicineReminder" };
+        this._apiList["deleteReminder"] = { controller: "Kare4uRCWidget", method: "DeleteReminder", api: "api/Kare4uRCWidget/DeleteReminder" };
+        this._apiList["deleteAllReminder"] = { controller: "Kare4uRCWidget", method: "DeleteAllReminder", api: "api/Kare4uRCWidget/DeleteAllReminder" };
+        this._apiList["getVideoBlog"] = { controller: "Kare4uRCWidget", method: "GetVideoBlogs", api: "api/Kare4uRCWidget/GetVideoBlogs" };
+        this._apiList["getLabSettingsForGroupEntity"] = { controller: "HealthPackage", method: "GetLabSettingsForGroupEntity", api: "api/HealthPackage/GetLabSettingsForGroupEntity" };
+        this._apiList["updateUserDeviceToken"] = { controller: "Kare4uRCWidget", method: "UpdateUserDeviceTokenId", api: "api/Kare4uRCWidget/UpdateUserDeviceTokenId" };
+        this._apiList["downloadUniqueTokenForProviderUploadedFile"] = { controller: "ProviderGroup", method: "DownloadFileFromAWSForMobileForHospital", api: "api/ProviderGroup/DownloadFileFromAWSForMobileForHospital" };
+    }
+    CommonServices.prototype.getAppVersion = function () {
+        return this._appVersion;
+    };
+    CommonServices.prototype.getAppTitle = function () {
+        return this.appTtitle;
+    };
+    CommonServices.prototype.getGoogleApiKey = function () {
+        return this.google_api_key;
+    };
+    CommonServices.prototype.getUserDefaultPassword = function () {
+        return this.defaulPassword;
+    };
+    CommonServices.prototype.getAllSearchData = function () {
+        return this.getAllSearcheddata = {
+            "size": 0,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "ProviderType" },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 5
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedHospitalList = function () {
+        return this.getHospitalList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 11 } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getEmergencyHospitalList = function () {
+        return this.getEmergencyHospitals = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 11 } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getAllDrugList = function () {
+        return this.getDrugList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getAllDrugListByKeyword = function () {
+        return this.getDrugListBySearchedKeyword = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getAllDiasesList = function () {
+        return this.getDiasesList = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getAllDiasesListByKeyword = function () {
+        return this.getAllDiasesByKeyword = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedDoctorList = function () {
+        return this.getSearchedDoctors = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "ProviderType": 10 } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedHospitalsByKeyword = function () {
+        return this.getSearchedHospitals = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "ProviderType": 11 } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedSpecializationList = function () {
+        return this.getSpecializationList = {
+            "size": 1000,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "SpecialisationDesc", "size": 1000, },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 1,
+                                "_source": {
+                                    "includes": ["SpecialisationCode", "SpecialisationDesc"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getDoctorsBySlelectedSpecId = function () {
+        return this.getDoctorsBySpecId = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 10 } },
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getDoctorListByHospitalId = function () {
+        return this.getDoctorsByHospitalId = {
+            "size": 20,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        { "term": { "ProviderType": 10 } },
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSurgeryByKeyword = function () {
+        return this.getSurgeries = {
+            "size": 20,
+            "_source": ["SurgeryProviderID", "Surgery", "SurgeryId"],
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "_type": "Surgery" } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSurgeryList = function () {
+        return this.surgeryList =
+            {
+                "size": 0,
+                "aggs": {
+                    "by_type": {
+                        "terms": { "field": "Surgery", "size": 1000 },
+                        "aggs": {
+                            "tops": {
+                                "top_hits": {
+                                    "size": 1,
+                                    "_source": {
+                                        "includes": [""]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+    };
+    CommonServices.prototype.getDoctorsBySurgeryName = function () {
+        return this.doctorsBySurgeryName = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "filter": [{
+                            "terms": {
+                                "ProviderID": []
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getAllSearchSymptomList = function () {
+        return this.getAllSearchedSymptomsdata = {
+            "size": 0,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_type": {
+                    "terms": { "field": "PrimarySymptom" },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 4
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedEmergencyHospitalsByKeyword = function () {
+        return this.getSearchedEmergencyHospitals = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                "_all": {
+                                    "query": "",
+                                    "operator": "and"
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [
+                        { "term": { "ProviderType": 12 } }
+                    ]
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedDiagnosticPackageByKeywords = function () {
+        return this.getDiagnosticPackages = {
+            "size": 5,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "multi_match": {
+                                "query": "",
+                                "fields": ["PackageName", "TestList"]
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getSearchedDiagnosticCenterByKeywords = function () {
+        // return this.getDiagnosticCenters = {
+        //   "size": 5,
+        //   "from": 0,
+        //   "query": {
+        //     "bool": {
+        //       "must": [
+        //         {
+        //           "multi_match": {
+        //             "query": "",
+        //             "fields": ["CenterName"]
+        //           }
+        //         }
+        //       ],
+        //       "filter": [
+        //       ]
+        //     }
+        //   }
+        // };
+        return this.getDiagnosticCenters = {
+            "size": 5,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "multi_match": {
+                                "query": "",
+                                "fields": [
+                                    "CenterName"
+                                ]
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_Center": {
+                    "terms": {
+                        "field": "CenterID",
+                        "size": 10000
+                    },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 1,
+                                "_source": { "includes": ["CenterName", "City", "CenterID", "CityAreaName"] }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getDefaultPackageList = function () {
+        return this.getDefaultPackages = {
+            "size": 5,
+            // "form":0,
+            "query": {
+                "bool": {
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getDefaultCenterList = function () {
+        return this.getDefaultCenters = {
+            "size": 0,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match_all": {}
+                        }
+                    ],
+                    "filter": []
+                }
+            },
+            "aggs": {
+                "by_Center": {
+                    "terms": {
+                        "field": "CenterID",
+                        "size": 20
+                    },
+                    "aggs": {
+                        "tops": {
+                            "top_hits": {
+                                "size": 1,
+                                "_source": { "includes": ["CenterName", "City", "CenterID", "CityAreaName"] }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getHospitalEmergencyNumber = function () {
+        return this.getEmergencyContact = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match_all": {}
+                        }
+                    ],
+                    "filter": []
+                }
+            }
+        };
+    };
+    CommonServices.prototype.getHospitalEmergencyNumberByKeyword = function () {
+        return this.getEmergencyContactList = {
+            "size": 20,
+            "from": 0,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "multi_match": {
+                                "query": "",
+                                "fields": ["Hospital"]
+                            }
+                        }
+                    ],
+                    "filter": []
+                }
+            }
+        };
+    };
+    // getDataFromStorage(key) {
+    //   return this.storage.get(key).then((data) => {
+    //     return data;
+    //   });
+    // };
+    // setDataToStorage(key, value) {
+    //   return this.storage.set(key, value).then((data) => {
+    //     return data;
+    //   });
+    // };
+    CommonServices.prototype.setStoreDataIncache = function (url, data) {
+        var cacheKey = url;
+        var uniqueKey = "Health-Pro-App-" + this.getParentGroupEntityId();
+        var ttl = 60 * 60 * 24 * 7 * 30 * 12;
+        //      let delayType="all";
+        return this.cache.saveItem(cacheKey, data, uniqueKey, ttl);
+    };
+    CommonServices.prototype.getStoreDataFromCache = function (key) {
+        return this.cache.getItem(key).catch(function (data) {
+            // fall here if item is expired or doesn't exist
+            return false;
+        }).then(function (data) {
+            return data;
+        });
+    };
+    //Clear all cache
+    CommonServices.prototype.clearAllCache = function () {
+        return this.cache.clearAll();
+    };
+    CommonServices.prototype.closeCurrentPage = function () {
+        this.appCtrl.getActiveNav().pop();
+    };
+    CommonServices.prototype.splitCountryCode = function (number) {
+        return number.substring(0, number.length - 10);
+    };
+    CommonServices.prototype.splitMobileNumber = function (number) {
+        return number.substring(number.length - 10, number.length);
+    };
+    CommonServices.prototype.getCacheKeyUrl = function (value) {
+        return this._cacheKeyList[value];
+    };
+    CommonServices.prototype.getApiServiceUrl = function () {
+        return this.apiServiceUrl;
+    };
+    CommonServices.prototype.getApiControllerName = function (value) {
+        return this._apiList[value].api;
+    };
+    CommonServices.prototype.getGroupEntityId = function () {
+        return this.groupEnitityId;
+    };
+    CommonServices.prototype.getParentGroupEntityId = function () {
+        return this.parentGroupEntityId;
+    };
+    CommonServices.prototype.getTermsAndConditions = function () {
+        return this.termsAnsConditions;
+    };
+    CommonServices.prototype.validateEmail = function (email) {
+        var email_reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return email_reg.test(email);
+    };
+    ;
+    CommonServices.prototype.validatePhone = function (phone) {
+        var phone_reg = /^\d{10}$/;
+        return phone_reg.test(phone);
+    };
+    CommonServices.prototype.getWebsiteURL = function () {
+        return this.websiteURL;
+    };
+    CommonServices.prototype.validateAlphanumeric = function (e) {
+        var regex = /^[a-zA-Z0-9]+$/;
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        e.preventDefault();
+        return false;
+    };
+    CommonServices.prototype.validateOnlyNumber = function (event) {
+        if (event.which == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46)
+            return true;
+        else if ((event.which != 46 || __WEBPACK_IMPORTED_MODULE_5_jquery__(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57))
+            event.preventDefault();
+    };
+    CommonServices.prototype.isNumber = function (value) {
+        var number_regx = /^\d+$/;
+        return number_regx.test(value);
+    };
+    CommonServices.prototype.validatePassword = function (value) {
+        //let passwordRegx = /^(?=([^\d]*\d){8})$/;
+        return value.length >= 8 ? true : false;
+    };
+    CommonServices.prototype.validateOnlyNumbeAndText = function (evt, value) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (evt.which != 8 && evt.which != 0 && (evt.keyCode >= 48 && evt.keyCode <= 57) && (evt.keyCode >= 96 && evt.keyCode <= 105)) {
+            return false;
+        }
+        if (this.isNumber(value)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    CommonServices.prototype.checkActiveCityAndLocality = function () {
+        var selectedLocalition = [];
+        return this.getStoreDataFromCache(this._cacheKeyList["getActiveLocation"])
+            .then(function (result) {
+            if ((result.activeCity != "" && result.activeCity != undefined) && (result.activeLocation != "" && result.activeLocation != undefined)) {
+                selectedLocalition.push({ "term": { "City": result.activeCity } }, { "term": { "CityAreaName": result.activeLocation } });
+            }
+            else if ((result.activeCity != "" && result.activeCity != undefined) && (result.activeLocation == "" || result.activeLocation == undefined)) {
+                selectedLocalition.push({ "term": { "City": result.activeCity } });
+            }
+            else {
+                // this.onMessageHandler("Please select your location", 0);
+            }
+            return selectedLocalition;
+        });
+    };
+    CommonServices.prototype.getCurrentLocation = function () {
+        this.geolocation.getCurrentPosition().then(function (resp) {
+            return resp;
+        }).catch(function (error) {
+            console.log('Error getting location', error);
+        });
+    };
+    CommonServices.prototype.getAppType = function () {
+        return this.appType;
+    };
+    CommonServices.prototype.getAWSEmailJsonFormat = function () {
+        return this.awsEmailJsonFormat;
+    };
+    CommonServices.prototype.getAWSSMSJsonFormat = function () {
+        return this.awsSMSJsonFormat;
+    };
+    CommonServices.prototype.isValidateForm = function (form) {
+        var status = true;
+        for (var key in form.controls) {
+            if (form.controls.hasOwnProperty(key)) {
+                var control = form.controls[key];
+                if (!control.valid && !control.disabled) {
+                    if (key == "new_password") {
+                        return this.onMessageHandler("Password doesn't match", 0);
+                    }
+                    else {
+                        return this.onMessageHandler("Please enter " + key, 0);
+                    }
+                }
+                else {
+                    if (key == "email-id") {
+                        status = this.validateEmail(control.value);
+                    }
+                    else if (key == "mobile_number") {
+                        status = this.validatePhone(control.value);
+                        if (!status) {
+                            return this.onMessageHandler("Please enter a valid mobile number", 0);
+                        }
+                    }
+                    else if (key == "password") {
+                        status = this.validatePassword(control.value);
+                        if (!status) {
+                            return this.onMessageHandler("Password must be at least 8 characters", 0);
+                        }
+                    }
+                    else if (key == "new_password") {
+                        status = this.validatePassword(control.value);
+                        if (!status) {
+                            return this.onMessageHandler("Password must be at least 8 characters", 0);
+                        }
+                    }
+                    // else if (key == "new_password") {
+                    //   if (JSON.stringify(form.controls["new_password"].value) == JSON.stringify(control.value)) {
+                    //     status = true;
+                    //   }
+                    //   else {
+                    //     return this.onMessageHandler("Password doesn't match!", 0);
+                    //   }
+                    // }
+                    if (!status) {
+                        return this.onMessageHandler("Please enter a valid " + key, 0);
+                    }
+                    // this.dynamicFieldValidation(key, control.value);
+                }
+            }
+        }
+        return status;
+    };
+    // dynamicFieldValidation(key: string, value: string) {
+    //   let status: boolean = true;
+    //   switch (key) {
+    //     case "email": {
+    //       status = this.validateEmail(value);
+    //       break;
+    //     }
+    //     case "mobile_number": {
+    //       status = this.validatePhone(value);
+    //       break;
+    //     }
+    //     default: {
+    //       //statements; 
+    //       break;
+    //     }
+    //   }
+    //   if (!status) {
+    //     return this.onMessageHandler("Please enter a valid " + key, 0);
+    //   }
+    // }
+    CommonServices.prototype.convert_case = function (str) {
+        return str.toLowerCase().replace(/\b./g, function (a) { return a.toUpperCase(); });
+    };
+    CommonServices.prototype.onMessageHandler = function (error_message, value) {
+        var toast = this._toastCtrl.create({
+            message: error_message,
+            duration: 5000,
+            cssClass: !value ? "error" : "success",
+            showCloseButton: true
+        });
+        toast.present();
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Navbar */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* Navbar */])
+    ], CommonServices.prototype, "navBar", void 0);
+    CommonServices = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_cache__["b" /* CacheService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* App */]])
+    ], CommonServices);
+    return CommonServices;
+}());
+
+//# sourceMappingURL=common.service.js.map
+
+/***/ }),
+
+/***/ 685:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HealthProApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_conference_data__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_common_service__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(686);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_push__ = __webpack_require__(687);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+;
+
+
+
+
+// export interface PageInterface {
+//   title: string;
+//   name: string;
+//   component: any;
+//   icon: string;
+//   logsOut?: boolean;
+//   index?: number;
+//   tabName?: string;
+//   tabComponent?: any;
+// }
+var HealthProApp = /** @class */ (function () {
+    function HealthProApp(events, commonServices, menu, platform, confData, storage, splashScreen, statusBar, alertCtrl, push) {
+        this.events = events;
+        this.commonServices = commonServices;
+        this.menu = menu;
+        this.platform = platform;
+        this.confData = confData;
+        this.storage = storage;
+        this.splashScreen = splashScreen;
+        this.statusBar = statusBar;
+        this.alertCtrl = alertCtrl;
+        this.push = push;
+        this.rootPage = "CalculatorList";
+        this.key = this.commonServices.getApiServiceUrl() + "/deviceId";
+        this.url = this.commonServices.getApiServiceUrl() + "/hasSeenTutorial";
+        // Check if the user has already seen the tutorial
+        // this.commonServices.getStoreDataFromCache(this.url)
+        //   .then((hasSeenTutorial) => {
+        //     if (!hasSeenTutorial) {
+        //       this.rootPage = "TutorialPage";
+        //       this.commonServices.setStoreDataIncache(this.url, true);
+        //     } else {
+        //       this.rootPage = "ApplicationStartUpPage";
+        //     }
+        //     this.platformReady()
+        //   });
+    }
+    // openPage(page: PageInterface) {
+    //   let params = {};
+    //   // the nav component was found using @ViewChild(Nav)
+    //   // setRoot on the nav to remove previous pages and only have this page
+    //   // we wouldn't want the back button to show in this scenario
+    //   if (page.index) {
+    //     params = { tabIndex: page.index };
+    //   }
+    //   // If we are already on tabs just change the selected tab
+    //   // don't setRoot again, this maintains the history stack of the
+    //   // tabs even if changing them from the menu
+    //   if (this.nav.getActiveChildNavs().length && page.index != undefined) {
+    //     this.nav.getActiveChildNavs()[0].select(page.index);
+    //   } else {
+    //     // Set the root of the nav with params if it's a tab index
+    //     this.nav.setRoot(page.name, params).catch((err: any) => {
+    //       console.log(`Didn't set nav root: ${err}`);
+    //     });
+    //   }
+    //   if (page.logsOut === true) {
+    //     // Give the menu time to close before changing to logged out
+    //     this.userData.logout();
+    //   }
+    // }
+    // listenToLoginEvents() {
+    //   this.events.subscribe('user:login', () => {
+    //     this.enableMenu(true);
+    //   });
+    //   this.events.subscribe('user:signup', () => {
+    //     this.enableMenu(true);
+    //   });
+    //   this.events.subscribe('user:logout', () => {
+    //     this.enableMenu(false);
+    //   });
+    // }
+    // enableMenu(loggedIn: boolean) {
+    //   this.menu.enable(loggedIn, 'loggedInMenu');
+    //   this.menu.enable(!loggedIn, 'loggedOutMenu');
+    // }
+    HealthProApp.prototype.platformReady = function () {
+        var _this = this;
+        // Call any initial plugins when ready
+        this.platform.ready().then(function () {
+            _this.splashScreen.hide();
+            _this.statusBar.backgroundColorByHexString("#047c92");
+            _this.statusBar.styleBlackOpaque();
+            var key = _this.commonServices.getApiServiceUrl();
+            // let installedStatus = this.cache.getItem(key).catch((data) => {
+            //   // fall here if item is expired or doesn't exist 
+            //   this.appRootPage = "ApplicationStartUpPage";
+            // }).then((data) => {
+            //  if (data) {
+            var options = {
+                android: {
+                    senderID: "1073663429783",
+                    vibrate: true,
+                    sound: false,
+                },
+                ios: {
+                    alert: 'true',
+                    badge: true,
+                    sound: 'false'
+                }
+            };
+            _this.notificationPermission();
+            var pushObject = _this.push.init(options);
+            pushObject.on('notification').subscribe(function (notification) {
+                return _this.showAlert("Notification!", notification.message);
+            });
+            pushObject.on('registration').subscribe(function (registration) {
+                //this.storage.set(this.key, registration.registrationId)
+                //alert(registration.registrationId),
+                return _this.storeUniqueToken(registration.registrationId);
+            }
+            // this.commonServices.setStoreDataIncache(this.commonServices.getCacheKeyUrl("getUserDeviceToken"),registration.registrationId)
+            );
+            pushObject.on('error').subscribe(function (error) {
+                return _this.showAlert('Error', error);
+            });
+            // }
+        });
+    };
+    HealthProApp.prototype.storeUniqueToken = function (token) {
+        this.commonServices.setStoreDataIncache(this.commonServices.getCacheKeyUrl("getUserDeviceToken"), token);
+    };
+    HealthProApp.prototype.showAlert = function (Title, Message) {
+        var notification_alert = this.alertCtrl.create({
+            subTitle: Title,
+            message: Message,
+            buttons: ['OK']
+        });
+        notification_alert.present();
+    };
+    HealthProApp.prototype.notificationPermission = function () {
+        // to check if we have permission
+        this.push.hasPermission()
+            .then(function (res) {
+            if (res.isEnabled) {
+                alert('We have permission to send push notifications');
+            }
+            else {
+                // console.log('We do not have permission to send push notifications');
+            }
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */])
+    ], HealthProApp.prototype, "nav", void 0);
+    HealthProApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"D:\HealthProConsumerApp\src\app\app.template.html"*/'<ion-nav [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\HealthProConsumerApp\src\app\app.template.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_push__["a" /* Push */]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_common_service__["a" /* CommonServices */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* MenuController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_conference_data__["a" /* ConferenceData */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_push__["a" /* Push */]])
+    ], HealthProApp);
+    return HealthProApp;
+}());
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ })
+
+},[358]);
+//# sourceMappingURL=main.js.map

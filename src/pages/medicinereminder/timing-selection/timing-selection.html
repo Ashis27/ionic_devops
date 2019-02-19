@@ -1,0 +1,62 @@
+<!--
+  Generated template for the TimingSelectionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>Time</ion-title>
+        <ion-buttons left (click)="closeTimings()">
+            <button ion-button icon-only>
+                <ion-icon name="close" class="color-white"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <!-- <ion-item no-lines>
+        <ion-label></ion-label>
+    </ion-item> -->
+    <p class="search-header">Choose Frequency
+    </p>
+    <ion-item style="width:100%;margin:0;text-align:center" no-lines>
+        <ion-row>
+            <ion-col (click)="TimeInterval('remove')">
+                <button ion-button icon-only clear>
+                    <ion-icon name="remove-circle"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col style="margin-top:4%;">
+                <strong>{{slectedMedicineTime.totalCount}}</strong>
+            </ion-col>
+            <ion-col (click)="TimeInterval('add')">
+                <button ion-button icon-only clear>
+                    <ion-icon name="add-circle"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-item>
+    <p class="search-header">Choose Time </p>
+    <ion-row *ngIf="slectedMedicineTime.medicineTime.length > 0">
+        <ion-col col-12 *ngFor="let item of slectedMedicineTime.medicineTime; let i = index">
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label class="reg-label-sec login-rem-sec-label login-input-label ">
+                            <img src="assets/img/clock-circular-outline.svg" class="clock-icon"> Select Time {{i+1}}</ion-label>
+                        <ion-datetime displayFormat="h:mm a" pickerFormat="h:mm a" [(ngModel)]=item.time (ionChange)="selectedTime($event,i)"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-content>
+<ion-footer (click)="saveTimings()">
+    <ion-toolbar>
+        <ion-title class="footer-titel-class" text-center>
+            <img src="assets/img/saveIcon.svg" class="book-appo-footer-btn">
+            <span class="margin-left-right-5">Save</span>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,132 @@
+<!--
+  Generated template for the DailywaterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Daily Water Intake</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="">
+    <!-- <div class="bg_image"></div> -->
+  <!-- <ion-row class="margin-left">
+    <ion-col col-12>
+        <ion-item style="padding-left:0px;" class="item-border-bottom" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+            <ion-label>Gender</ion-label>
+            <ion-select [(ngModel)]="dailywater.sex" style="border-right: 0px dashed gainsboro;">
+              <ion-option value="male">Male</ion-option>
+              <ion-option value="female">Female</ion-option>
+              
+            </ion-select>
+          </ion-item>
+    </ion-col>
+  </ion-row> -->
+  <div class="progress_wrapper">
+    <div>
+      <round-progress
+      [current]="current"
+      [max]="max"
+      [color]="status"
+      [background]="'#eaeaea'"
+      [radius]="150"
+      [stroke]="25"
+      [semicircle]="false"
+      [rounded]="true"
+      [clockwise]="true"
+      [responsive]="false"
+      [duration]="800"
+      [animation]="'easeInOutQuart'"
+      [animationDelay]="0"></round-progress></div>
+      <div class="progress_text" [style.color]="status" *ngIf="AllFieldsFil">
+        <img [src]="smiley_src">
+        <p class="result" [style.color]="status"> {{result}} litres</p>
+      </div>
+    </div>
+    
+  <!-- <ion-row class="margin-left">
+    <ion-col col-12>
+        <ion-label>Weight</ion-label>
+    </ion-col>
+    <ion-col col-10 style="margin-top: -20px;">
+      <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;;">
+        <ion-input type="number" [(ngModel)]="dailywater.weight" placeholder="Enter your weight" ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-2 style="text-align: right;">
+      <ion-label class="header_label">Kgs</ion-label>
+    </ion-col>
+  </ion-row> -->
+  <ion-col col-12 class="padding-0">
+    <ion-row>
+      <ion-col col-12>
+        <p class="text_col margin-top-bottom-5">Enter Your Weight(kgs)</p>
+        <ion-input type="number" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" placeholder="Kgs" [(ngModel)]="dailywater.weight" ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+  <br>
+  <ion-row>
+      <ion-col col-12 class="padding-0">
+        <button ion-button block class="btn" (click) = "calculate()">CALCULATE</button>
+      </ion-col>
+  </ion-row>
+
+  <ion-col col-12  class="Cal_Des" >
+    <ion-row>
+      <!-- <ion-col col-10 color="primary" >
+        <p class="Cal_header">Description</p>
+      </ion-col> -->
+      <ion-col col-12 *ngIf="!AllFieldsFil">
+         <p class="cal_des"><strong>What is a Daily Water Intake ?</strong></p>
+            <p class="cal_des">This calculator helps you determine approximately the amount of water you must drink each day to avoid dehydration. This calculator helps you determine approximately the amount of water you must drink each day to avoid dehydration.
+          </p>
+      </ion-col>
+    </ion-row>
+</ion-col>  
+
+<ion-col col-12  class="suggestions_col">
+    <ion-row>
+      <!-- <ion-col col-10  color="primary" >
+        <p class="Cal_header">Suggestions</p>
+      </ion-col> -->
+      <ion-col col-12 class="">
+          
+         <p class="cal_des padding-5" *ngIf="AllFieldsFil">
+           <strong>Your daily water consumption should be {{result}} litres.</strong>
+         </p>
+         <ion-row class="margin-top-bottom-15">
+         <p class="cal_des" >
+           <span class="highlight"></span>Drink a glass of water before a meal. It not only controls your eating and helps to keep your weight in healthy range but also helps to protect your stomach wall from the harmful effects of digestive acids.
+         </p>
+         <p class="cal_des" >
+           <span class="highlight"></span>Drinking enough water helps you to lose weight because without water the body can’t metabolize fat adequately.
+         </p>
+         
+        </ion-row>
+       
+      </ion-col>
+    </ion-row>
+</ion-col>
+
+
+
+
+<ion-col col-12  class="disclaimer_wrapper">
+  <ion-row>
+    <ion-col col-10  color="primary" >
+      <p class="disclaimer_header">Disclaimer</p>
+    </ion-col>
+    <ion-col col-12 >
+      <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.  
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-col>
+</ion-content>
+

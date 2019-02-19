@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Notification</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only *ngIf="userNotificationList.length > 0 && isAvailable" (click)="removeSelectedNotification(1,userNotificationList)">
+                <p class="margin-right-15">CLEAR</p>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row *ngIf="userNotificationList.length > 0">
+        <ion-card *ngFor="let item of userNotificationList" class="card-box-shadow">
+            <ion-col col-12>
+                <ion-row>
+                    <ion-col col-12 text-center class="remove-circle" (click)="removeSelectedNotification(0,item)">
+                        <ion-icon name="ios-close-outline" class="icon-size"></ion-icon>
+                    </ion-col>
+                    <ion-col col-2>
+                        <img src="assets/img/notification-bell.svg" class="notification-img" />
+                    </ion-col>
+                    <ion-col col-10 class="padding-top-10">
+                        <p class="font-size-16">{{item.Message}}</p>
+                    </ion-col>
+                    <ion-col col-12 text-right>
+                        <p class="notification-date">
+                            <span *ngIf="item.days>0">{{item.days}} day(s)
+                            </span>
+                            <span *ngIf="item.days==0 && item.hrs > 0">{{item.hrs}} hr(s)
+                            </span>
+                            <span *ngIf="item.days==0 && item.hrs == 0 && item.mins>0 ">{{item.mins}} minute(s)
+                            </span>
+                            <span *ngIf="item.days == 0 && item.hrs == 0 && item.mins == 0 ">{{item.secs}} seconds</span> ago
+                        </p>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-card>
+    </ion-row>
+    <ion-row *ngIf="userNotificationList.length == 0 && !isAvailable">
+        <ion-col col-12 text-center>
+            <img src="assets/img/notification-bell.svg" class="not-found" />
+            <p class="not-found-text">No Notification available!</p>
+        </ion-col>
+    </ion-row>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+        <ion-item class="footer-sec footer-row-section default-add">
+            <ion-row class="footer-row-section">
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HOME</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">EMERGENCY</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+                </ion-col>
+                <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+                    <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+                    <br>
+                    <p class="footer-name bar-button">HISTORY</p>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer> -->

@@ -1,0 +1,291 @@
+<!--
+  Generated template for the BodyfatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Body Fat</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+     <!-- <div class="background_image"></div>  -->
+    <div class="progress_wrapper">
+      <div>
+        <round-progress
+        [current]="current"
+        [max]="max"
+        [color]="status"
+        [background]="'#eaeaea'"
+        [radius]="150"
+        [stroke]="25"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="true"
+        [responsive]="false"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"></round-progress></div>
+        <div class="progress_text" *ngIf="(allFieldsFil) && selectedFoot!='' && selectedInches != '' && age != '' && weight != ''" [style.color]="status">
+            <img [src]="smiley_src">
+            <p  class="result" [style.color]="status">
+              {{result}}%
+            </p>
+        </div>
+      </div>
+      
+
+    <ion-col col-12 class="padding-0">
+      <div class="gender_wrapper">
+        <ion-row>
+            <ion-col col-6 class="text-center-cls" (click)="getStyle('male')" [ngClass]="{'activate': sex=='male'}">
+                <p style="margin:0px">Male</p>
+                <img src="assets/imgs/calculator/male.png" class="gendercls">
+              </ion-col>
+              <ion-col col-6 class="text-center-cls" (click)="getStyle('female')" [ngClass]="{'activate': sex=='female'}">
+                  <p style="margin:0px">Female</p>
+                  <img src="assets/imgs/calculator/female.png" class="gendercls">
+              </ion-col>      
+        </ion-row>
+      </div>
+    </ion-col>
+
+      <!-- <ion-row class="margin-left">
+        <ion-col col-11 class="col-padding-0">
+            <ion-item  class="padding-left-0" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+                <ion-label >Gender</ion-label>
+                <ion-select [(ngModel)]="sex" style="border-right: 0px dashed gainsboro;">
+                  <ion-option value="male">Male</ion-option>
+                  <ion-option value="female">Female</ion-option>
+                </ion-select>
+              </ion-item>
+        </ion-col>
+      </ion-row> -->
+      <ion-row class="margin-left">
+          <ion-col col-10 class="col-padding-0">
+            <ion-label>Height</ion-label>
+          </ion-col>
+          <ion-col col-6 class="mar_col col-padding-0">
+            <ion-item class="padding-left-0"  style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+              <ion-label class="header_label">Feet</ion-label>
+              <ion-select [(ngModel)]="selectedFoot" (ionChange)="CheckAllFil()">
+                <ion-option value={{num}} *ngFor="let num of foots" >{{num}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6 class="mar_col col-padding-0">
+            <ion-item class="padding-left-0" class="" style="box-shadow: 0px 1px 0px -1px #488aff !important;;">
+              <ion-label class="header_label">Inches</ion-label>
+              <ion-select [(ngModel)]="selectedInches" (ionChange)="CheckAllFil()">
+                <ion-option value={{num}} *ngFor="let num of inches" >{{num}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+    <ion-row class="margin-left">
+        <ion-col col-6 class="col-padding-0">
+          <ion-label>Age</ion-label>
+          <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;">
+            <!-- <span class="padding-top-20" item-right>Years</span> -->
+          <ion-input type="number" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" placeholder="Years" [(ngModel)]="age" ></ion-input>
+        </ion-item>
+        </ion-col>
+        <ion-col col-6 class="col-padding-0">
+          <ion-label>Weight</ion-label>
+          <ion-item style="border-bottom: 1px solid #e0e0e0 !important; box-shadow: 0px 1px 0px -1px #488aff !important;;">
+            <!-- <span class="padding-top-20" item-right>Kgs</span> -->
+          <ion-input type="number" (ionChange)="CheckAllFil()" (keypress)="RestrictDecimels($event)" placeholder="kgs" [(ngModel)]="weight" ></ion-input>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <br>
+      <ion-row>
+          <ion-col col-12 class="col-padding-0">
+            <button ion-button block (click)="calculate()">Calculate</button>
+          </ion-col>
+      </ion-row>
+       <!-- <p *ngIf="allFieldsFil" class="result">
+          {{result}} %
+       </p> -->
+       <ion-col col-12  class="Cal_Des" *ngIf="(!allFieldsFil) && this.selectedFoot!='' && this.selectedInches != '' && this.age != '' && this.weight != ''">
+          <ion-row>
+            <ion-col col-12 >
+               <p class="cal_des"><strong>What is a Body Fat Calculator ?</strong></p>
+                  <p class="cal_des">This body fat calculator helps you to calculate an estimate of your body fat percentage and the amount of fat in the body.
+                </p>
+            </ion-col>
+          </ion-row>
+      </ion-col>
+
+      <div  class="suggestions_col" *ngIf="(allFieldsFil) && this.selectedFoot!='' && this.selectedInches != '' && this.age != '' && this.weight != '' && sex === 'male'">
+          <ion-row *ngIf="(result >= '2' && result <= '17')">
+            <ion-col col-12 >
+               <p class="cal_des" class="margin-top-bottom-15">
+                 <strong>You have a Essential BodyFat. Do you still looking for an appointment ?...</strong>
+               </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+              </ion-col>
+              <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+              </ion-col>
+          </ion-row>
+          <ion-row *ngIf="(result > '17' && result <= '24') ">
+            <ion-col col-12 no-padding class="margin-top-bottom-15">
+               <p class="cal_des">
+                  <strong>Your body fat is Acceptable, Do you still looking for an appointment ?...</strong>
+               </p>
+            </ion-col>
+            <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+              </ion-col>
+              <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+              </ion-col>
+          </ion-row>
+          <ion-row *ngIf="(result > '24')">
+                <ion-col col-12 no-padding class="margin-top-bottom-15">
+                <p class="cal_des">
+                   <strong>Your bodyfat is very high, You may consult a Physician.</strong>
+                </p>
+              </ion-col>
+              <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+              </ion-col>
+              <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                  </strong></p>
+              </ion-col>
+          </ion-row>
+        </div>
+        
+      <div  *ngIf="(allFieldsFil) && this.selectedFoot!='' && this.selectedInches != '' && this.age != '' && this.weight != '' && sex === 'female'">
+          <ion-row *ngIf="(result >= '10' && result <= '24') " >
+            <ion-col col-12 no-padding class="margin-top-bottom-15">
+              <p class="cal_des">
+                <strong>You have a Essential Body Fat. Do you still looking for an appointment ?...</strong>
+              </p>
+           </ion-col>
+           <ion-col col-5 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+              </strong></p>
+            </ion-col>
+          </ion-row>
+            <ion-row *ngIf="(result > '24' && result <= '31') ">
+            <ion-col col-12 no-padding class="margin-top-bottom-15">
+              <p class="cal_des">
+                  <strong>Your body fat is Acceptable, Do you still looking for an appointment ?...</strong>
+              </p>
+           </ion-col>
+           <ion-col col-5 no-padding>
+              <p class="for_appointment">For Appointment </p>
+            </ion-col>
+            <ion-col col-6 no-padding>
+              <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+              </strong></p>
+            </ion-col>
+            </ion-row>
+            <ion-row *ngIf="(result > '31')">
+              <ion-col col-12 no-padding class="margin-top-bottom-15">
+                <p class="cal_des">
+                  <strong>Your bodyfat is very high, You may consult a Physician.</strong>
+                </p>
+             </ion-col>
+             <ion-col col-5 no-padding>
+                <p class="for_appointment">For Appointment </p>
+              </ion-col>
+              <ion-col col-6 no-padding>
+                <p class="appointment_book" (click)="bookAppointment()"><strong>Click Here 
+                </strong></p>
+              </ion-col>
+            </ion-row>
+      </div>
+
+       <div class="bodyfat_ranges" *ngIf="(allFieldsFil) && selectedFoot!='' && selectedInches != '' && age != '' && weight != '' && sex=='male'">
+          <ion-row>
+              <ion-col col-12  color="primary" >
+                  <p class="disclaimer_header">Avg Body Fat Ranges</p>
+              </ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_normal': result >= '2' && result <= '17'}">
+              <ion-col col-6>
+                  <p class="ranges" text-left>
+                      <strong>Bodyfat : >= 2 & <= 17</strong> 
+                  </p>
+              </ion-col>
+              <ion-col col-6><p class="ranges" text-left>Essential.</p></ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_normal': result > '17' && result <= '24'}">
+              <ion-col col-6>
+                 <p class="ranges" text-left>
+                   <strong>Bodyfat : > 17 & <= 24</strong> 
+                 </p>
+              </ion-col>
+              <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_danger': result > '24'}">
+                <ion-col col-6>
+                   <p class="ranges" text-left>
+                     <strong>Bodyfat : > 24</strong> 
+                   </p>
+                </ion-col>
+                <ion-col col-6><p class="ranges" text-left>Need Treatment.</p></ion-col>
+            </ion-row>
+      </div>
+
+      <div class="bodyfat_ranges" *ngIf="(allFieldsFil) && selectedFoot!='' && selectedInches != '' && age != '' && weight != '' && sex=='female'">
+          <ion-row>
+              <ion-col col-12  color="primary" >
+                  <p class="disclaimer_header">Avg Body Fat Ranges</p>
+              </ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_normal': result>= '10' && result <= '24'}">
+              <ion-col col-6>
+                  <p class="ranges" text-left>
+                    <strong>Bodyfat : >= 10 & <= 25</strong> 
+                  </p>
+              </ion-col>
+              <ion-col col-6><p class="ranges" text-left>Essential.</p></ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_normal': result > '25' && result <= '31'}">
+              <ion-col col-6>
+                 <p class="ranges" text-left>
+                   <strong>Bodyfat : > 25 & <= 31</strong> 
+                 </p>
+              </ion-col>
+              <ion-col col-6><p class="ranges" text-left>Acceptable.</p></ion-col>
+            </ion-row>
+            <ion-row [ngClass]="{'highlight_danger': result > '31'}">
+                <ion-col col-6>
+                   <p class="ranges" text-left>
+                     <strong>Bodyfat : > 31</strong> 
+                   </p>
+                </ion-col>
+                <ion-col col-6><p class="ranges" text-left>Need Treatment.</p></ion-col>
+            </ion-row>
+      </div>
+
+      <ion-col col-12>
+        <ion-row class="disclaimer_wrapper">
+          <ion-col col-10  color="primary" >
+            <p class="disclaimer_header">Disclaimer</p>
+          </ion-col>
+          <ion-col col-12 >
+            <p class="disclaimer_des">The health information provided by our mobile application and all the calculators is for general information and guidance purposes only and is never a substitute for medical health device and professional advice. Accordingly before taking any actions based upon this information from this app, we strongly advise you to consult with an appropriate medical and healthcare professionals.
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+</ion-content>

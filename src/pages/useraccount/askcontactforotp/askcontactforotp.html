@@ -1,0 +1,73 @@
+<ion-header no-border>
+	<ion-navbar class="askotp-password">
+		<ion-buttons>
+			<button ion-button menuToggle class="left-arrow-style">
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content class="back-image">
+	<div class="logo margin-top-0">
+		<img src="assets/img/logo.png" alt="health-pro logo">
+	</div>
+
+	<ion-list class="login-form-top">
+		<ion-row>
+			<ion-col class="para-section-style">
+				<p class="para-text-color">
+					Enter
+					<span class="optional-text">Mobile Number Or Email Id</span>
+				</p>
+			</ion-col>
+		</ion-row>
+
+		<form #otpform="ngForm" (ngSubmit)="onGetOTP(otpform)" class="login-form">
+			<!--<ion-icon name="ios-phone-portrait" class="mobile-icon-size" *ngIf="isNumberTyped"></ion-icon>
+					<ion-icon name="mail" class="mobile-icon-size" *ngIf="!isNumberTyped"></ion-icon>-->
+			<!-- <ion-row class="login-input number-email-field">
+				<ion-col col-2>
+					<ion-select interface="popover" class="country-code" [(ngModel)]="countryCode" name="country_code" (ionChange)="selectedCountryCode(countryCode)">
+						<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-10 class="input-for-email-mobile">
+					<ion-item class="contact-number-field">
+						<ion-input [(ngModel)]="contactNumber" id="numberInput" name="mobile_number" type="tel" placeholder="Mobile Number" #contact="ngModel"
+						 spellcheck="false" autocapitalize="off" maxlength="10" (keypress)="onlyNumber($event)" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row> -->
+			<ion-row class="login-input number-email-field padding-right-0">
+				<ion-col col-2>
+					<img class="form-image login-email-size" *ngIf="!isNumberTyped" src="assets/img/register/mail_icon.svg" />
+					<ion-select interface="popover" [(ngModel)]="countryCode" class="country-code" name="country_code" *ngIf="isNumberTyped"
+					 (ionChange)="selectedCountryCode(countryCode)">
+						<ion-option *ngFor="let item of activeCountry" value="{{item.DemographyCode}}">+{{item.DemographyCode}}</ion-option>
+					</ion-select>
+				</ion-col>
+				<ion-col col-10 class="input-email-mobile-sec padding-right-0">
+					<ion-item class="contact-number-field default-add padding-right-0">
+						<ion-input [(ngModel)]="userEmailOrMobile" id="numberInput" name="mobile_number" type="email" placeholder="Mobile Number or Email Id"
+						 #contact="ngModel" spellcheck="false" autocapitalize="off" [attr.maxlength]="maxLen" (keyup)="onlyNumber($event)" required>
+						</ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<div text-center style="margin-top: 5% !important">
+				<button class="login-form-btn" ion-button type="submit">Send</button>
+			</div>
+		</form>
+		<ion-row class="margin-top-10">
+			<ion-col col-12 class="" text-center>
+				<p class="optional-text">
+					Don't have an account?
+					<span class="ask-login-signup-text" (click)="onSignup()"> Sign Up</span>
+				</p>
+			</ion-col>
+		</ion-row>
+
+	</ion-list>
+
+</ion-content>

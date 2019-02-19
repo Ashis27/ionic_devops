@@ -1,0 +1,93 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button menuToggle class="left-arrow-style">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="">Medical History</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col col-12>
+      <ion-row class="input-box-row number-email-field border-bottom-color">
+        <ion-col col-10 class="input-for-email-mobile">
+          <p class="default-address margin-top-10 medical-history-text">Allergies</p>
+        </ion-col>
+        <ion-col col-2 class="padding-left-right-5 text-aligh-right" (click)="openAllergies()">
+          <img class="footer-icon" src="assets/img/add.svg" />
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="allergies.length > 0">
+        <ion-col col-12>
+          <ion-row>
+            <ion-col col-4 class="padding-left-right-5" *ngFor="let item of allergies;let i = index" (click)="openAllergies()">
+              <p class="show-added-info-list para-overflow-hidden para-margin-bottom-5">{{item.DisplayText}}
+                <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row class="input-box-row number-email-field border-bottom-color">
+        <ion-col col-10 class="input-for-email-mobile">
+          <p class="default-address margin-top-10 medical-history-text">Chronic Diseases</p>
+        </ion-col>
+        <ion-col col-2 class="padding-left-right-5 text-aligh-right" (click)="openDisease()">
+          <!-- <p class="update-style address-country-code">Add</p> -->
+          <img class="footer-icon" src="assets/img/add.svg" />
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="chronicDisease.length > 0">
+        <ion-col col-12>
+          <ion-row>
+            <ion-col col-4 class="padding-left-right-5" *ngFor="let item of chronicDisease;let i = index" (click)="openDisease()">
+              <p class="show-added-info-list para-overflow-hidden para-margin-bottom-5">{{item.DisplayText}}
+                <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row class="input-box-row number-email-field border-bottom-color">
+        <ion-col col-10 class="input-for-email-mobile">
+          <p class="default-address margin-top-10 medical-history-text">Current Medication</p>
+        </ion-col>
+        <ion-col col-2 class="padding-left-right-5 text-aligh-right" (click)="openMedication()">
+          <img class="footer-icon" src="assets/img/add.svg" />
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="medications.length > 0">
+        <ion-col col-12>
+          <ion-row>
+            <ion-col col-4 class="padding-left-right-5" *ngFor="let item of medications;let i = index" (click)="openMedication()">
+              <p class="show-added-info-list para-overflow-hidden para-margin-bottom-5">{{item.DisplayText}}
+                <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
+    <ion-col>
+      <div text-center class="btn-margin">
+        <button class="btn-back-style" ion-button type="button" (click)="updateUserMedicalHistory()">SAVE</button>
+      </div>
+    </ion-col>
+  </ion-row> -->
+</ion-content>
+<!-- <ion-footer (click)="updateUserMedicalHistory()">
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/save.svg" class="book-appo-footer-btn">
+      <button class="btn-back-style" [disabled]="userMedicalHistory.length" ion-button type="button" (click)="shareRecord()">Save</button>  
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

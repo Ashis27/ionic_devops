@@ -1,0 +1,227 @@
+<ion-content>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>Book Order For</ion-title>
+  </ion-navbar>
+  <ion-card class="time-slot-card-background border-bottom-color">
+    <ion-item class="">
+      <ion-avatar item-start class="avtar-margin">
+        <img class="img-size" [src]="(providerInfo.ProviderImage != null && providerInfo.ProviderImage != '') ? providerInfo.ProviderImage :'assets/img/dc_icon/dc.svg'"
+        />
+        <!-- <img [src]="providerInfo.ProviderImage" class="profile-w-h"> -->
+      </ion-avatar>
+      <div class="card">
+        <h4 class="profile-user-name">{{providerInfo.DiagnosticCenter.CenterName}}
+          <span style="float:right;width: 25px;">
+            <img src="assets/img/medical_icon.svg">
+          </span>
+        </h4>
+        <p class="margin-top-6 para-overflow-hidden">
+          <span class="display-inline">
+            <img src="assets/img/bookAppointment/hospital_icon.svg" class="doc-detail-location-icon">
+          </span>
+          <span class="font-weight-doc-loc">{{providerInfo.DiagnosticCenter.CityAreaName}}, {{providerInfo.DiagnosticCenter.City}}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-row>
+    <!-- Selected Date And Time -->
+    <ion-col col-12 class="appo-dtl-date-header appo-dtl-padding selected-datetime-header">
+      <p class="header-title-margin">
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="padding-left-right-8 border-bottom-color padding-bottom-5">
+    <ion-col col-12 class="padding-left-right-5">
+      <ion-row>
+        <ion-col col-8 class="padding-left-right-5" *ngIf="timeSlotInfo !=null">
+          <!-- <p class="appo-dtl-date-header para-margin-0 profile-user-name"> -->
+          <p class="margin-top-6">
+            <span class="appo-dtl-date-header para-margin-0 profile-user-name">{{timeSlotInfo.date}}</span>
+            <span class="font-size-16 selected-time">{{timeSlotInfo.timeSlot}}
+            </span>
+          </p>
+          <!-- <p class="margin-top-4">
+            <span class="font-size-16 selected-time">{{timeSlotInfo.timeSlot}}
+            </span>
+          </p> -->
+        </ion-col>
+        <ion-col col-4 class="padding-left-right-5" (click)="changeDate()">
+          <p class="time-change-link">Change</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <!-- <ion-col col-4 class="padding-left-15 margin-top-13">
+      <p class="para-margin-0">
+        <img src="assets/img/fees_icon.svg" class="wallete-w">
+        <span class="wallete-w-text">Fees</span>
+      </p>
+      <p class="para-margin-0" *ngIf="totalPrice > 0">
+        <img src="assets/img/rupee_icon.svg" class="rupee-icon-width">
+        <span class="doc-fee-text">{{showTotalPrice}}</span>
+      </p>
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12>
+      <!-- <div>
+        <ion-segment [(ngModel)]="addMembers">
+          <ion-segment-button value="ForMeAndFamily" class="text-center-cls border-right segBordder">
+            <p class="para-margin-0">
+              <img src="assets/img/family.svg" class="morning-icon-width family-icon">
+            </p>
+            <p class="margin-top--10 tab-heading-color">For Me & Family</p>
+          </ion-segment-button>
+          <ion-segment-button value="ForOthers" class="text-center-cls segBordder">
+            <p class="para-margin-0">
+              <img src="assets/img/friends.svg" class="morning-icon-width">
+            </p>
+            <p class="margin-top--10 tab-heading-color">For Others</p>
+          </ion-segment-button>
+        </ion-segment>
+      </div> -->
+      <!-- <div [ngSwitch]="addMembers">
+        <ion-list *ngSwitchCase="'ForMeAndFamily'">
+          <ion-row class="border-bottom-color" *ngIf="userDetails !=null">
+            <ion-col col-12 class="appo-dtl-padding">
+              <p class="body-content-header">NAME</p>
+              <p (click)="selectedMember('self',userDetails.ConsumerID,userDetails.FirstName)">
+                <ion-radio checked={{isChecked}} value="{{userDetails.ConsumerID}}" id="self" name="appoBooking"></ion-radio>
+                <span class="check-box-content"> {{userDetails.FirstName}}</span>
+              </p>
+            </ion-col>
+          </ion-row> -->
+      <ion-row class="margin-top-bottom-10">
+        <ion-col col-12 class="appo-dtl-padding" (click)="addNewMember()">
+          <p class="body-content-header margin-bottom-0">ADD NEW FAMILY MEMBER
+            <span class="float-right">
+              <img src="assets/img/plus.svg" class="add-member-icon">
+              <!-- <img src="assets/img/minus.svg" *ngIf="showNewMemberField" class="add-member-icon" (click)="showNewMemberField = !showNewMemberField"> -->
+            </span>
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="border-bottom-color" *ngIf="documentsFor.length>0">
+        <ion-col col-12 class="appo-dtl-padding">
+          <p class="body-content-header padding-bottom-10">Select Member</p>
+          <ion-row class="margin-top--12">
+            <ion-list radio-group [(ngModel)]="selectedUser" class="width-100" name="family">
+              <ion-item class="radio-btn-sec default-add list-item-border" *ngFor="let memeber of documentsFor">
+                <ion-label class="radio-btn-name">{{memeber.DisplayText}}</ion-label>
+                <ion-radio class="family-radio" item-left value="{{memeber.Value}}" (ionSelect)="selectedMember('family',memeber.Value,memeber.DisplayText)"></ion-radio>
+              </ion-item>
+            </ion-list>
+            <!-- <ion-col col-6 class="padding-left-right-5" *ngFor="let memeber of documentsFor" (click)="selectedMember(memeber)">
+                  <p>
+                    <ion-radio [(ngModel)]="selectedUser" value="{{memeber.Value}}" id="{{memeber.Value}}" name="appoBooking"></ion-radio>
+                    <span class="check-box-content"> {{memeber.DisplayText}}</span>
+                  </p>
+                </ion-col> -->
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row class="payment-section">
+    <ion-col col-12 class="payment-details-header">
+      <p class="select-time-text">
+        Payment Details</p>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-9 text-left>
+          <p class="para-margin-0 price-sec-text">Order Amount:</p>
+        </ion-col>
+        <ion-col col-3 text-right>
+          <p class="para-margin-0 price-sec-text">₹{{showTotalPriceBeforeDiscount}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-9 text-left>
+          <p class="para-margin-0 price-sec-text">Order Discount:</p>
+        </ion-col>
+        <ion-col col-3 text-right>
+          <p class="para-margin-0 price-deduct-sec">-{{totalDiscount}}%</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-9 text-left>
+          <p class="para-margin-0 price-sec-text">Sub Total:</p>
+        </ion-col>
+        <ion-col col-3 text-right>
+          <p class="para-margin-0 price-sec-text">₹ {{totalPrice}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 class="padding-0" *ngIf="redeemableConsumerWallet.isRedeemableFromConsumerWallet">
+      <ion-row>
+        <ion-col col-8 text-left>
+          <ion-item class="tc_section default-add">
+            <ion-label class="terms-conditions para-margin-0">
+              <p class="para-margin-0 price-sec-text">
+                <span>Redeem from wallet:</span>
+              </p>
+              <p>
+                <span class="show-remaining-balance">(Remaining Wallet point <span class="hp_cash_balance">{{remainingWalletBalance}}</span>)</span>
+              </p>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="isRedeemable" name="redeem" #redeemableWallet="ngModel" (ionChange)="getRedeemAmount()" spellcheck="false"
+              autocapitalize="off">
+            </ion-checkbox>
+          </ion-item>
+
+        </ion-col>
+        <ion-col col-1 class="margin-auto">
+          <span class="tc_content">
+            <ion-icon name="ios-information-circle-outline" style="font-size: 22px;" [tooltip]="redeemMessage" event="click"
+              positionV="bottom" arrow></ion-icon>
+          </span>
+        </ion-col>
+        <ion-col col-3 text-right class="margin-auto" style="padding-right: 10px;">
+          <p class="para-margin-0 price-sec-text price-deduct-sec" [ngClass]="!isRedeemable?'price_not_redeemable':''" >₹ -{{redeemableAmount}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-9 text-left>
+          <p class="price-sec-text" style="font-weight: bold;">Total Payble:</p>
+        </ion-col>
+        <ion-col col-3 text-right>
+          <p class="price-sec-text" style="font-weight: bold;">₹ {{showTotalPrice}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-col col-12 class="appo-dtl-padding confirm-btn">
+      <button ion-button class="login-form-btn" (click)="confirmBooking()">Pay Now</button>
+    </ion-col> -->
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-12 class="appo-dtl-padding padding-right-5">
+        <ion-row>
+          <ion-col col-5 class="margin-auto">
+            <span class="price-tag">
+              <img src="assets/img/rupee_icon.svg" class="rupee-icon-width1">{{showTotalPrice}}</span>
+          </ion-col>
+          <ion-col col-7>
+            <button ion-button class="login-form-btn" (click)="confirmBooking()">
+              <span class="pay-now-text"> Pay & Book</span>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

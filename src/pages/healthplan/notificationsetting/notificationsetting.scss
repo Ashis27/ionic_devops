@@ -1,0 +1,22 @@
+page-notificationsetting {
+    ion-navbar {
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .toggle-md.toggle-checked .toggle-inner {
+        background-color: var(--primary-color) !important;
+    }
+    .notification-back {
+        background-color: rgba(255, 255, 255, 0.4196078431372549) !important;
+        padding-left: 0px !important;
+    }
+    .close-sec {
+        text-align: right;
+        color: var(--white-color);
+        margin-top: -12px;
+        font-size: 40px;
+    }
+}

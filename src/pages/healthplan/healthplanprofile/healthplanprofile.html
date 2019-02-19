@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="back-image">
+    <ion-row class="sub-menu-header-sec">
+        <ion-col col-12 class="sub-menu-header">
+            <ion-item class="item-bottom" (click)="redirectTo('Pregnancy')">
+                <ion-row class="">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/pregnant.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="margin-auto">
+                        <p class="para-list-header">Pregnancy Plan</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Track pregnancy record</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+        <ion-col col-12 class="sub-menu-header">
+            <ion-item class="item-bottom" (click)="redirectTo('Diabetic')">
+                <ion-row class="">
+                    <ion-col col-2 class="margin-auto">
+                        <img class="dashboard-sub-menu-img" src="https://s3.amazonaws.com/kare4u.platform.cmscontent/HealthPro/media/KarePlan/PregnancyPlan/sugar-blood-level.svg" />
+                    </ion-col>
+                    <ion-col col-8 class="margin-auto">
+                        <p class="para-list-header">Diabatetic Plans</p>
+                        <p class="inner-sub-text-size para-overflow-hidden">Track diabatetic record</p>
+                    </ion-col>
+                    <ion-col col-2 class="text-aligh-right margin-auto">
+                        <img class="right-arrow-img para-margin-0" src="assets/img/dashboard/rightarrow_icon.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-content>

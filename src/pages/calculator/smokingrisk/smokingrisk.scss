@@ -1,0 +1,136 @@
+page-smokingrisk {
+    .background_image{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat !important;
+        width: 100% !important;
+        height: 100%;
+        // background-position: center !important;
+        background-size: 100% 100%;
+        opacity: 0.5;
+        filter: alpha(opacity=40);
+        background-image: url('../assets/imgs/calculator/smokingrisk.jpg') ;
+        z-index:-1;
+    }
+    .scroll-content{
+       padding:0px !important;
+       z-index:1;
+    }
+    
+    
+    // .list{
+    //     margin:5px 5px 16px;
+    // }
+    .item{
+        background-color: transparent !important;
+        border-bottom:1px solid #fff !important;
+    }
+
+    
+    
+    ion-navbar{
+        background-color: var(--primary-color) !important;
+    }
+    .bar-button-default {
+        margin: 0px !important;
+        color: var(--white-color) !important;
+    }
+    .item-input{
+        border: none !important
+    }
+    text-input {
+        margin: 0px 0px !important;
+    }
+    .item{
+        padding: 0px !important
+    }
+    ion-label{
+        font-weight: 500;
+        margin-left: 10px !important;
+        margin-top: 9px !important;
+        
+    }
+    // .col{
+    //     padding: 0px !important;
+    // }
+    ion-item{
+        margin-top: -3px !important;
+    }
+    .mar_col{
+        margin-top: -10px;
+    }
+    .margin-left{
+        margin-left:1%;   
+     }
+    .button{
+        // margin-left: 1% !important;
+        width: 100% !important;
+        background-color:#f15c23 !important;
+        color:white;
+    }
+    .toolbar-background{    
+        background: #39bebc !important;
+    }
+    .toolbar-title{
+       color: #fff8f8 !important;
+    }
+    ion-label{
+        color:#2d2d2d !important;
+    }
+    // p{
+    //   //  font-size: 25px;
+    //     text-align: center;
+    //     color: #34bdbc;
+    // }
+    .label {
+        margin: 0px 8px 0px 0 !important;
+    }
+
+    .header_label{
+        font-weight:300;
+    }
+    .text-input{
+        margin: 13px 0px !important;
+     }
+
+     
+     .disclaimer_header,.Cal_header{
+        text-align: left;
+        font-size: 15px !important; 
+        // background-color:#39bebc;
+        color: #39bebc;
+        padding: 5px 0px;
+        margin: 0px;
+        text-decoration: underline;
+     }
+     .cal_des{
+       // font-size: 12px !important; 
+        text-align: left;
+        color: #222;
+        margin: 0px;
+     }
+     .disclaimer_des{
+        font-size: 10px !important; 
+        text-align: left;
+        color: #222;
+        margin:0px;
+     }
+     .disclaimer_wrapper{
+         margin-top:30px;
+         margin-bottom:10px;
+     }
+    
+    .result{
+        font-size: 10px;
+        margin: 5px;
+    }
+     .Cal_Des{
+
+     }
+     .result_des{
+         margin:5px;
+         color:#222;
+         font-weight:300;
+     }
+}

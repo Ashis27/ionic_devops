@@ -1,0 +1,180 @@
+<ion-content>
+  <ion-item class="header-background">
+    <ion-row class="location-search-header">
+      <ion-col col-1 (click)="closeModal()" class="close-sec header-text">
+        <ion-icon name="ios-close"></ion-icon>
+      </ion-col>
+      <ion-col col-9 class="modal-header-size menu-inner-margin header-text">
+        Add {{medicalInfo}}
+      </ion-col>
+      <!-- <ion-col col-2 (click)="saveMedicalInfo()" class="header-text margin-top-5 text-aligh-right" *ngIf="addedMedicalnfo.length > 0">
+        Save
+      </ion-col> -->
+    </ion-row>
+  </ion-item>
+  <ion-row>
+    <!--Showing Allergies List-->
+    <ion-col col-12 *ngIf="medicalInfoStatus == 0">
+      <ion-row *ngIf="addedMedicalnfo.length > 0">
+        <ion-col col-4 class="padding-left-right-5" *ngFor="let item of addedMedicalnfo;let i = index" (click)="deleteMedicalInfo(addedMedicalnfo,i,item)">
+          <p class="default-address show-added-info-list para-overflow-hidden para-margin-bottom-5">{{item.DisplayText}}
+            <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="padding-left-right-5">
+          <ion-row class="input-box-border-radious number-email-field contact-background">
+            <ion-col col-1>
+              <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+            </ion-col>
+            <ion-col col-10 class="input-for-email-mobile">
+              <ion-item class="contact-number-field default-add padding-0">
+                <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Search Allergy"
+                  (keyup)="searchMedicalInfo($event)">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1 >
+              <img class="input-box-img" src="assets/img/add.svg" *ngIf="medicalInfoList.length == 0" (click)="customAlergyAddedByUser()"/>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col col-12 class="">
+          <ion-item class="contact-number-field input-item-border">
+            <ion-input #myinput [(ngModel)]="searchedAllergy" class="padding-left-right-10" autocorrect="off" placeholder="Search allergies"
+              (keyup)="searchMedicalInfo($event)">
+            </ion-input>
+          </ion-item>
+        </ion-col> -->
+        <!--<ion-col col-1>
+          <img class="menu-search-img" src="assets/img/dashboard/notifiation_deselected.svg" />
+        </ion-col>-->
+      </ion-row>
+      <ion-row *ngIf="medicalInfo.length > 0" class="show-medical-info padding-10">
+        <ion-col col-12 *ngFor="let item of medicalInfoList" class="list-item-style" (click)="addMedicalInfo(item)">
+          <p class="default-address margin-top-bottom-10">{{item.DisplayText}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <!--Showing Diases List-->
+    <ion-col col-12 *ngIf="medicalInfoStatus == 1">
+      <ion-row *ngIf="addedMedicalnfo.length > 0">
+        <ion-col col-4 class="padding-left-right-5" *ngFor="let item of addedMedicalnfo;let i = index" (click)="deleteMedicalInfo(addedMedicalnfo,i,item)">
+          <p class="default-address show-added-info-list para-overflow-hidden margin-top-bottom-5">{{item.DisplayText}}
+            <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="padding-left-right-5">
+          <ion-row class="input-box-border-radious number-email-field contact-background">
+            <ion-col col-1>
+              <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+            </ion-col>
+            <ion-col col-11 class="input-for-email-mobile">
+              <ion-item class="contact-number-field default-add padding-0">
+                <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Search Disease"
+                  (keyup)="getAllDiases($event)">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <!--<ion-col col-1>
+                <img class="menu-search-img" src="assets/img/dashboard/notifiation_deselected.svg" />
+              </ion-col>-->
+      </ion-row>
+      <ion-row *ngIf="medicalInfo.length > 0" class="show-medical-info padding-10">
+        <ion-col col-12 *ngFor="let item of medicalInfoList" class="list-item-style" (click)="addMedicalInfo(item)">
+          <p class="default-address margin-top-bottom-10">{{item.DisplayText}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <!--Showing Mecication List-->
+    <ion-col col-12 *ngIf="medicalInfoStatus == 2">
+      <ion-row *ngIf="addedMedicalnfo.length > 0">
+        <ion-col col-4 class="padding-left-right-5" *ngFor="let item of addedMedicalnfo;let i = index" (click)="deleteMedicalInfo(addedMedicalnfo,i,item)">
+          <p class="default-address show-added-info-list para-overflow-hidden margin-top-bottom-5">{{item.DisplayText}}
+            <!-- <ion-icon name="ios-close-circle"></ion-icon> -->
+          </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="padding-left-right-5">
+          <ion-row class="input-box-border-radious number-email-field contact-background">
+            <ion-col col-1>
+              <img class="input-box-img" src="assets/img/dashboard/search.svg" />
+            </ion-col>
+            <ion-col col-11 class="input-for-email-mobile">
+              <ion-item class="contact-number-field default-add padding-0">
+                <ion-input #myinput [(ngModel)]="searchKeyword" class="padding-left-right-10" autocorrect="off" placeholder="Search Medicine"
+                  (keyup)="getAllMedications($event)">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <!--<ion-col col-1>
+          <img class="menu-search-img" src="assets/img/dashboard/notifiation_deselected.svg" />
+        </ion-col>-->
+      </ion-row>
+      <ion-row *ngIf="medicalInfo.length > 0" class="show-medical-info padding-10">
+        <ion-col col-12 *ngFor="let item of medicalInfoList" class="list-item-style" (click)="addMedicalInfo(item)">
+          <p class="default-address margin-top-bottom-10">{{item.DisplayText}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="medicalInfoList.length == 0 && medicalInfoShowStatus" class="margin-to-40">
+    <ion-col>
+      <p text-center class="not-found-text" *ngIf="medicalInfoStatus == 0">No {{medicalInfo}} found! You can add custom allergy by clicking  add button.</p>
+      <p text-center class="not-found-text" *ngIf="medicalInfoStatus != 0">No {{medicalInfo}} found!</p>
+   
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!-- <ion-footer (click)="saveMedicalInfo()" *ngIf="addedMedicalnfo.length > 0">
+  <ion-toolbar>
+    <ion-title class="footer-titel-class" text-center>
+      <img src="assets/img/save.svg" class="book-appo-footer-btn">
+      <span class="btn-back-style">Save</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->
+<ion-footer>
+  <ion-toolbar (click)="saveMedicalInfo()" *ngIf="addedMedicalnfo.length > 0">
+    <ion-title class="footer-titel-class">
+      <img src="assets/img/save.svg" class="book-appo-footer-btn">
+      <span class="margin-left-right-5">Save</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-item class="footer-sec footer-row-section default-add">
+      <ion-row class="footer-row-section">
+        <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('DashBoard',$event)">
+          <img class="footer-icon" src="assets/img/dashboard/home_deselected.svg" />
+          <br>
+          <p class="footer-name bar-button">HOME</p>
+        </ion-col>
+        <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('Emergency',$event)">
+          <img class="footer-icon" src="assets/img/dashboard/emergeny_deselected.svg" />
+          <br>
+          <p class="footer-name bar-button">EMERGENCY</p>
+        </ion-col>
+        <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('QuickAppointment',$event)">
+          <img class="footer-icon" src="assets/img/dashboard/quickappiontment_deselected.svg" />
+          <br>
+          <p class="footer-name bar-button">QUICK APPOINTMENT</p>
+        </ion-col>
+        <ion-col col-3 text-center class="padding-0 footer-image-sec" (click)="redirectToMenu('MedicalRecord',$event)">
+          <img class="footer-icon" src="assets/img/dashboard/medicalrecord_deselected.svg" />
+          <br>
+          <p class="footer-name bar-button">HISTORY</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer> -->

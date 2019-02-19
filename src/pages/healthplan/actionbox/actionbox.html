@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>Action Box</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="back-image">
+    <ion-row>
+        <ion-col col-12 class="padding-0">
+            <div>
+                <ion-segment [(ngModel)]="tabValue">
+                    <ion-segment-button *ngFor="let option of tapOption ;  let i = index;" class="text-center-cls segBordder" [ngClass]="i == 0?'border-right':''" value="appo-{{i}}" (click)="tabSelection($event,option)">
+                        <p class="margin-5 tab-heading-color font-size-16">{{option}}</p>
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
+            <div [ngSwitch]="tabValue">
+                <ion-list *ngSwitchCase="'appo-0'">
+                    <div *ngIf="upcomingActionItems.length > 0" id="cardContainer">
+                        <ion-card *ngFor="let linedata of upcomingActionItems" class="actioncard">
+                            <ion-card-content class="booking-slot ">
+                                <ion-row>
+                                    <ion-col col-3 style="border-right: 2px solid var(--health-plan-pregnancy-color);width: 40px;" class="card-img margin-auto">
+                                        <img class="img-size" [src]="linedata.url" />
+                                    </ion-col>
+                                    <ion-col col-9>
+                                        <p class="card-title">{{linedata.LineItemDescription}}
+
+                                        </p>
+                                        <p>
+                                            <span class="due-date">{{linedata.ScheduledDate}}</span>
+                                        </p>
+                                    </ion-col>
+                                </ion-row>
+                                <p class="dash-action" (click)="redirectToBook(linedata)">Book Appointment</p>
+                            </ion-card-content>
+                        </ion-card>
+                    </div>
+                    <div *ngIf="upcomingActionItems.length == 0 && !isAvailable">
+                        <ion-row>
+                            <ion-col col-12 text-center>
+                                <img src="assets/img/calendar.svg" class="not-found" />
+                                <p class="not-found-text">No Result Found!</p>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-list>
+                <ion-list *ngSwitchCase="'appo-1'" style="margin-top:10px !important;">
+                    <div *ngIf="pendingActionItems.length > 0">
+                        <ion-card *ngFor="let linedata of pendingActionItems" class="pending-card">
+                            <ion-card-content class="booking-slot ">
+                                <ion-row>
+                                    <ion-col col-3 style="border-right: 2px solid var(--health-plan-pregnancy-color);width: 40px; padding:0" class="card-img margin-auto">
+                                        <img class="img-size" [src]="linedata.url" />
+                                    </ion-col>
+                                    <ion-col col-9>
+                                        <p class="card-body">{{linedata.LineItemDescription}}
+                                        </p>
+                                        <p>
+                                            <span class="due-date">{{linedata.ScheduledDate}}</span>
+                                        </p>
+                                    </ion-col>
+                                </ion-row>
+                                <!-- <p class="dash-action" (click)="redirectToBook(linedata)">Book Appointment</p> -->
+                            </ion-card-content>
+                        </ion-card>
+                    </div>
+                    <div *ngIf="pendingActionItems.length == 0 && !isExpaired">
+                        <ion-row>
+                            <ion-col col-12 text-center>
+                                <img src="assets/img/calendar.svg" class="not-found" />
+                                <p class="not-found-text">No Result Found!</p>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-list>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-content>

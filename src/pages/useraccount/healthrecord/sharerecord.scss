@@ -1,0 +1,316 @@
+page-sharerecord{
+  .referral-img{
+      width:30% !important;
+  }
+  .referral-code-text{
+      font-size: 18px;
+  }
+  .indivisual-sec-border .progress-inner {
+    min-width: 1%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* padding: 1px 0px 1px 0px; */
+  border-radius: 3px;
+  background-color: #7cba84 !important;
+  font-size: 13px;
+  height: 4px;
+  color: white;
+  margin-top: 5px;
+  margin-left: 5px;
+  }
+  .progress_count{
+        margin-top: 5px;
+        margin-left: 5px;
+  }
+  .progress-text{
+    color:var(--button-color);
+  }
+  .indivisual-sec-border .progress-outer {
+     width: 96% !important;
+  }
+  .refrral-header-sec{
+    margin-top: 20%;
+    margin-bottom: 5%;
+  }
+  .referral-and-earn{
+      font-size: 25px;
+      margin-bottom: 20% !important;
+  }
+  .referral-code{
+    border: 1px dashed var(--dark-alpha-Dot5);
+    padding: 0;
+    margin-top: 5%;
+  }
+  .bar-button-default {
+    margin: 0px !important;
+    color: var(--white-color) !important;
+  }
+  ion-navbar{
+    background-color: var(--primary-color) !important;
+}
+.chat-icon-margin{
+    width: 50%;
+    margin-top: 10px;
+}
+.active-record{
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.in-active-record{
+    font-size: 25px;
+    font-weight: 400;
+}
+.downloading-text{
+    color:var(--primary-color);
+}
+
+
+//Modal css
+.modal {
+
+    display: none; /* Hidden by default */
+    
+    position: fixed; /* Stay in place */
+    
+    z-index: 1; /* Sit on top */
+    
+    left: 0;
+    
+    top: 0;
+    
+    width: 100%; /* Full width */
+    
+    height: 100%; /* Full height */
+    
+    overflow: auto; /* Enable scroll if needed */
+    
+    background-color: rgb(0,0,0); /* Fallback color */
+    
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    
+    -webkit-animation-duration: 0.4s;
+    
+    animation-name: fadeIn;
+    
+    animation-duration: 0.4s
+    
+    }
+    
+    
+    
+    /* Modal Content */
+    
+    .modal-content {
+    
+    // width: 40% !important;
+    
+    // margin-top: 44% !important;
+    
+    // margin-left: 18% ;
+    
+    
+    
+    // background-color: #fefefe;
+    
+    
+    
+    // -webkit-animation-name: slideIn;
+    
+    // -webkit-animation-duration: 0.4s;
+    
+    // animation-name: slideIn;
+    
+    // animation-duration: 0.4s
+    
+   
+    
+    }
+.openImage{
+   // height: 100%;
+    
+    width: 100% !important;
+    
+    margin-top: 15% !important;
+    
+    margin-left: 0%;
+    //padding: 50px;
+    //background-color: #fefefe;
+    
+    -webkit-animation-name: slideIn;
+    
+    -webkit-animation-duration: 0.4s;
+    
+    animation-name: slideIn;
+    
+    animation-duration: 0.4s;
+    
+    border-radius: 16px;
+}
+    
+    /* The Close Button */
+    
+    .close {
+    
+    color: white;
+    
+    float: right;
+    
+    font-size: 28px;
+    
+    font-weight: bold;
+    
+    }
+    
+    
+    
+    .close:hover,
+    
+    .close:focus {
+    
+    color: #000;
+    
+    text-decoration: none;
+    
+    cursor: pointer;
+    }
+    .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+    }
+    
+    
+    
+    .modal-body {padding: 2px 16px;}
+    .modal-footer {
+    padding: 2px 16px;
+background-color: #5cb85c;
+    color: white;
+    }
+    
+    
+    
+    /* Add Animation */
+    
+    @-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+    }
+    
+    
+    
+    @keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+    }
+
+    
+    @-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+    }
+    
+    
+    
+    @keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+    }
+    
+    .images{
+    font-size: 25px;
+    margin-left: 10px;
+    }
+    
+    .name{
+    font-size: 15px;
+    margin-left: 32px;
+    }
+    .backbtn{
+    color: #585050;
+    font-size: 38px;
+    transform: rotate(43deg);
+    margin-left: 19px;
+    margin-top: -8px;
+    font-weight: bold;  
+    }
+    .img-size{
+        width: 100%;
+        height: 100%;
+    }
+    .close-icon{
+        font-size: 30px;
+        font-weight: 400;
+    }
+    .header-back{
+        background: var(--primary-color);
+ 
+    }
+    .document-name{
+        text-align: left;
+        padding-left: 15px;
+        padding: 0px 0px 0px 10px;
+    }
+    .download-icon{
+        font-size: 30px;
+        font-weight: 400;
+        margin-right: 15px;
+    }
+    .glry-border-rds{
+        height:70px !important;
+        //width: 80% !important;
+        border: 1px solid #e0e0e0;
+        width: 75% !important;
+    }
+    .download-progress{
+        background: #ececec !important;
+        height: 14% !important;
+        margin-top: 65% !important;
+        padding: 10px 0px 0px 15px !important;
+        width: 90% !important;
+       // margin: auto !important;
+        border-radius: 5px !important;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .cancel-text{
+        color:var(--button-color);
+    }
+    .download-percentage{
+        float: right;
+        margin-right: 15px;
+    }
+    // .view-image{
+    //     width: 100% !important;
+    //     height: 310px !important;
+    //     border-radius: 0px !important;
+    //     border: 1px solid #e6e6e6 !important;
+    // }
+    .view-image{
+        // width: 100% !important;
+        // height: 310px !important;
+        // border-radius: 0px !important;
+        // border: 1px solid #e6e6e6 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0px !important;
+        //border: 1px solid #e6e6e6 !important;
+         // padding: 10px 50px 20px 50px;
+        padding: 55px 40px 20px 40px;
+    }
+    .modal-position-fixed{
+        position: fixed;
+        width: 100%;
+    }
+    .book-appo-footer-btn{
+        width: 20px;
+        margin-bottom: -5px;
+        margin-right: 10px;
+      }
+      .color-white{
+        color:white;
+    }
+}
