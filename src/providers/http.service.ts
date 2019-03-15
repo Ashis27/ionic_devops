@@ -31,7 +31,6 @@ export class HttpService {
     ) {
         this.offline_message = "You are OFFLINE. Please check your network connection!";
     }
-
     get(url: string, options?: RequestOptionsArgs): Observable<any> {
         if (navigator.onLine) {
             if (this.pendingRequests < 1) {
